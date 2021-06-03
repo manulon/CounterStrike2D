@@ -1,0 +1,8 @@
+/home/manulon/Escritorio/CounterStrike2D/Ejemplo-Clase-SDL/src/CMakeFiles/rebuild_cache.dir
+/home/manulon/Escritorio/CounterStrike2D/Ejemplo-Clase-SDL/src/CMakeFiles/edit_cache.dir
+/home/manulon/Escritorio/CounterStrike2D/Ejemplo-Clase-SDL/src/CMakeFiles/sdl-alpha-blending.dir
+/home/manulon/Escritorio/CounterStrike2D/Ejemplo-Clase-SDL/src/CMakeFiles/sdl-events.dir
+/home/manulon/Escritorio/CounterStrike2D/Ejemplo-Clase-SDL/src/CMakeFiles/sdl-hello.dir
+/home/manulon/Escritorio/CounterStrike2D/Ejemplo-Clase-SDL/src/libs/CMakeFiles/rebuild_cache.dir
+/home/manulon/Escritorio/CounterStrike2D/Ejemplo-Clase-SDL/src/libs/CMakeFiles/edit_cache.dir
+/home/manulon/Escritorio/CounterStrike2D/Ejemplo-Clase-SDL/src/libs/CMakeFiles/sdldemo.dir

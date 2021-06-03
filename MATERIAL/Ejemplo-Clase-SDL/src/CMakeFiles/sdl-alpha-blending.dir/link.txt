@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11  -rdynamic CMakeFiles/sdl-alpha-blending.dir/mainSdlAlphaBlending.cpp.o  -o sdl-alpha-blending  libs/libsdldemo.a -lSDL2 -lSDL2_image 
