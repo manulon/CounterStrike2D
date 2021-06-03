@@ -1,3 +1,0 @@
-/home/manulon/Escritorio/CounterStrike2D/Semana1/CMakeFiles/rebuild_cache.dir
-/home/manulon/Escritorio/CounterStrike2D/Semana1/CMakeFiles/edit_cache.dir
-/home/manulon/Escritorio/CounterStrike2D/Semana1/CMakeFiles/showAnImage.dir

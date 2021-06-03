@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11  -rdynamic CMakeFiles/showAnImage.dir/showAnImage.cpp.o  -o showAnImage  -lSDL2 -lSDL2_image 
