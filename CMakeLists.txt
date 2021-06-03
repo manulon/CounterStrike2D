@@ -8,6 +8,6 @@ add_executable (showAnImage
   Semana1/showAnImage.cpp  
 )
 
-target_link_libraries(showAnImage SDL2 SDL2_image)
+target_link_libraries(showAnImage sdldemo SDL2 SDL2_image)
 
-file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY Semana1/assets DESTINATION ${CMAKE_BINARY_DIR})
