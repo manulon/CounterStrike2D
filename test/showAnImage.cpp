@@ -3,6 +3,7 @@
 #include <exception>
 #include "SdlWindow.h"
 #include "SdlTexture.h"
+#include "Area.h"
 
 int main(int argc, char** argv){
     try {

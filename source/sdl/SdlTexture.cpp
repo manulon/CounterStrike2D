@@ -1,8 +1,9 @@
 #include "SdlTexture.h"
-#include <SDL2/SDL_image.h>
-#include <string>
 #include "SdlWindow.h"
 #include "SdlException.h"
+#include "Area.h"
+#include <SDL2/SDL_image.h>
+#include <string>
 
 SdlTexture::SdlTexture(const std::string &filename, const SdlWindow& window): renderer(window.getRenderer()) {
     /** 

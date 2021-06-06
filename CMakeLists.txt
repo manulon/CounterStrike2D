@@ -1,13 +1,16 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(sdl)
+project(CounterStrike2D)
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable (showAnImage
-  Semana1/showAnImage.cpp  
-)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
-target_link_libraries(showAnImage sdldemo SDL2 SDL2_image)
+include_directories(include include/exception include/sdl)
+add_subdirectory(source)
+add_executable(showAnImage test/showAnImage.cpp)
 
-file(COPY Semana1/assets DESTINATION ${CMAKE_BINARY_DIR})
+target_link_libraries(showAnImage source SDL2 SDL2_image)
+
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
