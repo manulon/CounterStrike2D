@@ -1,5 +1,4 @@
 #include "Image.h"
-#include "SdlTexture.h"
 #include "SdlRenderer.h"
 #include "Window.h"
 #include "Area.h"

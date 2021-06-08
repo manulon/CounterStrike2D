@@ -40,29 +40,3 @@ void SdlWindow::destroyWindow() {
 SDL_Window* SdlWindow::getWindow() const {
     return window;
 }
-
-/*void SdlWindow::fill(std::uint8_t r, std::uint8_t g, std::uint8_t b,
-                     std::uint8_t alpha) {
-    int errCode = SDL_SetRenderDrawColor(renderer, r, g, b, alpha);
-    if (errCode < 0){
-        throw SdlException("SdlWindow no pudo renderizar el color para dibujar. SDL_Error:");
-    }
-
-    errCode = SDL_RenderClear(renderer);
-    if (errCode < 0) {
-        throw SdlException("SdlWindow no limpiar el renderizado. SDL_Error:");
-    }
-}
-
-void SdlWindow::fill() {
-    fill(0x33,0x33,0x33,0xFF);
-}
-
-void SdlWindow::render() {
-    SDL_RenderPresent(renderer);
-}
-
-
-SDL_Renderer* SdlWindow::getRenderer() const {
-    return renderer;
-}*/

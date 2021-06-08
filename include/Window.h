@@ -14,8 +14,8 @@ class Window {
 
 		Window(const Window &other) = delete;
 		Window& operator=(const Window &other) = delete;
-		void fill(std::uint8_t red, std::uint8_t green, 
-				  std::uint8_t blue, std::uint8_t alpha);
+		void fill(uint8_t red, uint8_t green, 
+				  uint8_t blue, uint8_t alpha);
 		void fill();
 
 	public:
