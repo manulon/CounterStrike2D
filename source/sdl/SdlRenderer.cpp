@@ -1,8 +1,7 @@
 #include "SdlRenderer.h"
 #include "SdlWindow.h"
 #include "SdlException.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_video.h>
+
 #define INDEX_FLAGS -1
 
 SdlRenderer::SdlRenderer(SdlWindow &window) 
@@ -51,16 +50,12 @@ void SdlRenderer::setRendererDrawColor(uint8_t red, uint8_t green, uint8_t blue,
 void SdlRenderer::renderClear() {
     int errCode = SDL_RenderClear(renderer);
     if (errCode < 0) {
-        throw SdlException("SdlRender no limpiar el renderizado con el color establecido. SDL_Error:");
+        throw SdlException("SdlRender no pudo limpiar el renderizado con el color establecido. SDL_Error:");
     }
 }
 
 void SdlRenderer::renderPresent() {
     SDL_RenderPresent(renderer);
-}
-
-SDL_Renderer* SdlRenderer::getRenderer() const {
-    return renderer;
 }
 
 void SdlRenderer::renderCopyEx(SDL_Texture *texture, const SDL_Rect *srcrect,
@@ -71,4 +66,8 @@ void SdlRenderer::renderCopyEx(SDL_Texture *texture, const SDL_Rect *srcrect,
     if (errCode < 0) {
         throw SdlException("SdlRender no pudo renderizar la textura. SDL_Error:");
     }
+}
+
+SDL_Renderer* SdlRenderer::getRenderer() const {
+    return renderer;
 }

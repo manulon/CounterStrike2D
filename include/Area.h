@@ -1,16 +1,17 @@
-#ifndef __AREA_H__
-#define __AREA_H_
+#ifndef _AREA_H_
+#define _AREA_H_
 
 class Area {
-public:
-	Area(int x, int y, int width, int height);
-	int getX() const;
-	int getY() const;
-	int getWidth() const;
-	int getHeight() const;
-private:
-	int x, y;
-	int width, height;
+	private:
+		int x, y;
+		int width, height;
+
+	public:
+		Area(int x, int y, int width, int height);
+		int getX() const;
+		int getY() const;
+		int getWidth() const;
+		int getHeight() const;
 };
 
-#endif
+#endif // _AREA_H_

@@ -14,6 +14,9 @@ class Window {
 
 		Window(const Window &other) = delete;
 		Window& operator=(const Window &other) = delete;
+		void fill(std::uint8_t red, std::uint8_t green, 
+				  std::uint8_t blue, std::uint8_t alpha);
+		void fill();
 
 	public:
 		Window(const char *title, int width, 
@@ -26,9 +29,6 @@ class Window {
 		Window(Window &&other);
 		~Window();
 		Window& operator=(Window &&other);
-		void fill(std::uint8_t red, std::uint8_t green, 
-				  std::uint8_t blue, std::uint8_t alpha);
-		void fill();
 		void render();
 		SdlRenderer& getRenderer();
 };

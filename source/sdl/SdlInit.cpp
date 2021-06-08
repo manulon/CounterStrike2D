@@ -1,7 +1,6 @@
 #include "SdlInit.h"
 #include "SdlException.h"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_video.h>
 
 SdlInit::SdlInit(std::uint32_t flags) {
 	int errCode = SDL_Init(flags);
@@ -19,7 +18,6 @@ SdlInit::SdlInit(SdlInit &&other) {
 }
 
 SdlInit::~SdlInit() { 
-    //SDL_Quit();
     destroyInit();
 }
 

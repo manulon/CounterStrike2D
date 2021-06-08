@@ -1,18 +1,17 @@
 #include "Area.h"
 
-Area::Area(int x, int y, int width, int height) :
-	x(x), y(y), width(width), height(height){
-}
+Area::Area(int x, int y, int width, int height) 
+	: x(x), y(y), width(width), height(height) { }
 	
 int Area::getX() const {
-	return this->x;
+	return x;
 }
 int Area::getY() const {
-	return this->y;
+	return y;
 }
 int Area::getWidth() const {
-	return this->width;
+	return width;
 }
 int Area::getHeight() const {
-	return this->height;
+	return height;
 }

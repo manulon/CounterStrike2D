@@ -5,7 +5,7 @@ class SDL_Surface;
 
 class SdlSurface {
     private:
-        SDL_Surface* surface;
+        SDL_Surface *surface;
         SdlSurface(const SdlSurface &other) = delete;
         SdlSurface& operator=(const SdlSurface &other) = delete;
         void destroySurface();

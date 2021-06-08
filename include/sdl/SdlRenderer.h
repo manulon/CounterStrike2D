@@ -1,13 +1,9 @@
 #ifndef _SDL_RENDERER_H_
 #define _SDL_RENDERER_H_
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
-class SDL_Renderer;
-class SDL_Texture;
 class SdlWindow;
 #include <cstdint>
+#include <SDL2/SDL.h>
 
 class SdlRenderer {
     private:

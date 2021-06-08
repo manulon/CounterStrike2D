@@ -6,7 +6,9 @@ Window::Window(const char *title, int width,
 			   int height, uint32_t windowFlags) 
 	: sdlInit(SDL_INIT_VIDEO), 
 	  sdlWindow(title, width, height, windowFlags), 
-	  sdlRenderer(sdlWindow) { }
+	  sdlRenderer(sdlWindow) { 
+	fill();
+}
 
 Window::Window(const char *title, int width, int height, 
                uint32_t windowFlags, uint32_t rendererFlags) 
@@ -43,7 +45,7 @@ void Window::fill(std::uint8_t red, std::uint8_t green,
 }
 
 void Window::fill() {
-	fill(0x33,0x33,0x33,0xFF);
+	fill(0x33,0x33,0x33,SDL_ALPHA_OPAQUE);
 }
 
 void Window::render() {
