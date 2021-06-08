@@ -3,10 +3,17 @@
 
 #include <cstdint>
 
-class SdlInit {    
+class SdlInit {
+    private:
+        SdlInit(const SdlInit &other) = delete;
+        SdlInit& operator=(const SdlInit &other) = delete;
+        void destroyInit();
+
     public:
         SdlInit(std::uint32_t flags);
+        SdlInit(SdlInit &&other);
         ~SdlInit();
+        SdlInit& operator=(SdlInit &&other);
 };
 
 #endif // _SDL_INIT_H_

@@ -2,24 +2,25 @@
 #define _SDL_WINDOW_H_
 
 class SDL_Window;
-class SDL_Renderer;
 #include <cstdint>
 
 class SdlWindow {
     private:
-        int width;
-        int height;
         SDL_Window *window;
-        SDL_Renderer *renderer;
+
+        SdlWindow(const SdlWindow &other) = delete;
+        SdlWindow& operator=(const SdlWindow &other) = delete;
+        void destroyWindow();
     
     public:
-        SdlWindow(int width, int height);
+        SdlWindow(const char *title, int width, 
+                  int height, uint32_t flags);
+        SdlWindow(const char *title, int x, int y, 
+                  int width, int height, uint32_t flags);
+        SdlWindow(SdlWindow &&other);
         ~SdlWindow();
-        void fill();
-        void fill(std::uint8_t r, std::uint8_t g, std::uint8_t b,
-                  std::uint8_t alpha);
-        void render();
-        SDL_Renderer* getRenderer() const;
+        SdlWindow& operator=(SdlWindow &&other);
+        SDL_Window* getWindow() const;
 };
 
 #endif // _SDL_WINDOW_H_

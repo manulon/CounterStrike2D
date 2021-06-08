@@ -1,7 +1,11 @@
 add_library(source
-       	    Area.cpp	
+			Area.cpp
+			Window.cpp 
+			Image.cpp
        	    exception/Exception.cpp 
 	    exception/SdlException.cpp
 	    sdl/SdlInit.cpp
+	    sdl/SdlRenderer.cpp
+	    sdl/SdlSurface.cpp
 	    sdl/SdlTexture.cpp
 	    sdl/SdlWindow.cpp)

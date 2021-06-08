@@ -1,92 +1,63 @@
 #include "SdlTexture.h"
-#include "SdlWindow.h"
+#include "SdlSurface.h"
+#include "SdlRenderer.h"
 #include "SdlException.h"
-#include "Area.h"
-#include <SDL2/SDL_image.h>
-#include <string>
 
-SdlTexture::SdlTexture(const std::string &filename, const SdlWindow& window): renderer(window.getRenderer()) {
-    /** 
-     * Cargo la imagen en una superficie temporal
-     */
-    SDL_Surface *tmp = IMG_Load(filename.c_str());
-    if (!tmp) {
-        throw SdlException("Error loading texture");
+SdlTexture::SdlTexture(const std::string &imgPath, SdlRenderer &renderer) {
+    SdlSurface surface(imgPath.c_str());
+    texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());
+    if (texture == nullptr) {
+        throw SdlException("Error creaando la textura. SDL_Error:");
     }
-
-    /* creates a texture from the surface */
-    this->texture = SDL_CreateTextureFromSurface(this->renderer, tmp);
-    if (!texture) {
-        SDL_FreeSurface(tmp);
-        throw SdlException("Error creating texture");
-    }
-
-    this->height = tmp->h;
-    this->width = tmp->w;
-
-    /* releases the temporary surface */
-    SDL_FreeSurface(tmp);
-
 }
 
-SdlTexture::SdlTexture(const std::string &filename, const SdlWindow& window, Color key) 
-    : renderer(window.getRenderer()) {
-    /** 
-     * Cargo la imagen en una superficie temporal
-     */
-    SDL_Surface *tmp = IMG_Load(filename.c_str());
-    if (!tmp) {
-        throw SdlException("Error loading texture");
+SdlTexture::SdlTexture(const std::string &imgPath, SdlRenderer &renderer, Color key) {
+    SdlSurface surface(imgPath.c_str());
+    setColorKey(surface.getSurface(), SDL_TRUE, key);
+    texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());
+    if (texture == nullptr) {
+        throw SdlException("Error creando la textura. SDL_Error:");
     }
-
-    SDL_SetColorKey(tmp, SDL_TRUE, SDL_MapRGB(tmp->format, key.r, key.g, key.b));
-
-    /* creates a texture from the surface */
-    this->texture = SDL_CreateTextureFromSurface(this->renderer, tmp);
-    if (!texture) {
-        SDL_FreeSurface(tmp);
-        throw SdlException("Error creating texture");
-    }
-
-    this->height = tmp->h;
-    this->width = tmp->w;
-
-    /* releases the temporary surface */
-    SDL_FreeSurface(tmp);
 }
 
-SdlTexture::SdlTexture(const std::string &filename, const SdlWindow& window, Color key, SDL_BlendMode blending, uint8_t alpha)
-    : SdlTexture(filename, window, key) {
+SdlTexture::SdlTexture(const std::string &imgPath, SdlRenderer &renderer,
+                       Color key, SDL_BlendMode blending, uint8_t alpha)
+    : SdlTexture(imgPath, renderer, key) {
+    setTextureBlendMode(blending);
+    setTextureAlphaMod(alpha);
+}
 
-    SDL_SetTextureBlendMode(this->texture, blending);
-    SDL_SetTextureAlphaMod(this->texture, alpha);
+void SdlTexture::setTextureBlendMode(SDL_BlendMode blending) {
+    int errCode = SDL_SetTextureBlendMode(texture, blending);
+    if (errCode < 0) {
+        throw SdlException("Textura no pudo establecer el blend mode. SDL_Error:");
+    }
+}
+
+void SdlTexture::setTextureAlphaMod(uint8_t alpha) {
+    int errCode = SDL_SetTextureAlphaMod(texture, alpha);
+    if (errCode < 0) {
+        throw SdlException("Textura No pudo establecer el alpha mod. SDL_Error:");
+    }
+}
+
+void SdlTexture::setColorKey(SDL_Surface* surface, int flag, Color key) {
+    int errCode = SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, key.r, key.g, key.b)); 
+    if (errCode < 0) {
+        throw SdlException("Textura no pudo establecer el key color. SDL_Error:");
+    }
+}
+
+void SdlTexture::destroyTexture() {
+    if (texture != nullptr) {
+        SDL_DestroyTexture(texture);
+    }
 }
 
 SdlTexture::~SdlTexture() {
-    SDL_DestroyTexture(this->texture);
+    destroyTexture();
 }
 
-int SdlTexture::render(const Area& src, const Area& dest, const SDL_RendererFlip& flipType) const {
-    return render(src, dest, 0, flipType);
-}
-
-int SdlTexture::render(const Area& src, const Area& dest, float angle, const SDL_RendererFlip& flipType) const {
-    SDL_Rect sdlSrc = {
-            src.getX(), src.getY(),
-            src.getWidth(), src.getHeight()
-    };
-    SDL_Rect sdlDest = {
-            dest.getX(), dest.getY(),
-            dest.getWidth(), dest.getHeight()
-    };
-
-    return SDL_RenderCopyEx(this->renderer, this->texture, &sdlSrc, &sdlDest, angle, nullptr, flipType);
-}
-
-int SdlTexture::getWidth() const {
-    return this->width;
-}
-
-int SdlTexture::getHeight() const {
-    return this->height;
+SDL_Texture* SdlTexture::getTexture() const {
+    return texture;
 }
