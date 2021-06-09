@@ -68,6 +68,14 @@ void SdlRenderer::renderCopyEx(SDL_Texture *texture, const SDL_Rect *srcrect,
     }
 }
 
+void SdlRenderer::renderCopy(SDL_Texture *texture, const SDL_Rect *srcrect,
+                             const SDL_Rect *dstrect) {
+    int errCode = SDL_RenderCopy(renderer, texture, srcrect, dstrect);
+    if (errCode < 0) {
+        throw SdlException("SdlRender no pudo renderizar la textura. SDL_Error:");
+    }
+}
+
 SDL_Renderer* SdlRenderer::getRenderer() const {
     return renderer;
 }

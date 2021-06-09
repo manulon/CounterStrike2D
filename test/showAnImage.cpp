@@ -10,9 +10,8 @@ int main(int argc, const char *argv[]){
     try {
         Window window("Ventana de prueba", 800, 600, SDL_WINDOW_RESIZABLE);
         Image image("assets/gfx/backgrounds/toxic.jpg", window);
-        Area srcArea(0, 0, 300, 300);
-        Area destArea(230, 125, 300, 300);
-        image.render(srcArea, destArea, SDL_FLIP_NONE);
+        Area destArea(325, 225, 150, 150);
+        image.render(destArea);
         window.render();
         usleep(3000000);
 

@@ -23,9 +23,11 @@ class SdlRenderer {
         void setRendererDrawColor(uint8_t red, uint8_t green, uint8_t blue,  uint8_t alpha);
         void renderClear();
         void renderPresent();
+        void renderCopy(SDL_Texture *texture, const SDL_Rect *srcrect,
+                        const SDL_Rect *dstrect);
         void renderCopyEx(SDL_Texture *texture, const SDL_Rect *srcrect,
-                               const SDL_Rect *dstrect, const double angle,
-                               const SDL_RendererFlip &flipType);
+                          const SDL_Rect *dstrect, const double angle,
+                          const SDL_RendererFlip &flipType);
         SDL_Renderer* getRenderer() const;
 };
 

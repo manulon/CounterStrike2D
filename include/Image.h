@@ -19,8 +19,9 @@ class Image {
         Image(const char *pathImg, Window &window);
         Image(Image &&other);
         ~Image();
-        void render(const Area &src, const Area &dest, float angle, const SDL_RendererFlip &flipType);
-        void render(const Area &src, const Area &dest, const SDL_RendererFlip &flipType);
+        void render(const Area &dest) const;
+        void render(const Area &src, const Area &dest) const;
+        void render(const Area &src, const Area &dest, float angle, const SDL_RendererFlip &flipType) const;
 };
 
 #endif // _IMAGE_H_

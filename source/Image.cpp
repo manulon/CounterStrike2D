@@ -15,14 +15,20 @@ Image::Image(Image &&other)
 
 Image::~Image() { }
 
-void Image::render(const Area &src, const Area &dest, float angle, const SDL_RendererFlip &flipType) {
+void Image::render(const Area &dest) const {
+	SDL_Rect destrect = {dest.getX(), dest.getY(), 
+                         dest.getWidth(), dest.getHeight()};
+	sdlRenderer.renderCopy(sdlTexture.getTexture(), nullptr, &destrect);
+}
+
+void Image::render(const Area &src, const Area &dest) const {
+	render(src, dest, DEFAULT_ANGLE, SDL_FLIP_NONE);
+}
+
+void Image::render(const Area &src, const Area &dest, float angle, const SDL_RendererFlip &flipType) const {
     SDL_Rect srcrect = {src.getX(), src.getY(), 
                         src.getWidth(), src.getHeight()};
     SDL_Rect destrect = {dest.getX(), dest.getY(), 
                          dest.getWidth(), dest.getHeight()};
     sdlRenderer.renderCopyEx(sdlTexture.getTexture(), &srcrect, &destrect, angle, flipType);
-}
-
-void Image::render(const Area &src, const Area &dest, const SDL_RendererFlip &flipType) {
-    render(src, dest, DEFAULT_ANGLE, flipType);
 }
