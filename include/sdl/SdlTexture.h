@@ -7,30 +7,29 @@
 class SDL_Texture;
 class SDL_Surface;
 class SdlRenderer;
-
-struct Color {
-    uint8_t red;
-    uint8_t green;
-    uint8_t blue;
-};
+class SdlSurface;
 
 class SdlTexture {
     private:
         SDL_Texture *texture;
 
         void destroyTexture();
-        void setColorKey(SDL_Surface* surface, int flag, Color key);
+        SdlTexture(const SdlTexture &other) = delete;
+        SdlTexture operator=(const SdlTexture &other) = delete;
 
     public:
-        SdlTexture(const char *imgPath, SdlRenderer &renderer);
-        SdlTexture(const char *imgPath, SdlRenderer &renderer, Color key);
-        SdlTexture(const char *imgPath, SdlRenderer &renderer,
-                   Color key, SDL_BlendMode blending, uint8_t alpha);
+        SdlTexture(const char *imgPath, const SdlRenderer &renderer);
+        SdlTexture(const SdlRenderer &renderer, int width, int height);
+        SdlTexture(SdlSurface &surface, const SdlRenderer &renderer);
+        /*SdlTexture(const char *imgPath, const SdlRenderer &renderer, Color key);
+        SdlTexture(const char *imgPath, const SdlRenderer &renderer,
+                   Color key, SDL_BlendMode blending, uint8_t alpha);*/
         SdlTexture(SdlTexture &&other);
         ~SdlTexture();
         SdlTexture& operator=(SdlTexture &&other);
         void setTextureBlendMode(SDL_BlendMode blending);
         void setTextureAlphaMod(uint8_t alpha);
+        void queryTexture(uint32_t *format, int *access, int *w, int *h);
         SDL_Texture* getTexture() const;
 };
 

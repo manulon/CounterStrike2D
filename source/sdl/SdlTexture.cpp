@@ -3,7 +3,7 @@
 #include "SdlRenderer.h"
 #include "SdlException.h"
 
-SdlTexture::SdlTexture(const char *imgPath, SdlRenderer &renderer) {
+SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer) {
     SdlSurface surface(imgPath);
     texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());
     if (texture == nullptr) {
@@ -11,7 +11,24 @@ SdlTexture::SdlTexture(const char *imgPath, SdlRenderer &renderer) {
     }
 }
 
-SdlTexture::SdlTexture(const char *imgPath, SdlRenderer &renderer, Color key) {
+SdlTexture::SdlTexture(const SdlRenderer &renderer, int width, int height) { 
+    texture = SDL_CreateTexture(renderer.getRenderer(), SDL_PIXELFORMAT_RGBA8888, 
+                                SDL_TEXTUREACCESS_TARGET, width, height);
+    if (texture == nullptr) {
+        throw SdlException("Error creando la textura. SDL_Error:");
+    }
+
+}
+
+SdlTexture::SdlTexture(SdlSurface &surface, const SdlRenderer &renderer) {
+    surface.setColorKey(0xFF, 0xFF, 0xFF);
+    texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());
+    if (texture == nullptr) {
+        throw SdlException("Error creando la textura. SDL_Error:");
+    }
+}
+
+/*SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer, Color key) {
     SdlSurface surface(imgPath);
     setColorKey(surface.getSurface(), SDL_TRUE, key);
     texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());
@@ -20,12 +37,12 @@ SdlTexture::SdlTexture(const char *imgPath, SdlRenderer &renderer, Color key) {
     }
 }
 
-SdlTexture::SdlTexture(const char *imgPath, SdlRenderer &renderer,
+SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer,
                        Color key, SDL_BlendMode blending, uint8_t alpha)
     : SdlTexture(imgPath, renderer, key) {
     setTextureBlendMode(blending);
     setTextureAlphaMod(alpha);
-}
+}*/
 
 SdlTexture::SdlTexture(SdlTexture &&other) : texture(other.texture) {
     other.texture = nullptr;
@@ -63,10 +80,10 @@ void SdlTexture::setTextureAlphaMod(uint8_t alpha) {
     }
 }
 
-void SdlTexture::setColorKey(SDL_Surface* surface, int flag, Color key) {
-    int errCode = SDL_SetColorKey(surface, flag, SDL_MapRGB(surface->format, key.red, key.green, key.blue)); 
+void SdlTexture::queryTexture(uint32_t *format, int *access, int *w, int *h) {
+    int errCode = SDL_QueryTexture(texture, format, access, w, h);
     if (errCode < 0) {
-        throw SdlException("Textura no pudo establecer el key color. SDL_Error:");
+        throw SdlException("Fallo la consulta a la textura. SDL_Error:");
     }
 }
 

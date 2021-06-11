@@ -1,4 +1,5 @@
 add_library(source
+			Stencil.cpp
 			Area.cpp
 			Window.cpp 
 			Image.cpp

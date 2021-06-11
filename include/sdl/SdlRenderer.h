@@ -20,14 +20,18 @@ class SdlRenderer {
         SdlRenderer(SdlRenderer &&other);
         ~SdlRenderer();
         SdlRenderer& operator=(SdlRenderer &&other);
-        void setRendererDrawColor(uint8_t red, uint8_t green, uint8_t blue,  uint8_t alpha);
-        void renderClear();
-        void renderPresent();
+        void setRendererDrawColor(uint8_t red, uint8_t green, uint8_t blue,  uint8_t alpha) const;
+        void setRenderTarget(SDL_Texture *texture) const;
+        void renderDrawPoint(int x, int y) const;
+        void renderClear() const;
+        void renderPresent() const;
         void renderCopy(SDL_Texture *texture, const SDL_Rect *srcrect,
-                        const SDL_Rect *dstrect);
+                        const SDL_Rect *dstrect) const;
         void renderCopyEx(SDL_Texture *texture, const SDL_Rect *srcrect,
                           const SDL_Rect *dstrect, const double angle,
-                          const SDL_RendererFlip &flipType);
+                          const SDL_RendererFlip &flipType) const;
+        void renderReadPixels(const SDL_Rect *rect, uint32_t format, 
+                              void *pixels, int pitch) const;
         SDL_Renderer* getRenderer() const;
 };
 
