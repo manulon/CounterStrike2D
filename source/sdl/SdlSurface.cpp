@@ -1,5 +1,6 @@
 #include "SdlSurface.h"
 #include "SdlException.h"
+#include "SdlImageException.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
@@ -7,7 +8,7 @@
 SdlSurface::SdlSurface(const char *pathImg) {
 	surface = IMG_Load(pathImg);
 	if (surface == nullptr) {
-		throw SdlException("Error al cargar la imagen. SDL_Error:");
+		throw SdlImageException("Error al cargar la imagen. SDL_Error:");
 	}
 }
 

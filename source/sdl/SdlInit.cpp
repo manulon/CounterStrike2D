@@ -2,19 +2,24 @@
 #include "SdlException.h"
 #include <SDL2/SDL.h>
 
-SdlInit::SdlInit(std::uint32_t flags) {
-	int errCode = SDL_Init(flags);
+SdlInit::SdlInit(uint32_t flags) : flags(flags) {
+    createInit(flags);
+}
+
+void SdlInit::createInit(uint32_t flags) {
+    int errCode = SDL_Init(flags);
     if (errCode < 0) {
         throw SdlException("SdlInit no pudo inicializar. SDL_Error:");
     }
 }
 
-void SdlInit::destroyInit() {
-    SDL_Quit();
+SdlInit::SdlInit(SdlInit &&other) {
+    createInit(other.flags);
+    other.destroyInit();
 }
 
-SdlInit::SdlInit(SdlInit &&other) { 
-    other.destroyInit();
+void SdlInit::destroyInit() {
+    SDL_Quit();
 }
 
 SdlInit::~SdlInit() { 
@@ -23,6 +28,8 @@ SdlInit::~SdlInit() {
 
 SdlInit& SdlInit::operator=(SdlInit &&other) {
     if (this == &other) return *this;
+    destroyInit();
+    createInit(other.flags);
     other.destroyInit();
     return *this;
 }

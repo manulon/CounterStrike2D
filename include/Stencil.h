@@ -16,7 +16,7 @@ class Stencil {
         Stencil(const Stencil &other) = delete;
         Stencil& operator=(const Stencil &other) = delete;
         Stencil& operator=(Stencil &&other) = delete;
-        void fillBackground();
+        void clear();
         void drawStencil(int Xc, int Yc, int viewR, float viewAngle);
         void drawCircle(int Xc, int Yc, int r);
         

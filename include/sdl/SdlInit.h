@@ -5,8 +5,11 @@
 
 class SdlInit {
     private:
+        uint32_t flags;
+
         SdlInit(const SdlInit &other) = delete;
         SdlInit& operator=(const SdlInit &other) = delete;
+        void createInit(uint32_t flags);
         void destroyInit();
 
     public:

@@ -42,13 +42,13 @@ void Stencil::convertTexture() {
 
 void Stencil::drawStencil(int Xc, int Yc, int viewR, float viewAngle) {
 	sdlRenderer.setRenderTarget(sdlTexture.getTexture());
-	fillBackground();
+	clear();
 	drawCircle(Xc, Yc, viewR);
 	drawViewAngle(viewAngle);
 	sdlRenderer.setRenderTarget(nullptr);
 }
 
-void Stencil::fillBackground() {
+void Stencil::clear() {
 	sdlRenderer.setRendererDrawColor(0x00, 0x00, 0x00, 0xFF);
 	sdlRenderer.renderClear();
 }
