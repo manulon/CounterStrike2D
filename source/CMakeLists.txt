@@ -5,15 +5,15 @@ add_library(source
 			Area.cpp
 			Window.cpp 
 			Image.cpp
-       	    exception/Exception.cpp 
-	    exception/SdlException.cpp
-	    exception/SdlImageException.cpp
-	    exception/SdlMixException.cpp
-	    sdl/SdlInit.cpp
-	    sdl/SdlInitAudio.cpp
-	    sdl/SdlMusic.cpp
-	   	sdl/SdlSoundEffect.cpp
-	    sdl/SdlRenderer.cpp
-	    sdl/SdlSurface.cpp
-	    sdl/SdlTexture.cpp
-	    sdl/SdlWindow.cpp)
+       	    Exception/Exception.cpp 
+	    	Exception/SdlException.cpp
+		    Exception/SdlImageException.cpp
+		    Exception/SdlMixException.cpp
+		    SDL/Init/SdlInit.cpp
+		    SDL/Init/SdlInitAudio.cpp
+		    SDL/Sound/SdlMusic.cpp
+		   	SDL/Sound/SdlSoundEffect.cpp
+		    SDL/Renderer/SdlRenderer.cpp
+		    SDL/Texture/SdlSurface.cpp
+		    SDL/Texture/SdlTexture.cpp
+		    SDL/Window/SdlWindow.cpp)

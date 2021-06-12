@@ -16,9 +16,9 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-#pragma hdrstop
-#pragma argsused
-#pragma comment(lib, "Box2D")
+//#pragma hdrstop
+//#pragma argsused
+//#pragma comment(lib, "Box2D")
 
 #ifdef _WIN32
 #include <tchar.h>
