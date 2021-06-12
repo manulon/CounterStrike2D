@@ -41,8 +41,13 @@ SdlSurface& SdlSurface::operator=(SdlSurface &&other) {
 	return *this;
 }
 
-void SdlSurface::setColorKey(uint8_t red, uint8_t green, uint8_t blue) {
-    int errCode = SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, red, green, blue)); 
+void SdlSurface::setColorKey(Color key) {
+    int errCode = SDL_SetColorKey(surface, 
+    							  SDL_TRUE, 
+    							  SDL_MapRGB(surface->format, 
+    							  			 key.red, 
+    							  			 key.green, 
+    							  			 key.blue)); 
     if (errCode < 0) {
         throw SdlException("Textura no pudo establecer el key color. SDL_Error:");
     }

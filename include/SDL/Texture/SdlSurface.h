@@ -4,6 +4,12 @@
 class SDL_Surface;
 #include <cstdint>
 
+struct Color {
+    uint8_t red;
+    uint8_t green;
+    uint8_t blue;
+};
+
 class SdlSurface {
     private:
         SDL_Surface *surface;
@@ -17,7 +23,7 @@ class SdlSurface {
         SdlSurface(SdlSurface &&other);
         ~SdlSurface();
         SdlSurface& operator=(SdlSurface &&other);
-        void setColorKey(uint8_t red, uint8_t green, uint8_t blue);
+        void setColorKey(Color key);
         SDL_Surface* getSurface() const;
 };
 

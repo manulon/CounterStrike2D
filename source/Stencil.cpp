@@ -16,8 +16,7 @@ Stencil::Stencil(int width, int height,
 	  width(width), height(height) { 
 	drawStencil(0, 0, viewR, viewAngle);
 	convertTexture();
-	sdlTexture.setTextureBlendMode(SDL_BLENDMODE_BLEND);
-    sdlTexture.setTextureAlphaMod(alpha);
+	sdlTexture.setTextureAlphaBlend(SDL_BLENDMODE_BLEND, alpha);
 }
 
 Stencil::Stencil(Stencil &&other) 
@@ -37,7 +36,8 @@ void Stencil::convertTexture() {
 								 surface.getSurface()->pixels,
 								 surface.getSurface()->pitch);
 	sdlRenderer.setRenderTarget(nullptr);
-	sdlTexture = SdlTexture(surface, sdlRenderer);
+	Color key = {0xFF, 0xFF, 0xFF};
+	sdlTexture = SdlTexture(surface, sdlRenderer, key);
 }
 
 void Stencil::drawStencil(int Xc, int Yc, int viewR, float viewAngle) {

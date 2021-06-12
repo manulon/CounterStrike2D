@@ -1,5 +1,4 @@
 #include "SdlTexture.h"
-#include "SdlSurface.h"
 #include "SdlRenderer.h"
 #include "SdlException.h"
 
@@ -17,32 +16,24 @@ SdlTexture::SdlTexture(const SdlRenderer &renderer, int width, int height) {
     if (texture == nullptr) {
         throw SdlException("Error creando la textura. SDL_Error:");
     }
-
 }
 
-SdlTexture::SdlTexture(SdlSurface &surface, const SdlRenderer &renderer) {
-    surface.setColorKey(0xFF, 0xFF, 0xFF);
+SdlTexture::SdlTexture(SdlSurface &surface, const SdlRenderer &renderer, Color key) {
+    surface.setColorKey(key);
     texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());
     if (texture == nullptr) {
         throw SdlException("Error creando la textura. SDL_Error:");
     }
 }
 
-/*SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer, Color key) {
+SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer, Color key) {
     SdlSurface surface(imgPath);
-    setColorKey(surface.getSurface(), SDL_TRUE, key);
+    surface.setColorKey(key);
     texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());
     if (texture == nullptr) {
         throw SdlException("Error creando la textura. SDL_Error:");
     }
 }
-
-SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer,
-                       Color key, SDL_BlendMode blending, uint8_t alpha)
-    : SdlTexture(imgPath, renderer, key) {
-    setTextureBlendMode(blending);
-    setTextureAlphaMod(alpha);
-}*/
 
 SdlTexture::SdlTexture(SdlTexture &&other) : texture(other.texture) {
     other.texture = nullptr;
@@ -64,6 +55,11 @@ SdlTexture& SdlTexture::operator=(SdlTexture &&other) {
     texture = other.texture;
     other.texture = nullptr;
     return *this;
+}
+
+void SdlTexture::setTextureAlphaBlend(SDL_BlendMode blending, uint8_t alpha) {
+    setTextureBlendMode(blending);
+    setTextureAlphaMod(alpha);
 }
 
 void SdlTexture::setTextureBlendMode(SDL_BlendMode blending) {
