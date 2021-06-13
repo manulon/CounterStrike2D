@@ -6,6 +6,8 @@ add_library(source
 			Area.cpp
 			Window.cpp 
 			Image.cpp
+			Soldier.cpp
+			Animation.cpp
        	    Exception/Exception.cpp 
 	    	Exception/SdlException.cpp
 	    	Exception/SdlFontException.cpp

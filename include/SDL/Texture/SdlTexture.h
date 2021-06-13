@@ -2,6 +2,7 @@
 #define _SDL_TEXTURE_H_
 
 #include "SdlSurface.h"
+#include "Area.h"
 #include <SDL2/SDL.h>
 #include <cstdint>
 
@@ -31,9 +32,11 @@ class SdlTexture {
         SdlTexture(SdlTexture &&other);
         ~SdlTexture();
         SdlTexture& operator=(SdlTexture &&other);
-        void queryTexture(uint32_t *format, int *access, int *w, int *h);
+        void queryTexture(uint32_t *format, int *access, int *w, int *h) const;
         void setTextureAlphaBlend(SDL_BlendMode blending, uint8_t alpha);
         SDL_Texture* getTexture() const;
+        int getWidth() const;
+        int getHeight() const;
 };
 
 #endif // _SDL_TEXTURE_H_

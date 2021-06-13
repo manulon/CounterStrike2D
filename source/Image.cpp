@@ -32,3 +32,11 @@ void Image::render(const Area &src, const Area &dest, float angle, const SDL_Ren
                          dest.getWidth(), dest.getHeight()};
     sdlRenderer.renderCopyEx(sdlTexture.getTexture(), &srcrect, &destrect, angle, flipType);
 }
+
+const SdlTexture* Image::getTexture() const {
+    return &sdlTexture;
+}
+
+void Image:: clear() const {
+    sdlRenderer.renderClear();
+}

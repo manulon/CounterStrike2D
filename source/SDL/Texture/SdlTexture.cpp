@@ -86,7 +86,7 @@ void SdlTexture::setTextureAlphaMod(uint8_t alpha) {
     }
 }
 
-void SdlTexture::queryTexture(uint32_t *format, int *access, int *w, int *h) {
+void SdlTexture::queryTexture(uint32_t *format, int *access, int *w, int *h) const {
     int errCode = SDL_QueryTexture(texture, format, access, w, h);
     if (errCode < 0) {
         throw SdlException("Fallo la consulta a la textura. SDL_Error:");
@@ -95,4 +95,16 @@ void SdlTexture::queryTexture(uint32_t *format, int *access, int *w, int *h) {
 
 SDL_Texture* SdlTexture::getTexture() const {
     return texture;
+}
+
+int SdlTexture:: getWidth() const {
+    int width(0);
+    queryTexture(nullptr,nullptr,&width,nullptr);
+    return width;
+}
+
+int SdlTexture:: getHeight() const {
+    int height(0);
+    queryTexture(nullptr,nullptr,nullptr,&height);
+    return height;
 }

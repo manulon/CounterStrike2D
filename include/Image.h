@@ -16,12 +16,16 @@ class Image {
         Image& operator=(Image &&other) = delete;
     
     public:
+        Image(const char *pathImg);
         Image(const char *pathImg, Window &window);
+
         Image(Image &&other);
         ~Image();
         void render(const Area &dest) const;
         void render(const Area &src, const Area &dest) const;
         void render(const Area &src, const Area &dest, float angle, const SDL_RendererFlip &flipType) const;
+        const SdlTexture* getTexture() const;
+        void clear() const ;
 };
 
 #endif // _IMAGE_H_
