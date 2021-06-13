@@ -16,7 +16,7 @@ include_directories(include
 
 add_subdirectory(source)
 add_executable(showAnImage test/showAnImage.cpp)
-target_link_libraries(showAnImage source SDL2 SDL2_image SDL2_mixer Box2D)
+target_link_libraries(showAnImage source SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D)
 
 add_executable(box2dTest test/box2d.cpp)
 target_link_libraries(box2dTest Box2D)

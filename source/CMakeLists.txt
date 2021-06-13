@@ -2,18 +2,22 @@ add_library(source
 			Music.cpp
 			SoundEffect.cpp
 			Stencil.cpp
+			Text.cpp
 			Area.cpp
 			Window.cpp 
 			Image.cpp
        	    Exception/Exception.cpp 
 	    	Exception/SdlException.cpp
+	    	Exception/SdlFontException.cpp
 		    Exception/SdlImageException.cpp
 		    Exception/SdlMixException.cpp
 		    SDL/Init/SdlInit.cpp
 		    SDL/Init/SdlInitAudio.cpp
+		    SDL/Init/SdlInitFont.cpp
 		    SDL/Sound/SdlMusic.cpp
 		   	SDL/Sound/SdlSoundEffect.cpp
 		    SDL/Renderer/SdlRenderer.cpp
+		    SDL/Texture/SdlFont.cpp
 		    SDL/Texture/SdlSurface.cpp
 		    SDL/Texture/SdlTexture.cpp
 		    SDL/Window/SdlWindow.cpp)
