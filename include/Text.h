@@ -12,16 +12,19 @@ class Text {
 		SdlFont sdlFont;
 		SdlTexture sdlTexture;
 		SdlRenderer &sdlRenderer;
+		
+		Text(const Text &other) = delete;
+		Text& operator=(const Text &other) = delete;
+		Text& operator=(Text &&other) = delete;
 
 	public:
 		Text(const char *fontPath, int ptsize,
 		     const char *textToRender, 
 		     SDL_Color color, 
 		     Window &window);
+		Text(Text &&other);
 		~Text();
 		void render(const Area &dest) const;
-        //void render(const Area &src, const Area &dest) const;
-        //void render(const Area &src, const Area &dest, float angle, const SDL_RendererFlip &flipType) const;
 };
 
 #endif // _TEXT_H_
