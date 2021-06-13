@@ -22,6 +22,9 @@ class SdlTexture {
 
     public:
         SdlTexture(const char *imgPath, const SdlRenderer &renderer);
+        SdlTexture(const char *text, SDL_Color textColor, 
+                   const SdlRenderer &renderer,
+                   const SdlFont &font);
         SdlTexture(const SdlRenderer &renderer, int width, int height);
         SdlTexture(SdlSurface &surface, const SdlRenderer &renderer, Color key);
         SdlTexture(const char *imgPath, const SdlRenderer &renderer, Color key);

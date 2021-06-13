@@ -10,6 +10,16 @@ SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer) {
     }
 }
 
+SdlTexture::SdlTexture(const char *text, SDL_Color textColor, 
+                       const SdlRenderer &renderer,
+                       const SdlFont &font) {
+    SdlSurface surface(text, textColor, font);
+    texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());
+    if (texture == nullptr) {
+        throw SdlException("Error creando la textura. SDL_Error:");
+    }    
+}
+
 SdlTexture::SdlTexture(const SdlRenderer &renderer, int width, int height) { 
     texture = SDL_CreateTexture(renderer.getRenderer(), SDL_PIXELFORMAT_RGBA8888, 
                                 SDL_TEXTUREACCESS_TARGET, width, height);

@@ -1,6 +1,8 @@
 #include "SdlSurface.h"
+#include "SdlFont.h"
 #include "SdlException.h"
 #include "SdlImageException.h"
+#include "SdlFontException.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
@@ -9,6 +11,13 @@ SdlSurface::SdlSurface(const char *pathImg) {
 	surface = IMG_Load(pathImg);
 	if (surface == nullptr) {
 		throw SdlImageException("Error al cargar la imagen. SDL_Error:");
+	}
+}
+
+SdlSurface::SdlSurface(const char *text, SDL_Color textColor, const SdlFont &sdlFont) {
+	surface = TTF_RenderText_Solid(sdlFont.getFont(), text, textColor);
+	if (surface == nullptr) {
+		throw SdlFontException("Error al crear el texto. SDL_Error:");
 	}
 }
 
