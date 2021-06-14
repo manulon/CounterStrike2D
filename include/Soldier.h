@@ -4,14 +4,14 @@
 #include "Animation.h"
 #include "Image.h"
 #include "Area.h"
-#define UP 'u'
-#define DOWN 'd'
-#define LEFT 'l'
-#define RIGHT 'r'
-#define UP_RIGHT 'U'
-#define DOWN_RIGHT 'D'
-#define UP_LEFT 'L'
-#define DOWN_LEFT 'P'
+#define UP 0
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 3
+#define UP_RIGHT 4
+#define DOWN_RIGHT 5
+#define UP_LEFT 6
+#define DOWN_LEFT 7
 
 
 class Soldier {
@@ -29,10 +29,8 @@ public:
 
 private:
     Animation an;
-    char direction;
+    int direction;
     bool facingLeft;
-    bool facingRight;
-    bool facingUp;
     bool moving;
     int x;
     int y;

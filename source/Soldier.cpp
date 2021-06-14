@@ -4,7 +4,7 @@
 #include <iostream>
 
 Soldier::Soldier(Image &image): 
-an(&image,2,3), direction(RIGHT), facingLeft(false), facingRight(true), facingUp(false),
+an(&image,2,3), direction(RIGHT), facingLeft(false),
 moving(false), x(100), y(100), height(50), width(50), angle(90)  {}
 
 Soldier::~Soldier() {}
@@ -57,26 +57,25 @@ void Soldier::render() {
 void Soldier::moveRigth() {
     moving = true;
     facingLeft = false;
-    facingRight = true;
+    direction = RIGHT;
 }
 
 void Soldier::moveLeft() {
     moving = true;
     facingLeft = true;
+    direction = LEFT;
 }
 
 void Soldier::moveUp() {
     moving = true;
-    facingUp = true;
     facingLeft = false;
-    facingRight = false;
+    direction = UP;
 }
 
 void Soldier::moveDown() {
     moving = true;
     facingLeft = false;
-    facingRight = false;
-    facingUp = false;
+    direction = DOWN;
 }
 
 void Soldier::stopMoving() {
