@@ -27,6 +27,12 @@ static bool handleEvents(Soldier &soldier) {
                     case SDLK_RIGHT:
                         soldier.moveRigth();
                         break;
+                    case SDLK_UP:
+                        soldier.moveUp();
+                        break;
+                    case SDLK_DOWN:
+                        soldier.moveDown();
+                        break;
                     }
                 } // Fin KEY_DOWN
                 break;
@@ -37,6 +43,12 @@ static bool handleEvents(Soldier &soldier) {
                         soldier.stopMoving();
                         break;
                     case SDLK_RIGHT:
+                        soldier.stopMoving();
+                        break;
+                    case SDLK_UP:
+                        soldier.stopMoving();
+                        break;
+                    case SDLK_DOWN:
                         soldier.stopMoving();
                         break;
                     } 

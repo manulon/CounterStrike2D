@@ -4,6 +4,15 @@
 #include "Animation.h"
 #include "Image.h"
 #include "Area.h"
+#define UP 'u'
+#define DOWN 'd'
+#define LEFT 'l'
+#define RIGHT 'r'
+#define UP_RIGHT 'U'
+#define DOWN_RIGHT 'D'
+#define UP_LEFT 'L'
+#define DOWN_LEFT 'P'
+
 
 class Soldier {
 public:
@@ -20,6 +29,7 @@ public:
 
 private:
     Animation an;
+    char direction;
     bool facingLeft;
     bool facingRight;
     bool facingUp;

@@ -4,8 +4,8 @@
 #include <iostream>
 
 Soldier::Soldier(Image &image): 
-an(&image,2,3), facingLeft(false), facingRight(true), facingUp(false),
-moving(false), x(100), y(100), height(50), width(50), angle(90) {}
+an(&image,2,3), direction(RIGHT), facingLeft(false), facingRight(true), facingUp(false),
+moving(false), x(100), y(100), height(50), width(50), angle(90)  {}
 
 Soldier::~Soldier() {}
 
@@ -16,18 +16,34 @@ Soldier::~Soldier() {}
 void Soldier::update(float dt) {
     if (moving) {
         an.update(dt);
-        if (facingLeft){
+        if (direction == LEFT) {
             angle = -90;
             x -= 3;
-        }else if (facingRight){
+        }else if (direction == RIGHT) {
             angle = 90;
             x += 3;
-        }else if (facingUp){
+        }else if (direction == UP) {
             angle = 0;
             y -= 3;
-        }else{
+        }else if (direction == DOWN) {
             angle = -180;
             y += 3;
+        }else if (direction == DOWN_LEFT){
+            angle = -135;
+            y += 3;
+            x -= 3;
+        }else if (direction == DOWN_RIGHT){
+            angle = 135;
+            y += 3;
+            x -= 3;
+        }else if (direction == UP_RIGHT){
+            angle = 45;
+            y -= 3;
+            x += 3;
+        }else if (direction == UP_LEFT){
+            angle = -45;
+            y += 3;
+            x -= 3;
         }
     }
 }
@@ -41,6 +57,7 @@ void Soldier::render() {
 void Soldier::moveRigth() {
     moving = true;
     facingLeft = false;
+    facingRight = true;
 }
 
 void Soldier::moveLeft() {
@@ -51,6 +68,8 @@ void Soldier::moveLeft() {
 void Soldier::moveUp() {
     moving = true;
     facingUp = true;
+    facingLeft = false;
+    facingRight = false;
 }
 
 void Soldier::moveDown() {
