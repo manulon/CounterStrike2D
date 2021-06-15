@@ -36,7 +36,3 @@ void Image::render(const Area &src, const Area &dest, float angle, const SDL_Ren
 const SdlTexture* Image::getTexture() const {
     return &sdlTexture;
 }
-
-void Image:: clear() const {
-    sdlRenderer.renderClear();
-}
