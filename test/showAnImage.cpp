@@ -71,10 +71,8 @@ static void update(Soldier &soldier, float dt) {
     soldier.update(dt);
 }
 
-
 int main(int argc, const char *argv[]){
     try {
-        
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -97,20 +95,17 @@ int main(int argc, const char *argv[]){
 
         bool running = true;
         while (running) {
+            running = handleEvents(soldier);
+            update(soldier, FRAME_RATE);
+
+            window.clear();
             image.render(imageArea);
             stencil.render(stencilArea, 225);
             text.render(textArea);
-
-            running = handleEvents(soldier);
-            
-            update(soldier, FRAME_RATE);
             soldier.render();
             window.render();
             
-            
-            usleep(FRAME_RATE);
-            
-            window.clear();
+            usleep(FRAME_RATE);    
         }
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
