@@ -1,43 +1,37 @@
-/*
- * Created by Federico Manuel Gomez Peter
- * Date: 17/05/18.
- */
+#ifndef _ANIMATION_H_
+#define _ANIMATION_H_
 
-#ifndef __ANIMATION_H__
-#define __ANIMATION_H__
+#define FRAME_RATE 1000000/25
 
-#include <SDL2/SDL.h>
-
-#include "SdlException.h"
 #include "Image.h"
-#include "SdlTexture.h"
-
-#define FRAME_RATE 1000000.0f/25.0f
-
 class Area;
 
 class Animation {
-   public:
-    Animation(const Image *img, int vframes, int hframes);
-    ~Animation();
-    void update(float dt);
-    void render(const Area& dst, const SDL_RendererFlip &flipType, int angle);
-    void clear() const ;
-
    private:
-    void advanceFrame();
-    /** SDL texture of the raw image. */
-    const Image *image;
-    /** Current animation frame. */
-    int currentVerticalFrame;
-    int currentHorizontalFrame;
-    /** Total number of frames in the sprite. */
-    int verticalFrames;
-    int horizontalFrames;
-    /** Size of the sprite (height and width). */
-    int size;
-    /** Time elapsed since last update. */
-    float elapsed;
+      const Image &image;
+      int rows;
+      int columns;
+      int currentRow;
+      int currentColumn;
+      bool inverseOrder;
+      int width;
+      int height;
+      float elapsed;
+
+      Animation(const Animation &other) = delete;
+      Animation& operator=(const Animation &other) = delete;
+      Animation& operator=(Animation &&other) = delete;
+      void advanceDefaultOrder();
+      void advanceInverseOrder();
+      void advanceFrame();
+   
+   public:
+      Animation(const Image &image, int rows, int columns,
+                int width, int height, bool inverseOrder);
+      Animation(Animation &&other);
+      virtual ~Animation();
+      virtual void update(float dt);
+      virtual void render(const Area &dst, int angle, const SDL_RendererFlip &flipType);
 };
 
-#endif  //__ANIMATION_H__
+#endif  // _ANIMATION_H_

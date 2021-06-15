@@ -1,66 +1,66 @@
-/*
- * Created by Federico Manuel Gomez Peter
- * Date: 17/05/18.
- */
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
-#include <algorithm>
-#include <cassert>
-#include <iostream>
-#include <string>
-
-#include "Area.h"
 #include "Animation.h"
-#include "SdlTexture.h"
+#include "Area.h"
 
-Animation::Animation(const Image *image, int vframes, int hframes) : 
-image(image), currentVerticalFrame(0),currentHorizontalFrame(0),
-verticalFrames(vframes),horizontalFrames(hframes),size(32),
-elapsed(0.0f) {}
+//TODO Revisar la variable FRAME RATE.
 
-Animation::~Animation() {}
+Animation::Animation(const Image &image, int rows, int columns,
+                     int width, int height, bool inverseOrder) :
+    image(image), rows(rows), columns(columns), 
+    currentRow(0), currentColumn(0), inverseOrder(inverseOrder), 
+    width(width), height(height), elapsed(0) { }
+
+Animation::Animation(Animation &&other) : 
+    image(other.image), rows(other.rows), columns(other.columns), 
+    currentRow(other.currentRow), currentColumn(other.currentColumn),
+    inverseOrder(other.inverseOrder), 
+    width(other.width), height(other.height), elapsed(other.elapsed) { 
+    other.rows = 0;
+    other.columns = 0;
+    other.currentRow = 0;
+    other.currentColumn = 0;
+    other.inverseOrder = 0;
+    other.width = 0;
+    other.height = 0;
+    other.elapsed = 0;
+}
+
+Animation::~Animation() { }
 
 void Animation::update(float dt) {
-    this->elapsed += dt;
-    /* checks if the frame should be updated based on the time elapsed since the last update */
-    while (this->elapsed > FRAME_RATE) {
-        this->advanceFrame();
-        this->elapsed -= FRAME_RATE;
+    elapsed += dt;
+    while (elapsed > FRAME_RATE) {
+        advanceFrame();
+        elapsed -= FRAME_RATE;
     }
 }
 
-void Animation::render(const Area &dst, const SDL_RendererFlip &flipType,int angle) {
-    Area src(size * currentHorizontalFrame, size * currentVerticalFrame, size, size);
-    this->image->render(src,dst,angle,flipType);
+void Animation::render(const Area &dst, int angle, const SDL_RendererFlip &flipType) {
+    Area src(width * currentColumn, height * currentRow, width, height);
+    image.render(src, dst, angle, flipType);
+}
+
+void Animation::advanceDefaultOrder() {
+    ++currentColumn;
+    if (currentColumn == (columns - 1)) {
+        ++currentRow;
+        currentColumn = 0;
+    }
+    currentRow = currentRow % rows;
+}
+
+void Animation::advanceInverseOrder() {
+    ++currentRow;
+    if (currentRow == (rows - 1)) {
+        ++currentColumn;
+        currentRow = 0;
+    }
+    currentColumn = currentColumn % columns;  
 }
 
 void Animation::advanceFrame() {
-    currentVerticalFrame ++;
-
-    if (currentVerticalFrame == verticalFrames){
-        currentHorizontalFrame ++;
-        currentVerticalFrame = 0;
+    if (!inverseOrder) {
+        advanceDefaultOrder();
+    } else {
+        advanceInverseOrder();      
     }
-
-    if(currentHorizontalFrame == horizontalFrames-1){
-        currentHorizontalFrame = 0;
-    }
-}
-/*
-void Animation::advanceFrame() {
-    currentHorizontalFrame ++;
-
-    if (currentHorizontalFrame == horizontalFrames-1){
-        currentVerticalFrame ++;
-        currentHorizontalFrame = 0;
-    }
-
-    if(currentVerticalFrame == verticalFrames){
-        currentVerticalFrame = 0;
-    }
-}*/
-
-void Animation:: clear() const {
-    this->image->clear();    
 }
