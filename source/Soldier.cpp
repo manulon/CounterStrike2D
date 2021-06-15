@@ -35,14 +35,14 @@ void Soldier::update(float dt) {
         }else if (direction == DOWN_RIGHT){
             angle = 135;
             y += 3;
-            x -= 3;
+            x += 3;
         }else if (direction == UP_RIGHT){
             angle = 45;
             y -= 3;
             x += 3;
         }else if (direction == UP_LEFT){
             angle = -45;
-            y += 3;
+            y -= 3;
             x -= 3;
         }
     }
@@ -54,34 +54,35 @@ void Soldier::render() {
     an.render(dest, flip, angle);
 }
 
-void Soldier::moveRigth() {
-    moving = true;
-    facingLeft = false;
-    direction = RIGHT;
-}
-
-void Soldier::moveLeft() {
-    moving = true;
-    facingLeft = true;
-    direction = LEFT;
-}
-
-void Soldier::moveUp() {
-    moving = true;
-    facingLeft = false;
-    direction = UP;
-}
-
-void Soldier::moveDown() {
-    moving = true;
-    facingLeft = false;
-    direction = DOWN;
-}
-
 void Soldier::stopMoving() {
     moving = false;
 }
 
 void Soldier:: clear(){
     an.clear();
+}
+void Soldier:: move(char dir){
+    moving = true;
+    direction = dir;
+}
+
+void Soldier:: stopLeft(){
+    if (direction == DOWN_LEFT) direction = DOWN;
+    else if (direction == UP_LEFT) direction = UP;
+    else if (direction == LEFT) stopMoving();
+}
+void Soldier:: stopRight(){
+    if (direction == DOWN_RIGHT) direction = DOWN;
+    else if (direction == UP_RIGHT) direction = UP;
+    else if (direction == RIGHT) stopMoving();
+}
+void Soldier:: stopUp(){
+    if (direction == UP_RIGHT) direction = RIGHT;
+    else if (direction == UP_LEFT) direction = LEFT;
+    else if (direction == UP) stopMoving();
+}
+void Soldier:: stopDown(){
+    if (direction == DOWN_RIGHT) direction = RIGHT;
+    else if (direction == DOWN_LEFT) direction = LEFT;
+    else if (direction == DOWN) stopMoving();
 }

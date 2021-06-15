@@ -15,41 +15,44 @@
 static bool handleEvents(Soldier &soldier) {
     SDL_Event event;
     // Para el alumno: Buscar diferencia entre waitEvent y pollEvent
-    while(SDL_PollEvent(&event)){
-        switch(event.type) {
+    while (SDL_PollEvent(&event)){
+        switch (event.type) {
             case SDL_KEYDOWN: {
                 // ¿Qué pasa si mantengo presionada la tecla?    
-                SDL_KeyboardEvent& keyEvent = (SDL_KeyboardEvent&) event;
-                switch (keyEvent.keysym.sym) {
-                    case SDLK_LEFT:
-                        soldier.moveLeft();
-                        break;
-                    case SDLK_RIGHT:
-                        soldier.moveRigth();
-                        break;
-                    case SDLK_UP:
-                        soldier.moveUp();
-                        break;
-                    case SDLK_DOWN:
-                        soldier.moveDown();
-                        break;
-                    }
-                } // Fin KEY_DOWN
+                const Uint8 *state = SDL_GetKeyboardState(NULL);
+                if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_RIGHT]){
+                    soldier.move(DOWN_RIGHT);
+                }else if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_LEFT]){
+                    soldier.move(DOWN_LEFT);
+                }else if (state[SDL_SCANCODE_LEFT] && state[SDL_SCANCODE_UP]){
+                    soldier.move(UP_LEFT);
+                }else if (state[SDL_SCANCODE_RIGHT] && state[SDL_SCANCODE_UP]){
+                    soldier.move(UP_RIGHT);
+                }else if (state[SDL_SCANCODE_LEFT]){
+                    soldier.move(LEFT);
+                }else if (state[SDL_SCANCODE_RIGHT]){
+                    soldier.move(RIGHT);
+                }else if (state[SDL_SCANCODE_DOWN]){
+                    soldier.move(DOWN);
+                }else if (state[SDL_SCANCODE_UP]){
+                    soldier.move(UP);
+                }  
+            } // Fin KEY_DOWN
                 break;
             case SDL_KEYUP: {
                 SDL_KeyboardEvent& keyEvent = (SDL_KeyboardEvent&) event;
                 switch (keyEvent.keysym.sym) {
                     case SDLK_LEFT:
-                        soldier.stopMoving();
+                        soldier.stopLeft();
                         break;
                     case SDLK_RIGHT:
-                        soldier.stopMoving();
+                        soldier.stopRight();
                         break;
                     case SDLK_UP:
-                        soldier.stopMoving();
+                        soldier.stopUp();
                         break;
                     case SDLK_DOWN:
-                        soldier.stopMoving();
+                        soldier.stopDown();
                         break;
                     } 
                 }// Fin KEY_UP
@@ -71,7 +74,7 @@ static void update(Soldier &soldier, float dt) {
 
 int main(int argc, const char *argv[]){
     try {
-
+        
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -115,4 +118,3 @@ int main(int argc, const char *argv[]){
     }
     return 0;
 }
-

@@ -20,13 +20,14 @@ public:
     ~Soldier();
     void update(float dt);
     void render();
-    void moveRigth();
-    void moveLeft();
-    void moveUp();
-    void moveDown();
     void stopMoving();
     void clear();
-
+    void stopLeft();
+    void stopRight();
+    void stopUp();    
+    void stopDown();
+    void move(char dir);
+    
 private:
     Animation an;
     int direction;

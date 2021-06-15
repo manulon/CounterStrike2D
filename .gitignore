@@ -5,3 +5,4 @@ CMakeCache.txt
 Makefile
 *.a
 showAnImage
+box2dTest
