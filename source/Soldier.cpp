@@ -1,21 +1,39 @@
 #include "Soldier.h"
 #include "Area.h"
+#include <utility>
 
-#include <iostream>
+// TODO Tal vez agregar un enum que sea
+// enum {soldado_tipo_1, soldado_tipo_2, soldado_tipo3..., soldado_tipoN};
+// e instanciar un objeto de una clase ImageRepository para decirle,
+// imageRepository.loadImage(tipo_soldado).
+// Soldado podria recibir el enum de afuera que indique el tipo de soldadito a crear
+// e internamente, aca que cada enum referencie al path en donde se encuentra la
+// imagen solicitada para renderizar.
 
-Soldier::Soldier(Image &image): 
-an(&image,2,3), direction(RIGHT), facingLeft(false),
-moving(false), x(100), y(100), height(50), width(50), angle(90)  {}
+Soldier::Soldier(const Image &image) : 
+    Animation(image, 3, 2, 32, 32, true), direction(RIGHT), facingLeft(false),
+    moving(false), x(100), y(100), width(50), height(50), angle(90) { }
 
-Soldier::~Soldier() {}
+Soldier::Soldier(Soldier &&other) : 
+    Animation(std::move(other)), direction(other.direction),
+    facingLeft(other.facingLeft), moving(other.moving),
+    x(other.x), y(other.y), width(other.width), height(other.height),
+    angle(other.angle) {
+    direction = 0;
+    facingLeft = false;
+    facingLeft = false;
+    x = 0;
+    y = 0;
+    width = 0;
+    height = 0;
+    angle = 0;
+}
 
-/**
- * Notar que el manejo de eventos y la actualización de modelo ocurren en momentos distintos.
- * Esto les va a resultar muy util en un juego multiplaforma. 
- */
+Soldier::~Soldier() { }
+
 void Soldier::update(float dt) {
     if (moving) {
-        an.update(dt);
+        Animation::update(dt);
         if (direction == LEFT) {
             angle = -90;
             x -= 3;
@@ -51,16 +69,13 @@ void Soldier::update(float dt) {
 void Soldier::render() {
     Area dest(x, y, height, width);
     SDL_RendererFlip flip = facingLeft ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
-    an.render(dest, flip, angle);
+    Animation::render(dest, angle, flip);
 }
 
 void Soldier::stopMoving() {
     moving = false;
 }
 
-void Soldier:: clear(){
-    an.clear();
-}
 void Soldier:: move(char dir){
     moving = true;
     direction = dir;

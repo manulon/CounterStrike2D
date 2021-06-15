@@ -1,43 +1,46 @@
-#ifndef __SOLDIER_H__
-#define __SOLDIER_H__
+#ifndef _SOLDIER_H_
+#define _SOLDIER_H_
 
 #include "Animation.h"
-#include "Image.h"
-#include "Area.h"
-#define UP 0
-#define DOWN 1
-#define LEFT 2
-#define RIGHT 3
-#define UP_RIGHT 4
-#define DOWN_RIGHT 5
-#define UP_LEFT 6
-#define DOWN_LEFT 7
 
-
-class Soldier {
-public:
-    Soldier(Image &image);
-    ~Soldier();
-    void update(float dt);
-    void render();
-    void stopMoving();
-    void clear();
-    void stopLeft();
-    void stopRight();
-    void stopUp();    
-    void stopDown();
-    void move(char dir);
-    
-private:
-    Animation an;
-    int direction;
-    bool facingLeft;
-    bool moving;
-    int x;
-    int y;
-    int height;
-    int width;
-    int angle;
+enum {
+    UP, 
+    DOWN, 
+    LEFT, 
+    RIGHT, 
+    UP_RIGHT, 
+    DOWN_RIGHT, 
+    UP_LEFT, 
+    DOWN_LEFT
 };
 
-#endif // __SOLDIER_H__
+class Soldier : public Animation {        
+    private:
+        int direction;
+        bool facingLeft;
+        bool moving;
+        int x;
+        int y;
+        int width;
+        int height;
+        int angle;
+
+        Soldier(const Soldier &other) = delete;
+        Soldier& operator=(const Soldier &other) = delete;
+        Soldier& operator=(Soldier &&other) = delete;
+
+    public:
+        Soldier(const Image &image);
+        Soldier(Soldier &&other);
+        ~Soldier();
+        void update(float dt);
+        void render();
+        void stopMoving();
+        void stopLeft();
+        void stopRight();
+        void stopUp();    
+        void stopDown();
+        void move(char dir);
+};
+
+#endif // _SOLDIER_H_
