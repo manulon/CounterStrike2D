@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "Area.h"
 #include <utility>
+#include <iostream>
 
 #define DEFAULT_ANGLE 0
 
@@ -18,7 +19,7 @@ Image::~Image() { }
 void Image::render(const Area &dest) const {
 	SDL_Rect destrect = {dest.getX(), dest.getY(), 
                          dest.getWidth(), dest.getHeight()};
-	sdlRenderer.renderCopy(sdlTexture.getTexture(), nullptr, &destrect);
+	sdlRenderer.renderCopy(sdlTexture.getTexture(), nullptr, &destrect);   
 }
 
 void Image::render(const Area &src, const Area &dest) const {
@@ -33,6 +34,23 @@ void Image::render(const Area &src, const Area &dest, float angle, const SDL_Ren
     sdlRenderer.renderCopyEx(sdlTexture.getTexture(), &srcrect, &destrect, angle, flipType);
 }
 
+void Image::render(int x, int y, const Area &dest) const {
+    SDL_Rect srcrect = {0, 0, 
+                        sdlTexture.getWidth(), sdlTexture.getHeight()};
+    SDL_Rect destrect = {x, y, 
+                         dest.getWidth(), dest.getHeight()};
+
+    sdlRenderer.renderCopyEx( sdlTexture.getTexture(), &srcrect, &destrect, 0, SDL_FLIP_NONE);
+}
+
 const SdlTexture* Image::getTexture() const {
     return &sdlTexture;
+}
+
+int Image::getWidth() const{
+    return sdlTexture.getWidth();
+}
+
+int Image::getHeight() const{
+    return sdlTexture.getHeight();
 }

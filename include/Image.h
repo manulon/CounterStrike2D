@@ -21,10 +21,13 @@ class Image {
 
         Image(Image &&other);
         ~Image();
+        /*manu*/void render(int x, int y,const Area &dest) const;
         void render(const Area &dest) const;
         void render(const Area &src, const Area &dest) const;
         void render(const Area &src, const Area &dest, float angle, const SDL_RendererFlip &flipType) const;
         const SdlTexture* getTexture() const;
+        int getWidth() const;
+        int getHeight() const;
 };
 
 #endif // _IMAGE_H_

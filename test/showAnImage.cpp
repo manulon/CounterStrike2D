@@ -5,6 +5,7 @@
 #include "Music.h"
 #include "SoundEffect.h"
 #include "Text.h"
+#include "Dot.h"
 #include "Soldier.h"
 #include "Animation.h"
 #include <SDL2/SDL.h>
@@ -12,7 +13,7 @@
 #include <iostream>
 #include <unistd.h>
 
-static bool handleEvents(Soldier &soldier) {
+static bool handleEvents(Soldier &soldier,/*manu*/Dot& dot,int scrollingOffset, int backgroundWidth) {
     SDL_Event event;
     // Para el alumno: Buscar diferencia entre waitEvent y pollEvent
     while (SDL_PollEvent(&event)){
@@ -29,9 +30,21 @@ static bool handleEvents(Soldier &soldier) {
                 }else if (state[SDL_SCANCODE_RIGHT] && state[SDL_SCANCODE_UP]){
                     soldier.move(UP_RIGHT);
                 }else if (state[SDL_SCANCODE_LEFT]){
+                    
                     soldier.move(LEFT);
+                    dot.move(LEFT);
+                    --scrollingOffset;
+                    if( scrollingOffset < backgroundWidth )
+                        scrollingOffset = 0;
+
                 }else if (state[SDL_SCANCODE_RIGHT]){
+                    
                     soldier.move(RIGHT);
+                    dot.move(RIGHT);
+                    --scrollingOffset;
+                    if( scrollingOffset < backgroundWidth )
+                        scrollingOffset = 0;
+
                 }else if (state[SDL_SCANCODE_DOWN]){
                     soldier.move(DOWN);
                 }else if (state[SDL_SCANCODE_UP]){
@@ -76,7 +89,12 @@ int main(int argc, const char *argv[]){
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-        Image image("assets/gfx/backgrounds/toxic.jpg", window);
+        Image background("assets/gfx/backgrounds/toxic.jpg", window);
+
+        /*--------ARRANCO A PROBAR LO DE LA CAMARA------------*/
+        Dot dot(background);
+        int scrollingOffset = 0;
+        /*----------------------------------------------------*/
 
         Image soldier_img1("assets/gfx/player/t4.bmp", window);
         Image soldier_img2("assets/gfx/player/t4.bmp", window);
@@ -89,17 +107,24 @@ int main(int argc, const char *argv[]){
         Text text("assets/gfx/fonts/liberationsans.ttf", 200,
                   "Hola Mundo !", textColor, window);
 
-        Area imageArea(0, 0, 800, 600);       
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
         Area textArea((800/2)-(200/2), (600/2)-(100/2), 200, 100);       
 
         bool running = true;
         while (running) {
-            running = handleEvents(soldier);
+            running = handleEvents(soldier,/*manu*/dot,scrollingOffset,background.getWidth());
             update(soldier, FRAME_RATE);
 
-            window.clear();
-            image.render(imageArea);
+            window.clear(); 
+            
+            /*manuel*/
+            Area dotArea(0, 0, 800, 600);
+            background.render( scrollingOffset + dotArea.getWidth(), dotArea.getHeight() ,dotArea);
+
+            dot.render(dotArea);
+
+            /*------*/
+
             stencil.render(stencilArea, 225);
             text.render(textArea);
             soldier.render();
