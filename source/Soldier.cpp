@@ -101,3 +101,11 @@ void Soldier:: stopDown(){
     else if (direction == DOWN_LEFT) direction = LEFT;
     else if (direction == DOWN) stopMoving();
 }
+
+int Soldier:: getX(){
+    return x;
+}
+
+int Soldier:: getY(){
+    return y;
+}

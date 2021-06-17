@@ -30,6 +30,8 @@ class Soldier : public Animation {
         void stopUp();    
         void stopDown();
         void move(char dir);
+        int getX();
+        int getY();
 };
 
 #endif // _SOLDIER_H_

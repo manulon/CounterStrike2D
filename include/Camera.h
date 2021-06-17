@@ -12,8 +12,8 @@ class Camera{
         Camera(const Image& img);
         ~Camera();
 
-        void move(int direction);
-        void render(const Area &dest);
+        void move();
+        void render(int x, int y, const Area &dest);
         int getScrollingOffset();
         int getBackgroundWidth();
         int getBackgroundHeight();

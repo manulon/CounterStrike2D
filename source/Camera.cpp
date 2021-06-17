@@ -7,24 +7,14 @@ backgroundWidth(img.getWidth()),backgroundHeight(img.getHeight()){}
 
 Camera:: ~Camera(){}
 
-void Camera::move(int direction){
-    if (direction == LEFT) {
-        x += 3;
-    }else if (direction == RIGHT) {
-        x -= 3;
-    }else if (direction == UP) {
-        y += 3;
-    }else if (direction == DOWN) {
-        y -= 3;
-    }
-
+void Camera::move(){
     --scrollingOffset;
     if( scrollingOffset < backgroundWidth )
         scrollingOffset = 0;
 }
 
-void Camera::render(const Area &dest){
-    img.render(x,y,dest);
+void Camera::render(int x, int y, const Area &dest){
+    img.render(-x,-y,dest);
 }
 
 int Camera::getScrollingOffset(){

@@ -31,10 +31,10 @@ static bool handleEvents(Soldier &soldier,/*manu*/Camera& camera) {
                     soldier.move(UP_RIGHT);
                 }else if (state[SDL_SCANCODE_LEFT]){
                     soldier.move(LEFT);
-                    camera.move(LEFT);
+                    camera.move();
                 }else if (state[SDL_SCANCODE_RIGHT]){
                     soldier.move(RIGHT);
-                    camera.move(RIGHT);
+                    camera.move();
                 }else if (state[SDL_SCANCODE_DOWN]){
                     soldier.move(DOWN);
                 }else if (state[SDL_SCANCODE_UP]){
@@ -108,7 +108,7 @@ int main(int argc, const char *argv[]){
             background.render( camera.getScrollingOffset() + cameraArea.getWidth(), 
                                cameraArea.getHeight() ,cameraArea);
 
-            camera.render(cameraArea);
+            camera.render(soldier.getX(), soldier.getY(), cameraArea);
 
             stencil.render(stencilArea, 225);
             text.render(textArea);
