@@ -31,15 +31,13 @@ static bool handleEvents(Soldier &soldier,/*manu*/Camera& camera) {
                     soldier.move(UP_RIGHT);
                 }else if (state[SDL_SCANCODE_LEFT]){
                     soldier.move(LEFT);
-                    camera.move();
                 }else if (state[SDL_SCANCODE_RIGHT]){
                     soldier.move(RIGHT);
-                    camera.move();
                 }else if (state[SDL_SCANCODE_DOWN]){
                     soldier.move(DOWN);
                 }else if (state[SDL_SCANCODE_UP]){
                     soldier.move(UP);
-                }  
+                }
             } // Fin KEY_DOWN
                 break;
             case SDL_KEYUP: {
@@ -104,10 +102,7 @@ int main(int argc, const char *argv[]){
             update(soldier, FRAME_RATE);
 
             window.clear(); 
-            
-            background.render( camera.getScrollingOffset() + cameraArea.getWidth(), 
-                               cameraArea.getHeight() ,cameraArea);
-
+        
             camera.render(soldier.getX(), soldier.getY(), cameraArea);
 
             stencil.render(stencilArea, 225);
