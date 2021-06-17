@@ -5,7 +5,7 @@
 #include "Music.h"
 #include "SoundEffect.h"
 #include "Text.h"
-#include "Dot.h"
+#include "Camera.h"
 #include "Soldier.h"
 #include "Animation.h"
 #include <SDL2/SDL.h>
@@ -13,7 +13,7 @@
 #include <iostream>
 #include <unistd.h>
 
-static bool handleEvents(Soldier &soldier,/*manu*/Dot& dot,int scrollingOffset, int backgroundWidth) {
+static bool handleEvents(Soldier &soldier,/*manu*/Camera& camera) {
     SDL_Event event;
     // Para el alumno: Buscar diferencia entre waitEvent y pollEvent
     while (SDL_PollEvent(&event)){
@@ -30,21 +30,11 @@ static bool handleEvents(Soldier &soldier,/*manu*/Dot& dot,int scrollingOffset, 
                 }else if (state[SDL_SCANCODE_RIGHT] && state[SDL_SCANCODE_UP]){
                     soldier.move(UP_RIGHT);
                 }else if (state[SDL_SCANCODE_LEFT]){
-                    
                     soldier.move(LEFT);
-                    dot.move(LEFT);
-                    --scrollingOffset;
-                    if( scrollingOffset < backgroundWidth )
-                        scrollingOffset = 0;
-
+                    camera.move(LEFT);
                 }else if (state[SDL_SCANCODE_RIGHT]){
-                    
                     soldier.move(RIGHT);
-                    dot.move(RIGHT);
-                    --scrollingOffset;
-                    if( scrollingOffset < backgroundWidth )
-                        scrollingOffset = 0;
-
+                    camera.move(RIGHT);
                 }else if (state[SDL_SCANCODE_DOWN]){
                     soldier.move(DOWN);
                 }else if (state[SDL_SCANCODE_UP]){
@@ -91,10 +81,7 @@ int main(int argc, const char *argv[]){
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
         Image background("assets/gfx/backgrounds/toxic.jpg", window);
 
-        /*--------ARRANCO A PROBAR LO DE LA CAMARA------------*/
-        Dot dot(background);
-        int scrollingOffset = 0;
-        /*----------------------------------------------------*/
+        Camera camera(background);
 
         Image soldier_img1("assets/gfx/player/t4.bmp", window);
         Image soldier_img2("assets/gfx/player/t4.bmp", window);
@@ -109,21 +96,19 @@ int main(int argc, const char *argv[]){
 
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
         Area textArea((800/2)-(200/2), (600/2)-(100/2), 200, 100);       
+        Area cameraArea(0, 0, 800, 600);
 
         bool running = true;
         while (running) {
-            running = handleEvents(soldier,/*manu*/dot,scrollingOffset,background.getWidth());
+            running = handleEvents(soldier,camera);
             update(soldier, FRAME_RATE);
 
             window.clear(); 
             
-            /*manuel*/
-            Area dotArea(0, 0, 800, 600);
-            background.render( scrollingOffset + dotArea.getWidth(), dotArea.getHeight() ,dotArea);
+            background.render( camera.getScrollingOffset() + cameraArea.getWidth(), 
+                               cameraArea.getHeight() ,cameraArea);
 
-            dot.render(dotArea);
-
-            /*------*/
+            camera.render(cameraArea);
 
             stencil.render(stencilArea, 225);
             text.render(textArea);
