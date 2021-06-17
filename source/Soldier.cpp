@@ -67,7 +67,7 @@ void Soldier::update(float dt) {
 }
 
 void Soldier::render() {
-    Area dest(x, y, height, width);
+    Area dest(400, 300, height, width);
     SDL_RendererFlip flip = facingLeft ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
     Animation::render(dest, angle, flip);
 }

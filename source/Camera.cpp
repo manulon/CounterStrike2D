@@ -8,10 +8,14 @@ backgroundWidth(img.getWidth()),backgroundHeight(img.getHeight()){}
 Camera:: ~Camera(){}
 
 void Camera::move(int direction){
-    if (direction == 2) {
+    if (direction == LEFT) {
         x += 3;
-    }else if (direction == 3) {
+    }else if (direction == RIGHT) {
         x -= 3;
+    }else if (direction == UP) {
+        y += 3;
+    }else if (direction == DOWN) {
+        y -= 3;
     }
 
     --scrollingOffset;

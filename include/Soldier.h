@@ -1,18 +1,7 @@
 #ifndef _SOLDIER_H_
 #define _SOLDIER_H_
-
+#include "Directions.h"
 #include "Animation.h"
-
-enum {
-    UP, 
-    DOWN, 
-    LEFT, 
-    RIGHT, 
-    UP_RIGHT, 
-    DOWN_RIGHT, 
-    UP_LEFT, 
-    DOWN_LEFT
-};
 
 class Soldier : public Animation {        
     private:
