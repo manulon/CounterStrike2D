@@ -80,7 +80,7 @@ int main(int argc, const char *argv[]){
         Image background("assets/gfx/backgrounds/toxic.jpg", window);
 
         Camera camera(background);
-
+        
         Image soldier_img1("assets/gfx/player/t4.bmp", window);
         Image soldier_img2("assets/gfx/player/t4.bmp", window);
         Soldier soldier(soldier_img2);
