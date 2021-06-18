@@ -21,7 +21,7 @@ Stencil::Stencil(int width, int height,
 
 Stencil::Stencil(Stencil &&other) 
 	: sdlTexture(std::move(other.sdlTexture)), 
-	  sdlRenderer(other.sdlRenderer) { }
+	  sdlRenderer(other.sdlRenderer){ }
 
 Stencil::~Stencil() { }
 
@@ -43,7 +43,7 @@ void Stencil::convertTexture() {
 void Stencil::drawStencil(int Xc, int Yc, int viewR, float viewAngle) {
 	sdlRenderer.setRenderTarget(sdlTexture.getTexture());
 	clear();
-	drawCircle(Xc, Yc, viewR);
+	drawCircle(0, 0, viewR);
 	drawViewAngle(viewAngle);
 	sdlRenderer.setRenderTarget(nullptr);
 }
@@ -84,8 +84,9 @@ void Stencil::drawViewAngle(int viewAngle) {
 	}
 }
 
-void Stencil::render(const Area &dest, const double angle) const {
+void Stencil::render(const Area &dest, int angle) const {
     SDL_Rect destrect = {dest.getX(), dest.getY(), 
                          dest.getWidth(), dest.getHeight()};
-	sdlRenderer.renderCopyEx(sdlTexture.getTexture(), nullptr, &destrect, angle, SDL_FLIP_NONE);
+	sdlRenderer.renderCopyEx(sdlTexture.getTexture(), nullptr, &destrect,
+							 angle-90, SDL_FLIP_NONE);
 }

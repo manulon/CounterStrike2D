@@ -2,6 +2,7 @@
 #define _STENCIL_H_
 
 #include "SdlTexture.h"
+#include "Soldier.h"
 class SdlRenderer;
 class Window;
 class Area;
@@ -26,10 +27,11 @@ class Stencil {
         void convertTexture();
     
     public:
-        Stencil(int width, int height, int viewR, int viewAngle, uint8_t alpha, Window &window);
+        Stencil(int width, int height, int viewR, int viewAngle,
+                uint8_t alpha, Window &window);
         Stencil(Stencil &&other);
         ~Stencil();
-        void render(const Area &dest, const double angle) const;
+        void render(const Area &dest, int angle) const;
 };
 
 #endif // _STENCIL_H_

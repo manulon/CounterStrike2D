@@ -94,7 +94,7 @@ int main(int argc, const char *argv[]){
 
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
         Area textArea((800/2)-(200/2), (600/2)-(100/2), 200, 100);       
-        Area cameraArea(0, 0, 800, 600);
+        Area cameraArea(0, 0, 1200, 800);
 
         bool running = true;
         while (running) {
@@ -105,7 +105,7 @@ int main(int argc, const char *argv[]){
         
             camera.render(soldier.getX(), soldier.getY(), cameraArea);
 
-            stencil.render(stencilArea, 225);
+            stencil.render(stencilArea, soldier.getAngle());
             text.render(textArea);
             soldier.render();
             window.render();

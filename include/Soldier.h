@@ -32,6 +32,7 @@ class Soldier : public Animation {
         void move(char dir);
         int getX();
         int getY();
+        int getAngle();
 };
 
 #endif // _SOLDIER_H_
