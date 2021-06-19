@@ -12,31 +12,32 @@
 #include <exception>
 #include <iostream>
 #include <unistd.h>
-
-static bool handleEvents(Soldier &soldier,/*manu*/Camera& camera) {
+#include "../server/World.h"
+#include "../server/Player.h"
+static bool handleEvents(Soldier &soldier,/*manu*/Camera& camera, Player &player) {
     SDL_Event event;
     // Para el alumno: Buscar diferencia entre waitEvent y pollEvent
+    std::cout <<"pepe\n";
     while (SDL_PollEvent(&event)){
         switch (event.type) {
             case SDL_KEYDOWN: {
                 // ¿Qué pasa si mantengo presionada la tecla?    
                 const Uint8 *state = SDL_GetKeyboardState(NULL);
-                if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_RIGHT]){
-                    soldier.move(DOWN_RIGHT);
-                }else if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_LEFT]){
-                    soldier.move(DOWN_LEFT);
-                }else if (state[SDL_SCANCODE_LEFT] && state[SDL_SCANCODE_UP]){
-                    soldier.move(UP_LEFT);
-                }else if (state[SDL_SCANCODE_RIGHT] && state[SDL_SCANCODE_UP]){
-                    soldier.move(UP_RIGHT);
-                }else if (state[SDL_SCANCODE_LEFT]){
+                if (state[SDL_SCANCODE_LEFT]){
                     soldier.move(LEFT);
-                }else if (state[SDL_SCANCODE_RIGHT]){
+                    player.moveLeft();
+                }
+                if (state[SDL_SCANCODE_RIGHT]){
                     soldier.move(RIGHT);
-                }else if (state[SDL_SCANCODE_DOWN]){
+                    player.moveRight();
+                }
+                if (state[SDL_SCANCODE_DOWN]){
                     soldier.move(DOWN);
-                }else if (state[SDL_SCANCODE_UP]){
+                    player.moveDown();
+                }
+                if (state[SDL_SCANCODE_UP]){
                     soldier.move(UP);
+                    player.moveUp();
                 }
             } // Fin KEY_DOWN
                 break;
@@ -45,15 +46,19 @@ static bool handleEvents(Soldier &soldier,/*manu*/Camera& camera) {
                 switch (keyEvent.keysym.sym) {
                     case SDLK_LEFT:
                         soldier.stopLeft();
+                        player.stopMoveLeft();
                         break;
                     case SDLK_RIGHT:
                         soldier.stopRight();
+                        player.stopMoveRight();
                         break;
                     case SDLK_UP:
                         soldier.stopUp();
+                        player.stopMoveUp();
                         break;
                     case SDLK_DOWN:
                         soldier.stopDown();
+                        player.stopMoveDown();
                         break;
                     } 
                 }// Fin KEY_UP
@@ -68,12 +73,18 @@ static bool handleEvents(Soldier &soldier,/*manu*/Camera& camera) {
     return true;
 }
 
-static void update(Soldier &soldier, float dt) {
+static void update(Soldier &soldier,Player &player, float dt) {
     soldier.update(dt);
+    player.update();
+
 }
 
 int main(int argc, const char *argv[]){
     try {
+        World world;
+        Player player(world, 
+    				  0.0f, 4.0f, 
+    				  1.0f, 1.0f);
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -83,7 +94,7 @@ int main(int argc, const char *argv[]){
         
         Image soldier_img1("assets/gfx/player/t4.bmp", window);
         Image soldier_img2("assets/gfx/player/t4.bmp", window);
-        Soldier soldier(soldier_img2);
+        Soldier soldier_renderer(soldier_img2);
 
         Music music("assets/sfx/menu.wav");
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
@@ -98,16 +109,16 @@ int main(int argc, const char *argv[]){
 
         bool running = true;
         while (running) {
-            running = handleEvents(soldier,camera);
-            update(soldier, FRAME_RATE);
+            running = handleEvents(soldier_renderer,camera, player);
+            update(soldier_renderer,player, FRAME_RATE);
 
             window.clear(); 
-        
-            camera.render(soldier.getX(), soldier.getY(), cameraArea);
+            world.step();
+            camera.render(player.getPosition_x()*75,player.getPosition_y()*75, cameraArea);
 
-            stencil.render(stencilArea, soldier.getAngle());
+            stencil.render(stencilArea, soldier_renderer.getAngle());
             text.render(textArea);
-            soldier.render();
+            soldier_renderer.render();
             window.render();
             
             usleep(FRAME_RATE);    

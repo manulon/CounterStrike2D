@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "World.h"
 #include <Box2D/Box2D.h>
-
+#include <iostream>
 #define PLAYER_WIDTH 1.0f
 #define PLAYER_HEIGHT 1.0f
 #define PLAYER_DAMPING 10.0f
@@ -11,7 +11,7 @@
 
 Player::Player(World &world, 
                float x, float y,
-               float width, float height) { 
+               float width, float height) : force(0,0){ 
 	initBody(world, x, y, width, height);
 }
 
@@ -56,10 +56,63 @@ float Player::getPosition_y() const {
 }
 
 float Player::getAngle() const {
-	return body->GetAngle();
+    b2Vec2 vel = body->GetLinearVelocity();
+    double angle = atan(vel.x/vel.y) *180/PI;
+    if (!isnan(angle)){
+        body->SetTransform(body->GetPosition(),angle);        
+    }
+    return body->GetAngle();
 }
 
 void Player::moveRight() {
-    b2Vec2 force(100, 0);
-    body->ApplyForceToCenter(force, false); 
+    // b2Vec2 force(100, 0);
+    // body->ApplyForceToCenter(force, true); 
+    force.Set(100, force.y);
 }
+
+void Player::moveLeft() {
+    // b2Vec2 force(-100, 0);
+    // body->ApplyForceToCenter(force, true); 
+    force.Set(-100, force.y);
+}
+
+void Player::moveUp() {
+    // b2Vec2 force(0, -100);
+    // body->ApplyForceToCenter(force, true); 
+    force.Set(force.x, -100);
+}
+
+void Player::moveDown() {
+    // b2Vec2 force(0, 100);
+    // body->ApplyForceToCenter(force, true);
+    force.Set(force.x, 100); 
+}
+void Player::stopMoveRight() {
+    // b2Vec2 force(100, 0);
+    // body->ApplyForceToCenter(force, true); 
+    force.Set(0, force.y);
+}
+
+void Player::stopMoveLeft() {
+    // b2Vec2 force(-100, 0);
+    // body->ApplyForceToCenter(force, true); 
+    force.Set(0, force.y);
+}
+
+void Player::stopMoveUp() {
+    // b2Vec2 force(0, -100);
+    // body->ApplyForceToCenter(force, true); 
+    force.Set(force.x, 0);
+}
+
+void Player::stopMoveDown() {
+    // b2Vec2 force(0, 100);
+    // body->ApplyForceToCenter(force, true);
+    force.Set(force.x, 0); 
+}
+
+void Player:: update(){
+    std::cout<<"FUERZA X: "<<force.x<<"FUERZA Y: "<<force.y<<std::endl;
+    body->ApplyForceToCenter(force,true);
+}
+

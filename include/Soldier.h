@@ -6,7 +6,6 @@
 class Soldier : public Animation {        
     private:
         int direction;
-        bool facingLeft;
         bool moving;
         int x;
         int y;

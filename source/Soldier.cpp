@@ -11,17 +11,15 @@
 // imagen solicitada para renderizar.
 
 Soldier::Soldier(const Image &image) : 
-    Animation(image, 3, 2, 32, 32, true), direction(RIGHT), facingLeft(false),
-    moving(false), x(100), y(100), width(50), height(50), angle(90) { }
+    Animation(image, 3, 2, 32, 32, true), direction(RIGHT), moving(false),
+    x(100), y(100), width(50), height(50), angle(90) { }
 
 Soldier::Soldier(Soldier &&other) : 
     Animation(std::move(other)), direction(other.direction),
-    facingLeft(other.facingLeft), moving(other.moving),
-    x(other.x), y(other.y), width(other.width), height(other.height),
+     moving(other.moving), x(other.x), y(other.y), 
+     width(other.width), height(other.height),
     angle(other.angle) {
     direction = 0;
-    facingLeft = false;
-    facingLeft = false;
     x = 0;
     y = 0;
     width = 0;
@@ -68,8 +66,7 @@ void Soldier::update(float dt) {
 
 void Soldier::render() {
     Area dest((800/2)-(50/2), (600/2)-(50/2), height, width);
-    SDL_RendererFlip flip = facingLeft ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
-    Animation::render(dest, angle, flip);
+    Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
 }
 
 void Soldier::stopMoving() {

@@ -2,12 +2,15 @@
 #define _PLAYER_H_
 
 #include <Box2D/Box2D.h>
+#include <math.h>
+#include <cmath>
+#define PI 3.14159265
 class World;
 
 class Player {
 	private:
 		b2Body *body;
-
+		b2Vec2 force;
 	public:
 		Player(World &world, 
                float x, float y,
@@ -24,6 +27,14 @@ class Player {
 		float getPosition_y() const;
 		float getAngle() const;
 		void moveRight();
+		void moveLeft();
+		void moveUp();
+		void moveDown();
+		void stopMoveDown();
+		void stopMoveUp();
+		void stopMoveLeft();
+		void stopMoveRight();
+		void update();
 };
 
 #endif // _PLAYER_H_

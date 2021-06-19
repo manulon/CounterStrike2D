@@ -6,3 +6,4 @@ Makefile
 *.a
 showAnImage
 box2dTest
+.vscode/settings.json

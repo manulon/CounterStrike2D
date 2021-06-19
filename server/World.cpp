@@ -5,7 +5,7 @@
 #define VELOCITY_ITERATIONS 6
 #define POSITION_ITERATIONS 2
 #define GRAVITY_X 0.0f
-#define GRAVITY_Y -10.0f
+#define GRAVITY_Y 0.0f
 
 World::World() : gravity(GRAVITY_X, GRAVITY_Y),
 				 world(gravity),
