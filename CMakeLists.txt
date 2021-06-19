@@ -18,7 +18,8 @@ add_subdirectory(source)
 add_executable(showAnImage test/showAnImage.cpp)
 target_link_libraries(showAnImage source SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D)
 
-add_executable(box2dTest test/box2d.cpp)
-target_link_libraries(box2dTest Box2D)
+add_subdirectory(server)
+add_executable(box2dTest server/serverMain.cpp)
+target_link_libraries(box2dTest server Box2D)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
