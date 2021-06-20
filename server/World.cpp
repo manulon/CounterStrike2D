@@ -1,5 +1,4 @@
 #include "World.h"
-#include <Box2D/Box2D.h>
 
 #define TIME_STEP 1.0f/60.0f
 #define VELOCITY_ITERATIONS 6
@@ -12,21 +11,20 @@ World::World() : gravity(GRAVITY_X, GRAVITY_Y),
 				 timeStep(TIME_STEP), 
 				 velocityIterations(VELOCITY_ITERATIONS), 
 				 positionIterations(POSITION_ITERATIONS) {
-	createBoundaries();
+	makeBoundaries();
 }
 
 World::~World() { }
 
-void World::createBoundaries() {
+void World::makeBoundaries() {
+	// TODO REFACTORIZAR A LOS LIMITES CORRECTOS DEL MAPA
+	// CUANDO SEPAMOS COMO SERIAN.
+
     b2BodyDef groundBodyDef;
     groundBodyDef.position.Set(0.0f, -10.0f);
-
     b2Body* groundBody = world.CreateBody(&groundBodyDef);
-
     b2PolygonShape groundBox;
-
-    groundBox.SetAsBox(50.0f, 00.0f);
-
+    groundBox.SetAsBox(50.0f, 0.0f);
     groundBody->CreateFixture(&groundBox, 0.0f);
 }
 
