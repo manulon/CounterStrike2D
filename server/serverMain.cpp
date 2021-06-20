@@ -24,7 +24,7 @@ int main(int argc, const char *argv[]) {
         	float position_x = player.getPosition_x();
         	float position_y = player.getPosition_y();
             float angle = player.getAngle();
-            printf("%4.2f %4.2f %4.2f\n", position_x, position_y, angle);
+            //printf("%4.2f %4.2f %4.2f\n", position_x, position_y, angle);
 
             position_x = Obstacle.getPosition_x();
         	position_y = Obstacle.getPosition_y();
