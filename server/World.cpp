@@ -25,7 +25,7 @@ void World::createBoundaries() {
 
     b2PolygonShape groundBox;
 
-    groundBox.SetAsBox(50.0f, 10.0f);
+    groundBox.SetAsBox(50.0f, 00.0f);
 
     groundBody->CreateFixture(&groundBox, 0.0f);
 }
