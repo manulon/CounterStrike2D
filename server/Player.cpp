@@ -117,7 +117,6 @@ void Player::stopMoveDown() {
     force.Set(force.x, 0); 
 }
 
-void Player::update() {
-    std::cout<<"FUERZA X: "<<force.x<<"FUERZA Y: "<<force.y<<std::endl;
+void Player:: update(){
     body->ApplyForceToCenter(force,true);
 }
