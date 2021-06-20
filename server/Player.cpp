@@ -1,50 +1,56 @@
 #include "Player.h"
 #include "World.h"
-#include <Box2D/Box2D.h>
 #include <iostream>
-#define PLAYER_WIDTH 1.0f
-#define PLAYER_HEIGHT 1.0f
-#define PLAYER_DAMPING 10.0f
-#define PLAYER_DENSITY 1.0f
-#define PLAYER_FRICTION 0.0f
+
+#define DAMPING 10.0f
+#define DENSITY 1.0f
+#define FRICTION 0.0f
 #define PLAYER_MOVING_FORCE 100.0f
 
 Player::Player(World &world, 
                float x, float y,
-               float width, float height) : force(0,0){ 
-	initBody(world, x, y, width, height);
+               float width, float height) :
+    body(nullptr), force(0,0) { 
+    b2BodyDef bodyDef;
+    b2PolygonShape polygonShape;
+    b2FixtureDef fixtureDef;
+    setBodyParams(bodyDef, x, y);
+    setShapeParams(polygonShape, width, height);
+    setFixtureParams(polygonShape, fixtureDef);
+    createBody(world, bodyDef);
+    bindFixtureToBody(fixtureDef);
+}
+
+Player::Player(Player &&other) : body(other.body) {
+    other.body = nullptr;
 }
 
 Player::~Player() { }
 
-void Player::initBody(World &world, 
-                      float x, float y,
-                      float width, float height) {
-    b2BodyDef bodyDef;
+void Player::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
     bodyDef.type = b2_dynamicBody;
-    bodyDef.linearDamping = PLAYER_DAMPING;
-    bodyDef.position.Set(x, y);
-    body = world.createBody(&bodyDef);
-
-    b2PolygonShape polygonShape;
-    setShape(polygonShape, width, height);
-
-    b2FixtureDef fixtureDef;
-    setFixture(polygonShape, fixtureDef);
-
-    body->CreateFixture(&fixtureDef);
+    bodyDef.linearDamping = DAMPING;
+    bodyDef.position.Set(x, y);  
 }
 
-void Player::setShape(b2PolygonShape &polygonShape,
-                      float width, float height) {
+void Player::createBody(World &world, b2BodyDef &bodyDef) {
+    body = world.createBody(&bodyDef);   
+}
+
+void Player::setShapeParams(b2PolygonShape &polygonShape,
+                            float width, float height) {
     polygonShape.SetAsBox(width, height);	
 }
 
-void Player::setFixture(const b2PolygonShape &polygonShape, 
-						b2FixtureDef &fixtureDef) {
+void Player::setFixtureParams(const b2PolygonShape &polygonShape, 
+						      b2FixtureDef &fixtureDef) {
     fixtureDef.shape = &polygonShape;
-    fixtureDef.density = PLAYER_DENSITY;
-    fixtureDef.friction = PLAYER_FRICTION;
+    fixtureDef.density = DENSITY;
+    fixtureDef.friction = FRICTION;
+}
+
+void Player::bindFixtureToBody(const b2FixtureDef &fixtureDef) {
+    body->CreateFixture(&fixtureDef);
 }
 
 float Player::getPosition_x() const {
@@ -57,7 +63,7 @@ float Player::getPosition_y() const {
 
 float Player::getAngle() const {
     b2Vec2 vel = body->GetLinearVelocity();
-    double angle = atan(vel.x/vel.y) *180/PI;
+    double angle = (atan(vel.x / vel.y) * 180) / b2_pi;
     if (!isnan(angle)){
         body->SetTransform(body->GetPosition(),angle);        
     }
@@ -111,8 +117,7 @@ void Player::stopMoveDown() {
     force.Set(force.x, 0); 
 }
 
-void Player:: update(){
+void Player::update() {
     std::cout<<"FUERZA X: "<<force.x<<"FUERZA Y: "<<force.y<<std::endl;
     body->ApplyForceToCenter(force,true);
 }
-
