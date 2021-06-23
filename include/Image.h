@@ -21,7 +21,7 @@ class Image {
 
         Image(Image &&other);
         ~Image();
-        /*manu*/void render(int x, int y,const Area &dest) const;
+        void render(int x, int y,const Area &dest) const;
         void render(const Area &dest) const;
         void render(const Area &src, const Area &dest) const;
         void render(const Area &src, const Area &dest, float angle, const SDL_RendererFlip &flipType) const;

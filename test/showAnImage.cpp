@@ -8,16 +8,18 @@
 #include "Camera.h"
 #include "Soldier.h"
 #include "Animation.h"
+#include "TileMap.h"
 #include <SDL2/SDL.h>
 #include <exception>
 #include <iostream>
 #include <unistd.h>
 #include "../server/World.h"
 #include "../server/Player.h"
-static bool handleEvents(Soldier &soldier,/*manu*/Camera& camera, Player &player) {
+
+static bool handleEvents(Soldier &soldier,Camera& camera, Player &player) {
     SDL_Event event;
     // Para el alumno: Buscar diferencia entre waitEvent y pollEvent
-    std::cout <<"pepe\n";
+
     while (SDL_PollEvent(&event)){
         switch (event.type) {
             case SDL_KEYDOWN: {
@@ -88,6 +90,7 @@ int main(int argc, const char *argv[]){
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+
         Image background("assets/gfx/backgrounds/toxic.jpg", window);
 
         Camera camera(background);
@@ -112,7 +115,7 @@ int main(int argc, const char *argv[]){
             running = handleEvents(soldier_renderer,camera, player);
             update(soldier_renderer,player, FRAME_RATE);
 
-            window.clear(); 
+            window.clear();
             world.step();
             camera.render(player.getPosition_x()*75,player.getPosition_y()*75, cameraArea);
 

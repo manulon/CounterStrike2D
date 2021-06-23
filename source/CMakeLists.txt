@@ -9,6 +9,8 @@ add_library(source
 			Soldier.cpp
 			Camera.cpp
 			Animation.cpp
+			Tile.cpp
+			TileMap.cpp
        	    Exception/Exception.cpp 
 	    	Exception/SdlException.cpp
 	    	Exception/SdlFontException.cpp
