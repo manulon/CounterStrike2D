@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "Obstacle.h"
 #include "Bullet.h"
+#include "Loader.h"
+#include "FireArm.h"
 
 int main(int argc, const char *argv[]) {
     try {
@@ -15,26 +17,30 @@ int main(int argc, const char *argv[]) {
     					  30.0f, 4.0f,
     					  1.0f, 1.0f);
     	Bullet bullet(world, 4.0f, 4.0f);
-        bullet.shoot(0);
+    	Loader Loader(10);
+        FireArm fireArm(world, 4.0f, 8.0f, 0.2f, 0.2f, 
+        			    std::move(bullet), std::move(Loader));
+        fireArm.shoot(0);
 
         for (int32 i = 0; i < 120; ++i) {
-            // TODO NO PUEDO MOVER EL JUGADOR COMO ANTES,
-            // REACOMODAR PARA QUE APAREZCA EL MOVIMIENTO DE JUGADOR Y PROBAR
         	world.step();
-        	float position_x = player.getPosition_x();
-        	float position_y = player.getPosition_y();
+        	float position_x = player.getPositionX();
+        	float position_y = player.getPositionY();
             float angle = player.getAngle();
             //printf("%4.2f %4.2f %4.2f\n", position_x, position_y, angle);
 
-            position_x = Obstacle.getPosition_x();
-        	position_y = Obstacle.getPosition_y();
+            position_x = Obstacle.getPositionX();
+        	position_y = Obstacle.getPositionY();
             angle = Obstacle.getAngle();
             printf("%4.2f %4.2f %4.2f\n", position_x, position_y, angle);
 
-            position_x = bullet.getPosition_x();
-        	position_y = bullet.getPosition_y();
-            angle = bullet.getAngle();
+            // COLOCAR ATRIBUTOS PUBLICOS
+            
+            position_x = fireArm.bullet.getPositionX();
+        	position_y = fireArm.bullet.getPositionY();
+            angle = fireArm.bullet.getAngle();
             printf("%4.2f %4.2f %4.2f\n", position_x, position_y, angle);
+            
 
         }
 
@@ -45,3 +51,33 @@ int main(int argc, const char *argv[]) {
 
 	return 0;
 }
+
+/*
+		World world;
+    	Player player(world, 
+    				  0.0f, 4.0f, 
+    				  1.0f, 1.0f);
+
+    	Obstacle Obstacle(world, 
+    					  30.0f, 4.0f,
+    					  1.0f, 1.0f);
+    	Bullet bullet(world, 4.0f, 4.0f);
+        bullet.shoot(0);
+
+        for (int32 i = 0; i < 120; ++i) {
+        	world.step();
+        	float position_x = player.getPositionX();
+        	float position_y = player.getPositionY();
+            float angle = player.getAngle();
+            //printf("%4.2f %4.2f %4.2f\n", position_x, position_y, angle);
+
+            position_x = Obstacle.getPositionX();
+        	position_y = Obstacle.getPositionY();
+            angle = Obstacle.getAngle();
+            printf("%4.2f %4.2f %4.2f\n", position_x, position_y, angle);
+
+            position_x = bullet.getPositionX();
+        	position_y = bullet.getPositionY();
+            angle = bullet.getAngle();
+            printf("%4.2f %4.2f %4.2f\n", position_x, position_y, angle);
+*/

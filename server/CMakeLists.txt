@@ -2,4 +2,8 @@ add_library(server
 			Player.cpp
 			World.cpp
 			Obstacle.cpp
-			Bullet.cpp)
+			Bullet.cpp
+            FireArm.cpp
+            Loader.cpp
+            Entity.cpp
+            CollisionManager.cpp)

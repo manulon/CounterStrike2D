@@ -8,10 +8,12 @@
 
 World::World() : gravity(GRAVITY_X, GRAVITY_Y),
 				 world(gravity),
+				 collisionHandler(),
 				 timeStep(TIME_STEP), 
 				 velocityIterations(VELOCITY_ITERATIONS), 
 				 positionIterations(POSITION_ITERATIONS) {
 	makeBoundaries();
+	world.SetContactListener(&collisionHandler);
 }
 
 World::~World() { }
