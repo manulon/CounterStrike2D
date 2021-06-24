@@ -91,9 +91,11 @@ int main(int argc, const char *argv[]){
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
-        Image background("assets/gfx/backgrounds/toxic.jpg", window);
+        //Image background("assets/gfx/backgrounds/toxic.jpg", window);
+        Image de_dust("assets/gfx/tiles/default_dust.png", window);
+        TileMap mapTest("assets/maps/testMap.txt", de_dust);
 
-        Camera camera(background);
+        Camera camera(mapTest);
         
         Image soldier_img1("assets/gfx/player/t4.bmp", window);
         Image soldier_img2("assets/gfx/player/t4.bmp", window);
@@ -108,7 +110,7 @@ int main(int argc, const char *argv[]){
 
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
         Area textArea((800/2)-(200/2), (600/2)-(100/2), 200, 100);       
-        Area cameraArea(0, 0, 1200, 800);
+        Area cameraArea(0, 0, 800, 800);
 
         bool running = true;
         while (running) {

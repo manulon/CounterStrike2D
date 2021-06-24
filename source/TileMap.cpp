@@ -58,7 +58,7 @@ bool TileMap::setTiles(){
     return true;
 }
 
-void TileMap::render(const Area &dst){
+void TileMap::render(int x, int y, const Area &dst){
     int xOffset(0);
     int yOffset(0);
 
@@ -71,7 +71,7 @@ void TileMap::render(const Area &dst){
             yOffset += TILE_HEIGHT;
         }
 
-        Area finalArea(xOffset,yOffset, 
+        Area finalArea(xOffset + x,yOffset + y, 
                        tileClips[type-1].w, tileClips[type-1].h);
 
         tile->render(finalArea);

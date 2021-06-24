@@ -27,7 +27,7 @@ int main(int argc, const char *argv[]){
 
     TileMap mapTest("assets/maps/testMap.txt", de_dust);
         
-    mapTest.render(windowArea);
+    //mapTest.render(windowArea);
 
     window.render();
             
