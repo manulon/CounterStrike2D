@@ -9,11 +9,18 @@ int Tile::getType(){
     return mType;
 }
 
-void Tile::render(){
-    Area dest(mBox.x, mBox.y, mBox.w, mBox.h);
-    image.render(dest);
+/*
+    void Image::render(const Area &src, const Area &dest) const {
+    render(src, dest, DEFAULT_ANGLE, SDL_FLIP_NONE);
+}
+*/
+
+void Tile::render(const Area& dest){
+    Area src(mBox.x, mBox.y, mBox.w, mBox.h);
+    printf( " En la posicion = {%d,%d}\n",dest.getX(),dest.getY());
+    image.render(src,dest);
 }
 
-void Tile::setMBox(SDL_Rect &mBox){
+void Tile::setMBox(const SDL_Rect &mBox){
     this->mBox = mBox;
 }

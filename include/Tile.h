@@ -18,16 +18,17 @@ public:
     ~Tile();
 
     //Shows the tile
-    void render();
+    void render(const Area &dest);
 
     //Get the tile type
     int getType();
 
-    void setMBox(SDL_Rect &mBox);
+    void setMBox(const SDL_Rect &mBox);
 
+    SDL_Rect mBox;
 private:
     //The attributes of the tile
-    SDL_Rect mBox;
+    
 
     //The tile type
     int mType;

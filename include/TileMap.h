@@ -4,6 +4,7 @@
 #include "Tile.h"
 #include "Image.h"
 #include "Window.h"
+#include "Area.h"
 #include <list>
 
 //The dimensions of the level
@@ -39,7 +40,7 @@ public:
 	//Sets tiles from tile map
 	bool setTiles();
 
-	void render();
+	void render(const Area &dest);
 };
 
 #endif

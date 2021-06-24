@@ -17,15 +17,19 @@
 #include "../server/Player.h"
 
 int main(int argc, const char *argv[]){
-    Window window("Prueba para tiles", 800, 600, 
+    Window window("Prueba para tiles", 800, 800, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
     Image de_dust("assets/gfx/tiles/default_dust.png", window);
 
+    Area windowArea(0, 0, 25*32, 25*32);
+
     TileMap mapTest("assets/maps/testMap.txt", de_dust);
+
+    mapTest.loadMedia();
         
-    mapTest.render();
+    mapTest.render(windowArea);
 
     window.render();
             

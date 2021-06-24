@@ -16,8 +16,8 @@ Soldier::Soldier(const Image &image) :
 
 Soldier::Soldier(Soldier &&other) : 
     Animation(std::move(other)), direction(other.direction),
-     moving(other.moving), x(other.x), y(other.y), 
-     width(other.width), height(other.height),
+    moving(other.moving), x(other.x), y(other.y), 
+    width(other.width), height(other.height),
     angle(other.angle) {
     direction = 0;
     x = 0;
