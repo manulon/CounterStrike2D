@@ -23,11 +23,9 @@ int main(int argc, const char *argv[]){
 
     Image de_dust("assets/gfx/tiles/default_dust.png", window);
 
-    Area windowArea(0, 0, 25*32, 25*32);
+    Area windowArea(0, 0, 800, 800);
 
     TileMap mapTest("assets/maps/testMap.txt", de_dust);
-
-    mapTest.loadMedia();
         
     mapTest.render(windowArea);
 

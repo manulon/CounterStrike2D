@@ -1,23 +1,23 @@
 #include "Tile.h"
+#include <utility>
 
 Tile::Tile(int tileType, const Image &image ):
-mType(tileType), image(image){}
+type(tileType), image(image){}
+
+Tile::Tile(Tile &&other) : 
+    mBox(other.mBox),type(other.type),
+    image(std::move(other.image)){
+    other.type = 0;
+}
 
 Tile::~Tile(){}
 
 int Tile::getType(){
-    return mType;
+    return type;
 }
-
-/*
-    void Image::render(const Area &src, const Area &dest) const {
-    render(src, dest, DEFAULT_ANGLE, SDL_FLIP_NONE);
-}
-*/
 
 void Tile::render(const Area& dest){
     Area src(mBox.x, mBox.y, mBox.w, mBox.h);
-    printf( " En la posicion = {%d,%d}\n",dest.getX(),dest.getY());
     image.render(src,dest);
 }
 

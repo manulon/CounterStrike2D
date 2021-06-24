@@ -13,27 +13,23 @@
 
 class Tile{
 public:
-	//Initializes position and type
     Tile(int tileType, const Image &image);
+    Tile(Tile &&other);
     ~Tile();
 
-    //Shows the tile
     void render(const Area &dest);
-
-    //Get the tile type
     int getType();
-
     void setMBox(const SDL_Rect &mBox);
 
-    SDL_Rect mBox;
-private:
-    //The attributes of the tile
     
-
-    //The tile type
-    int mType;
-
+private:
+    SDL_Rect mBox;
+    int type;
     const Image &image;
+
+    Tile(const Tile &other) = delete;
+    Tile& operator=(const Tile &other) = delete;
+    Tile& operator=(Tile &&other) = delete;
 };
 
 #endif

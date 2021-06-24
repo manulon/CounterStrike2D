@@ -19,6 +19,7 @@ Soldier::Soldier(Soldier &&other) :
     moving(other.moving), x(other.x), y(other.y), 
     width(other.width), height(other.height),
     angle(other.angle) {
+    // ACA NO SERIA OTHER.direction etc etc....
     direction = 0;
     x = 0;
     y = 0;
