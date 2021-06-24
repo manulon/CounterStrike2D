@@ -111,3 +111,7 @@ int Soldier:: getY(){
 int Soldier:: getAngle(){
     return angle;
 }
+
+void Soldier::setAngle(int angle){
+    this->angle = angle;
+}

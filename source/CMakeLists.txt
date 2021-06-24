@@ -1,4 +1,5 @@
 add_library(source
+			MouseManager.cpp
 			Music.cpp
 			SoundEffect.cpp
 			Stencil.cpp
