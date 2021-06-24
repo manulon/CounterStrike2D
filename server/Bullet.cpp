@@ -4,6 +4,7 @@
 #define RADIUS 0.1f
 #define RESTITUTION 0.0f
 #define DENSITY 1.0f
+#define IS_BULLET true
 #define BODY_TYPE b2_dynamicBody
 
 Bullet::Bullet(World &world, float x, float y) : 
@@ -25,7 +26,7 @@ Bullet::~Bullet() { }
 void Bullet::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
     bodyDef.userData = static_cast<void*>(this);
     bodyDef.type = BODY_TYPE;
-    bodyDef.bullet = BULLET;
+    bodyDef.bullet = IS_BULLET;
     bodyDef.position.Set(x, y);
 }
 

@@ -15,12 +15,12 @@ int main(int argc, const char *argv[]) {
 
     	Obstacle Obstacle(world, 
     					  30.0f, 4.0f,
-    					  1.0f, 1.0f);
-    	Bullet bullet(world, 4.0f, 4.0f);
+    					  1.0f, 50.0f);
+    	Bullet bullet(world, 0.0f, 10.0f);
     	Loader Loader(10);
         FireArm fireArm(world, 4.0f, 8.0f, 0.2f, 0.2f, 
         			    std::move(bullet), std::move(Loader));
-        fireArm.shoot(0);
+        fireArm.shoot(-90);
 
         for (int32 i = 0; i < 120; ++i) {
         	world.step();
