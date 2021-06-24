@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include "../server/World.h"
 #include "../server/Player.h"
+#include "MouseManager.h"
 
 static bool handleEvents(Soldier &soldier,Camera& camera, Player &player) {
     SDL_Event event;
@@ -75,9 +76,11 @@ static bool handleEvents(Soldier &soldier,Camera& camera, Player &player) {
     return true;
 }
 
-static void update(Soldier &soldier,Player &player, float dt) {
+static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) {
     soldier.update(dt);
+    soldier.setAngle(mm.getAngle());
     player.update();
+
 
 }
 
@@ -110,17 +113,17 @@ int main(int argc, const char *argv[]){
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
         Area textArea((800/2)-(200/2), (600/2)-(100/2), 200, 100);       
         Area cameraArea(0, 0, 800, 800);
-
+        MouseManager mm;
         bool running = true;
         while (running) {
             running = handleEvents(soldier_renderer,camera, player);
-            update(soldier_renderer,player, FRAME_RATE);
+            update(soldier_renderer,player, FRAME_RATE,mm);
 
             window.clear();
             world.step();
             camera.render(player.getPositionX()*75,player.getPositionY()*75, cameraArea);
 
-            stencil.render(stencilArea, soldier_renderer.getAngle());
+            stencil.render(stencilArea, mm.getAngle());
             text.render(textArea);
             soldier_renderer.render();
             window.render();
