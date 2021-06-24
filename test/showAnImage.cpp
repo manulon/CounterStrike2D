@@ -117,7 +117,7 @@ int main(int argc, const char *argv[]){
 
             window.clear();
             world.step();
-            camera.render(player.getPosition_x()*75,player.getPosition_y()*75, cameraArea);
+            camera.render(player.getPositionX()*75,player.getPositionY()*75, cameraArea);
 
             stencil.render(stencilArea, soldier_renderer.getAngle());
             text.render(textArea);
