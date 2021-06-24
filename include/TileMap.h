@@ -33,7 +33,7 @@ public:
 
 	bool loadMedia();
 	bool setTiles();
-	void render(const Area &dest);
+	void render(int x, int y, const Area &dest);
 };
 
 #endif
