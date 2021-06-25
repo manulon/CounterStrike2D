@@ -71,11 +71,12 @@ void TileMap::render(int x, int y, const Area &dst){
             yOffset += TILE_HEIGHT;
         }
 
-        Area finalArea(xOffset + x,yOffset + y, 
+        if ( (xOffset + x) <= ((dst.getWidth()) + TILE_WIDTH) &&
+             (yOffset + y) <= ((dst.getHeight()) + TILE_HEIGHT) ){
+            Area finalArea(xOffset + x,yOffset + y, 
                        tileClips[type-1].w, tileClips[type-1].h);
-
-        tile->render(finalArea);
-
+            tile->render(finalArea);
+        }     
         xOffset += TILE_WIDTH;
     }
 }

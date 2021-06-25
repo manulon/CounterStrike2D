@@ -7,7 +7,7 @@
 #include "Area.h"
 #include <list>
 
-/* ESTO NO DEBERIA SER UNA CONSTANTE!!!!!! Preguntar al profe */
+/* Esto no deberia estar en un archivo aparte? Preguntar al profe */
 #define LEVEL_WIDTH  		800
 #define LEVEL_HEIGHT  		600
 #define TILE_WIDTH  		32
