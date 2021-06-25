@@ -32,6 +32,11 @@ class FireArm : public Entity {
 		~FireArm();
 		void shoot(float angle);
 		void reload(size_t &ammunition);
+		virtual void collidingWithObstacle(Entity &other) override;
+		virtual void collidingWithFireArm(Entity &other) override;
+		virtual void collidingWithBullet(Entity &other) override;
+		virtual void collidingWithPlayer(Entity &other) override;
+		virtual void collideWith(Entity &other) override;
 };
 
 #endif // _FIRE_ARM_H_

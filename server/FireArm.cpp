@@ -60,3 +60,20 @@ void FireArm::shoot(float angle) {
 void FireArm::reload(size_t &ammunition) {
 	loader.reload(ammunition);
 }
+
+void FireArm::collidingWithBullet(Entity &other){
+    std::cout<<"obstaculo chocado por bala\n";
+}
+void FireArm::collidingWithPlayer(Entity &other){
+    std::cout<<"FireArm chocado por player\n";
+}
+void FireArm::collidingWithFireArm(Entity &other){
+    std::cout<<"FireArm chocado por firearm\n";
+}
+void FireArm::collidingWithObstacle(Entity &other){
+    std::cout<<"FireArm chocado por obstavulo\n";
+}
+
+void FireArm::collideWith(Entity &other){
+    other.collidingWithFireArm(*this);
+}

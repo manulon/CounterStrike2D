@@ -117,17 +117,14 @@ int main(int argc, const char *argv[]){
         bool running = true;
         while (running) {
             running = handleEvents(soldier_renderer,camera, player);
-            update(soldier_renderer,player, FRAME_RATE,mm);
-
+             update(soldier_renderer,player, FRAME_RATE,mm);
             window.clear();
             world.step();
             camera.render(player.getPositionX()*75,player.getPositionY()*75, cameraArea);
-
             stencil.render(stencilArea, mm.getAngle());
             text.render(textArea);
             soldier_renderer.render();
             window.render();
-            
             usleep(FRAME_RATE);    
         }
     } catch (std::exception &e) {

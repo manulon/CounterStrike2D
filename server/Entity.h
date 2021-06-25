@@ -2,6 +2,7 @@
 #define _ENTITY_H_
 
 #include <Box2D/Box2D.h>
+#include <iostream>
 class World;
 
 enum EntityID {
@@ -39,6 +40,13 @@ class Entity {
 		float getPositionY() const;
 		float getAngle() const;
 		EntityID getID() const;
+		virtual void collideWith(Entity &other) = 0;
+		virtual void collidingWithBullet(Entity &other) = 0;
+		virtual void collidingWithObstacle(Entity &other) = 0;
+		virtual void collidingWithFireArm(Entity &other) = 0;
+		virtual void collidingWithPlayer(Entity &other) = 0;
+		
+
 };
 	
 #endif // _ENTITY_H_

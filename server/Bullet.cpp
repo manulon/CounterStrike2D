@@ -50,3 +50,20 @@ void Bullet::shoot(float angle) {
 float Bullet::angleToRadians(float angle) {
 	return (angle * b2_pi) / 180;
 }
+
+void Bullet::collidingWithBullet(Entity &other){
+    std::cout<<"obstaculo chocado por bala\n";
+}
+void Bullet::collidingWithPlayer(Entity &other){
+    std::cout<<"Bullet chocado por player\n";
+}
+void Bullet::collidingWithFireArm(Entity &other){
+    std::cout<<"Bullet chocado por firearm\n";
+}
+void Bullet::collidingWithObstacle(Entity &other){
+    std::cout<<"Bullet chocado por obstavulo\n";
+}
+
+void Bullet::collideWith(Entity &other){
+    other.collidingWithBullet(*this);
+}

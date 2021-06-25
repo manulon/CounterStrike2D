@@ -22,6 +22,11 @@ class Bullet : public Entity {
 		Bullet(Bullet &&other);
 		~Bullet();
 		void shoot(float angle);
+		virtual void collidingWithObstacle(Entity &other) override;
+		virtual void collidingWithFireArm(Entity &other) override;
+		virtual void collidingWithBullet(Entity &other) override;
+		virtual void collidingWithPlayer(Entity &other) override;
+		virtual void collideWith(Entity &other) override;
 };
 
 #endif // _BULLET_H_

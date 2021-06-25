@@ -81,3 +81,20 @@ void Player::stopMoveDown() {
 void Player::update() {
     applyForceToCenter(force, true);
 }
+
+void Player::collideWith(Entity &other){
+    other.collidingWithPlayer(*this);
+}
+
+void Player::collidingWithBullet(Entity &other){
+    std::cout<<"plalyerchocado por bala\n";
+}
+void Player::collidingWithPlayer(Entity &other){
+    std::cout<<"player chocado por player\n";
+}
+void Player::collidingWithFireArm(Entity &other){
+    std::cout<<"player chocado por firearm\n";
+}
+void Player::collidingWithObstacle(Entity &other){
+    std::cout<<"player chocado por obstavulo\n";
+}

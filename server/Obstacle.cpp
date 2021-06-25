@@ -27,3 +27,20 @@ void Obstacle::setShapeParams(b2PolygonShape &polygonShape,
                       		  float width, float height) {
     polygonShape.SetAsBox(width, height);	
 }
+
+void Obstacle::collidingWithBullet(Entity &other){
+    std::cout<<"obstaculo chocado por bala\n";
+}
+void Obstacle::collidingWithPlayer(Entity &other){
+    std::cout<<"Obstacle chocado por player\n";
+}
+void Obstacle::collidingWithFireArm(Entity &other){
+    std::cout<<"Obstacle chocado por firearm\n";
+}
+void Obstacle::collidingWithObstacle(Entity &other){
+    std::cout<<"Obstacle chocado por obstavulo\n";
+}
+
+void Obstacle::collideWith(Entity &other){
+    other.collidingWithObstacle(*this);
+}

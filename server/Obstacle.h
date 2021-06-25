@@ -21,6 +21,11 @@ class Obstacle : public Entity {
 				 float width, float height);
 		Obstacle(Obstacle &&other);
 		~Obstacle();
+		virtual void collidingWithObstacle(Entity &other) override;
+		virtual void collidingWithFireArm(Entity &other) override;
+		virtual void collidingWithBullet(Entity &other) override;
+		virtual void collidingWithPlayer(Entity &other) override;
+		virtual void collideWith(Entity &other) override;
 };
 
 #endif // _OBSTACLE_H_
