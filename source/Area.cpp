@@ -22,6 +22,7 @@ void Area::setX(int new_var) {
 void Area::setY(int new_var) {
 	y = new_var;
 }
+
 void Area::setWidth(int new_var) {
 	width = new_var;
 }

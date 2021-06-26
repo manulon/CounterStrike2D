@@ -2,7 +2,6 @@
 #include "Window.h"
 #include "Image.h"
 
-
 bool leftMouseButtonDown = false;
 
 int main(int argc, const char *argv[]){
