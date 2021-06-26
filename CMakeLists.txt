@@ -14,9 +14,12 @@ include_directories(include
 					include/SDL/Texture
 					include/SDL/Window)
 include_directories(server/include)
+include_directories(mapEditor
+					/usr/local/include/yaml-cpp)
 
 add_subdirectory(source)
 add_subdirectory(server)
+add_subdirectory(mapEditor)
 add_executable(showAnImage test/showAnImage.cpp)
 target_link_libraries(showAnImage source server SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D)
 
@@ -30,5 +33,8 @@ target_link_libraries(dragAndDrop source server SDL2 SDL2_image SDL2_mixer SDL2_
 
 add_executable(box2dTest server/serverMain.cpp)
 target_link_libraries(box2dTest server Box2D)
+
+add_executable(mapTest test/makeMap.cpp)
+target_link_libraries(mapTest mapEditor /usr/local/lib/libyaml-cpp.a)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
