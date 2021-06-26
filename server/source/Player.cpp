@@ -11,7 +11,7 @@
 Player::Player(World &world, 
                float x, float y,
                float width, float height) :
-    Entity(EntityID::PLAYER), force(0,0) { 
+    Entity(), force(0,0) { 
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     b2FixtureDef fixtureDef;
@@ -19,7 +19,7 @@ Player::Player(World &world,
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
 
-    createEntity(world, bodyDef, fixtureDef);
+    init(world, bodyDef, fixtureDef);
 }
 
 Player::Player(Player &&other) : Entity(std::move(other)) { }
@@ -82,19 +82,26 @@ void Player::update() {
     applyForceToCenter(force, true);
 }
 
-void Player::collideWith(Entity &other){
-    other.collidingWithPlayer(*this);
+void Player::collideWith(Entity &entity) {
+    entity.collideWithPlayer(*this);
 }
 
-void Player::collidingWithBullet(Entity &other){
-    std::cout<<"plalyerchocado por bala\n";
+void Player::collideWithBullet(Bullet &bullet) {
+    std::cout << "player chocado por bala\n";
 }
-void Player::collidingWithPlayer(Entity &other){
-    std::cout<<"player chocado por player\n";
+
+void Player::collideWithObstacle(Obstacle &obstacle) {
+    std::cout << "player chocado por obstaculo\n";
 }
-void Player::collidingWithFireArm(Entity &other){
-    std::cout<<"player chocado por firearm\n";
+
+void Player::collideWithFireArm(FireArm &fireArm) {
+    std::cout << "player chocado por firearm\n";
 }
-void Player::collidingWithObstacle(Entity &other){
-    std::cout<<"player chocado por obstavulo\n";
+
+void Player::collideWithPlayer(Player &player) {
+    std::cout << "player chocado por player\n";
+}
+
+void Player::collideWithBorder(Border &border) {
+    std::cout << "Player chocado por border\n";
 }

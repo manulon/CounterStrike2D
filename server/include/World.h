@@ -3,6 +3,7 @@
 
 #include "CollisionManager.h"
 #include <Box2D/Box2D.h>
+#include <queue>
 
 class World {
 	private:
@@ -12,6 +13,8 @@ class World {
 		float timeStep;
 		int32 velocityIterations;
 		int32 positionIterations;
+
+		std::queue<b2Body*> destroyList;
 
 		void makeBoundaries();
 		World(const World &other) = delete;
@@ -24,6 +27,11 @@ class World {
 		~World();
 		void step();
 		b2Body *createBody(const b2BodyDef *def);
+		friend std::ostream& operator<<(std::ostream &os, const World &obj);
+		const b2Body* getBodyList() const;
+		
+		void clean();
+		void destroy(b2Body &body);
 };
 
 #endif // _WORLD_H_

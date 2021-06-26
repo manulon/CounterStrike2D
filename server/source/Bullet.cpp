@@ -8,7 +8,7 @@
 #define BODY_TYPE b2_dynamicBody
 
 Bullet::Bullet(World &world, float x, float y) : 
-    Entity(EntityID::BULLET) {
+    Entity() {
 	b2BodyDef bodyDef;
     b2CircleShape circleShape;
     b2FixtureDef fixtureDef;
@@ -16,7 +16,7 @@ Bullet::Bullet(World &world, float x, float y) :
     setShapeParams(circleShape);
     setFixtureParams(circleShape, fixtureDef);
 
-    createEntity(world, bodyDef, fixtureDef);
+    init(world, bodyDef, fixtureDef);
 }
 
 Bullet::Bullet(Bullet &&other) : Entity(std::move(other)) { }
@@ -51,19 +51,33 @@ float Bullet::angleToRadians(float angle) {
 	return (angle * b2_pi) / 180;
 }
 
-void Bullet::collidingWithBullet(Entity &other){
-    std::cout<<"obstaculo chocado por bala\n";
-}
-void Bullet::collidingWithPlayer(Entity &other){
-    std::cout<<"Bullet chocado por player\n";
-}
-void Bullet::collidingWithFireArm(Entity &other){
-    std::cout<<"Bullet chocado por firearm\n";
-}
-void Bullet::collidingWithObstacle(Entity &other){
-    std::cout<<"Bullet chocado por obstavulo\n";
+void Bullet::collideWith(Entity &entity) {
+    entity.collideWithBullet(*this);
 }
 
-void Bullet::collideWith(Entity &other){
-    other.collidingWithBullet(*this);
+void Bullet::collideWithBullet(Bullet &bullet) {
+    std::cout << "bullet chocado por bala\n";
+}
+
+void Bullet::collideWithObstacle(Obstacle &obstacle) {
+    std::cout << "bullet chocado por obstaculo y destruido\n";
+    destroy();
+}
+
+void Bullet::collideWithFireArm(FireArm &fireArm) {
+    std::cout << "bullet chocado por firearm\n";
+}
+
+void Bullet::collideWithPlayer(Player &player) {
+    std::cout << "bullet chocado por player\n";
+}
+
+void Bullet::collideWithBorder(Border &border) {
+    std::cout << "Bullet chocado por border\n";
+    destroy();
+}
+
+std::ostream& operator<<(std::ostream &os, const Bullet &obj) {
+    os << "bullet";
+    return os;
 }

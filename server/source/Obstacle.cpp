@@ -5,13 +5,13 @@
 Obstacle::Obstacle(World &world, 
 				   float x, float y,
 				   float width, float height) : 
-    Entity(EntityID::OBSTACLE) {
+    Entity() {
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
 
-    createEntity(world, bodyDef, polygonShape, DENSITY);
+    init(world, bodyDef, polygonShape, DENSITY);
 }
 
 Obstacle::Obstacle(Obstacle &&other) : Entity(std::move(other)) { }
@@ -28,19 +28,26 @@ void Obstacle::setShapeParams(b2PolygonShape &polygonShape,
     polygonShape.SetAsBox(width, height);	
 }
 
-void Obstacle::collidingWithBullet(Entity &other){
-    std::cout<<"obstaculo chocado por bala\n";
-}
-void Obstacle::collidingWithPlayer(Entity &other){
-    std::cout<<"Obstacle chocado por player\n";
-}
-void Obstacle::collidingWithFireArm(Entity &other){
-    std::cout<<"Obstacle chocado por firearm\n";
-}
-void Obstacle::collidingWithObstacle(Entity &other){
-    std::cout<<"Obstacle chocado por obstavulo\n";
+void Obstacle::collideWith(Entity &entity) {
+    entity.collideWithObstacle(*this);
 }
 
-void Obstacle::collideWith(Entity &other){
-    other.collidingWithObstacle(*this);
+void Obstacle::collideWithBullet(Bullet &bullet) {
+    std::cout << "obstacle chocado por bala\n";
+}
+
+void Obstacle::collideWithObstacle(Obstacle &obstacle) {
+    std::cout << "obstacle chocado por obstaculo\n";
+}
+
+void Obstacle::collideWithFireArm(FireArm &fireArm) {
+    std::cout << "obstacle chocado por firearm\n";
+}
+
+void Obstacle::collideWithPlayer(Player &player) {
+    std::cout << "obstacle chocado por jugador\n";
+}
+
+void Obstacle::collideWithBorder(Border &border) {
+    std::cout << "Obstacle chocado por border\n";
 }

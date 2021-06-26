@@ -4,18 +4,16 @@
 #include <Box2D/Box2D.h>
 #include <iostream>
 class World;
-
-enum EntityID {
-	PLAYER,
-	BULLET,
-	FIRE_ARM,
-	OBSTACLE
-};
+class Bullet;
+class Obstacle;
+class FireArm;
+class Player;
+class Border;
 
 class Entity {
 	private:
-		EntityID entityID;
 		b2Body *body;
+		World *world;
 
 		void bindFixtureToEntity(const b2FixtureDef &fixtureDef);
 		void bindFixtureToEntity(const b2Shape &shape, float density);
@@ -25,27 +23,28 @@ class Entity {
 		Entity& operator=(Entity &&other) = delete;
 
 	public:
-		Entity(EntityID entityID);
+		virtual void collideWith(Entity &entity) = 0;
+		virtual void collideWithBullet(Bullet &bullet) = 0;
+		virtual void collideWithObstacle(Obstacle &obstacle) = 0;
+		virtual void collideWithFireArm(FireArm &fireArm) = 0;
+		virtual void collideWithPlayer(Player &player) = 0;
+		virtual void collideWithBorder(Border &border) = 0;
+		
+		Entity();
 		Entity(Entity &&other);
 		virtual ~Entity();
-
-		void createEntity(World &world, b2BodyDef &bodyDef, 
+		void init(World &world, b2BodyDef &bodyDef, 
                           const b2Shape &shape, float density);
-		void createEntity(World &world, b2BodyDef &bodyDef, 
+		void init(World &world, b2BodyDef &bodyDef, 
 						  const b2FixtureDef &fixtureDef);
+		void destroy();
 		void applyForceToCenter(const b2Vec2 &force, bool wake);
 		void applyLinearImpulseToCenter(const b2Vec2 &force, 
                              			bool wake);
 		float getPositionX() const;
 		float getPositionY() const;
 		float getAngle() const;
-		EntityID getID() const;
-		virtual void collideWith(Entity &other) = 0;
-		virtual void collidingWithBullet(Entity &other) = 0;
-		virtual void collidingWithObstacle(Entity &other) = 0;
-		virtual void collidingWithFireArm(Entity &other) = 0;
-		virtual void collidingWithPlayer(Entity &other) = 0;
-		
+		friend std::ostream& operator<<(std::ostream &os, const Entity &obj);
 
 };
 	

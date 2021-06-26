@@ -14,8 +14,8 @@
 #include <list>
 #include <iostream>
 #include <unistd.h>
-#include "../server/World.h"
-#include "../server/Player.h"
+#include "World.h"
+#include "Player.h"
 #include "MouseManager.h"
 
 bool leftMouseButtonDown = false;

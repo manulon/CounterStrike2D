@@ -13,8 +13,8 @@
 #include <exception>
 #include <iostream>
 #include <unistd.h>
-#include "../server/World.h"
-#include "../server/Player.h"
+#include "World.h"
+#include "Player.h"
 
 int main(int argc, const char *argv[]){
     Window window("Prueba para tiles", 800, 800, 

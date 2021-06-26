@@ -4,7 +4,6 @@
 #include "Entity.h"
 #include <Box2D/Box2D.h>
 
-
 class World;
 
 class Player : public Entity {
@@ -26,11 +25,12 @@ class Player : public Entity {
                float width, float height);
 		Player(Player &&other);
 		~Player();
-		virtual void collidingWithObstacle(Entity &other) override;
-		virtual void collidingWithFireArm(Entity &other) override;
-		virtual void collidingWithBullet(Entity &other) override;
-		virtual void collidingWithPlayer(Entity &other) override;
-		virtual void collideWith(Entity &other) override;
+		virtual void collideWith(Entity &entity) override;
+		virtual void collideWithBullet(Bullet &bullet) override;
+		virtual void collideWithObstacle(Obstacle &obstacle) override;
+		virtual void collideWithFireArm(FireArm &fireArm) override;
+		virtual void collideWithPlayer(Player &player) override;
+		virtual void collideWithBorder(Border &border) override;
 		void moveRight();
 		void moveLeft();
 		void moveUp();

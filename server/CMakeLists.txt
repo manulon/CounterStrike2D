@@ -1,9 +1,10 @@
 add_library(server
-			Player.cpp
-			World.cpp
-			Obstacle.cpp
-			Bullet.cpp
-            FireArm.cpp
-            Loader.cpp
-            Entity.cpp
-            CollisionManager.cpp)
+			source/Player.cpp
+			source/World.cpp
+			source/Obstacle.cpp
+			source/Bullet.cpp
+            source/FireArm.cpp
+            source/Loader.cpp
+            source/Entity.cpp
+            source/CollisionManager.cpp
+            source/Border.cpp)

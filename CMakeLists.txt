@@ -13,6 +13,7 @@ include_directories(include
 					include/SDL/Sound
 					include/SDL/Texture
 					include/SDL/Window)
+include_directories(server/include)
 
 add_subdirectory(source)
 add_subdirectory(server)

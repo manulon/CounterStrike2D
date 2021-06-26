@@ -1,26 +1,29 @@
 #include "Entity.h"
 #include "World.h"
 
-Entity::Entity(EntityID entityID) : 
-    entityID(entityID),
-    body(nullptr) { }
+Entity::Entity() : 
+    body(nullptr), 
+    world(nullptr) { }
 
 Entity::Entity(Entity &&other) : 
-    entityID(other.entityID), 
-    body(other.body) {
+    body(other.body),
+    world(other.world) {
     other.body = nullptr;
+    other.world = nullptr;
 }
 
 Entity::~Entity() { }
 
-void Entity::createEntity(World &world, b2BodyDef &bodyDef, 
+void Entity::init(World &world, b2BodyDef &bodyDef, 
                           const b2Shape &shape, float density) {
+    this->world = &world;
     body = world.createBody(&bodyDef); 
     bindFixtureToEntity(shape, density);
 }
 
-void Entity::createEntity(World &world, b2BodyDef &bodyDef, 
+void Entity::init(World &world, b2BodyDef &bodyDef, 
 						  const b2FixtureDef &fixtureDef) {
+    this->world = &world;
     body = world.createBody(&bodyDef); 
     bindFixtureToEntity(fixtureDef);
 }
@@ -56,14 +59,24 @@ float Entity::radiansToAngle(float radians) const {
     return (fmod(radians, (2 * b2_pi)) * 180) / b2_pi;
 }
 
-EntityID Entity::getID() const {
-    return entityID;
-}
-
 void Entity::bindFixtureToEntity(const b2Shape &shape, float density) {
     body->CreateFixture(&shape, density);
 }
 
 void Entity::bindFixtureToEntity(const b2FixtureDef &fixtureDef) {
     body->CreateFixture(&fixtureDef);
+}
+
+std::ostream& operator<<(std::ostream &os, const Entity &obj) {
+    float position_x = obj.getPositionX();
+    float position_y = obj.getPositionY();
+    float angle = obj.getAngle();
+    char buffer[100];
+    snprintf(buffer, sizeof(buffer), "%4.2f %4.2f %4.2f", position_x, position_y, angle);
+    os << buffer;
+    return os;
+}
+
+void Entity::destroy() {
+    world->destroy(*body);
 }

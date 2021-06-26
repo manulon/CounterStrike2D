@@ -22,11 +22,13 @@ class Bullet : public Entity {
 		Bullet(Bullet &&other);
 		~Bullet();
 		void shoot(float angle);
-		virtual void collidingWithObstacle(Entity &other) override;
-		virtual void collidingWithFireArm(Entity &other) override;
-		virtual void collidingWithBullet(Entity &other) override;
-		virtual void collidingWithPlayer(Entity &other) override;
-		virtual void collideWith(Entity &other) override;
+		virtual void collideWith(Entity &entity) override;
+		virtual void collideWithBullet(Bullet &bullet) override;
+		virtual void collideWithObstacle(Obstacle &obstacle) override;
+		virtual void collideWithFireArm(FireArm &fireArm) override;
+		virtual void collideWithPlayer(Player &player) override;
+		virtual void collideWithBorder(Border &border) override;
+		friend std::ostream& operator<<(std::ostream &os, const Bullet &obj);
 };
 
 #endif // _BULLET_H_

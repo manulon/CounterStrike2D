@@ -7,10 +7,10 @@
 FireArm::FireArm(World &world, 
 				 float x, float y,
 				 float width, float height, 
-				 Bullet &&bullet, Loader &&loader) : 
-	Entity(EntityID::FIRE_ARM), 
-	bullet(std::move(bullet)),
-	loader(std::move(loader)) { 
+				 Bullet &bullet, Loader &loader) : 
+	Entity(), 
+	bullet(bullet),
+	loader(loader) { 
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     b2FixtureDef fixtureDef;
@@ -18,13 +18,13 @@ FireArm::FireArm(World &world,
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
 
-    createEntity(world, bodyDef, fixtureDef);
+    init(world, bodyDef, fixtureDef);
 }
 
 FireArm::FireArm(FireArm &&other) : 
 	Entity(std::move(other)),
-	bullet(std::move(other.bullet)),
-	loader(std::move(other.loader)) { }
+	bullet(other.bullet),
+	loader(other.loader) { }
 
 FireArm::~FireArm() { }
 
@@ -61,19 +61,26 @@ void FireArm::reload(size_t &ammunition) {
 	loader.reload(ammunition);
 }
 
-void FireArm::collidingWithBullet(Entity &other){
-    std::cout<<"obstaculo chocado por bala\n";
-}
-void FireArm::collidingWithPlayer(Entity &other){
-    std::cout<<"FireArm chocado por player\n";
-}
-void FireArm::collidingWithFireArm(Entity &other){
-    std::cout<<"FireArm chocado por firearm\n";
-}
-void FireArm::collidingWithObstacle(Entity &other){
-    std::cout<<"FireArm chocado por obstavulo\n";
+void FireArm::collideWith(Entity &entity) {
+    entity.collideWithFireArm(*this);
 }
 
-void FireArm::collideWith(Entity &other){
-    other.collidingWithFireArm(*this);
+void FireArm::collideWithBullet(Bullet &bullet) {
+    std::cout << "obstacle chocado por bala\n";
+}
+
+void FireArm::collideWithObstacle(Obstacle &obstacle) {
+    std::cout << "obstacle chocado por obstaculo\n";
+}
+
+void FireArm::collideWithFireArm(FireArm &fireArm) {
+    std::cout << "obstacle chocado por firearm\n";
+}
+
+void FireArm::collideWithPlayer(Player &player) {
+    std::cout << "obstacle chocado por player\n";
+}
+
+void FireArm::collideWithBorder(Border &border) {
+    std::cout << "FireArm chocado por border\n";
 }
