@@ -73,9 +73,9 @@ void SdlRenderer::renderPresent() const {
     SDL_RenderPresent(renderer);
 }
 
-void SdlRenderer::renderCopyEx(SDL_Texture *texture, const SDL_Rect *srcrect,
-                               const SDL_Rect *dstrect, const double angle,
-                               const SDL_RendererFlip &flipType) const {
+void SdlRenderer::renderCopyEx(SDL_Texture *texture,  SDL_Rect *srcrect,
+                                SDL_Rect *dstrect, const double angle,
+                                SDL_RendererFlip flipType) {
     int errCode = SDL_RenderCopyEx(renderer, texture, 
                                    srcrect, dstrect, angle, nullptr, flipType);
     if (errCode < 0) {
