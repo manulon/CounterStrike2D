@@ -12,6 +12,10 @@ class Area {
 		int getY() const;
 		int getWidth() const;
 		int getHeight() const;
+		void setX(int new_var);
+		void setY(int new_var);
+		void setWidth(int new_var);
+		void setHeight(int new_var);
 };
 
 #endif // _AREA_H_

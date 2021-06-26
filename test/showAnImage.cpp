@@ -80,8 +80,6 @@ static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) 
     soldier.update(dt);
     soldier.setAngle(mm.getAngle());
     player.update();
-
-
 }
 
 int main(int argc, const char *argv[]){
@@ -117,7 +115,7 @@ int main(int argc, const char *argv[]){
         bool running = true;
         while (running) {
             running = handleEvents(soldier_renderer,camera, player);
-             update(soldier_renderer,player, FRAME_RATE,mm);
+            update(soldier_renderer,player, FRAME_RATE,mm);
             window.clear();
             world.step();
             camera.render(player.getPositionX()*75,player.getPositionY()*75, cameraArea);
