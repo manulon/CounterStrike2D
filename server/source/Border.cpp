@@ -1,12 +1,23 @@
 #include "Border.h"
 #define DENSITY 1.0f
+#define DELTA 1.0f
 
-Border::Border(World &world) : Entity() {
-	b2BodyDef groundBodyDef;
-    b2PolygonShape groundBox;
-    setBodyParams(groundBodyDef, 0.0f, 0.0f);
-    setShapeParams(groundBox, 50.0f, 0.0f);
-    init(world, groundBodyDef, groundBox, DENSITY);
+Border::Border(World &world,
+               float x, float y,
+               float width, float height) : Entity(world) {
+	b2BodyDef borderDef;
+    b2PolygonShape side;
+    b2FixtureDef fixtureDef;
+    setBodyParams(borderDef, x, y);
+    setFixtureParams(side, fixtureDef);
+    side.SetAsBox(width, DELTA, b2Vec2(x, y - height/2), 0);
+    Entity::init(borderDef, fixtureDef);
+    side.SetAsBox(DELTA, height, b2Vec2(x + width/2, y), 0);
+    Entity::bindFixture(fixtureDef);
+    side.SetAsBox(width, DELTA, b2Vec2(x, y + height/2), 0);
+    Entity::bindFixture(fixtureDef);
+    side.SetAsBox(DELTA, height, b2Vec2(x - width/2, y), 0);
+    Entity::bindFixture(fixtureDef);
 }
 
 Border::~Border() { }
@@ -16,9 +27,11 @@ void Border::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
 	bodyDef.position.Set(x, y);
 }
 
-void Border::setShapeParams(b2PolygonShape &polygonShape,
-                      		float width, float height) {
-    polygonShape.SetAsBox(width, height);	
+void Border::setFixtureParams(const b2PolygonShape &polygonShape, 
+                              b2FixtureDef &fixtureDef) {
+    fixtureDef.shape = &polygonShape;
+    fixtureDef.density = DENSITY;
+    fixtureDef.friction = 1.0f;
 }
 
 void Border::collideWith(Entity &entity) {

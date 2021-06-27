@@ -22,16 +22,15 @@ class FireArm : public Entity {
 		FireArm& operator=(FireArm &&other) = delete;
 
 	public:
-		Bullet &bullet;
-		Loader &loader;
+		//Bullet &bullet;
+		//Loader &loader;
 		FireArm(World &world, 
 				float x, float y,
-				float width, float height, 
-				Bullet &bullet, Loader &loader);
+				float width, float height);
 		FireArm(FireArm &&other);
 		~FireArm();
-		void shoot(float angle);
-		void reload(size_t &ammunition);
+		// void shoot(float angle);
+		// void reload(size_t &ammunition);
 		virtual void collideWith(Entity &entity) override;
 		virtual void collideWithBullet(Bullet &bullet) override;
 		virtual void collideWithObstacle(Obstacle &obstacle) override;

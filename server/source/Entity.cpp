@@ -1,31 +1,40 @@
 #include "Entity.h"
 #include "World.h"
 
-Entity::Entity() : 
+Entity::Entity(World &world) : 
     body(nullptr), 
-    world(nullptr) { }
+    world(world) { }
 
 Entity::Entity(Entity &&other) : 
     body(other.body),
     world(other.world) {
     other.body = nullptr;
-    other.world = nullptr;
 }
 
 Entity::~Entity() { }
 
-void Entity::init(World &world, b2BodyDef &bodyDef, 
-                          const b2Shape &shape, float density) {
-    this->world = &world;
+void Entity::init(b2BodyDef &bodyDef, 
+                  const b2Shape &shape, float density) {
     body = world.createBody(&bodyDef); 
-    bindFixtureToEntity(shape, density);
+    bindFixture(shape, density);
 }
 
-void Entity::init(World &world, b2BodyDef &bodyDef, 
-						  const b2FixtureDef &fixtureDef) {
-    this->world = &world;
+void Entity::init(b2BodyDef &bodyDef, 
+				  const b2FixtureDef &fixtureDef) {
     body = world.createBody(&bodyDef); 
-    bindFixtureToEntity(fixtureDef);
+    bindFixture(fixtureDef);
+}
+
+void Entity::bindFixture(const b2Shape &shape, float density) {
+    body->CreateFixture(&shape, density);
+}
+
+void Entity::bindFixture(const b2FixtureDef &fixtureDef) {
+    body->CreateFixture(&fixtureDef);
+}
+
+float Entity::radiansToAngle(float radians) const {
+    return (fmod(radians, (2 * b2_pi)) * 180) / b2_pi;
 }
 
 void Entity::applyForceToCenter(const b2Vec2 &force, bool wake) {
@@ -55,28 +64,21 @@ float Entity::getAngle() const {
     return angle;
 }
 
-float Entity::radiansToAngle(float radians) const {
-    return (fmod(radians, (2 * b2_pi)) * 180) / b2_pi;
+void Entity::destroy() {
+    if (body != nullptr) {
+        world.destroy(*body);
+        body = nullptr;        
+    }
 }
 
-void Entity::bindFixtureToEntity(const b2Shape &shape, float density) {
-    body->CreateFixture(&shape, density);
-}
-
-void Entity::bindFixtureToEntity(const b2FixtureDef &fixtureDef) {
-    body->CreateFixture(&fixtureDef);
-}
-
-std::ostream& operator<<(std::ostream &os, const Entity &obj) {
-    float position_x = obj.getPositionX();
-    float position_y = obj.getPositionY();
-    float angle = obj.getAngle();
+std::ostream& operator<<(std::ostream &os, const Entity &entity) {
+    // TODO
+    // CORREGIR FORMATO LUEGO
+    float positionX = entity.getPositionX();
+    float positionY = entity.getPositionY();
+    float angle = entity.getAngle();
     char buffer[100];
-    snprintf(buffer, sizeof(buffer), "%4.2f %4.2f %4.2f", position_x, position_y, angle);
+    snprintf(buffer, sizeof(buffer), "%4.2f %4.2f %4.2f", positionX, positionY, angle);
     os << buffer;
     return os;
-}
-
-void Entity::destroy() {
-    world->destroy(*body);
 }
