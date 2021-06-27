@@ -1,10 +1,10 @@
 #include "EditorEventHandler.h"
 #include "Image.h"
 
-EditorEventHandler::EditorEventHandler(Window& window): 
+EditorEventHandler::EditorEventHandler(Area& area, Window& window): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),
-area(0,0,32,32),image("assets/gfx/tiles/default_dust.png", window){}
+area(area){}
 
 bool EditorEventHandler::handleEvents(){
    SDL_Event event;
@@ -63,10 +63,6 @@ bool EditorEventHandler::handleEvents(){
         }
     }
     return true;
-}
-
-void EditorEventHandler:: renderImageTest(){
-   image.render(area);
 }
 
 EditorEventHandler::~EditorEventHandler(){}

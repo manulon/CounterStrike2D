@@ -3,7 +3,6 @@
 
 #include "Area.h"
 #include "Window.h"
-#include "Image.h"
 #include "SDL2/SDL.h"
 #include <iostream>
 
@@ -18,15 +17,13 @@ class EditorEventHandler {
       int mousePositionY;
       int windowWidth;
       int windowHeight;
-      Area area;
-      Image image;
+      Area& area;
 
    public:
-      EditorEventHandler(Window &window);
+      EditorEventHandler(Area& area, Window &window);
       ~EditorEventHandler();
 
       bool handleEvents();
-      void renderImageTest();
 };
 
 #endif  // _EDITOR_EVENT_HANDLER_H_
