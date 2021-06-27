@@ -22,10 +22,12 @@ int main(int argc, const char *argv[]){
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
     Image de_dust("assets/gfx/tiles/default_dust.png", window);
-
+    Image obsImg("assets/gfx/tiles/dust.bmp", window);
     Area windowArea(0, 0, 800, 800);
 
-    TileMap mapTest("assets/maps/testMap.txt", de_dust);
+
+
+    TileMap mapTest("assets/maps/testMap.txt", de_dust, obsImg);
         
     //mapTest.render(windowArea);
 

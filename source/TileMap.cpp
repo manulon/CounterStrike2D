@@ -3,8 +3,8 @@
 #include <utility>
 #include "yaml-cpp/yaml.h"
 
-TileMap::TileMap(const char *pathText, const Image &image):
-image(image),mapName(pathText),tiles(){
+TileMap::TileMap(const char *pathText, const Image &image, const Image &obs) :
+image(image),mapName(pathText),imgObstacles(obs),tiles(), obstacles(){
 	
     //Deberia tirar excepcion
     // if( map.fail() )
@@ -18,6 +18,9 @@ TileMap::~TileMap(){
     // map.close();
     for (auto& tile: tiles){
        delete tile;
+    }
+    for (auto& obstacle : obstacles){
+        delete obstacle;
     }
 }
 
@@ -52,6 +55,26 @@ bool TileMap::setTiles(){
         	y_aux+=TILE_HEIGHT;
         }
     }
+    YAML::Node obsyaml = map["obstacles"];
+    for (unsigned int i=0; i< obsyaml.size(); i++){
+        obstacles.push_back(new Tile(obsyaml[i][2].as<int>(),
+         obsyaml[i][0].as<int>(), obsyaml[i][1].as<int>(),imgObstacles));
+    }
+    x_aux = 0;
+    y_aux = 0;
+    for (int i=0; i<80; i++){
+        obsClips[i].x = x_aux;
+        obsClips[i].y = y_aux;
+        obsClips[i].w = TILE_WIDTH;
+        obsClips[i].h = TILE_HEIGHT;
+
+        x_aux += TILE_WIDTH;
+
+        if (x_aux==256){
+        	x_aux=0;
+        	y_aux+=TILE_HEIGHT;
+        }
+    }
 
     return true;
 }
@@ -70,6 +93,19 @@ void TileMap::render(int x, int y, const Area &dst){
              (yOffset + y) <= ((dst.getHeight()) + TILE_HEIGHT) ){
             Area finalArea(xOffset + x,yOffset + y, 
                        tileClips[type-1].w, tileClips[type-1].h);
+            tile->render(finalArea);
+        } 
+    }
+    for (auto& tile: obstacles){
+        int xOffset(tile->getX());
+        int yOffset(tile->getY());
+        int type(tile->getType());
+        tile->setMBox(obsClips[type-1]);
+
+        if ( (xOffset + x) <= ((dst.getWidth()) + TILE_WIDTH) &&
+             (yOffset + y) <= ((dst.getHeight()) + TILE_HEIGHT) ){
+            Area finalArea(xOffset + x,yOffset + y, 
+                       obsClips[type-1].w, obsClips[type-1].h);
             tile->render(finalArea);
         } 
     }

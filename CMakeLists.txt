@@ -20,8 +20,6 @@ add_subdirectory(source)
 add_subdirectory(server)
 add_subdirectory(mapEditor)
 
-add_executable(dragAndDrop test/pruebaDragAndDrop.cpp)
-target_link_libraries(dragAndDrop source mapEditor SDL2 SDL2_image)
 
 add_executable(showAnImage test/showAnImage.cpp)
 target_link_libraries(showAnImage source server SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
@@ -34,5 +32,8 @@ target_link_libraries(box2dTest server Box2D)
 
 add_executable(mapTest test/makeMap.cpp)
 target_link_libraries(mapTest mapEditor yaml-cpp)
+
+add_executable(dragAndDrop test/pruebaDragAndDrop.cpp)
+target_link_libraries(dragAndDrop  source  SDL2 SDL2_image mapEditor)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
