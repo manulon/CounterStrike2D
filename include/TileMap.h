@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Area.h"
 #include <list>
+// #include "yaml-cpp/yaml"
 
 /* Esto no deberia estar en un archivo aparte? Preguntar al profe */
 #define LEVEL_WIDTH  		800
@@ -19,7 +20,7 @@
 class TileMap{
 private:
 	const Image &image;
-	std::ifstream map;
+	std::string mapName;
 	SDL_Rect tileClips[ TOTAL_TILE_SPRITES ];
 	std::list<Tile*> tiles;
 

@@ -93,7 +93,7 @@ int main(int argc, const char *argv[]){
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
         Image de_dust("assets/gfx/tiles/default_dust.png", window);
-        TileMap mapTest("assets/maps/testMap.txt", de_dust);
+        TileMap mapTest("assets/maps/mapTest.yaml", de_dust);
 
         Camera camera(mapTest);
         

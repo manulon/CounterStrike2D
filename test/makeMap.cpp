@@ -2,39 +2,35 @@
 #include <fstream>
 #include <vector>
 #include "MapEditor.h"
+
 // int main(int argc, char const *argv[]){
-//     std::ofstream file("map2.yaml");
-//     YAML::Node mapFile;
+//     int spriteId;
+//     MapEditor me;
+//     me.createMap("mapTest", "dust");
+//     std::fstream file("testMap.txt");
+//     int x_aux(0);
+//     int y_aux(0);
+//     for (int i = 0; i<650;i++){
+//         file >> spriteId;
+//         me.addField(x_aux,y_aux,spriteId);
+//         x_aux += 32;
 
-//     mapFile["style"] = "dust";
-//     for (int i = 0; i <2; i++){
-//         YAML::Node field = YAML::Load("[1,2,3,4,5]");
-//         mapFile["fields"].push_back(field);
-//     }
-//     std::vector<int> lista;
-//     lista.push_back(9);
-//     lista.push_back(4);
-//     lista.push_back(2);
-//     lista.push_back(4);
-//     lista.push_back(2);
-//     std::cout <<(std::stringendl;
-//     YAML::Node seq(lista);
-//     mapFile["fields"].push_back(seq);
-//     file <<mapFile;
+//         if (x_aux==800){
+//         	x_aux=0;
+//         	y_aux+=32;
+//         }
 
-//     file.close();
-
-//     // YAML::Node node = YAML::LoadFile("map2.yaml");
-//     // if (node["fields"][0].IsSequence()) std::cout<<"pepe\n"; 
-//     // std::cout<<node["fields"][0][2]<<std::endl;
+//     } 
+//     me.generateMap();
 //     return 0;
 // }
-int main(int argc, char const *argv[]){
-    MapEditor me;
-    me.createMap("mapaDeFede","dust");
-    for (int i = 0; i<5 ; i++) me.addField(i,i* 2,i*40);
-    for (int i = 0; i<5 ; i++) me.addObstacle(i+5,i*42,i*3);
-    me.generateMap();
-    return 0;
-}
 
+int main(int argc, char **argv){
+    YAML::Node map = YAML::LoadFile("mapTest.yaml");
+    YAML::Node fields = map["fields"];
+    for (unsigned int i = 0; i < fields.size(); i++ ){
+        std::cout <<fields[i][0]<<", "<<fields[i][1]<<", "<<fields[i][2]<< std::endl;
+        int j  = fields[i][0].as<int>();
+        std::cout <<"el int es: "<< j+3<<std::endl;
+    }
+}

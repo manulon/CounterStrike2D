@@ -13,18 +13,22 @@
 
 class Tile{
 public:
-    Tile(int tileType, const Image &image);
+    Tile(int tileType, int x, int y,const Image &image);
     Tile(Tile &&other);
     ~Tile();
 
     void render(const Area &dest);
     int getType();
+    int getX();
+    int getY();
     void setMBox(const SDL_Rect &mBox);
 
     
 private:
     SDL_Rect mBox;
     int type;
+    int posX;
+    int posY;
     const Image &image;
 
     Tile(const Tile &other) = delete;

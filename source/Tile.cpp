@@ -1,8 +1,8 @@
 #include "Tile.h"
 #include <utility>
 
-Tile::Tile(int tileType, const Image &image ):
-type(tileType), image(image){}
+Tile::Tile(int tileType,int x, int y, const Image &image ):
+type(tileType),posX(x),posY(y), image(image){}
 
 Tile::Tile(Tile &&other) : 
     mBox(other.mBox),type(other.type),
@@ -14,6 +14,13 @@ Tile::~Tile(){}
 
 int Tile::getType(){
     return type;
+}
+
+int Tile::getX(){
+    return posX;
+}
+int Tile::getY(){
+    return posY;
 }
 
 /*
