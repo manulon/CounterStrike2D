@@ -4,8 +4,9 @@
 
 
 Editor::Editor(Window& window): 
-eventHandler(window),window(window),
-grid("assets/gfx/emptySpace.png", window){}
+window(window),grid("assets/gfx/emptySpace.png", window),
+image("assets/gfx/tiles/default_dust.png", window),area(0,0,32,32),
+eventHandler(area, window){}
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
@@ -21,12 +22,12 @@ void Editor:: showGrid(){
     }
 }
 
-bool Editor::handleEvents(){
-    return eventHandler.handleEvents();
+void Editor:: renderImageTest(){
+    image.render(area);
 }
 
-void Editor:: renderImageTest(){
-    eventHandler.renderImageTest();
+bool Editor:: handleEvents(){
+    return eventHandler.handleEvents();
 }
 
 Editor::~Editor(){}
