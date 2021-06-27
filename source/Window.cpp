@@ -6,7 +6,8 @@ Window::Window(const char *title, int width,
 			   int height, uint32_t windowFlags, 
 			   uint32_t type) 
 	: sdlWindow(title, width, height, windowFlags, type), 
-	  sdlRenderer(sdlWindow) { 
+	  sdlRenderer(sdlWindow),
+	  height(height),width(width) { 
 	clear();
 }
 
@@ -48,6 +49,14 @@ void Window::clear() {
 
 void Window::render() {
 	sdlRenderer.renderPresent();
+}
+
+int Window::getHeight() {
+	return height;
+}
+
+int Window::getWidth() {
+	return width;
 }
 
 SdlRenderer& Window::getRenderer() { 

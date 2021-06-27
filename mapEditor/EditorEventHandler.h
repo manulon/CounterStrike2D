@@ -2,7 +2,9 @@
 #define _EDITOR_EVENT_HANDLER_H_
 
 #include "Area.h"
+#include "Window.h"
 #include "SDL2/SDL.h"
+#include <iostream>
 
 class EditorEventHandler {
    private:
@@ -11,15 +13,17 @@ class EditorEventHandler {
       EditorEventHandler& operator=(EditorEventHandler &&other) = delete;
       
       bool leftMouseButtonDown;
+      int mousePositionX;
+      int mousePositionY;
+      int windowWidth;
+      int windowHeight;
       Area& area;
-      SDL_Point& mousePos;
-   
+
    public:
-      EditorEventHandler(Area &area, SDL_Point& mousePos);
-      EditorEventHandler(EditorEventHandler &&other);
+      EditorEventHandler(Area &area, Window &window);
       ~EditorEventHandler();
 
-      static bool handleEvents();
+      bool handleEvents();
 };
 
 #endif  // _EDITOR_EVENT_HANDLER_H_
