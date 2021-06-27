@@ -6,25 +6,18 @@
 
 FireArm::FireArm(World &world, 
 				 float x, float y,
-				 float width, float height, 
-				 Bullet &bullet, Loader &loader) : 
-	Entity(), 
-	bullet(bullet),
-	loader(loader) { 
+				 float width, float height) : 
+	Entity(world) { 
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     b2FixtureDef fixtureDef;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
-
-    init(world, bodyDef, fixtureDef);
+    Entity::init(bodyDef, fixtureDef);
 }
 
-FireArm::FireArm(FireArm &&other) : 
-	Entity(std::move(other)),
-	bullet(other.bullet),
-	loader(other.loader) { }
+FireArm::FireArm(FireArm &&other) : Entity(std::move(other)) { }
 
 FireArm::~FireArm() { }
 
@@ -50,16 +43,16 @@ void FireArm::setFixtureParams(const b2PolygonShape &polygonShape,
     fixtureDef.friction = FRICTION;
 }
 
-void FireArm::shoot(float angle) {
+/*void FireArm::shoot(float angle) {
 	if (!loader.isEmpty()) {
 		bullet.shoot(angle);
 		loader.releaseAmmunition();
 	}
-}
+}*/
 
-void FireArm::reload(size_t &ammunition) {
+/*void FireArm::reload(size_t &ammunition) {
 	loader.reload(ammunition);
-}
+}*/
 
 void FireArm::collideWith(Entity &entity) {
     entity.collideWithFireArm(*this);

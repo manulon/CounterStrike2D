@@ -6,12 +6,16 @@
 class World;
 
 class Border : public Entity {
-	public:
-		Border(World &world);
-		~Border();
+	private:
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
-		void setShapeParams(b2PolygonShape &polygonShape,
-                      		float width, float height);
+		void setFixtureParams(const b2PolygonShape &polygonShape, 
+                              b2FixtureDef &fixtureDef);
+
+	public:
+		Border(World &world, 
+			   float x, float y,
+               float width, float height);
+		~Border();
 		virtual void collideWith(Entity &entity) override;
 		virtual void collideWithBullet(Bullet &bullet) override;
 		virtual void collideWithObstacle(Obstacle &obstacle) override;

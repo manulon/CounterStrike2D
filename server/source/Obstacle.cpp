@@ -5,13 +5,12 @@
 Obstacle::Obstacle(World &world, 
 				   float x, float y,
 				   float width, float height) : 
-    Entity() {
+    Entity(world) {
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
-
-    init(world, bodyDef, polygonShape, DENSITY);
+    Entity::init(bodyDef, polygonShape, DENSITY);
 }
 
 Obstacle::Obstacle(Obstacle &&other) : Entity(std::move(other)) { }
