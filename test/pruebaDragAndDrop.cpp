@@ -1,6 +1,6 @@
-#include "EditorEventHandler.h"
-#include "Window.h"
-#include "Image.h"
+#include "Editor.h"
+#include <iostream>
+#include <unistd.h>
 
 bool leftMouseButtonDown = false;
 
@@ -9,17 +9,14 @@ int main(int argc, const char *argv[]){
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
-    Image de_dust("assets/gfx/tiles/default_dust.png", window);
-    SDL_Point mousePos = {0, 0};
-    Area area(0, 0, 50, 50);
-
-    EditorEventHandler mapEditor(area,mousePos);
-
+    Editor editor(window);
+    
     bool running(true);
     while (running) {
     	window.clear();
-    	running = mapEditor.handleEvents();
-	    de_dust.render(area);
+        editor.showGrid();    	
+        running = editor.handleEvents();
+        editor.renderImageTest();
 	    window.render();
 	}
     

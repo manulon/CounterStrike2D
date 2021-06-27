@@ -9,29 +9,26 @@ class World {
 	private:
 		b2Vec2 gravity;
 		b2World world;
-		CollisionManager collisionHandler;
+		CollisionManager collisionManager;
+		std::queue<b2Body*> bodiesToDestroy;
 		float timeStep;
 		int32 velocityIterations;
 		int32 positionIterations;
 
-		std::queue<b2Body*> destroyList;
-
-		void makeBoundaries();
 		World(const World &other) = delete;
 		World& operator=(const World &other) = delete;
 		World& operator=(World &&other) = delete;
 		World(World &&other) = delete;
+		void clean();
+		const b2Body* getBodyList() const;
 
 	public: 
 		World();
 		~World();
 		void step();
-		b2Body *createBody(const b2BodyDef *def);
-		friend std::ostream& operator<<(std::ostream &os, const World &obj);
-		const b2Body* getBodyList() const;
-		
-		void clean();
+		b2Body* createBody(const b2BodyDef *bodyDef);
 		void destroy(b2Body &body);
+		friend std::ostream& operator<<(std::ostream &os, const World &world);
 };
 
 #endif // _WORLD_H_

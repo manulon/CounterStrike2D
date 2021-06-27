@@ -8,15 +8,14 @@
 #define BODY_TYPE b2_dynamicBody
 
 Bullet::Bullet(World &world, float x, float y) : 
-    Entity() {
+    Entity(world) {
 	b2BodyDef bodyDef;
     b2CircleShape circleShape;
     b2FixtureDef fixtureDef;
     setBodyParams(bodyDef, x, y);
     setShapeParams(circleShape);
     setFixtureParams(circleShape, fixtureDef);
-
-    init(world, bodyDef, fixtureDef);
+    Entity::init(bodyDef, fixtureDef);
 }
 
 Bullet::Bullet(Bullet &&other) : Entity(std::move(other)) { }
@@ -44,7 +43,7 @@ void Bullet::setFixtureParams(const b2CircleShape &circleShape,
 void Bullet::shoot(float angle) {
     float radians = angleToRadians(angle);
     b2Vec2 force(IMPULSE * cos(radians), IMPULSE * sin(radians));
-    applyLinearImpulseToCenter(force, true);
+    Entity::applyLinearImpulseToCenter(force, true);
 }
 
 float Bullet::angleToRadians(float angle) {
@@ -61,7 +60,7 @@ void Bullet::collideWithBullet(Bullet &bullet) {
 
 void Bullet::collideWithObstacle(Obstacle &obstacle) {
     std::cout << "bullet chocado por obstaculo y destruido\n";
-    destroy();
+    Entity::destroy();
 }
 
 void Bullet::collideWithFireArm(FireArm &fireArm) {
@@ -74,7 +73,7 @@ void Bullet::collideWithPlayer(Player &player) {
 
 void Bullet::collideWithBorder(Border &border) {
     std::cout << "Bullet chocado por border\n";
-    destroy();
+    Entity::destroy();
 }
 
 std::ostream& operator<<(std::ostream &os, const Bullet &obj) {

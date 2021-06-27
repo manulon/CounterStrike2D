@@ -11,15 +11,14 @@
 Player::Player(World &world, 
                float x, float y,
                float width, float height) :
-    Entity(), force(0,0) { 
+    Entity(world), force(0,0) { 
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     b2FixtureDef fixtureDef;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
-
-    init(world, bodyDef, fixtureDef);
+    Entity::init(bodyDef, fixtureDef);
 }
 
 Player::Player(Player &&other) : Entity(std::move(other)) { }
@@ -79,7 +78,7 @@ void Player::stopMoveDown() {
 }
 
 void Player::update() {
-    applyForceToCenter(force, true);
+    Entity::applyForceToCenter(force, true);
 }
 
 void Player::collideWith(Entity &entity) {

@@ -9,43 +9,43 @@
 
 World::World() : gravity(GRAVITY_X, GRAVITY_Y),
 				 world(gravity),
-				 collisionHandler(),
+				 collisionManager(),
 				 timeStep(TIME_STEP), 
 				 velocityIterations(VELOCITY_ITERATIONS), 
 				 positionIterations(POSITION_ITERATIONS) {
-	world.SetContactListener(&collisionHandler);
+	world.SetContactListener(&collisionManager);
 }
 
 World::~World() { }
+
+b2Body* World::createBody(const b2BodyDef *bodyDef) {
+	return world.CreateBody(bodyDef);
+}
+
+void World::destroy(b2Body &body) {
+	bodiesToDestroy.push(&body);
+}
 
 void World::step() {
     world.Step(timeStep, velocityIterations, positionIterations);
     clean();
 }
 
-b2Body* World::createBody(const b2BodyDef *def) {
-	return world.CreateBody(def);
+void World::clean() {
+	b2Body *body = nullptr;
+	while(!bodiesToDestroy.empty()) {
+		body = bodiesToDestroy.front();
+		world.DestroyBody(body);
+		bodiesToDestroy.pop();
+	}
 }
 
 const b2Body* World::getBodyList() const {
 	return world.GetBodyList();
 }
 
-void World::destroy(b2Body &body) {
-	destroyList.push(&body);
-}
-
-void World::clean() {
-	b2Body *body = nullptr;
-	while(!destroyList.empty()) {
-		body = destroyList.front();
-		world.DestroyBody(body);
-		destroyList.pop();
-	}
-}
-
-std::ostream& operator<<(std::ostream &os, const World &obj) {
-    const b2Body *node = obj.getBodyList();
+std::ostream& operator<<(std::ostream &os, const World &world) {
+    const b2Body *node = world.getBodyList();
     while(node != nullptr) {
     	Entity *entity = static_cast<Entity*>(node->GetUserData());
     	if(entity != nullptr) {

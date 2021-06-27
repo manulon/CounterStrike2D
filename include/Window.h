@@ -9,6 +9,8 @@ class Window {
 	private:
 		SdlWindow sdlWindow;
 		SdlRenderer sdlRenderer;
+		int height;
+		int width;
 
 		Window(const Window &other) = delete;
 		Window& operator=(const Window &other) = delete;
@@ -28,6 +30,8 @@ class Window {
 		Window& operator=(Window &&other);
 		void clear();
 		void render();
+		int getHeight();
+		int getWidth();
 		SdlRenderer& getRenderer();
 };
 
