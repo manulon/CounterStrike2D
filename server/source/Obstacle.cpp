@@ -24,6 +24,7 @@ void Obstacle::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
 
 void Obstacle::setShapeParams(b2PolygonShape &polygonShape,
                       		  float width, float height) {
+    std::cout << "ancho "<< width << "alto "<<height << std::endl;
     polygonShape.SetAsBox(width, height);	
 }
 

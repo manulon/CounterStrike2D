@@ -35,4 +35,6 @@ target_link_libraries(box2dTest server Box2D)
 add_executable(mapTest test/makeMap.cpp)
 target_link_libraries(mapTest mapEditor yaml-cpp)
 
+
+
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

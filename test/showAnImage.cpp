@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include "World.h"
 #include "Player.h"
+#include "Obstacle.h"
 #include "MouseManager.h"
 
 static bool handleEvents(Soldier &soldier,Camera& camera, Player &player) {
@@ -93,10 +94,11 @@ int main(int argc, const char *argv[]){
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
         Image de_dust("assets/gfx/tiles/default_dust.png", window);
-        TileMap mapTest("assets/maps/mapTest.yaml", de_dust);
+        Image obsimg("assets/gfx/tiles/dust.bmp", window);
+        TileMap mapTest("assets/maps/mapTest.yaml", de_dust, obsimg);
 
         Camera camera(mapTest);
-        
+        Obstacle obs(world,1,1,0.25f,0.25f);
         Image soldier_img1("assets/gfx/player/t4.bmp", window);
         Image soldier_img2("assets/gfx/player/t4.bmp", window);
         Soldier soldier_renderer(soldier_img2);
@@ -118,7 +120,7 @@ int main(int argc, const char *argv[]){
             update(soldier_renderer,player, FRAME_RATE,mm);
             window.clear();
             world.step();
-            camera.render(player.getPositionX()*75,player.getPositionY()*75, cameraArea);
+            camera.render(player.getPositionX()*32,player.getPositionY()*32, cameraArea);
             stencil.render(stencilArea, mm.getAngle());
             text.render(textArea);
             soldier_renderer.render();

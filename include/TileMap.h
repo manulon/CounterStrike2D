@@ -22,14 +22,17 @@ private:
 	const Image &image;
 	std::string mapName;
 	SDL_Rect tileClips[ TOTAL_TILE_SPRITES ];
+	const Image &imgObstacles;
+	SDL_Rect obsClips[80];
 	std::list<Tile*> tiles;
+	std::list<Tile*> obstacles;
 
 	TileMap(const TileMap &other) = delete;
     TileMap& operator=(const TileMap &other) = delete;
     TileMap& operator=(TileMap &&other) = delete;
 
 public:
-	TileMap(const char *pathText, const Image &image);
+	TileMap(const char *pathText, const Image &image, const Image &obs);
 	~TileMap();
 
 	bool loadMedia();
