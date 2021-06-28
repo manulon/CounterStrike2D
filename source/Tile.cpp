@@ -50,11 +50,19 @@ bool Tile::mouseInTile(int x, int y){// El 32 tiene que ser del YAML
 }
 
 bool Tile::tileOutOfPosition(){
-    if ((posX % 32) == 0)
+    if ((posX % 32) == 0)       // CONSTANTE
         return false;
 
-    if ((posY % 32) == 0)
+    if ((posY % 32) == 0)       // CONSTANTE
         return false;
 
     return true;
+}
+
+int Tile::getFinalXCoordinate(){
+    return (posX / 32);    // CONSTANTE
+}
+
+int Tile::getFinalYCoordinate(){
+    return (posY / 32);    // CONSTANTE
 }

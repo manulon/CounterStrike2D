@@ -26,6 +26,8 @@ public:
     void setMBox(const SDL_Rect &mBox);
     bool mouseInTile(int x , int y);
     bool tileOutOfPosition();
+    int getFinalXCoordinate();
+    int getFinalYCoordinate();
     
 private:
     SDL_Rect mBox;

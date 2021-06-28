@@ -26,6 +26,13 @@ bool EditorEventHandler::handleEvents(std::vector<Tile*> tiles){
 
          case SDL_QUIT:
             std::cout << "Quit :(" << std::endl;
+            std::cout << "------------" << std::endl;
+            for (auto tile : tiles){
+               std::cout<<"El tile numero: "<<tile->getType();
+               std::cout<<" esta en las coordenadas {"<<tile->getFinalXCoordinate();
+               std::cout<<", "<<tile->getFinalYCoordinate();
+               std::cout<<"}"<<std::endl;
+            }
             return false;
         }
    }
