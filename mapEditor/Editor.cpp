@@ -33,10 +33,10 @@ bool Editor:: handleEvents(){
 
 void Editor::fillTileOptionList(){
     //for( int i=0; i<75 ; i++){      /* aca deberia ir LOS TOTAL SPRITES */
-    tiles.push_back(new Tile(49,0,0,image));
-    tiles.push_back(new Tile(5,32,32,image));
-    tiles.push_back(new Tile(4,32,64,image));
-    tiles.push_back(new Tile(23,96,96,image));  
+    tiles.push_back(new Tile(49,0,500,image));
+    tiles.push_back(new Tile(5,48,500,image));
+    tiles.push_back(new Tile(4,96,500,image));
+    tiles.push_back(new Tile(23,144,500,image));  
     //}
 }
 
