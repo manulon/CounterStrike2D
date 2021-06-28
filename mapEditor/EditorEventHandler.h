@@ -24,6 +24,11 @@ class EditorEventHandler {
       SDL_Rect tileClips[ 75 ];
 
       bool mouseInTile(int x, int y,Tile* tile);
+      void mouseMotionHandler(SDL_Event& event, std::vector<Tile*> tiles);
+      void mouseMotionDown(SDL_Event& event, std::vector<Tile*> tiles);
+      void mouseMotionUp(SDL_Event& event, std::vector<Tile*> tiles);
+      void renderTiles(std::vector<Tile*> tiles);
+      void buildTileClips();
 
    public:
       EditorEventHandler(Window &window);
