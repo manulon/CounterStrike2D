@@ -1,5 +1,6 @@
 #include "EditorEventHandler.h"
 #include "Image.h"
+#include "MapEditor.h"
 
 EditorEventHandler::EditorEventHandler(Window& window): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
@@ -25,14 +26,12 @@ bool EditorEventHandler::handleEvents(std::vector<Tile*> tiles){
             break;
 
          case SDL_QUIT:
-            std::cout << "Quit :(" << std::endl;
-            std::cout << "------------" << std::endl;
+            MapEditor map;
+            map.createMap("MapaDePruebaEditor","dust");
             for (auto tile : tiles){
-               std::cout<<"El tile numero: "<<tile->getType();
-               std::cout<<" esta en las coordenadas {"<<tile->getFinalXCoordinate();
-               std::cout<<", "<<tile->getFinalYCoordinate();
-               std::cout<<"}"<<std::endl;
+               map.addField(tile->getX(),tile->getY(),tile->getType());
             }
+            map.generateMap();
             return false;
         }
    }
@@ -137,7 +136,7 @@ void EditorEventHandler::buildTileClips(){
         	x_aux=0;
         	y_aux+=32;
         }
-    }
+   }
 }
 
 EditorEventHandler::~EditorEventHandler(){}

@@ -10,7 +10,7 @@ eventHandler(window){}                                      //estar en yaml
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
-    while ( gridArea.getY()< (window.getHeight() - 128) ){ /* CONSTANTE EL 128 */
+    while ( gridArea.getY() < (window.getHeight() - 128) ){ /* CONSTANTE EL 128 */
         grid.render(gridArea);
     
         gridArea.setX( gridArea.getX() + 32); /*ACA VA LO DEL YAML CREO (tile width).*/
