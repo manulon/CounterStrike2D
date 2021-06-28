@@ -28,9 +28,11 @@ int Tile::getY(){
 
 void Tile::setX(int x){
     posX = x;
+    centerX = x+16;
 }
 void Tile::setY(int y){
     posY = y;
+    centerY = y+16;
 }
 
 void Tile::render(const Area& dest){
@@ -55,11 +57,14 @@ void Tile::setMBox(const Area &area){
 }
 
 bool Tile::mouseInTile(int x, int y){    // El 16 tiene que ser del YAML   
-    if ((x < (centerX - 16) && y < (centerY - 16) )  ||
-        (x > (centerX + 16) && y < (centerY - 16) )  ||
-        (x < (centerX - 16) && y > (centerY + 16) )  ||
-        (x > (centerX + 16) && y > (centerY + 16) )){
+    if ((x < (centerX - 16) && y < (centerY - 16) ) ){
+        return false;
+    }else if (x > (centerX + 16) && y < (centerY - 16)){
+        return false;
+    }else if(x < (centerX - 16) && y > (centerY + 16) ){
+        return false;
+    }else if(x > (centerX + 16) && y > (centerY + 16) ){
         return false;
     }
-    return true;
+   return true;
 }

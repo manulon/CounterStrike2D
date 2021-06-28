@@ -42,12 +42,9 @@ bool EditorEventHandler::handleEvents(std::vector<Tile*> tiles){
                leftMouseButtonDown = true;
                for (auto tile : tiles){
                   tileNumber++;
-                  std::cout<<"### Estoy en el for del mouse down "<<tile->getType()<<std::endl;
                   if (mouseInTile(mousePositionX,mousePositionY,tile)){
-                     std::cout<<"Mouse is in tile"<<std::endl;
                      tiles[tileNumber]->setX(tile->getX());
                      tiles[tileNumber]->setY(tile->getY());
-                     std::cout<<"So, selected tile position is "<<tileNumber<<std::endl;
                      break;
                   } 
                }
@@ -58,33 +55,36 @@ bool EditorEventHandler::handleEvents(std::vector<Tile*> tiles){
          case SDL_MOUSEBUTTONUP:{
             leftMouseButtonDown = false;
 
-            int auxX( mousePositionX%32 ); // TAMBIEN CONSTANTE, EL TILE WIDTH
-            int auxY( mousePositionY%32 ); // TAMBIEN CONSTANTE, EL TILE HEIGHT
+            for (auto tile : tiles){
+               if (mouseInTile(mousePositionX,mousePositionY,tile)){
+                  int auxX( mousePositionX%32 ); // TAMBIEN CONSTANTE, EL TILE WIDTH
+                  int auxY( mousePositionY%32 ); // TAMBIEN CONSTANTE, EL TILE HEIGHT
+                  if ( auxX > 16 && auxY < 16 ){
+                     auxX = 32*((int)( (mousePositionX/32)+1 ));
+                     auxY = 32*((int)( (mousePositionY/32) ));
+                  }else if ( auxX > 16 && auxY > 16 ){
+                     auxX = 32*((int)( (mousePositionX/32)+1 ));
+                     auxY = 32*((int)(mousePositionY/32)+1);
+                  }else if ( auxX < 16 && auxY > 16 ){
+                     auxX = 32*((int)(mousePositionX/32));
+                     auxY = 32*((int)((mousePositionY/32)+1));
+                  }else{
+                     auxX = 32*((int)(mousePositionX/32));
+                     auxY = 32*((int)(mousePositionY/32));
+                  }
 
-            if ( auxX > 16 && auxY < 16 ){
-               auxX = 32*((int)( (mousePositionX/32)+1 ));
-               auxY = 32*((int)( (mousePositionY/32) ));
-            }else if ( auxX > 16 && auxY > 16 ){
-               auxX = 32*((int)( (mousePositionX/32)+1 ));
-               auxY = 32*((int)(mousePositionY/32)+1);
-            }else if ( auxX < 16 && auxY > 16 ){
-               auxX = 32*((int)(mousePositionX/32));
-               auxY = 32*((int)((mousePositionY/32)+1));
-            }else{
-               auxX = 32*((int)(mousePositionX/32));
-               auxY = 32*((int)(mousePositionY/32));
+                  if ( auxX >= windowWidth - 32 )
+                     auxX = windowWidth-32;            // 32 CONSTANTE
+                     
+                  if ( auxY >= windowHeight-128 )
+                     auxY = windowHeight-128-24;       // 24 Y 128 CONSTANTE    
+                     
+                  tiles[tileNumber]->setX(auxX);
+                  tiles[tileNumber]->setY(auxY);
+               }
             }
-
-            if ( auxX >= windowWidth - 32 )
-               auxX = windowWidth-32;           // 32 CONSTANTE
             
-            if ( auxY >= windowHeight-128 )
-               auxY = windowHeight-128-24;       // 24 Y 128 CONSTANTE    
-            
-            tiles[tileNumber]->setX(auxX);
-            tiles[tileNumber]->setY(auxY);
-
-            tileNumber = -1;
+            tileNumber = -1;  
          }
          break;
 
