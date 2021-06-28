@@ -18,18 +18,25 @@ public:
     ~Tile();
 
     void render(const Area &dest);
+    void render();
     int getType();
     int getX();
     int getY();
+    void setX(int x);
+    void setY(int y);
     void setMBox(const SDL_Rect &mBox);
-
+    void setMBox(const Area &area);
+    bool mouseInTile(int x , int y);
     
 private:
     SDL_Rect mBox;
     int type;
     int posX;
     int posY;
+    int centerX;
+    int centerY;
     const Image &image;
+    bool selected;
 
     Tile(const Tile &other) = delete;
     Tile& operator=(const Tile &other) = delete;

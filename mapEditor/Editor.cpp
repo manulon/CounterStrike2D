@@ -5,8 +5,9 @@
 
 Editor::Editor(Window& window): 
 window(window),grid("assets/gfx/emptySpace.png", window),
-image("assets/gfx/tiles/default_dust.png", window),area(0,0,32,32),
-eventHandler(area, window){}
+image("assets/gfx/tiles/default_dust.png", window),
+area(0,0,32,32),
+eventHandler(window){}
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
@@ -27,7 +28,20 @@ void Editor:: renderImageTest(){
 }
 
 bool Editor:: handleEvents(){
-    return eventHandler.handleEvents();
+    return eventHandler.handleEvents(tiles);
 }
 
-Editor::~Editor(){}
+void Editor::fillTileOptionList(){
+    //for( int i=0; i<75 ; i++){      /* aca deberia ir LOS TOTAL SPRITES */
+    tiles.push_back(new Tile(49,0,0,image));
+    tiles.push_back(new Tile(5,32,32,image));
+    tiles.push_back(new Tile(4,32,64,image));
+    tiles.push_back(new Tile(23,96,96,image));  
+    //}
+}
+
+Editor::~Editor(){
+    for (auto& tile: tiles){
+       delete tile;
+    }
+}

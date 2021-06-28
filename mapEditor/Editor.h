@@ -5,6 +5,8 @@
 #include "Image.h"
 #include "Area.h"
 #include "EditorEventHandler.h"
+#include "Tile.h"
+#include <vector>
 
 class Editor{
     private:
@@ -16,6 +18,7 @@ class Editor{
         const Image grid;
         const Image image;
         Area area;
+        std::vector<Tile*> tiles;
         EditorEventHandler eventHandler;
 
    public:
@@ -25,6 +28,7 @@ class Editor{
         void renderImageTest();
         void showGrid();
         bool handleEvents();
+        void fillTileOptionList();
 };
 
 #endif //_EDITOR_H

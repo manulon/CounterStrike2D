@@ -33,7 +33,8 @@ bool TileMap::setTiles(){
     YAML::Node map = YAML::LoadFile(mapName);
     YAML::Node fields = map["fields"];
     for (unsigned int i = 0; i < fields.size(); i++){
-        tiles.push_back(new Tile(fields[i][2].as<int>(), fields[i][0].as<int>(),fields[i][1].as<int>(),image));
+        tiles.push_back(new Tile(fields[i][2].as<int>(), fields[i][0].as<int>(),
+                                 fields[i][1].as<int>(),image));
     }
 
     int x_aux(0);

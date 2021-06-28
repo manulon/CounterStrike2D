@@ -1,28 +1,57 @@
 #include "EditorEventHandler.h"
 #include "Image.h"
 
-EditorEventHandler::EditorEventHandler(Area& area, Window& window): 
+EditorEventHandler::EditorEventHandler(Window& window): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
-windowWidth(window.getWidth()),windowHeight(window.getHeight()),
-area(area){}
+windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1){}
 
-bool EditorEventHandler::handleEvents(){
+bool EditorEventHandler::handleEvents(std::vector<Tile*> tiles){
    SDL_Event event;
-    while (SDL_PollEvent(&event)){
+   Area area(0,0,32,32);
+
+   int x_aux(0);
+   int y_aux(0);
+   for (int i=0; i<75; i++){
+        tileClips[i].x = x_aux;
+        tileClips[i].y = y_aux;
+        tileClips[i].w = 32;
+        tileClips[i].h = 32;
+
+        x_aux += 32;
+
+        if (x_aux==160){
+        	x_aux=0;
+        	y_aux+=32;
+        }
+    }
+
+   while (SDL_PollEvent(&event)){
       switch (event.type) {
          case SDL_MOUSEMOTION:{
             mousePositionX = event.motion.x;
             mousePositionY = event.motion.y;
-            if (leftMouseButtonDown){
-               area.setX(mousePositionX);
-               area.setY(mousePositionY);
+            if (leftMouseButtonDown && tileNumber != -1){
+               tiles[tileNumber]->setX(mousePositionX);
+               tiles[tileNumber]->setY(mousePositionY);
             }
          }
          break;
 
          case SDL_MOUSEBUTTONDOWN: {
-            if (!leftMouseButtonDown && event.button.button == SDL_BUTTON_LEFT)
-            leftMouseButtonDown = true;
+            if (!leftMouseButtonDown && event.button.button == SDL_BUTTON_LEFT){ 
+               leftMouseButtonDown = true;
+               for (auto tile : tiles){
+                  tileNumber++;
+                  std::cout<<"### Estoy en el for del mouse down "<<tile->getType()<<std::endl;
+                  if (mouseInTile(mousePositionX,mousePositionY,tile)){
+                     std::cout<<"Mouse is in tile"<<std::endl;
+                     tiles[tileNumber]->setX(tile->getX());
+                     tiles[tileNumber]->setY(tile->getY());
+                     std::cout<<"So, selected tile position is "<<tileNumber<<std::endl;
+                     break;
+                  } 
+               }
+            }
          }
          break;
 
@@ -52,8 +81,10 @@ bool EditorEventHandler::handleEvents(){
             if ( auxY >= windowHeight-128 )
                auxY = windowHeight-128-24;       // 24 Y 128 CONSTANTE    
             
-            area.setX(auxX);
-            area.setY(auxY);
+            tiles[tileNumber]->setX(auxX);
+            tiles[tileNumber]->setY(auxY);
+
+            tileNumber = -1;
          }
          break;
 
@@ -61,8 +92,24 @@ bool EditorEventHandler::handleEvents(){
             std::cout << "Quit :(" << std::endl;
             return false;
         }
-    }
-    return true;
+   }
+
+   for (auto& tile: tiles){     
+      int xOffset(tile->getX());
+      int yOffset(tile->getY());
+      int type(tile->getType());
+      tile->setMBox(tileClips[type-1]);
+
+      Area finalArea(xOffset,yOffset, 
+                       tileClips[type-1].w, tileClips[type-1].h);
+      tile->render(finalArea);
+   }
+
+   return true;
+}
+
+bool EditorEventHandler::mouseInTile(int x, int y, Tile* tile){
+   return tile->mouseInTile(x,y);
 }
 
 EditorEventHandler::~EditorEventHandler(){}

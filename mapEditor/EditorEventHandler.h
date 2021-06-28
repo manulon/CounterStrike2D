@@ -4,7 +4,10 @@
 #include "Area.h"
 #include "Window.h"
 #include "SDL2/SDL.h"
+#include "Tile.h"
 #include <iostream>
+#include <vector>
+
 
 class EditorEventHandler {
    private:
@@ -17,13 +20,16 @@ class EditorEventHandler {
       int mousePositionY;
       int windowWidth;
       int windowHeight;
-      Area& area;
+      int tileNumber;
+      SDL_Rect tileClips[ 75 ];
+
+      bool mouseInTile(int x, int y,Tile* tile);
 
    public:
-      EditorEventHandler(Area& area, Window &window);
+      EditorEventHandler(Window &window);
       ~EditorEventHandler();
 
-      bool handleEvents();
+      bool handleEvents(std::vector<Tile*> tiles);
 };
 
 #endif  // _EDITOR_EVENT_HANDLER_H_
