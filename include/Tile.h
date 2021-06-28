@@ -25,14 +25,13 @@ public:
     void setY(int y);
     void setMBox(const SDL_Rect &mBox);
     bool mouseInTile(int x , int y);
+    bool tileOutOfPosition();
     
 private:
     SDL_Rect mBox;
     int type;
     int posX;
     int posY;
-    int centerX;
-    int centerY;
     const Image &image;
     bool selected;
 

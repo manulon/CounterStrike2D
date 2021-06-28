@@ -3,8 +3,7 @@
 #include <iostream>
 
 Tile::Tile(int tileType,int x, int y, const Image &image ):
-type(tileType),posX(x),posY(y),centerX(x+16),centerY(y+16), //El 16 tiene q estar en yaml
-image(image),selected(false){                               //o a lo sumo es 32(Width)/2.
+type(tileType),posX(x),posY(y),image(image),selected(false){                               
 }                             
 
 Tile::Tile(Tile &&other) : 
@@ -28,11 +27,9 @@ int Tile::getY(){
 
 void Tile::setX(int x){
     posX = x;
-    centerX = x+16;                 // CONSTANTE
 }
 void Tile::setY(int y){
     posY = y;
-    centerY = y+16;                 // CONSTANTE
 }
 
 void Tile::render(const Area& dest){
@@ -44,15 +41,20 @@ void Tile::setMBox(const SDL_Rect &mBox){
     this->mBox = mBox;
 }
 
-bool Tile::mouseInTile(int x, int y){                   // El 16 tiene que ser del YAML   
-    if ((x < (centerX - 16) && y < (centerY - 16) ) ){
-        return false;
-    }else if (x > (centerX + 16) && y < (centerY - 16)){
-        return false;
-    }else if(x < (centerX - 16) && y > (centerY + 16) ){
-        return false;
-    }else if(x > (centerX + 16) && y > (centerY + 16) ){
-        return false;
+bool Tile::mouseInTile(int x, int y){// El 32 tiene que ser del YAML  
+    if ( ((x>posX) && (x<(posX + 32))) && 
+         ((y>posY) && (y<(posY + 32))) ){
+        return true;
     }
-   return true;
+    return false;
+}
+
+bool Tile::tileOutOfPosition(){
+    if ((posX % 32) == 0)
+        return false;
+
+    if ((posY % 32) == 0)
+        return false;
+
+    return true;
 }

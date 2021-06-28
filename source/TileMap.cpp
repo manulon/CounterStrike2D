@@ -80,8 +80,6 @@ bool TileMap::setTiles(){
     return true;
 }
 
-
-
 void TileMap::render(int x, int y, const Area &dst){
 
     for (auto& tile: tiles){

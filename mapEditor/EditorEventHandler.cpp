@@ -69,7 +69,7 @@ void EditorEventHandler::mouseMotionUp
    leftMouseButtonDown = false;
 
    for (auto tile : tiles){
-      if (mouseInTile(mousePositionX,mousePositionY,tile)){
+      if (tile->tileOutOfPosition()){
          int auxX( mousePositionX%32 ); // TAMBIEN CONSTANTE, EL TILE WIDTH
          int auxY( mousePositionY%32 ); // TAMBIEN CONSTANTE, EL TILE HEIGHT
          
