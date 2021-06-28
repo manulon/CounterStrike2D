@@ -22,7 +22,7 @@ b2Body* World::createBody(const b2BodyDef *bodyDef) {
 	return world.CreateBody(bodyDef);
 }
 
-void World::destroy(b2Body &body) {
+void World::destroyBody(b2Body &body) {
 	bodiesToDestroy.push(&body);
 }
 
@@ -32,6 +32,19 @@ void World::step() {
 }
 
 void World::clean() {
+	cleanBodies();
+	cleanDetachedEntities();
+}
+
+const b2Body* World::getBodyList() const {
+	return world.GetBodyList();
+}
+
+void World::spawnEntity(std::unique_ptr<Entity> &&entity) {
+	entities.push_back(std::move(entity));
+}
+
+void World::cleanBodies() {
 	b2Body *body = nullptr;
 	while(!bodiesToDestroy.empty()) {
 		body = bodiesToDestroy.front();
@@ -40,8 +53,15 @@ void World::clean() {
 	}
 }
 
-const b2Body* World::getBodyList() const {
-	return world.GetBodyList();
+void World::cleanDetachedEntities() {
+	std::list<std::unique_ptr<Entity>>::iterator it = entities.begin();
+	while(it != entities.end()) {
+		if ((*it)->isDetached()) {
+			it = entities.erase(it);
+		} else {
+			++it;
+		}
+	}
 }
 
 std::ostream& operator<<(std::ostream &os, const World &world) {

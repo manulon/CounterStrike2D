@@ -2,14 +2,17 @@
 #define _WORLD_H_
 
 #include "CollisionManager.h"
+#include "Entity.h"
 #include <Box2D/Box2D.h>
 #include <queue>
+#include <list>
 
 class World {
 	private:
 		b2Vec2 gravity;
 		b2World world;
 		CollisionManager collisionManager;
+		std::list<std::unique_ptr<Entity>> entities;
 		std::queue<b2Body*> bodiesToDestroy;
 		float timeStep;
 		int32 velocityIterations;
@@ -20,6 +23,8 @@ class World {
 		World& operator=(World &&other) = delete;
 		World(World &&other) = delete;
 		void clean();
+		void cleanBodies();
+		void cleanDetachedEntities();
 		const b2Body* getBodyList() const;
 
 	public: 
@@ -27,7 +32,8 @@ class World {
 		~World();
 		void step();
 		b2Body* createBody(const b2BodyDef *bodyDef);
-		void destroy(b2Body &body);
+		void destroyBody(b2Body &body);
+		void spawnEntity(std::unique_ptr<Entity> &&entity);
 		friend std::ostream& operator<<(std::ostream &os, const World &world);
 };
 

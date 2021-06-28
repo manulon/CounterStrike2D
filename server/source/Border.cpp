@@ -11,7 +11,7 @@ Border::Border(World &world,
     setBodyParams(borderDef, x, y);
     setFixtureParams(side, fixtureDef);
     side.SetAsBox(width, DELTA, b2Vec2(x, y - height/2), 0);
-    Entity::init(borderDef, fixtureDef);
+    Entity::attachToWorld(borderDef, fixtureDef);
     side.SetAsBox(DELTA, height, b2Vec2(x + width/2, y), 0);
     Entity::bindFixture(fixtureDef);
     side.SetAsBox(width, DELTA, b2Vec2(x, y + height/2), 0);

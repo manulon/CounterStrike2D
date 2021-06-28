@@ -3,7 +3,8 @@
 
 Entity::Entity(World &world) : 
     body(nullptr), 
-    world(world) { }
+    world(world),
+    detached(true) { }
 
 Entity::Entity(Entity &&other) : 
     body(other.body),
@@ -13,16 +14,8 @@ Entity::Entity(Entity &&other) :
 
 Entity::~Entity() { }
 
-void Entity::init(b2BodyDef &bodyDef, 
-                  const b2Shape &shape, float density) {
-    body = world.createBody(&bodyDef); 
-    bindFixture(shape, density);
-}
-
-void Entity::init(b2BodyDef &bodyDef, 
-				  const b2FixtureDef &fixtureDef) {
-    body = world.createBody(&bodyDef); 
-    bindFixture(fixtureDef);
+void Entity::moveToWorld(std::unique_ptr<Entity> &&entity) {
+    world.spawnEntity(std::move(entity));
 }
 
 void Entity::bindFixture(const b2Shape &shape, float density) {
@@ -64,9 +57,24 @@ float Entity::getAngle() const {
     return angle;
 }
 
-void Entity::destroy() {
+void Entity::attachToWorld(b2BodyDef &bodyDef, 
+                  const b2Shape &shape, float density) {
+    body = world.createBody(&bodyDef); 
+    bindFixture(shape, density);
+    detached = false;
+}
+
+void Entity::attachToWorld(b2BodyDef &bodyDef, 
+				  const b2FixtureDef &fixtureDef) {
+    body = world.createBody(&bodyDef); 
+    bindFixture(fixtureDef);
+    detached = false;
+}
+
+void Entity::detachFromWorld() {
     if (body != nullptr) {
-        world.destroy(*body);
+        world.destroyBody(*body);
+        detached = true;
         body = nullptr;        
     }
 }
@@ -81,4 +89,8 @@ std::ostream& operator<<(std::ostream &os, const Entity &entity) {
     snprintf(buffer, sizeof(buffer), "%4.2f %4.2f %4.2f", positionX, positionY, angle);
     os << buffer;
     return os;
+}
+
+bool Entity::isDetached() {
+    return detached;
 }
