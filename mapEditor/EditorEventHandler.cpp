@@ -7,10 +7,9 @@ windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1){}
 
 bool EditorEventHandler::handleEvents(std::vector<Tile*> tiles){
    SDL_Event event;
-   Area area(0,0,32,32);
-
    int x_aux(0);
    int y_aux(0);
+   
    for (int i=0; i<75; i++){
         tileClips[i].x = x_aux;
         tileClips[i].y = y_aux;

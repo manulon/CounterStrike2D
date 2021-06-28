@@ -17,7 +17,6 @@ class Editor{
         Window& window;
         const Image grid;
         const Image image;
-        Area area;
         std::vector<Tile*> tiles;
         EditorEventHandler eventHandler;
 
@@ -25,7 +24,6 @@ class Editor{
         Editor(Window& window);
         ~Editor();
 
-        void renderImageTest();
         void showGrid();
         bool handleEvents();
         void fillTileOptionList();

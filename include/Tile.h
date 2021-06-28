@@ -18,14 +18,12 @@ public:
     ~Tile();
 
     void render(const Area &dest);
-    void render();
     int getType();
     int getX();
     int getY();
     void setX(int x);
     void setY(int y);
     void setMBox(const SDL_Rect &mBox);
-    void setMBox(const Area &area);
     bool mouseInTile(int x , int y);
     
 private:

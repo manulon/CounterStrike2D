@@ -28,11 +28,11 @@ int Tile::getY(){
 
 void Tile::setX(int x){
     posX = x;
-    centerX = x+16;
+    centerX = x+16;                 // CONSTANTE
 }
 void Tile::setY(int y){
     posY = y;
-    centerY = y+16;
+    centerY = y+16;                 // CONSTANTE
 }
 
 void Tile::render(const Area& dest){
@@ -40,23 +40,11 @@ void Tile::render(const Area& dest){
     image.render(src,dest);
 }
 
-void Tile::render(){
-    Area src(mBox.x, mBox.y, mBox.w, mBox.h);
-    Area dest(posX, posY, mBox.w, mBox.h);
-
-    image.render(src,dest);
-}
-
 void Tile::setMBox(const SDL_Rect &mBox){
     this->mBox = mBox;
 }
 
-void Tile::setMBox(const Area &area){
-    this->mBox = {area.getX(), area.getY(), 
-                  area.getWidth(), area.getHeight()};
-}
-
-bool Tile::mouseInTile(int x, int y){    // El 16 tiene que ser del YAML   
+bool Tile::mouseInTile(int x, int y){                   // El 16 tiene que ser del YAML   
     if ((x < (centerX - 16) && y < (centerY - 16) ) ){
         return false;
     }else if (x > (centerX + 16) && y < (centerY - 16)){
