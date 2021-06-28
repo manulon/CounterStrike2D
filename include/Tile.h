@@ -26,14 +26,17 @@ public:
     void setMBox(const SDL_Rect &mBox);
     bool mouseInTile(int x , int y);
     bool tileOutOfPosition();
-    int getFinalXCoordinate();
-    int getFinalYCoordinate();
+    bool tileInOptionBox(int y);
+    int getInitialPositionX();
+    int getInitialPositionY();
     
 private:
     SDL_Rect mBox;
     int type;
     int posX;
     int posY;
+    int initialPositionX;
+    int initialPositionY;
     const Image &image;
     bool selected;
 

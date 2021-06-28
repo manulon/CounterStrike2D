@@ -3,7 +3,12 @@
 #include <iostream>
 
 Tile::Tile(int tileType,int x, int y, const Image &image ):
-type(tileType),posX(x),posY(y),image(image),selected(false){                               
+type(tileType),posX(x),posY(y),initialPositionX(x),initialPositionY(y),
+image(image),selected(false){         
+    //std::cout<<"x "<<x<<" vs. "<< posX << " vs. "<< initialPositionX <<" vs. " <<getX()<< std::endl;
+    //std::cout<<"y "<<y<<" vs. "<< posY<< " vs. "<< initialPositionY <<" vs. " <<getY()<< std::endl;
+    getX();
+    getY();           
 }                             
 
 Tile::Tile(Tile &&other) : 
@@ -30,6 +35,14 @@ void Tile::setX(int x){
 }
 void Tile::setY(int y){
     posY = y;
+}
+
+int Tile::getInitialPositionX(){
+    return initialPositionX;
+}
+
+int Tile::getInitialPositionY(){
+    return initialPositionY;
 }
 
 void Tile::render(const Area& dest){
@@ -59,10 +72,8 @@ bool Tile::tileOutOfPosition(){
     return true;
 }
 
-int Tile::getFinalXCoordinate(){
-    return (posX / 32);    // CONSTANTE
-}
-
-int Tile::getFinalYCoordinate(){
-    return (posY / 32);    // CONSTANTE
+bool Tile::tileInOptionBox(int y){
+    if (posY >= y)
+        return true;
+    return false;
 }

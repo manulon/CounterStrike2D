@@ -2,15 +2,16 @@
 #include "Image.h"
 #include "MapEditor.h"
 
-EditorEventHandler::EditorEventHandler(Window& window): 
+EditorEventHandler::EditorEventHandler(Window& window,const Image& image): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
-windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1){}
+windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
+image(image){}
 
-bool EditorEventHandler::handleEvents(std::vector<Tile*> tiles){
+bool EditorEventHandler::handleEvents(std::vector<Tile*>& tiles){
    SDL_Event event;
-   
+
    buildTileClips();
-   
+
    while (SDL_PollEvent(&event)){
       switch (event.type) {
          case SDL_MOUSEMOTION:
@@ -28,7 +29,7 @@ bool EditorEventHandler::handleEvents(std::vector<Tile*> tiles){
          case SDL_QUIT:
             MapEditor map;
             map.createMap("MapaDePruebaEditor","dust");
-            for (auto tile : tiles){
+            for (auto& tile : tiles){
                map.addField(tile->getX(),tile->getY(),tile->getType());
             }
             map.generateMap();
@@ -46,22 +47,29 @@ bool EditorEventHandler::mouseInTile(int x, int y, Tile* tile){
 }
 
 void EditorEventHandler::mouseMotionHandler
-(SDL_Event& event,std::vector<Tile*> tiles){
+(SDL_Event& event,std::vector<Tile*>& tiles){
    mousePositionX = event.motion.x;
    mousePositionY = event.motion.y;
    if (leftMouseButtonDown && tileNumber != -1){
       tiles[tileNumber]->setX(mousePositionX);
       tiles[tileNumber]->setY(mousePositionY);
+
    }
 }
 
 void EditorEventHandler::mouseMotionDown
-(SDL_Event& event,std::vector<Tile*> tiles){
+(SDL_Event& event,std::vector<Tile*>& tiles){
    if (!leftMouseButtonDown && event.button.button == SDL_BUTTON_LEFT){ 
       leftMouseButtonDown = true;
-      for (auto tile : tiles){
+      for (auto& tile : tiles){
          tileNumber++;
          if (mouseInTile(mousePositionX,mousePositionY,tile)){
+            if (tile->tileInOptionBox(windowHeight - 128)){ //Esto no puede estar asi.
+               tiles.push_back(new Tile(tiles[tileNumber]->getType(),
+                              tiles[tileNumber]->getInitialPositionX(),
+                              tiles[tileNumber]->getInitialPositionY(),
+                              image));
+            }
             tiles[tileNumber]->setX(tile->getX());
             tiles[tileNumber]->setY(tile->getY());
             break;
@@ -71,10 +79,10 @@ void EditorEventHandler::mouseMotionDown
 }
 
 void EditorEventHandler::mouseMotionUp
-(SDL_Event& event, std::vector<Tile*> tiles){
+(SDL_Event& event, std::vector<Tile*>& tiles){
    leftMouseButtonDown = false;
 
-   for (auto tile : tiles){
+   for (auto& tile : tiles){
       if (tile->tileOutOfPosition()){
          int auxX( mousePositionX%32 ); // TAMBIEN CONSTANTE, EL TILE WIDTH
          int auxY( mousePositionY%32 ); // TAMBIEN CONSTANTE, EL TILE HEIGHT
@@ -107,7 +115,7 @@ void EditorEventHandler::mouseMotionUp
    tileNumber = -1;  
 }
 
-void EditorEventHandler::renderTiles(std::vector<Tile*> tiles){
+void EditorEventHandler::renderTiles(std::vector<Tile*>& tiles){
    for (auto& tile: tiles){     
       int xOffset(tile->getX());
       int yOffset(tile->getY());
