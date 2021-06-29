@@ -5,7 +5,7 @@
 
 Editor::Editor(Window& window): 
 window(window),grid("assets/gfx/emptySpace.png", window),
-image("assets/gfx/tiles/default_dust.png", window),         //el path de la imagen tiene que
+image("assets/gfx/tiles/default_dust.png", window),               //el path de la imagen tiene que
 eventHandler(window,image){}                                      //estar en yaml
 
 void Editor:: showGrid(){    
@@ -23,16 +23,17 @@ void Editor:: showGrid(){
 }
 
 bool Editor:: handleEvents(){
-    return eventHandler.handleEvents(tiles);
+    return eventHandler.handleEvents(tiles,optionTiles);
 }
 
 void Editor::fillTileOptionList(){
     //for( int i=0; i<75 ; i++){      /* aca deberia ir LOS TOTAL SPRITES */
     
-    tiles.push_back(new Tile(49,0,500,image));
-    tiles.push_back(new Tile(5,48,500,image));
-    tiles.push_back(new Tile(4,96,500,image));
-    tiles.push_back(new Tile(23,144,500,image));  
+    optionTiles.push_back(new Tile(49,0,500,image));
+    optionTiles.push_back(new Tile(5,48,500,image));
+    optionTiles.push_back(new Tile(4,96,500,image));
+    optionTiles.push_back(new Tile(23,144,500,image));  
+    
     //}
 }
 

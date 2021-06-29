@@ -11,13 +11,13 @@ int main(int argc, const char *argv[]){
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
     /* SI BORRAS ESTAS LINEAS SE ROMPE TODO. */
-    Image de_dust("assets/gfx/tiles/default_dust.png", window);
+    Image de_dust("assets/gfx/backgroundTest.png", window);
     Tile tilexx(1,1,1,de_dust);
     /*---------------------------------------*/
-
+    
     Editor editor(window);
     editor.fillTileOptionList();
-
+    
     bool running(true);
     while (running) {
     	window.clear();

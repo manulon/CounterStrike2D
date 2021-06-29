@@ -18,6 +18,7 @@ class Editor{
         const Image grid;
         const Image image;
         std::vector<Tile*> tiles;
+        std::vector<Tile*> optionTiles;
         EditorEventHandler eventHandler;
 
    public:
