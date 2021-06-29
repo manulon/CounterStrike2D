@@ -45,3 +45,7 @@ void SdlWindow::destroyWindow() {
 SDL_Window* SdlWindow::getWindow() const {
     return window;
 }
+
+void SdlWindow::changeWindow(){
+    destroyWindow();
+}

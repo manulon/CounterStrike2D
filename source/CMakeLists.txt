@@ -20,6 +20,7 @@ add_library(source
 		    SDL/Init/SdlInit.cpp
 		    SDL/Init/SdlInitAudio.cpp
 		    SDL/Init/SdlInitFont.cpp
+			SDL/Color/SdlColor.cpp
 		    SDL/Sound/SdlMusic.cpp
 		   	SDL/Sound/SdlSoundEffect.cpp
 		    SDL/Renderer/SdlRenderer.cpp

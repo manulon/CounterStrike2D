@@ -28,6 +28,8 @@ class Editor{
         void showGrid();
         bool handleEvents();
         void fillTileOptionList();
+        void showMenu();
+        void startEditor();
 };
 
 #endif //_EDITOR_H

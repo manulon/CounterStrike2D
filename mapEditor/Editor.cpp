@@ -6,7 +6,7 @@
 Editor::Editor(Window& window): 
 window(window),grid("assets/gfx/emptySpace.png", window),
 image("assets/gfx/tiles/default_dust.png", window),               //el path de la imagen tiene que
-eventHandler(window,image){}                                      //estar en yaml
+eventHandler(window,image){}                               //estar en yaml
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
@@ -38,5 +38,5 @@ void Editor::fillTileOptionList(){
 }
 
 Editor::~Editor(){
-    /*Se borran los tiles por ser RAII?*/
+    //borrar los tiles de optionTIles
 }
