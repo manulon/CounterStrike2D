@@ -10,7 +10,8 @@ Text::Text(const char *fontPath, int ptsize,
 		   Window &window) 
 	: sdlFont(fontPath, ptsize),
 	  sdlTexture(textToRender, color, window.getRenderer(), sdlFont),
-	  sdlRenderer(window.getRenderer()) { }
+	  sdlRenderer(window.getRenderer()),
+	  posX(-1),posY(-1),width(-1),height(-1) { }
 
 Text::Text(Text &&other) 
 	: sdlFont(std::move(other.sdlFont)),
@@ -19,8 +20,21 @@ Text::Text(Text &&other)
 
 Text::~Text() { }
 
-void Text::render(const Area &dest) const {
+void Text::render(const Area &dest){
+	posX = dest.getX();
+	posY = dest.getY();
+	width = dest.getWidth();
+	height = dest.getHeight();
+
 	SDL_Rect destrect = {dest.getX(), dest.getY(), 
                          dest.getWidth(), dest.getHeight()};
 	sdlRenderer.renderCopy(sdlTexture.getTexture(), nullptr, &destrect);
+}
+
+bool Text::mouseInText(int x , int y){
+	if ( (x > posX && x < (posX + width)) && 
+		 (y > posY && y < (posY + height)) )
+		return true;
+
+	return false;
 }

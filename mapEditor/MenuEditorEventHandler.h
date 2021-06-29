@@ -2,6 +2,8 @@
 #define _MENU_EDITOR_EVENT_HANDLER_H
 
 #include "SDL2/SDL.h"
+#include "Text.h"
+#include <vector>
 
 class MenuEditorEventHandler{
     private:
@@ -9,15 +11,18 @@ class MenuEditorEventHandler{
         MenuEditorEventHandler& operator=(const MenuEditorEventHandler &other) = delete;
         MenuEditorEventHandler& operator=(MenuEditorEventHandler &&other) = delete;
 
-        void mouseMotionHandler();
-        void mouseMotionDown();
-        void mouseMotionUp();
+        int mousePositionX;
+        int mousePositionY;
+
+        void mouseMotionHandler(SDL_Event& event,std::vector<Text>& options);
+        void mouseMotionDown(SDL_Event& event);
+        void mouseMotionUp(SDL_Event& event);
 
     public:
         MenuEditorEventHandler();
         ~MenuEditorEventHandler();
 
-        bool handleEvents();
+        bool handleEvents(std::vector<Text>& options);
 };
 
 #endif

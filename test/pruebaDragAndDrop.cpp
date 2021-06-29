@@ -7,11 +7,7 @@
 #include <iostream>
 #include <unistd.h>
 
-int main(int argc, const char *argv[]){
-    /*--------------------------------*/
-
-    /*--------------------------------*/
-    
+int main(int argc, const char *argv[]){   
     EditorMenu menu;
     
     bool runningMenu(true);

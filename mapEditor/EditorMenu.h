@@ -14,6 +14,7 @@ class EditorMenu{
         Text textSelectMode;
         Text textExit;
         MenuEditorEventHandler handler;
+        std::vector<Text> options;
 
     EditorMenu(const EditorMenu &other) = delete;
     EditorMenu& operator=(const EditorMenu &other) = delete;
