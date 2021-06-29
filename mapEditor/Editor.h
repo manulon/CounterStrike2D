@@ -18,6 +18,7 @@ class Editor{
         const Image grid;
         const Image image;
         std::vector<Tile*> tiles;
+        std::vector<Tile*> optionTiles;
         EditorEventHandler eventHandler;
 
    public:
@@ -27,6 +28,8 @@ class Editor{
         void showGrid();
         bool handleEvents();
         void fillTileOptionList();
+        void showMenu();
+        void startEditor();
 };
 
 #endif //_EDITOR_H

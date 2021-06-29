@@ -7,7 +7,8 @@ leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
 image(image){}
 
-bool EditorEventHandler::handleEvents(std::vector<Tile*>& tiles){
+bool EditorEventHandler::handleEvents
+(std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles){
    SDL_Event event;
 
    buildTileClips();
@@ -19,7 +20,7 @@ bool EditorEventHandler::handleEvents(std::vector<Tile*>& tiles){
             break;
 
          case SDL_MOUSEBUTTONDOWN:
-            mouseMotionDown(event, tiles);
+            mouseMotionDown(event, tiles, optionTiles);
             break;
 
          case SDL_MOUSEBUTTONUP:
@@ -37,7 +38,7 @@ bool EditorEventHandler::handleEvents(std::vector<Tile*>& tiles){
         }
    }
 
-   renderTiles(tiles);
+   renderTiles(tiles,optionTiles);
 
    return true;
 }
@@ -53,28 +54,31 @@ void EditorEventHandler::mouseMotionHandler
    if (leftMouseButtonDown && tileNumber != -1){
       tiles[tileNumber]->setX(mousePositionX);
       tiles[tileNumber]->setY(mousePositionY);
-
    }
 }
 
 void EditorEventHandler::mouseMotionDown
-(SDL_Event& event,std::vector<Tile*>& tiles){
+(SDL_Event& event,std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles){
    if (!leftMouseButtonDown && event.button.button == SDL_BUTTON_LEFT){ 
       leftMouseButtonDown = true;
-      for (auto& tile : tiles){
-         tileNumber++;
+      for (auto& tile : optionTiles){
          if (mouseInTile(mousePositionX,mousePositionY,tile)){
-            if (tile->tileInOptionBox(windowHeight - 128)){ //Esto no puede estar asi.
-               tiles.push_back(new Tile(tiles[tileNumber]->getType(),
-                              tiles[tileNumber]->getInitialPositionX(),
-                              tiles[tileNumber]->getInitialPositionY(),
-                              image));
-            }
-            tiles[tileNumber]->setX(tile->getX());
-            tiles[tileNumber]->setY(tile->getY());
+            tiles.push_back(new Tile(tile->getType(),
+                           tile->getInitialPositionX(),
+                           tile->getInitialPositionY(),
+                           image));
+            tileNumber=(tiles.size()-1);                           
             break;
          } 
       }
+
+      for (size_t i=0; i<tiles.size(); i++){
+         if (mouseInTile(mousePositionX,mousePositionY,tiles[i])){
+            tileNumber=(int)i;
+            break;
+         }
+         i++;
+      }   
    }
 }
 
@@ -106,16 +110,16 @@ void EditorEventHandler::mouseMotionUp
                     
          if ( auxY >= windowHeight-128 )
             auxY = windowHeight-128-24;       // 24 Y 128 CONSTANTE    
-                     
+
          tiles[tileNumber]->setX(auxX);
          tiles[tileNumber]->setY(auxY);
       }
    }
-          
    tileNumber = -1;  
 }
 
-void EditorEventHandler::renderTiles(std::vector<Tile*>& tiles){
+void EditorEventHandler::renderTiles
+(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles){
    for (auto& tile: tiles){     
       int xOffset(tile->getX());
       int yOffset(tile->getY());
@@ -125,6 +129,17 @@ void EditorEventHandler::renderTiles(std::vector<Tile*>& tiles){
       Area finalArea(xOffset,yOffset, 
                        tileClips[type-1].w, tileClips[type-1].h);
       tile->render(finalArea);
+   }
+
+   for (auto& optionTile: optionTiles){     
+      int xOffset(optionTile->getX());
+      int yOffset(optionTile->getY());
+      int type(optionTile->getType());
+      optionTile->setMBox(tileClips[type-1]);
+
+      Area finalArea(xOffset,yOffset, 
+                       tileClips[type-1].w, tileClips[type-1].h);
+      optionTile->render(finalArea);
    }
 }
 

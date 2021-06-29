@@ -32,6 +32,7 @@ class Window {
 		void render();
 		int getHeight();
 		int getWidth();
+		void changeWindow();
 		SdlRenderer& getRenderer();
 };
 

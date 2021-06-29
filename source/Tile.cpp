@@ -5,8 +5,6 @@
 Tile::Tile(int tileType,int x, int y, const Image &image ):
 type(tileType),posX(x),posY(y),initialPositionX(x),initialPositionY(y),
 image(image),selected(false){         
-    //std::cout<<"x "<<x<<" vs. "<< posX << " vs. "<< initialPositionX <<" vs. " <<getX()<< std::endl;
-    //std::cout<<"y "<<y<<" vs. "<< posY<< " vs. "<< initialPositionY <<" vs. " <<getY()<< std::endl;
     getX();
     getY();           
 }                             
