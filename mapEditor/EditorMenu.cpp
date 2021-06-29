@@ -23,4 +23,12 @@ void EditorMenu::close(){
     window.changeWindow();
 }
 
+void EditorMenu::clear(){
+    window.clear();
+}
+
+bool EditorMenu::handleEvents(){
+    return handler.handleEvents();
+}
+
 EditorMenu::~EditorMenu(){}

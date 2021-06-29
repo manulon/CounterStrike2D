@@ -8,9 +8,18 @@
 #include <unistd.h>
 
 int main(int argc, const char *argv[]){
+    /*--------------------------------*/
+
+    /*--------------------------------*/
+    
     EditorMenu menu;
-    menu.render();
-    usleep(4000000);
+    
+    bool runningMenu(true);
+    while (runningMenu) {
+    	menu.clear();    	
+        runningMenu = menu.handleEvents();
+	    menu.render();
+	}
     menu.close(); 
 
     Window window("Counter Strike 2D", 800, 600, 
@@ -27,11 +36,11 @@ int main(int argc, const char *argv[]){
     Editor editor(window);
     editor.fillTileOptionList();
   
-    bool running(true);
-    while (running) {
+    bool runningEditor(true);
+    while (runningEditor) {
     	window.clear();
         editor.showGrid();    	
-        running = editor.handleEvents();
+        runningEditor = editor.handleEvents();
 	    window.render();
 	}
     

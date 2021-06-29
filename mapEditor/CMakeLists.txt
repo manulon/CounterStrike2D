@@ -3,4 +3,5 @@ add_library(mapEditor
             Editor.cpp
             EditorEventHandler.cpp
             EditorMenu.cpp
+            MenuEditorEventHandler.cpp
             )       

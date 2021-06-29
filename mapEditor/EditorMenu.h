@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Area.h"
 #include "SdlColor.h"
+#include "MenuEditorEventHandler.h"
 
 class EditorMenu{
     private:
@@ -12,6 +13,7 @@ class EditorMenu{
         Window window;
         Text textSelectMode;
         Text textExit;
+        MenuEditorEventHandler handler;
 
     EditorMenu(const EditorMenu &other) = delete;
     EditorMenu& operator=(const EditorMenu &other) = delete;
@@ -23,6 +25,8 @@ class EditorMenu{
 
         void render();
         void close();
+        void clear();
+        bool handleEvents();
 
 };
 
