@@ -52,8 +52,6 @@ void EditorEventHandler::mouseMotionHandler
    mousePositionX = event.motion.x;
    mousePositionY = event.motion.y;
    if (leftMouseButtonDown && tileNumber != -1){
-      std::cout<<"Voy a usar el tileNumber: "<<tileNumber<<std::endl;
-      std::cout<<"A ver si tira seg fault aca en mouse motion handler"<<std::endl;
       tiles[tileNumber]->setX(mousePositionX);
       tiles[tileNumber]->setY(mousePositionY);
    }
@@ -82,7 +80,6 @@ void EditorEventHandler::mouseMotionDown
          i++;
       }   
    }
-   std::cout<<"EL tile numbre en DOWN es: "<<tileNumber<<std::endl;
 }
 
 void EditorEventHandler::mouseMotionUp
