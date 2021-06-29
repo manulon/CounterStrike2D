@@ -10,7 +10,7 @@ Obstacle::Obstacle(World &world,
     b2PolygonShape polygonShape;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
-    Entity::init(bodyDef, polygonShape, DENSITY);
+    Entity::attachToWorld(bodyDef, polygonShape, DENSITY);
 }
 
 Obstacle::Obstacle(Obstacle &&other) : Entity(std::move(other)) { }
@@ -24,7 +24,6 @@ void Obstacle::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
 
 void Obstacle::setShapeParams(b2PolygonShape &polygonShape,
                       		  float width, float height) {
-    std::cout << "ancho "<< width << "alto "<<height << std::endl;
     polygonShape.SetAsBox(width, height);	
 }
 

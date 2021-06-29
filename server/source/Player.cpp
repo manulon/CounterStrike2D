@@ -3,7 +3,7 @@
 #define DAMPING 10.0f
 #define DENSITY 1.0f
 #define FRICTION 0.0f
-#define MOVING_FORCE 500.0f
+#define MOVING_FORCE 100.0f
 #define STOP_FORCE 0.0f
 #define FIXED_ROTATION true
 #define BODY_TYPE b2_dynamicBody
@@ -18,7 +18,7 @@ Player::Player(World &world,
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
-    Entity::init(bodyDef, fixtureDef);
+    Entity::attachToWorld(bodyDef, fixtureDef);
 }
 
 Player::Player(Player &&other) : Entity(std::move(other)) { }

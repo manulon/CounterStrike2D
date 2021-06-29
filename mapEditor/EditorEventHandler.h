@@ -26,17 +26,19 @@ class EditorEventHandler {
       const Image& image;
 
       bool mouseInTile(int x, int y,Tile* tile);
+      void mouseMotionDown
+      (SDL_Event& event, std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles);
       void mouseMotionHandler(SDL_Event& event, std::vector<Tile*>& tiles);
-      void mouseMotionDown(SDL_Event& event, std::vector<Tile*>& tiles);
       void mouseMotionUp(SDL_Event& event, std::vector<Tile*>& tiles);
-      void renderTiles(std::vector<Tile*>& tiles);
+      void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles);
       void buildTileClips();
 
    public:
       EditorEventHandler(Window &window,const Image& image);
       ~EditorEventHandler();
 
-      bool handleEvents(std::vector<Tile*>& tiles);
+      bool handleEvents
+      (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles);
 };
 
 #endif  // _EDITOR_EVENT_HANDLER_H_

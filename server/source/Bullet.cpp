@@ -7,18 +7,22 @@
 #define IS_BULLET true
 #define BODY_TYPE b2_dynamicBody
 
-Bullet::Bullet(World &world, float x, float y) : 
+Bullet::Bullet(World &world) : 
     Entity(world) {
-	b2BodyDef bodyDef;
+}
+
+void Bullet::attachToWorld(float x, float y) {
+    b2BodyDef bodyDef;
     b2CircleShape circleShape;
     b2FixtureDef fixtureDef;
     setBodyParams(bodyDef, x, y);
     setShapeParams(circleShape);
     setFixtureParams(circleShape, fixtureDef);
-    Entity::init(bodyDef, fixtureDef);
+    Entity::attachToWorld(bodyDef, fixtureDef);
 }
 
-Bullet::Bullet(Bullet &&other) : Entity(std::move(other)) { }
+Bullet::Bullet(Bullet &&other) : 
+    Entity(std::move(other)) { }
 
 Bullet::~Bullet() { }
 
@@ -60,7 +64,7 @@ void Bullet::collideWithBullet(Bullet &bullet) {
 
 void Bullet::collideWithObstacle(Obstacle &obstacle) {
     std::cout << "bullet chocado por obstaculo y destruido\n";
-    Entity::destroy();
+    Entity::detachFromWorld();
 }
 
 void Bullet::collideWithFireArm(FireArm &fireArm) {
@@ -73,10 +77,14 @@ void Bullet::collideWithPlayer(Player &player) {
 
 void Bullet::collideWithBorder(Border &border) {
     std::cout << "Bullet chocado por border\n";
-    Entity::destroy();
+    Entity::detachFromWorld();
 }
 
-std::ostream& operator<<(std::ostream &os, const Bullet &obj) {
+/*std::ostream& operator<<(std::ostream &os, const Bullet &obj) {
     os << "bullet";
     return os;
+}*/
+
+float Bullet::getRadius() {
+    return RADIUS;
 }

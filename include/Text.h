@@ -12,6 +12,11 @@ class Text {
 		SdlFont sdlFont;
 		SdlTexture sdlTexture;
 		SdlRenderer &sdlRenderer;
+		int posX;
+		int posY;
+		int width;
+		int height;
+		
 		
 		Text(const Text &other) = delete;
 		Text& operator=(const Text &other) = delete;
@@ -24,7 +29,8 @@ class Text {
 		     Window &window);
 		Text(Text &&other);
 		~Text();
-		void render(const Area &dest) const;
+		void render(const Area &dest);
+		bool mouseInText(int x, int y);
 };
 
 #endif // _TEXT_H_

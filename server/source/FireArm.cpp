@@ -4,30 +4,32 @@
 #define FRICTION 0.0f
 #define BODY_TYPE b2_dynamicBody
 
-FireArm::FireArm(World &world, 
+FireArm::FireArm(World &world,
 				 float x, float y,
-				 float width, float height) : 
-	Entity(world) { 
+				 float width, float height,
+                 size_t maxAmmunition) : 
+	Entity(world), loader(world, maxAmmunition), 
+    width(width), height(height) { 
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     b2FixtureDef fixtureDef;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
-    Entity::init(bodyDef, fixtureDef);
+    Entity::attachToWorld(bodyDef, fixtureDef);
 }
 
-FireArm::FireArm(FireArm &&other) : Entity(std::move(other)) { }
+FireArm::FireArm(FireArm &&other) : 
+    Entity(std::move(other)), loader(std::move(other.loader)),
+    width(other.width), height(other.height) { 
+    other.width = 0;
+    other.height = 0;
+}
 
 FireArm::~FireArm() { }
 
 void FireArm::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
     bodyDef.userData = static_cast<void*>(this);
-    /* TODO 
-     * ME PARECE QUE EL ARMA DEBERIA SER ESTATICO
-     * POR ESO AUN NO HABILITO TYPE A SER DINAMICO
-     */
-    //bodyDef.type = BODY_TYPE;
     bodyDef.position.Set(x, y);  
 }
 
@@ -43,16 +45,25 @@ void FireArm::setFixtureParams(const b2PolygonShape &polygonShape,
     fixtureDef.friction = FRICTION;
 }
 
-/*void FireArm::shoot(float angle) {
-	if (!loader.isEmpty()) {
-		bullet.shoot(angle);
-		loader.releaseAmmunition();
-	}
-}*/
+void FireArm::shoot(float angle) {
+    // TODO CORREGIR EXCEPCION DE EMPTY LOADER
+    try {
+        std::unique_ptr<Bullet> bullet(new Bullet(loader.releaseBullet()));
+        setBulletPosition(bullet);
+        bullet->shoot(angle);
+        Entity::moveToWorld(std::move(bullet));
+    } catch (...) { }
+}
 
-/*void FireArm::reload(size_t &ammunition) {
+void FireArm::setBulletPosition(std::unique_ptr<Bullet> &bullet) {
+    float radius = bullet->getRadius();
+    bullet->attachToWorld(getPositionX() + width/2.0f + radius*2.0f,
+                          getPositionY() + height/2.0f + radius*2.0f);   
+}
+
+void FireArm::reload(size_t &ammunition) {
 	loader.reload(ammunition);
-}*/
+}
 
 void FireArm::collideWith(Entity &entity) {
     entity.collideWithFireArm(*this);

@@ -62,3 +62,7 @@ int Window::getWidth() {
 SdlRenderer& Window::getRenderer() { 
 	return sdlRenderer;
 }
+
+void Window::changeWindow(){
+	sdlWindow.changeWindow();
+}

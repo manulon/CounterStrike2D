@@ -23,6 +23,7 @@ class SdlWindow {
         ~SdlWindow();
         SdlWindow& operator=(SdlWindow &&other);
         SDL_Window* getWindow() const;
+        void changeWindow();
 };
 
 #endif // _SDL_WINDOW_H_

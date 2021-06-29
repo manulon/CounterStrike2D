@@ -1,35 +1,41 @@
 #include "Loader.h"
-#define RELEASE_RATE 1
 
-Loader::Loader(size_t maxAmmunition) : 
-	maxAmmunition(maxAmmunition), 
-	counter(maxAmmunition) { }
+Loader::Loader(World &world, size_t maxAmmunition) : 
+	world(world), maxAmmunition(maxAmmunition) {
+	fillLoader(maxAmmunition);
+}
 
 Loader::Loader(Loader &&other) : 
-	maxAmmunition(other.maxAmmunition), 
-	counter(other.counter) {
-	other.counter = 0;
-}
+	world(other.world),
+	bullets(std::move(other.bullets)),
+	maxAmmunition(other.maxAmmunition) { }
 
 Loader::~Loader() { }
 
 void Loader::reload(size_t &ammunition) {
+	size_t counter = bullets.size();
 	size_t toLoad = maxAmmunition - counter;
 	if (toLoad <= ammunition) {
-		counter += toLoad;
+		fillLoader(toLoad);
 		ammunition -= toLoad;
 	} else {
-		counter += ammunition;
+		fillLoader(ammunition);
 		ammunition = 0;
 	}
 }
 
-void Loader::releaseAmmunition() {
-	if (counter >= RELEASE_RATE) {
-		counter -= RELEASE_RATE;
+Bullet Loader::releaseBullet() {
+	if (bullets.empty()) {
+		//TODO LUEGO ARREGLAR LA EXCEPCION
+		throw "Out of bullets";
 	}
+	Bullet bullet = std::move(bullets.top());
+	bullets.pop();
+	return bullet;
 }
 
-bool Loader::isEmpty() {
-	return counter == 0 ? true : false;
+void Loader::fillLoader(size_t &ammunition) {
+	for (size_t i = 0; i < ammunition; ++i) {
+		bullets.push(Bullet(world));
+	}
 }

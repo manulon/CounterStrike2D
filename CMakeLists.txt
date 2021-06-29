@@ -9,10 +9,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pedantic-errors
 include_directories(include 
 					include/Exception 
 					include/SDL/Init
+					include/SDL/Color
 					include/SDL/Renderer
 					include/SDL/Sound
 					include/SDL/Texture
-					include/SDL/Window)
+					include/SDL/Window
+					)
 include_directories(server/include)
 include_directories(mapEditor)
 

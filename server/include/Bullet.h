@@ -18,7 +18,7 @@ class Bullet : public Entity {
 		Bullet& operator=(Bullet &&other) = delete;
 
 	public:
-		Bullet(World &world, float x, float y);
+		Bullet(World &world);
 		Bullet(Bullet &&other);
 		~Bullet();
 		virtual void collideWith(Entity &entity) override;
@@ -27,8 +27,10 @@ class Bullet : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+		void attachToWorld(float x, float y);
 		void shoot(float angle);
-		friend std::ostream& operator<<(std::ostream &os, const Bullet &obj);
+		float getRadius();
+		//friend std::ostream& operator<<(std::ostream &os, const Bullet &obj);
 };
 
 #endif // _BULLET_H_

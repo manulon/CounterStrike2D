@@ -11,26 +11,29 @@ class World;
 
 class FireArm : public Entity {
 	private:
+		Loader loader;
+		float width;
+		float height;
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2PolygonShape &polygonShape,
                       		float width, float height);
 		void setFixtureParams(const b2PolygonShape &polygonShape, 
 							  b2FixtureDef &fixtureDef);
+		void setBulletPosition(std::unique_ptr<Bullet> &bullet);
 
 		FireArm(const FireArm &other) = delete;
 		FireArm& operator=(const FireArm &other) = delete;
 		FireArm& operator=(FireArm &&other) = delete;
 
 	public:
-		//Bullet &bullet;
-		//Loader &loader;
 		FireArm(World &world, 
 				float x, float y,
-				float width, float height);
+				float width, float height,
+                size_t maxAmmunition);
 		FireArm(FireArm &&other);
 		~FireArm();
-		// void shoot(float angle);
-		// void reload(size_t &ammunition);
+		void shoot(float angle);
+		void reload(size_t &ammunition);
 		virtual void collideWith(Entity &entity) override;
 		virtual void collideWithBullet(Bullet &bullet) override;
 		virtual void collideWithObstacle(Obstacle &obstacle) override;
