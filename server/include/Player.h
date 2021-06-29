@@ -2,6 +2,7 @@
 #define _PLAYER_H_
 
 #include "Entity.h"
+#include "FireArm.h"
 #include <Box2D/Box2D.h>
 
 class World;
@@ -9,6 +10,8 @@ class World;
 class Player : public Entity {
 	private:
 		b2Vec2 force;
+		FireArm fireArm;
+
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2PolygonShape &polygonShape,
                       		float width, float height);
@@ -40,6 +43,9 @@ class Player : public Entity {
 		void stopMoveLeft();
 		void stopMoveRight();
 		void update();
+		void bindFixture(b2FixtureDef &fixtureDef);
+		void shoot(float angle);
+		void reload(size_t ammunition);
 };
 
 #endif // _PLAYER_H_

@@ -47,6 +47,7 @@ class Entity {
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		void moveToWorld(std::unique_ptr<Entity> &&entity);
 		bool isDetached();
+		void setTransform(float x, float y, float angle);
 
 };
 	

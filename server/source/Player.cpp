@@ -11,7 +11,8 @@
 Player::Player(World &world, 
                float x, float y,
                float width, float height) :
-    Entity(world), force(0,0) { 
+    Entity(world), force(0,0),
+    fireArm(world, 0.2f, 0.2f, 10) { 
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     b2FixtureDef fixtureDef;
@@ -19,18 +20,25 @@ Player::Player(World &world,
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
     Entity::attachToWorld(bodyDef, fixtureDef);
+    fireArm.attachToPlayer(*this, getPositionX(),
+                           getPositionY(),
+                           getPositionX() + width/2, 
+                           getPositionY());
 }
 
-Player::Player(Player &&other) : Entity(std::move(other)) { }
+Player::Player(Player &&other) : 
+    Entity(std::move(other)), fireArm(std::move(other.fireArm)) { }
 
 Player::~Player() { }
+
+void Player::bindFixture(b2FixtureDef &fixtureDef) {
+    Entity::bindFixture(fixtureDef);
+}
 
 void Player::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
     bodyDef.userData = static_cast<void*>(this);
     bodyDef.type = BODY_TYPE;
     bodyDef.linearDamping = DAMPING;
-    // OJO NO SE SI ESTE FIXED ROTATION AFECTE EL MOVIMIENTO DEL CUERPO
-    bodyDef.fixedRotation = FIXED_ROTATION;
     bodyDef.position.Set(x, y);  
 }
 
@@ -83,6 +91,15 @@ void Player::update() {
 
 void Player::collideWith(Entity &entity) {
     entity.collideWithPlayer(*this);
+}
+
+void Player::shoot(float angle) {
+    Entity::setTransform(getPositionX(), getPositionY(), angle);
+    fireArm.shoot(angle);
+}
+
+void Player::reload(size_t ammunition) {
+    fireArm.reload(ammunition);
 }
 
 void Player::collideWithBullet(Bullet &bullet) {
