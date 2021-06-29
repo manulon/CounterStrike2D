@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "Area.h"
 #include <utility>
+#include <iostream>
 
 Text::Text(const char *fontPath, int ptsize,
 		   const char *textToRender, 
@@ -18,7 +19,8 @@ Text::Text(Text &&other)
 	  sdlTexture(std::move(other.sdlTexture)),
 	  sdlRenderer(other.sdlRenderer) { }
 
-Text::~Text() { }
+Text::~Text() {
+}
 
 void Text::render(const Area &dest){
 	posX = dest.getX();

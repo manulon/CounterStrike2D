@@ -38,5 +38,11 @@ void Editor::fillTileOptionList(){
 }
 
 Editor::~Editor(){
-    //borrar los tiles de optionTIles
+    for(auto& tile : optionTiles){
+        delete tile;
+    }
+
+    for(auto& tile : tiles){
+        delete tile;
+    }
 }

@@ -5,7 +5,7 @@
 MenuEditorEventHandler::MenuEditorEventHandler(): 
 mousePositionX(0),mousePositionY(0){}
 
-bool MenuEditorEventHandler::handleEvents(std::vector<Text>& options){
+bool MenuEditorEventHandler::handleEvents(std::vector<Text*>& options){
     SDL_Event event;
 
     while (SDL_PollEvent(&event)){
@@ -31,11 +31,11 @@ bool MenuEditorEventHandler::handleEvents(std::vector<Text>& options){
 
 
 void MenuEditorEventHandler::mouseMotionHandler
-(SDL_Event& event,std::vector<Text>& options){
+(SDL_Event& event,std::vector<Text*>& options){
     mousePositionX = event.motion.x;
     mousePositionY = event.motion.y;
     for(auto& option: options){
-        if (option.mouseInText(mousePositionX,mousePositionY)){
+        if (option->mouseInText(mousePositionX,mousePositionY)){
             std::cout<<"Mouse arriba de una opcion"<< std::endl;
         }
     }

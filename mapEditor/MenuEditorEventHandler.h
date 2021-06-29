@@ -14,7 +14,7 @@ class MenuEditorEventHandler{
         int mousePositionX;
         int mousePositionY;
 
-        void mouseMotionHandler(SDL_Event& event,std::vector<Text>& options);
+        void mouseMotionHandler(SDL_Event& event,std::vector<Text*>& options);
         void mouseMotionDown(SDL_Event& event);
         void mouseMotionUp(SDL_Event& event);
 
@@ -22,7 +22,7 @@ class MenuEditorEventHandler{
         MenuEditorEventHandler();
         ~MenuEditorEventHandler();
 
-        bool handleEvents(std::vector<Text>& options);
+        bool handleEvents(std::vector<Text*>& options);
 };
 
 #endif

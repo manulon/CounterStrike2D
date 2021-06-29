@@ -39,6 +39,5 @@ int main(int argc, const char *argv[]){
         runningEditor = editor.handleEvents();
 	    window.render();
 	}
-    
 	return 0;
 }

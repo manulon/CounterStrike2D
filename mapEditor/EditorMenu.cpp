@@ -1,4 +1,5 @@
 #include "EditorMenu.h"
+#include <iostream>
 
 EditorMenu::EditorMenu():
 textColor(0, 0, 0),
@@ -9,16 +10,16 @@ textSelectMode("assets/gfx/fonts/liberationsans.ttf", 40,
 textExit("assets/gfx/fonts/liberationsans.ttf", 40,
          "Salir ", textColor.getColor(), window),
 handler(){
-    options.push_back(std::move(textSelectMode));
-    options.push_back(std::move(textExit));
+    options.push_back(&textSelectMode);
+    options.push_back(&textExit);
 }
 
 void EditorMenu::render(){
     Area selectedModeArea(0, 25, 150, 40);
     Area exitArea(0, 75, 100, 30);              
 
-    options[0].render(selectedModeArea);
-    options[1].render(exitArea);
+    options[0]->render(selectedModeArea);
+    options[1]->render(exitArea);
 
     window.render();
 }
