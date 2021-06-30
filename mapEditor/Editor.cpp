@@ -3,9 +3,9 @@
 #include <unistd.h>
 #include <utility>
 
-Editor::Editor(Window& window): 
+Editor::Editor(Window& window,const char* path): 
 window(window),grid("assets/gfx/emptySpace.png", window),
-image("assets/gfx/tiles/default_dust.png", window),               
+image(path, window),               
 eventHandler(window,image){}                                     
 
 void Editor:: showGrid(){    

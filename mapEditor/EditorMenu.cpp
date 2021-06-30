@@ -30,8 +30,11 @@ void EditorMenu::clear(){
 }
 
 bool EditorMenu::handleEvents(){
-    startEditor = handler.handleEvents(options);
-    return startEditor;
+    bool keepRunning(true);
+    keepRunning = handler.handleEvents(options);
+    if (getPath() != nullptr)
+        startEditor=true;
+    return keepRunning;
 }
 
 const char* EditorMenu::getPath(){
