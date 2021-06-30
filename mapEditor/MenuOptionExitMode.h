@@ -15,7 +15,7 @@ class MenuOptionExitMode : public MenuOption{
 		           SDL_Color color, Window &window);
         ~MenuOptionExitMode();
 
-        virtual void clicked() override;
+        virtual bool clicked() override;
 };
 
 #endif

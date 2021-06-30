@@ -15,7 +15,7 @@ class MenuOptionSelectMode : public MenuOption{
 		           SDL_Color color, Window &window);
         ~MenuOptionSelectMode();
 
-        virtual void clicked() override;
+        virtual bool clicked() override;
 };
 
 #endif

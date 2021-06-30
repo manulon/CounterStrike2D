@@ -9,6 +9,7 @@ MenuOption(fontPath,ptsize,textToRender,color,window){}
 
 MenuOptionSelectMode::~MenuOptionSelectMode(){}
 
-void MenuOptionSelectMode::clicked(){
+bool MenuOptionSelectMode::clicked(){
     std::cout <<"Aprete la opcion seleccionar modo"<< std::endl;
+    return true;
 }

@@ -9,6 +9,7 @@ MenuOption(fontPath,ptsize,textToRender,color,window){}
 
 MenuOptionExitMode::~MenuOptionExitMode(){}
 
-void MenuOptionExitMode::clicked(){
+bool MenuOptionExitMode::clicked(){
     std::cout <<"Aprete la opcion salir"<< std::endl;
+    return false;
 }

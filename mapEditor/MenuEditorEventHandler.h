@@ -16,9 +16,9 @@ class MenuEditorEventHandler{
         int mousePositionX;
         int mousePositionY;
 
-        void mouseMotionHandler(SDL_Event& event,std::vector<MenuOption*>& options);
-        void mouseMotionDown(SDL_Event& event,std::vector<MenuOption*>& options);
-        void mouseMotionUp(SDL_Event& event);
+        bool mouseMotionHandler(SDL_Event& event,std::vector<MenuOption*>& options);
+        bool mouseMotionDown(SDL_Event& event,std::vector<MenuOption*>& options);
+        bool mouseMotionUp(SDL_Event& event);
 
     public:
         MenuEditorEventHandler();

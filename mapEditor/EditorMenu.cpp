@@ -9,7 +9,7 @@ textSelectMode("assets/gfx/fonts/liberationsans.ttf", 40,
                "Seleccionar modo ", textColor.getColor(), window),
 textExit("assets/gfx/fonts/liberationsans.ttf", 40,
          "Salir ", textColor.getColor(), window),
-handler(){
+handler(),startEditor(true){
     options.push_back(&textSelectMode);
     options.push_back(&textExit);
 }
@@ -33,7 +33,12 @@ void EditorMenu::clear(){
 }
 
 bool EditorMenu::handleEvents(){
-    return handler.handleEvents(options);
+    startEditor = handler.handleEvents(options);
+    return startEditor;
+}
+
+bool EditorMenu:: runEditor(){
+    return startEditor;
 }
 
 EditorMenu::~EditorMenu(){}

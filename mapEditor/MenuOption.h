@@ -23,7 +23,7 @@ class MenuOption{
 
         void render(const Area &dest);
         bool mouseInText(int x, int y);
-        virtual void clicked() = 0;
+        virtual bool clicked() = 0;
 };
 
 #endif

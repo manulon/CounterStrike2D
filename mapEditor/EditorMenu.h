@@ -18,6 +18,7 @@ class EditorMenu{
         MenuOptionExitMode textExit;
         MenuEditorEventHandler handler;
         std::vector<MenuOption*> options;
+        bool startEditor;
 
     EditorMenu(const EditorMenu &other) = delete;
     EditorMenu& operator=(const EditorMenu &other) = delete;
@@ -31,6 +32,7 @@ class EditorMenu{
         void close();
         void clear();
         bool handleEvents();
+        bool runEditor();
 
 };
 
