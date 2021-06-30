@@ -4,7 +4,6 @@
 #include "Text.h"
 #include "Window.h"
 #include "Area.h"
-#include "SdlColor.h"
 #include "MenuEditorEventHandler.h"
 #include "MenuOption.h"
 #include "MenuOptionSelectMode.h"
@@ -12,7 +11,6 @@
 
 class EditorMenu{
     private:
-        SdlColor textColor;
         Window window;
         MenuOptionSelectMode textSelectMode;
         MenuOptionExitMode textExit;

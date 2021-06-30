@@ -44,7 +44,7 @@ bool MenuEditorEventHandler::mouseMotionDown
     for(auto& option: options){
         if (option->mouseInText(mousePositionX,mousePositionY)){
             std::cout<<"Aprete una opcion "<< std::endl;
-            return option->clicked();
+            return option->clicked(options);
         }
     }
     return true;

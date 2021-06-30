@@ -2,6 +2,7 @@
 #define _MENU_OPTION_EXIT_MODE_
 
 #include "MenuOption.h"
+#include <vector>
 
 class MenuOptionExitMode : public MenuOption{
     private:
@@ -11,11 +12,12 @@ class MenuOptionExitMode : public MenuOption{
 
     public:
         MenuOptionExitMode(const char *fontPath, int ptsize,
-		           const char *textToRender, 
-		           SDL_Color color, Window &window);
+		           const char *textToRender,Window &window);
         ~MenuOptionExitMode();
 
-        virtual bool clicked() override;
+        virtual bool clicked(std::vector<MenuOption*>& options) override;
+        virtual void render() override;
+        virtual const char* getPathToImage() override;
 };
 
 #endif

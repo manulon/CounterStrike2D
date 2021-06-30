@@ -7,4 +7,7 @@ add_library(mapEditor
             MenuOption.cpp
             MenuOptionSelectMode.cpp
             MenuOptionExitMode.cpp
+            MapOptionInferno.cpp
+            MapOptionDust.cpp
+            MapOptionAztec.cpp
             )       

@@ -3,8 +3,9 @@
 
 #include "SdlFont.h"
 #include "SdlTexture.h"
+#include "Window.h"
+
 class SdlRenderer;
-class Window;
 class Area;
 
 class Text {
