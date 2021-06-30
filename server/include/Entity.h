@@ -48,7 +48,6 @@ class Entity {
 		void moveToWorld(std::unique_ptr<Entity> &&entity);
 		bool isDetached();
 		void setTransform(float x, float y, float angle);
-
 };
 	
 #endif // _ENTITY_H_
