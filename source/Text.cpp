@@ -40,3 +40,7 @@ bool Text::mouseInText(int x , int y){
 
 	return false;
 }
+
+void Text::changeColor(int r, int g, int b){
+	sdlTexture.changeColor(r,g,b);
+}

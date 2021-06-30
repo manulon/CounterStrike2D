@@ -37,6 +37,7 @@ class SdlTexture {
         SDL_Texture* getTexture() const;
         int getWidth() const;
         int getHeight() const;
+        void changeColor(int r, int g, int b);
 };
 
 #endif // _SDL_TEXTURE_H_

@@ -1,6 +1,7 @@
 #include "SdlTexture.h"
 #include "SdlRenderer.h"
 #include "SdlException.h"
+#include <iostream>
 
 SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer) {
     SdlSurface surface(imgPath);
@@ -103,8 +104,13 @@ int SdlTexture:: getWidth() const {
     return width;
 }
 
-int SdlTexture:: getHeight() const {
+int SdlTexture::getHeight() const {
     int height(0);
     queryTexture(nullptr,nullptr,nullptr,&height);
     return height;
+}
+
+void SdlTexture::changeColor(int r, int g, int b){
+    SDL_SetTextureColorMod(texture,r,g,b);
+    std::cout<<"Estoy cambiandole el color"<< std::endl;
 }

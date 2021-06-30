@@ -5,7 +5,7 @@
 EditorEventHandler::EditorEventHandler(Window& window,const Image& image): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
-image(image){}
+actualType(-1),selectedZoneX(384),selectedZoneY(500),image(image){}
 
 bool EditorEventHandler::handleEvents
 (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles){
@@ -51,10 +51,6 @@ void EditorEventHandler::mouseMotionHandler
 (SDL_Event& event,std::vector<Tile*>& tiles){
    mousePositionX = event.motion.x;
    mousePositionY = event.motion.y;
-   if (leftMouseButtonDown && tileNumber != -1){
-      tiles[tileNumber]->setX(mousePositionX);
-      tiles[tileNumber]->setY(mousePositionY);
-   }
 }
 
 void EditorEventHandler::mouseMotionDown
@@ -63,59 +59,27 @@ void EditorEventHandler::mouseMotionDown
       leftMouseButtonDown = true;
       for (auto& tile : optionTiles){
          if (mouseInTile(mousePositionX,mousePositionY,tile)){
-            tiles.push_back(new Tile(tile->getType(),
-                           tile->getInitialPositionX(),
-                           tile->getInitialPositionY(),
-                           image));
-            tileNumber=(tiles.size()-1);                           
-            break;
-         } 
-      }
-
-      for (size_t i=0; i<tiles.size(); i++){
-         if (mouseInTile(mousePositionX,mousePositionY,tiles[i])){
-            tileNumber=(int)i;
+            actualType = tile->getType();
+            optionTiles.push_back(new Tile(tile->getType(),
+                           selectedZoneX,selectedZoneY,image));
             break;
          }
-         i++;
-      }   
+      }
+      if (mouseInGrid(mousePositionX,mousePositionY) && actualType!=-1){
+         tiles.push_back(new Tile(actualType,
+                           mousePositionX,mousePositionY,image));
+         tileNumber=(tiles.size()-1);
+         checkPosition(tiles[tileNumber]);
+      }
    }
 }
 
 void EditorEventHandler::mouseMotionUp
 (SDL_Event& event, std::vector<Tile*>& tiles){
    leftMouseButtonDown = false;
-
    for (auto& tile : tiles){
-      if (tile->tileOutOfPosition()){
-         int auxX( mousePositionX%32 ); // TAMBIEN CONSTANTE, EL TILE WIDTH
-         int auxY( mousePositionY%32 ); // TAMBIEN CONSTANTE, EL TILE HEIGHT
-         
-         if ( auxX > 16 && auxY < 16 ){
-            auxX = 32*((int)( (mousePositionX/32)+1 ));
-            auxY = 32*((int)( (mousePositionY/32) ));
-         }else if ( auxX > 16 && auxY > 16 ){
-            auxX = 32*((int)( (mousePositionX/32)+1 ));
-            auxY = 32*((int)(mousePositionY/32)+1);
-         }else if ( auxX < 16 && auxY > 16 ){
-            auxX = 32*((int)(mousePositionX/32));
-            auxY = 32*((int)((mousePositionY/32)+1));
-         }else{
-            auxX = 32*((int)(mousePositionX/32));
-            auxY = 32*((int)(mousePositionY/32));
-         }
-
-         if ( auxX >= windowWidth - 32 )
-            auxX = windowWidth-32;            // 32 CONSTANTE
-                    
-         if ( auxY >= windowHeight-128 )
-            auxY = windowHeight-128-24;       // 24 Y 128 CONSTANTE    
-
-         tiles[tileNumber]->setX(auxX);
-         tiles[tileNumber]->setY(auxY);
-      }
+      checkPosition(tile);
    }
-   tileNumber = -1;  
 }
 
 void EditorEventHandler::renderTiles
@@ -160,6 +124,44 @@ void EditorEventHandler::buildTileClips(){
         	y_aux+=32;
         }
    }
+}
+
+bool EditorEventHandler::mouseInGrid(int mousePositionX,int mousePositionY){
+   if ( (mousePositionX >= 0) && (mousePositionX < windowWidth) && 
+        (mousePositionY >= 0) && (mousePositionY < windowHeight - 128)){
+      return true;
+   }
+   return false;
+}
+
+void EditorEventHandler::checkPosition(Tile* tile){
+   if (tile->tileOutOfPosition()){
+         int auxX( mousePositionX%32 ); // TAMBIEN CONSTANTE, EL TILE WIDTH
+         int auxY( mousePositionY%32 ); // TAMBIEN CONSTANTE, EL TILE HEIGHT
+         
+         if ( auxX > 16 && auxY < 16 ){
+            auxX = 32*((int)( (mousePositionX/32)+1 ));
+            auxY = 32*((int)( (mousePositionY/32) ));
+         }else if ( auxX > 16 && auxY > 16 ){
+            auxX = 32*((int)( (mousePositionX/32)+1 ));
+            auxY = 32*((int)(mousePositionY/32)+1);
+         }else if ( auxX < 16 && auxY > 16 ){
+            auxX = 32*((int)(mousePositionX/32));
+            auxY = 32*((int)((mousePositionY/32)+1));
+         }else{
+            auxX = 32*((int)(mousePositionX/32));
+            auxY = 32*((int)(mousePositionY/32));
+         }
+
+         if ( auxX >= windowWidth - 32 )
+            auxX = windowWidth-32;            // 32 CONSTANTE
+                    
+         if ( auxY >= windowHeight-128 )
+            auxY = windowHeight-128-24;       // 24 Y 128 CONSTANTE    
+
+         tile->setX(auxX);
+         tile->setY(auxY);
+      }
 }
 
 EditorEventHandler::~EditorEventHandler(){}

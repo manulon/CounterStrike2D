@@ -37,6 +37,7 @@ void MenuEditorEventHandler::mouseMotionHandler
     for(auto& option: options){
         if (option->mouseInText(mousePositionX,mousePositionY)){
             std::cout<<"Mouse arriba de una opcion"<< std::endl;
+            //option->changeColor(255,250,0);
         }
     }
 }

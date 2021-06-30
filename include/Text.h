@@ -31,6 +31,7 @@ class Text {
 		~Text();
 		void render(const Area &dest);
 		bool mouseInText(int x, int y);
+		void changeColor(int r, int g, int b);
 };
 
 #endif // _TEXT_H_
