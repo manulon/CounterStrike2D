@@ -14,8 +14,8 @@ class FireArm : public Entity {
 		Loader loader;
 		float width;
 		float height;
-		float x, y;
-		float xOrigin, yOrigin;
+		//float x, y;
+		//float xOrigin, yOrigin;
 
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2PolygonShape &polygonShape,
@@ -35,7 +35,7 @@ class FireArm : public Entity {
                 size_t maxAmmunition);
 		FireArm(FireArm &&other);
 		~FireArm();
-		void shoot(float angle);
+		void shoot(float angle, float x, float y);
 		void reload(size_t &ammunition);
 		virtual void collideWith(Entity &entity) override;
 		virtual void collideWithBullet(Bullet &bullet) override;
@@ -45,8 +45,8 @@ class FireArm : public Entity {
 		virtual void collideWithBorder(Border &border) override;
 
 		void attachToWorld(float x, float y);
-		void attachToPlayer(Player &player,float xOrigin, 
-        float yOrigin, float x, float y);
+		//void attachToPlayer(Player &player,float xOrigin, 
+        //sfloat yOrigin, float x, float y);
 };
 
 #endif // _FIRE_ARM_H_

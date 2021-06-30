@@ -11,6 +11,8 @@ class Player : public Entity {
 	private:
 		b2Vec2 force;
 		FireArm fireArm;
+		float width;
+		float height;
 
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2PolygonShape &polygonShape,

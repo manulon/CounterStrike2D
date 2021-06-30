@@ -12,7 +12,8 @@ Player::Player(World &world,
                float x, float y,
                float width, float height) :
     Entity(world), force(0,0),
-    fireArm(world, 0.2f, 0.2f, 10) { 
+    fireArm(world, 0.2f, 0.2f, 10), 
+    width(width), height(height) { 
     b2BodyDef bodyDef;
     b2PolygonShape polygonShape;
     b2FixtureDef fixtureDef;
@@ -20,14 +21,19 @@ Player::Player(World &world,
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
     Entity::attachToWorld(bodyDef, fixtureDef);
-    fireArm.attachToPlayer(*this, getPositionX(),
+    /*fireArm.attachToPlayer(*this, getPositionX(),
                            getPositionY(),
                            getPositionX() + width/2, 
-                           getPositionY());
+                           getPositionY());*/
 }
 
 Player::Player(Player &&other) : 
-    Entity(std::move(other)), fireArm(std::move(other.fireArm)) { }
+    Entity(std::move(other)), 
+    fireArm(std::move(other.fireArm)),
+    width(other.width), height(other.height) {
+    other.width = 0;
+    other.height = 0;
+}
 
 Player::~Player() { }
 
@@ -95,7 +101,10 @@ void Player::collideWith(Entity &entity) {
 
 void Player::shoot(float angle) {
     Entity::setTransform(getPositionX(), getPositionY(), angle);
-    fireArm.shoot(angle);
+    float shootRadius = width;
+    float xShoot = getPositionX() + shootRadius*cos(angle*b2_pi/180.0f);
+    float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
+    fireArm.shoot(angle, xShoot, yShoot);
 }
 
 void Player::reload(size_t ammunition) {

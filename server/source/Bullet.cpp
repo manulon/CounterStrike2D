@@ -44,8 +44,10 @@ void Bullet::setFixtureParams(const b2CircleShape &circleShape,
     fixtureDef.density = DENSITY;
 }
 
-void Bullet::shoot(float angle) {
+void Bullet::shoot(float angle, float x, float y) {
     float radians = angleToRadians(angle);
+    attachToWorld(x + RADIUS*cos(radians)*2, 
+                  y + RADIUS*sin(radians)*2);
     b2Vec2 force(IMPULSE * cos(radians), IMPULSE * sin(radians));
     Entity::applyLinearImpulseToCenter(force, true);
 }

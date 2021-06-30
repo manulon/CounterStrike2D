@@ -20,13 +20,13 @@ void FireArm::attachToWorld(float x, float y) {
     setShapeParams(polygonShape, width, height, x, y);
     setFixtureParams(polygonShape, fixtureDef);
     Entity::attachToWorld(bodyDef, fixtureDef);
-    xOrigin = x;
+    /*xOrigin = x;
     yOrigin = y;
     this->x = x;
-    this->y = y;
+    this->y = y;*/
 }
 
-void FireArm::attachToPlayer(Player &player, float xOrigin, 
+/*void FireArm::attachToPlayer(Player &player, float xOrigin, 
                              float yOrigin, float x, float y) {
     b2PolygonShape polygonShape;
     b2FixtureDef fixtureDef;
@@ -37,13 +37,20 @@ void FireArm::attachToPlayer(Player &player, float xOrigin,
     this->yOrigin = yOrigin;
     this->x = x + width;
     this->y = y;
-}
+}*/
 
-FireArm::FireArm(FireArm &&other) : 
+/*FireArm::FireArm(FireArm &&other) : 
     Entity(std::move(other)), loader(std::move(other.loader)),
     width(other.width), height(other.height),
     x(other.x), y(other.y),
     xOrigin(other.xOrigin), yOrigin(other.yOrigin) { 
+    other.width = 0;
+    other.height = 0;
+}*/
+
+FireArm::FireArm(FireArm &&other) : 
+    Entity(std::move(other)), loader(std::move(other.loader)),
+    width(other.width), height(other.height) {
     other.width = 0;
     other.height = 0;
 }
@@ -68,20 +75,20 @@ void FireArm::setFixtureParams(const b2PolygonShape &polygonShape,
     fixtureDef.friction = FRICTION;
 }
 
-void FireArm::shoot(float angle) {
+void FireArm::shoot(float angle, float x, float y) {
     // TODO CORREGIR EXCEPCION DE EMPTY LOADER
     try {
         std::unique_ptr<Bullet> bullet(new Bullet(loader.releaseBullet()));
-        setBulletPosition(bullet, angle);
-        bullet->shoot(angle);
+        //setBulletPosition(bullet, angle, x, y, width, height);
+        bullet->shoot(angle, x, y);
         Entity::moveToWorld(std::move(bullet));
     } catch (...) { }
 }
 
 void FireArm::setBulletPosition(std::unique_ptr<Bullet> &bullet, float angle) {
-    float radius = x + (width/2) + bullet->getRadius()*9.0f - xOrigin;
+    /*float radius = x + (width/2) + bullet->getRadius()*9.0f - xOrigin;
     bullet->attachToWorld(xOrigin + radius*cos(angle*b2_pi/180.0f), 
-                          yOrigin + radius*sin(angle*b2_pi/180.0f));
+                          yOrigin + radius*sin(angle*b2_pi/180.0f));*/
 }
 
 void FireArm::reload(size_t &ammunition) {

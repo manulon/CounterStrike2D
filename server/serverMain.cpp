@@ -13,7 +13,7 @@ int main(int argc, const char *argv[]) {
         Border border(world, 0.0f, 0.0f, 100.0f, 100.0f);
         Player player(world, 2.0f, 8.0f, 2.0f, 2.0f);
         for (int32 i = 0; i < 120; ++i) {
-            player.shoot(90);
+            player.shoot(180);
             std::cout << "-----Disparo-----" << std::endl;
             std::cout << world;
         	world.step();
@@ -23,9 +23,6 @@ int main(int argc, const char *argv[]) {
                 std::cout << "-----Reloaded-----" << std::endl;
                 std::cout << amm << std::endl;
             }
-            //std::cout << world;
-            //world.step();
-            //std::cout << "---------------" << std::endl;
         }
 
     } catch (std::exception &e) {
