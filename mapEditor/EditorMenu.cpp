@@ -34,6 +34,10 @@ bool EditorMenu::handleEvents(){
     return startEditor;
 }
 
+const char* EditorMenu::getPath(){
+    return handler.getPath().c_str();
+}
+
 bool EditorMenu:: runEditor(){
     return startEditor;
 }

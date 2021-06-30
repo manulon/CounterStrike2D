@@ -3,7 +3,7 @@
 #include <utility>
 
 MenuEditorEventHandler::MenuEditorEventHandler(): 
-mousePositionX(0),mousePositionY(0){}
+mousePositionX(0),mousePositionY(0),path(){}
 
 bool MenuEditorEventHandler::handleEvents(std::vector<MenuOption*>& options){
     SDL_Event event;
@@ -44,6 +44,8 @@ bool MenuEditorEventHandler::mouseMotionDown
     for(auto& option: options){
         if (option->mouseInText(mousePositionX,mousePositionY)){
             std::cout<<"Aprete una opcion "<< std::endl;
+            if (option->getPathToImage() != nullptr)
+                path = option->getPathToImage();
             return option->clicked(options);
         }
     }
@@ -52,6 +54,10 @@ bool MenuEditorEventHandler::mouseMotionDown
 
 bool MenuEditorEventHandler::mouseMotionUp(SDL_Event& event){
     return true;
+}
+
+std::string& MenuEditorEventHandler::getPath(){
+    return path;
 }
 
 MenuEditorEventHandler::~MenuEditorEventHandler(){}

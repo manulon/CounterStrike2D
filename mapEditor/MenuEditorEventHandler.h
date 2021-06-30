@@ -5,6 +5,7 @@
 #include "Text.h"
 #include "MenuOption.h"
 #include <vector>
+#include <string>
 
 
 class MenuEditorEventHandler{
@@ -15,6 +16,7 @@ class MenuEditorEventHandler{
 
         int mousePositionX;
         int mousePositionY;
+        std::string path;
 
         bool mouseMotionHandler(SDL_Event& event,std::vector<MenuOption*>& options);
         bool mouseMotionDown(SDL_Event& event,std::vector<MenuOption*>& options);
@@ -25,6 +27,7 @@ class MenuEditorEventHandler{
         ~MenuEditorEventHandler();
 
         bool handleEvents(std::vector<MenuOption*>& options);
+        std::string& getPath();
 };
 
 #endif

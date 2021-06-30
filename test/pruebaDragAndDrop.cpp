@@ -18,6 +18,8 @@ int main(int argc, const char *argv[]){
 	}
     menu.close(); 
     
+    std::cout<<"Path es: "<<menu.getPath()<<std::endl;
+
     if (menu.runEditor()){
         Window window("Counter Strike 2D", 800, 600, 
                     SDL_WINDOW_RESIZABLE, 

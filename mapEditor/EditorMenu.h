@@ -31,6 +31,7 @@ class EditorMenu{
         void clear();
         bool handleEvents();
         bool runEditor();
+        const char* getPath();
 
 };
 

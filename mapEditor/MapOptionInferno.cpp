@@ -19,5 +19,5 @@ void MapOptionInferno::render(){
 
 bool MapOptionInferno::clicked(std::vector<MenuOption*>& options){
     std::cout<<"click inferno"<< std::endl;
-    return true;
+    return false;
 }
