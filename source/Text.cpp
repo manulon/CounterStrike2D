@@ -12,7 +12,7 @@ Text::Text(const char *fontPath, int ptsize,
 	: sdlFont(fontPath, ptsize),
 	  sdlTexture(textToRender, color, window.getRenderer(), sdlFont),
 	  sdlRenderer(window.getRenderer()),
-	  posX(-1),posY(-1),width(-1),height(-1) { }
+	  posX(-1),posY(-1),width(-1),height(-1),asd(textToRender) { }
 
 Text::Text(Text &&other) 
 	: sdlFont(std::move(other.sdlFont)),
@@ -43,4 +43,8 @@ bool Text::mouseInText(int x , int y){
 
 void Text::changeColor(int r, int g, int b){
 	sdlTexture.changeColor(r,g,b);
+}
+
+const char* Text::getTextToRender(){
+	return asd;
 }

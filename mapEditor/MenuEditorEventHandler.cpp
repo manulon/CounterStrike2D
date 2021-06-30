@@ -5,7 +5,7 @@
 MenuEditorEventHandler::MenuEditorEventHandler(): 
 mousePositionX(0),mousePositionY(0){}
 
-bool MenuEditorEventHandler::handleEvents(std::vector<Text*>& options){
+bool MenuEditorEventHandler::handleEvents(std::vector<MenuOption*>& options){
     SDL_Event event;
 
     while (SDL_PollEvent(&event)){
@@ -15,7 +15,7 @@ bool MenuEditorEventHandler::handleEvents(std::vector<Text*>& options){
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
-                mouseMotionDown(event);
+                mouseMotionDown(event,options);
                 break;
 
             case SDL_MOUSEBUTTONUP:
@@ -31,18 +31,25 @@ bool MenuEditorEventHandler::handleEvents(std::vector<Text*>& options){
 
 
 void MenuEditorEventHandler::mouseMotionHandler
-(SDL_Event& event,std::vector<Text*>& options){
+(SDL_Event& event,std::vector<MenuOption*>& options){
     mousePositionX = event.motion.x;
     mousePositionY = event.motion.y;
     for(auto& option: options){
         if (option->mouseInText(mousePositionX,mousePositionY)){
-            std::cout<<"Mouse arriba de una opcion"<< std::endl;
             //option->changeColor(255,250,0);
         }
     }
 }
 
-void MenuEditorEventHandler::mouseMotionDown(SDL_Event& event){}
+void MenuEditorEventHandler::mouseMotionDown
+(SDL_Event& event,std::vector<MenuOption*>& options){
+    for(auto& option: options){
+        if (option->mouseInText(mousePositionX,mousePositionY)){
+            std::cout<<"Aprete una opcion "<< std::endl;
+            option->clicked();
+        }
+    }
+}
 
 void MenuEditorEventHandler::mouseMotionUp(SDL_Event& event){}
 

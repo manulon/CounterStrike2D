@@ -6,15 +6,18 @@
 #include "Area.h"
 #include "SdlColor.h"
 #include "MenuEditorEventHandler.h"
+#include "MenuOption.h"
+#include "MenuOptionSelectMode.h"
+#include "MenuOptionExitMode.h"
 
 class EditorMenu{
     private:
         SdlColor textColor;
         Window window;
-        Text textSelectMode;
-        Text textExit;
+        MenuOptionSelectMode textSelectMode;
+        MenuOptionExitMode textExit;
         MenuEditorEventHandler handler;
-        std::vector<Text*> options;
+        std::vector<MenuOption*> options;
 
     EditorMenu(const EditorMenu &other) = delete;
     EditorMenu& operator=(const EditorMenu &other) = delete;
