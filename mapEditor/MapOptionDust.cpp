@@ -14,9 +14,9 @@ const char* MapOptionDust:: getPathToImage(){
 void MapOptionDust::render(){
     Area renderArea(300,50,100,30);
     optionText.render(renderArea);
-    std::cout<<"Renderizo dust"<< std::endl;
 }
 
 bool MapOptionDust::clicked(std::vector<MenuOption*>& options){
+    std::cout<<"click dust"<< std::endl;
     return true;
 }

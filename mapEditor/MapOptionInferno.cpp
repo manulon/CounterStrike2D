@@ -14,9 +14,10 @@ const char* MapOptionInferno:: getPathToImage(){
 void MapOptionInferno::render(){
     Area renderArea(300,75,100,30);
     optionText.render(renderArea);
-    std::cout<<"Renderizo inferno"<< std::endl;
+    
 }
 
 bool MapOptionInferno::clicked(std::vector<MenuOption*>& options){
+    std::cout<<"click inferno"<< std::endl;
     return true;
 }

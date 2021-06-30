@@ -16,9 +16,9 @@ const char* MapOptionAztec:: getPathToImage(){
 void MapOptionAztec::render(){
     Area renderArea(300,25,100,30);
     optionText.render(renderArea);
-    std::cout<<"Renderizo aztec"<< std::endl;
 }
 
 bool MapOptionAztec::clicked(std::vector<MenuOption*>& options){
+    std::cout<<"click aztec"<< std::endl;
     return true;
 }
