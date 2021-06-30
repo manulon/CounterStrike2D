@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "Area.h"
 #include <utility>
+#include <iostream>
 
 Text::Text(const char *fontPath, int ptsize,
 		   const char *textToRender, 
@@ -11,14 +12,15 @@ Text::Text(const char *fontPath, int ptsize,
 	: sdlFont(fontPath, ptsize),
 	  sdlTexture(textToRender, color, window.getRenderer(), sdlFont),
 	  sdlRenderer(window.getRenderer()),
-	  posX(-1),posY(-1),width(-1),height(-1) { }
+	  posX(-1),posY(-1),width(-1),height(-1),asd(textToRender) { }
 
 Text::Text(Text &&other) 
 	: sdlFont(std::move(other.sdlFont)),
 	  sdlTexture(std::move(other.sdlTexture)),
 	  sdlRenderer(other.sdlRenderer) { }
 
-Text::~Text() { }
+Text::~Text() {
+}
 
 void Text::render(const Area &dest){
 	posX = dest.getX();
@@ -37,4 +39,12 @@ bool Text::mouseInText(int x , int y){
 		return true;
 
 	return false;
+}
+
+void Text::changeColor(int r, int g, int b){
+	sdlTexture.changeColor(r,g,b);
+}
+
+const char* Text::getTextToRender(){
+	return asd;
 }

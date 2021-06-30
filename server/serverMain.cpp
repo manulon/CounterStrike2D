@@ -11,19 +11,18 @@ int main(int argc, const char *argv[]) {
     try {
     	World world;
         Border border(world, 0.0f, 0.0f, 100.0f, 100.0f);
-        FireArm fireArm(world, 4.0f, 8.0f, 0.2f, 0.2f, 10);
-
+        Player player(world, 2.0f, 8.0f, 2.0f, 2.0f);
         for (int32 i = 0; i < 120; ++i) {
-            fireArm.shoot(15);
+            player.shoot(180);
             std::cout << "-----Disparo-----" << std::endl;
+            std::cout << world;
         	world.step();
             if(i == 90) {
                 size_t amm = 1;
-                fireArm.reload(amm);
+                player.reload(amm);
                 std::cout << "-----Reloaded-----" << std::endl;
                 std::cout << amm << std::endl;
             }
-            std::cout << world;
         }
 
     } catch (std::exception &e) {

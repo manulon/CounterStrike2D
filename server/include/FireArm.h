@@ -14,12 +14,16 @@ class FireArm : public Entity {
 		Loader loader;
 		float width;
 		float height;
+		//float x, y;
+		//float xOrigin, yOrigin;
+
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2PolygonShape &polygonShape,
-                      		float width, float height);
+                      		float width, float height,
+                            float x, float y);
 		void setFixtureParams(const b2PolygonShape &polygonShape, 
 							  b2FixtureDef &fixtureDef);
-		void setBulletPosition(std::unique_ptr<Bullet> &bullet);
+		void setBulletPosition(std::unique_ptr<Bullet> &bullet, float angle);
 
 		FireArm(const FireArm &other) = delete;
 		FireArm& operator=(const FireArm &other) = delete;
@@ -27,12 +31,11 @@ class FireArm : public Entity {
 
 	public:
 		FireArm(World &world, 
-				float x, float y,
 				float width, float height,
                 size_t maxAmmunition);
 		FireArm(FireArm &&other);
 		~FireArm();
-		void shoot(float angle);
+		void shoot(float angle, float x, float y);
 		void reload(size_t &ammunition);
 		virtual void collideWith(Entity &entity) override;
 		virtual void collideWithBullet(Bullet &bullet) override;
@@ -40,6 +43,10 @@ class FireArm : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+
+		void attachToWorld(float x, float y);
+		//void attachToPlayer(Player &player,float xOrigin, 
+        //sfloat yOrigin, float x, float y);
 };
 
 #endif // _FIRE_ARM_H_

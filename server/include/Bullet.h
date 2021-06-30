@@ -28,7 +28,7 @@ class Bullet : public Entity {
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
 		void attachToWorld(float x, float y);
-		void shoot(float angle);
+		void shoot(float angle, float x, float y);
 		float getRadius();
 		//friend std::ostream& operator<<(std::ostream &os, const Bullet &obj);
 };

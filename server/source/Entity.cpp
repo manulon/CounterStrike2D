@@ -94,3 +94,7 @@ std::ostream& operator<<(std::ostream &os, const Entity &entity) {
 bool Entity::isDetached() {
     return detached;
 }
+
+void Entity::setTransform(float x, float y, float angle) {
+    body->SetTransform(b2Vec2(x, y), angle * b2_pi/180);
+}

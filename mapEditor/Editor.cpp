@@ -3,10 +3,10 @@
 #include <unistd.h>
 #include <utility>
 
-Editor::Editor(Window& window): 
+Editor::Editor(Window& window,const char* path): 
 window(window),grid("assets/gfx/emptySpace.png", window),
-image("assets/gfx/tiles/default_dust.png", window),               //el path de la imagen tiene que
-eventHandler(window,image){}                               //estar en yaml
+image(path, window),               
+eventHandler(window,image){}                                     
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
@@ -38,5 +38,11 @@ void Editor::fillTileOptionList(){
 }
 
 Editor::~Editor(){
-    //borrar los tiles de optionTIles
+    for(auto& tile : optionTiles){
+        delete tile;
+    }
+
+    for(auto& tile : tiles){
+        delete tile;
+    }
 }

@@ -3,7 +3,10 @@
 
 #include "SDL2/SDL.h"
 #include "Text.h"
+#include "MenuOption.h"
 #include <vector>
+#include <string>
+
 
 class MenuEditorEventHandler{
     private:
@@ -13,16 +16,18 @@ class MenuEditorEventHandler{
 
         int mousePositionX;
         int mousePositionY;
+        std::string path;
 
-        void mouseMotionHandler(SDL_Event& event,std::vector<Text>& options);
-        void mouseMotionDown(SDL_Event& event);
-        void mouseMotionUp(SDL_Event& event);
+        bool mouseMotionHandler(SDL_Event& event,std::vector<MenuOption*>& options);
+        bool mouseMotionDown(SDL_Event& event,std::vector<MenuOption*>& options);
+        bool mouseMotionUp(SDL_Event& event);
 
     public:
         MenuEditorEventHandler();
         ~MenuEditorEventHandler();
 
-        bool handleEvents(std::vector<Text>& options);
+        bool handleEvents(std::vector<MenuOption*>& options);
+        std::string& getPath();
 };
 
 #endif

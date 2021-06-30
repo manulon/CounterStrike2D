@@ -4,17 +4,19 @@
 #include "Text.h"
 #include "Window.h"
 #include "Area.h"
-#include "SdlColor.h"
 #include "MenuEditorEventHandler.h"
+#include "MenuOption.h"
+#include "MenuOptionSelectMode.h"
+#include "MenuOptionExitMode.h"
 
 class EditorMenu{
     private:
-        SdlColor textColor;
         Window window;
-        Text textSelectMode;
-        Text textExit;
+        MenuOptionSelectMode textSelectMode;
+        MenuOptionExitMode textExit;
         MenuEditorEventHandler handler;
-        std::vector<Text> options;
+        std::vector<MenuOption*> options;
+        bool startEditor;
 
     EditorMenu(const EditorMenu &other) = delete;
     EditorMenu& operator=(const EditorMenu &other) = delete;
@@ -28,6 +30,8 @@ class EditorMenu{
         void close();
         void clear();
         bool handleEvents();
+        bool runEditor();
+        const char* getPath();
 
 };
 

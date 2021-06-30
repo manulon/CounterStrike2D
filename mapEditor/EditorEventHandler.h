@@ -22,6 +22,9 @@ class EditorEventHandler {
       int windowWidth;
       int windowHeight;
       int tileNumber;
+      int actualType;
+      int selectedZoneX;
+      int selectedZoneY;
       SDL_Rect tileClips[ 75 ];
       const Image& image;
 
@@ -32,6 +35,8 @@ class EditorEventHandler {
       void mouseMotionUp(SDL_Event& event, std::vector<Tile*>& tiles);
       void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles);
       void buildTileClips();
+      bool mouseInGrid(int mousePositionX,int mousePositionY);
+      void checkPosition(Tile* tile);
 
    public:
       EditorEventHandler(Window &window,const Image& image);

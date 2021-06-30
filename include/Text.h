@@ -3,8 +3,9 @@
 
 #include "SdlFont.h"
 #include "SdlTexture.h"
+#include "Window.h"
+
 class SdlRenderer;
-class Window;
 class Area;
 
 class Text {
@@ -16,6 +17,7 @@ class Text {
 		int posY;
 		int width;
 		int height;
+		const char* asd;
 		
 		
 		Text(const Text &other) = delete;
@@ -31,6 +33,8 @@ class Text {
 		~Text();
 		void render(const Area &dest);
 		bool mouseInText(int x, int y);
+		void changeColor(int r, int g, int b);
+		const char* getTextToRender();
 };
 
 #endif // _TEXT_H_

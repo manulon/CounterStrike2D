@@ -22,7 +22,7 @@ class Editor{
         EditorEventHandler eventHandler;
 
    public:
-        Editor(Window& window);
+        Editor(Window& window, const char* path);
         ~Editor();
 
         void showGrid();
