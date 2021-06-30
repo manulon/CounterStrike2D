@@ -12,7 +12,7 @@
 
 Soldier::Soldier(const Image &image) : 
     Animation(image, 3, 2, 32, 32, true), direction(RIGHT), moving(false),
-    x(100), y(100), width(50), height(50), angle(90) { }
+    x(100), y(100), width(32), height(32), angle(90) { }
 
 Soldier::Soldier(Soldier &&other) : 
     Animation(std::move(other)), direction(other.direction),
@@ -66,7 +66,8 @@ void Soldier::update(float dt) {
 }
 
 void Soldier::render() {
-    Area dest((800/2)-(50/2), (600/2)-(50/2), height, width);
+    // Area dest((800/2)-(32/2), (600/2)-(32/2), height, width);
+    Area dest((800/2)-(32/2), (600/2)-(32/2), height, width);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
 }
 

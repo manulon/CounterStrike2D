@@ -1,6 +1,6 @@
 #include "Border.h"
 #define DENSITY 1.0f
-#define DELTA 1.0f
+#define DELTA 0.1f
 
 Border::Border(World &world,
                float x, float y,
@@ -14,13 +14,17 @@ Border::Border(World &world,
     Entity::attachToWorld(borderDef, fixtureDef);
     side.SetAsBox(DELTA, height, b2Vec2(x + width/2, y), 0);
     Entity::bindFixture(fixtureDef);
-    side.SetAsBox(width, DELTA, b2Vec2(x, y + height/2), 0);
+    side.SetAsBox(width, DELTA, b2Vec2(x, y + height/2 ), 0);
     Entity::bindFixture(fixtureDef);
-    side.SetAsBox(DELTA, height, b2Vec2(x - width/2, y), 0);
+    side.SetAsBox(DELTA, height, b2Vec2(x - width/2-0.1f, y), 0);
     Entity::bindFixture(fixtureDef);
 }
 
+Border::Border(Border &&other) : Entity(std::move(other)) { }
+
 Border::~Border() { }
+
+
 
 void Border::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
     bodyDef.userData = static_cast<void*>(this);

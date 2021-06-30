@@ -36,8 +36,8 @@ bool TileMap::setTiles(){
     YAML::Node map = YAML::LoadFile(mapName);
     YAML::Node fields = map["fields"];
     for (unsigned int i = 0; i < fields.size(); i++){
-        tiles.push_back(new Tile(fields[i][2].as<int>(), fields[i][0].as<int>(),
-                                 fields[i][1].as<int>(),image));
+        tiles.push_back(new Tile(fields[i][2].as<int>(), fields[i][0].as<int>()*32,
+                                 fields[i][1].as<int>()*32,image));
     }
 
     int x_aux(0);
@@ -59,7 +59,7 @@ bool TileMap::setTiles(){
     YAML::Node obsyaml = map["obstacles"];
     for (unsigned int i=0; i< obsyaml.size(); i++){
         obstacles.push_back(new Tile(obsyaml[i][2].as<int>(),
-         obsyaml[i][0].as<int>(), obsyaml[i][1].as<int>(),imgObstacles));
+         obsyaml[i][0].as<int>()*32, obsyaml[i][1].as<int>()*32,imgObstacles));
     }
     x_aux = 0;
     y_aux = 0;
@@ -81,7 +81,6 @@ bool TileMap::setTiles(){
 }
 
 void TileMap::render(int x, int y, const Area &dst){
-
     for (auto& tile: tiles){
         int xOffset(tile->getX());
         int yOffset(tile->getY());

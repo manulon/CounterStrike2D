@@ -92,17 +92,17 @@ void EditorEventHandler::mouseMotionUp
          int auxY( mousePositionY%32 ); // TAMBIEN CONSTANTE, EL TILE HEIGHT
          
          if ( auxX > 16 && auxY < 16 ){
-            auxX = 32*((int)( (mousePositionX/32)+1 ));
-            auxY = 32*((int)( (mousePositionY/32) ));
+            auxX = ((int)( (mousePositionX/32)+1 ));
+            auxY = ((int)( (mousePositionY/32) ));
          }else if ( auxX > 16 && auxY > 16 ){
-            auxX = 32*((int)( (mousePositionX/32)+1 ));
-            auxY = 32*((int)(mousePositionY/32)+1);
+            auxX = ((int)( (mousePositionX/32)+1 ));
+            auxY = ((int)(mousePositionY/32)+1);
          }else if ( auxX < 16 && auxY > 16 ){
-            auxX = 32*((int)(mousePositionX/32));
-            auxY = 32*((int)((mousePositionY/32)+1));
+            auxX = ((int)(mousePositionX/32));
+            auxY = ((int)((mousePositionY/32)+1));
          }else{
-            auxX = 32*((int)(mousePositionX/32));
-            auxY = 32*((int)(mousePositionY/32));
+            auxX = ((int)(mousePositionX/32));
+            auxY = ((int)(mousePositionY/32));
          }
 
          if ( auxX >= windowWidth - 32 )
