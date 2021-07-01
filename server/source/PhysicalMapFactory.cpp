@@ -1,4 +1,5 @@
 #include "PhysicalMapFactory.h"
+#include "FireArm.h"
 
 PhysicalMapFactory::PhysicalMapFactory(World &w,std::string mapName) : world(w),map(YAML::LoadFile(mapName)), border(createBorders()) {
     YAML::Node obstaclesyaml = map["obstacles"];
@@ -8,10 +9,9 @@ PhysicalMapFactory::PhysicalMapFactory(World &w,std::string mapName) : world(w),
         std::unique_ptr<Obstacle> ptr(new Obstacle(world,
                                      obstacle[0].as<int>()-(width/2),obstacle[1].as<int>()-(height/2)
                                      ,0.45f,0.45f));
-
-        std::cout <<"esta en x = "<<obstacle[0].as<int>()-(width/2)<<"y: "<<obstacle[1].as<int>()-9<<std::endl;
         obstacles.push_back(std::move(ptr));
     }
+    
 }
 Border* PhysicalMapFactory::createBorders(){
     YAML::Node obstacles = map["obstacles"];

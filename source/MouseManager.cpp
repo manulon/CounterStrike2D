@@ -1,6 +1,9 @@
 #include "MouseManager.h"
 #include <iostream>
 
+
+MouseManager::MouseManager(int windowWidth, int windowHeight) : 
+                        windowWidth(windowWidth), windowHeight(windowHeight){}
 int MouseManager::getPositionX(){
     return x;
 }
@@ -9,17 +12,21 @@ int MouseManager::getPositionY(){
     return y;
 }
 
-int MouseManager::getAngle(){
+void MouseManager::update(){
     SDL_GetMouseState(&x, &y);
-    x = x-400;
-    y = 300-y;
-    if (y != 0){
-        float aux = (float)x/(float)y;
+}
+
+int MouseManager::getAngle(){
+    // SDL_GetMouseState(&x, &y);
+    int xAux = x-(windowWidth/2);
+    int yAux = (windowHeight/2)-y;
+    if (yAux != 0){
+        float aux = (float)xAux/(float)yAux;
         int angle = (atan(aux)* 180 / PI);
-        if (y < 0) return 180+angle;
+        if (yAux < 0) return 180 + angle;
         return angle;
     } else {
-        if (x > 0) return 90;
+        if (xAux > 0) return 90;
         else return -90;
     }
     

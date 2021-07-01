@@ -12,7 +12,6 @@ class Soldier : public Animation {
         int width;
         int height;
         int angle;
-
         Soldier(const Soldier &other) = delete;
         Soldier& operator=(const Soldier &other) = delete;
         Soldier& operator=(Soldier &&other) = delete;

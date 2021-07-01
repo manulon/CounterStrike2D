@@ -33,35 +33,6 @@ Soldier::~Soldier() { }
 void Soldier::update(float dt) {
     if (moving) {
         Animation::update(dt);
-        if (direction == LEFT) {
-            angle = -90;
-            x -= 3;
-        }else if (direction == RIGHT) {
-            angle = 90;
-            x += 3;
-        }else if (direction == UP) {
-            angle = 0;
-            y -= 3;
-        }else if (direction == DOWN) {
-            angle = -180;
-            y += 3;
-        }else if (direction == DOWN_LEFT){
-            angle = -135;
-            y += 3;
-            x -= 3;
-        }else if (direction == DOWN_RIGHT){
-            angle = 135;
-            y += 3;
-            x += 3;
-        }else if (direction == UP_RIGHT){
-            angle = 45;
-            y -= 3;
-            x += 3;
-        }else if (direction == UP_LEFT){
-            angle = -45;
-            y -= 3;
-            x -= 3;
-        }
     }
 }
 

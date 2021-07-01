@@ -8,10 +8,13 @@ class MouseManager {
     private:
         int x;
         int y;
+        int windowWidth, windowHeight;
     public:
+        MouseManager(int windowWidth, int windowHeight);
         int getPositionX();
         int getPositionY();
         int getAngle();
+        void update();
 };
 
 #endif

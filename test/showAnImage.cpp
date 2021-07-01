@@ -18,6 +18,8 @@
 #include "Obstacle.h"
 #include "MouseManager.h"
 #include "PhysicalMapFactory.h"
+#include "FireArm.h"
+#include "Pointer.h"
 #define PPM 32
 
 static bool handleEvents(Soldier &soldier,Camera& camera, Player &player) {
@@ -81,6 +83,7 @@ static bool handleEvents(Soldier &soldier,Camera& camera, Player &player) {
 
 static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) {
     soldier.update(dt);
+    mm.update();
     soldier.setAngle(mm.getAngle());
     player.update();
 }
@@ -99,7 +102,8 @@ int main(int argc, const char *argv[]){
         Image obsimg("assets/gfx/tiles/dust.bmp", window);
         TileMap mapTest("assets/maps/mapTest.yaml", de_dust, obsimg);
         PhysicalMapFactory g(world,"assets/maps/mapTest.yaml");
-
+        Image pointImg("assets/gfx/pointer.bmp",window);
+        Pointer pointer(pointImg);
         Camera camera(mapTest);
         // Obstacle obs(world,1,1,0.5f,0.5f);
         Image soldier_img1("assets/gfx/player/t1.bmp", window);
@@ -107,6 +111,8 @@ int main(int argc, const char *argv[]){
         Soldier soldier_renderer(soldier_img2);
         Soldier soldier_renderer2(soldier_img1);
         Music music("assets/sfx/menu.wav");
+        FireArm fa(world, 0.3f,0.3f,10);
+        fa.attachToWorld(0,3);
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
         SDL_Color textColor {0,0,0};
@@ -116,7 +122,7 @@ int main(int argc, const char *argv[]){
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
         Area textArea((800/2)-(200/2), (600/2)-(100/2), 200, 100);       
         Area cameraArea(0, 0, 800, 600);
-        MouseManager mm;
+        MouseManager mm(800,600);
         bool running = true;
         int i = 0;
         while (running) {
@@ -129,11 +135,13 @@ int main(int argc, const char *argv[]){
             stencil.render(stencilArea, mm.getAngle());
             // text.render(textArea);
             soldier_renderer.render();
+            pointer.render(mm.getPositionX(),mm.getPositionY());
             window.render();
             usleep(FRAME_RATE);  
             if (i%15 == 0){
                 std::cout<<"player x: "<<player.getPositionX()<<" y: "<<player.getPositionY()<<std::endl;
-                // std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
+                std::cout <<"firearm: "<<fa.getPositionX()<<" y: "<<fa.getPositionY()<<std::endl;
+                std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
             }
             i++;  
         }

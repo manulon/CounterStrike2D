@@ -12,6 +12,8 @@ add_library(source
 			Animation.cpp
 			Tile.cpp
 			TileMap.cpp
+			Weapon.cpp
+			Pointer.cpp
        	    Exception/Exception.cpp 
 	    	Exception/SdlException.cpp
 	    	Exception/SdlFontException.cpp
