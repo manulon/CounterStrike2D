@@ -136,31 +136,11 @@ bool EditorEventHandler::mouseInGrid(int mousePositionX,int mousePositionY){
 
 void EditorEventHandler::checkPosition(Tile* tile){
    if (tile->tileOutOfPosition()){
-         int auxX( mousePositionX%32 ); // TAMBIEN CONSTANTE, EL TILE WIDTH
-         int auxY( mousePositionY%32 ); // TAMBIEN CONSTANTE, EL TILE HEIGHT
-         
-         if ( auxX > 16 && auxY < 16 ){
-            auxX = ((int)( (mousePositionX/32)+1 ));
-            auxY = ((int)( (mousePositionY/32) ));
-         }else if ( auxX > 16 && auxY > 16 ){
-            auxX = ((int)( (mousePositionX/32)+1 ));
-            auxY = ((int)(mousePositionY/32)+1);
-         }else if ( auxX < 16 && auxY > 16 ){
-            auxX = ((int)(mousePositionX/32));
-            auxY = ((int)((mousePositionY/32)+1));
-         }else{
-            auxX = ((int)(mousePositionX/32));
-            auxY = ((int)(mousePositionY/32));
-         }
+         int auxX(mousePositionX/32);
+         int auxY(mousePositionY/32);
 
-         if ( auxX >= windowWidth - 32 )
-            auxX = windowWidth-32;            // 32 CONSTANTE
-                    
-         if ( auxY >= windowHeight-128 )
-            auxY = windowHeight-128-24;       // 24 Y 128 CONSTANTE    
-
-         tile->setX(auxX);
-         tile->setY(auxY);
+         tile->setX(auxX*32);
+         tile->setY(auxY*32);
       }
 }
 
