@@ -12,7 +12,8 @@ void ButtonBox::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonBox::clicked(){
+bool ButtonBox::clicked(std::vector<Button*> buttons){
     std::cout<<"Clickee cajas"<< std::endl;
+    
     return false;
 }

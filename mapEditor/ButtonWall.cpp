@@ -12,7 +12,7 @@ void ButtonWall::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonWall::clicked(){
+bool ButtonWall::clicked(std::vector<Button*> buttons){
     std::cout<<"Clickee paredes"<< std::endl;
     return false;
 }

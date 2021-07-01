@@ -12,7 +12,7 @@ void ButtonFloor::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonFloor::clicked(){
+bool ButtonFloor::clicked(std::vector<Button*> buttons){
     std::cout<<"Clickee pisos"<< std::endl;
     return false;
 }

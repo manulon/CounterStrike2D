@@ -12,7 +12,7 @@ void ButtonMisc::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonMisc::clicked(){
+bool ButtonMisc::clicked(std::vector<Button*> buttons){
     std::cout<<"Clickee misc"<< std::endl;
     return false;
 }
