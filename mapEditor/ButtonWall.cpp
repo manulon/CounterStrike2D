@@ -12,7 +12,23 @@ void ButtonWall::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonWall::clicked(std::vector<Button*> buttons){
-    std::cout<<"Clickee paredes"<< std::endl;
+bool ButtonWall::clicked(std::vector<Tile*>& options,const Image& image){
+    for (auto& option: options){
+        delete option;
+        options.pop_back();
+    }
+    
+    options.push_back(new Tile(7,0,500,image));
+    options.push_back(new Tile(11,0,548,image));
+    options.push_back(new Tile(8,48,500,image));
+    options.push_back(new Tile(12,48,548,image));
+    options.push_back(new Tile(9,98,500,image));   
+    options.push_back(new Tile(13,98,548,image));
+    options.push_back(new Tile(14,146,500,image));
+    options.push_back(new Tile(16,146,548,image));
+    options.push_back(new Tile(17,194,548,image));
+    options.push_back(new Tile(18,194,500,image));
+    options.push_back(new Tile(19,242,500,image));
+        
     return false;
 }

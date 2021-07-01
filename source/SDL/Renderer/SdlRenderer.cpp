@@ -4,6 +4,8 @@
 
 #define INDEX_FLAGS -1
 
+SdlRenderer::SdlRenderer(){}
+
 SdlRenderer::SdlRenderer(SdlWindow &window) 
     : SdlRenderer(window, INDEX_FLAGS, SDL_RENDERER_ACCELERATED) { }
 

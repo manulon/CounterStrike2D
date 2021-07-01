@@ -12,7 +12,20 @@ void ButtonFloor::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonFloor::clicked(std::vector<Button*> buttons){
-    std::cout<<"Clickee pisos"<< std::endl;
+bool ButtonFloor::clicked
+(std::vector<Tile*>& options, const Image& image){
+    for (auto& option: options){
+        delete option;
+        options.pop_back();
+    }
+
+    options.push_back(new Tile(2,0,500,image));
+    options.push_back(new Tile(3,48,500,image));
+    options.push_back(new Tile(4,98,500,image));
+    options.push_back(new Tile(38,148,500,image));
+    options.push_back(new Tile(39,0,548,image));
+    options.push_back(new Tile(43,48,548,image));
+    options.push_back(new Tile(44,98,548,image));
+
     return false;
 }

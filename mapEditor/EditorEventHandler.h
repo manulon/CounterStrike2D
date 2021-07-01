@@ -28,6 +28,7 @@ class EditorEventHandler {
       int selectedZoneY;
       SDL_Rect tileClips[ 75 ];
       const Image& image;
+      Window& window;
 
       bool mouseInTile(int x, int y,Tile* tile);
       void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles);

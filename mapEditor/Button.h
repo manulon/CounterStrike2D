@@ -3,6 +3,7 @@
 
 #include "SdlColor.h"
 #include "Text.h"
+#include "Tile.h"
 #include <vector>
 
 class Button{
@@ -23,7 +24,7 @@ class Button{
 
         bool mouseInText(int x, int y);
         virtual void render() = 0;
-        virtual bool clicked(std::vector<Button*> buttons) = 0;
+        virtual bool clicked(std::vector<Tile*>& options,const Image& image) = 0;
 
 };
 

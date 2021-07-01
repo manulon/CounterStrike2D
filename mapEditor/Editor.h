@@ -22,8 +22,8 @@ class Editor{
     
         Window& window;
         const Image grid;
-        const Image selectedTile;
         const Image image;
+        const Image selectedTile;
         std::vector<Tile*> tiles;
         std::vector<Tile*> optionTiles;
         std::vector<Button*> tileOptionButton;

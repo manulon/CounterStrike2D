@@ -5,7 +5,8 @@
 EditorEventHandler::EditorEventHandler(Window& window,const Image& image): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
-actualType(-1),selectedZoneX(384),selectedZoneY(500),image(image){}
+actualType(-1),selectedZoneX(384),selectedZoneY(500),
+image(image),window(window){}
 
 bool EditorEventHandler::handleEvents
 (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
@@ -61,7 +62,7 @@ std::vector<Button*>& buttons){
       leftMouseButtonDown = true;
       for (auto& button: buttons){
          if (button->mouseInText(mousePositionX,mousePositionY))
-            button->clicked(buttons);
+            button->clicked(optionTiles,image);
       }
       for (auto& tile : optionTiles){
          if (mouseInTile(mousePositionX,mousePositionY,tile)){

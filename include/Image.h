@@ -10,16 +10,19 @@ class Image {
     private:
         SdlTexture sdlTexture;
         SdlRenderer &sdlRenderer;
+        const char* path;
 
         Image(const Image &other) = delete;
         Image& operator=(const Image &other) = delete;
-        Image& operator=(Image &&other) = delete;
+        //Image& operator=(Image &&other) = delete;
     
     public:
+        Image();
         Image(const char *pathImg);
         Image(const char *pathImg, Window &window);
 
         Image(Image &&other);
+        Image& operator=(Image &&other);
         ~Image();
         void render(int x, int y,const Area &dest) const;
         void render(const Area &dest) const;
@@ -28,6 +31,7 @@ class Image {
         const SdlTexture* getTexture() const;
         int getWidth() const;
         int getHeight() const;
+        const char* getPath() const;
 };
 
 #endif // _IMAGE_H_

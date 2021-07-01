@@ -12,7 +12,7 @@ void ButtonWeaponCharacter::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonWeaponCharacter::clicked(std::vector<Button*> buttons){
+bool ButtonWeaponCharacter::clicked(std::vector<Tile*>& buttons,const Image& image){
     std::cout<<"Clickee duo"<< std::endl;
     return false;
 }
