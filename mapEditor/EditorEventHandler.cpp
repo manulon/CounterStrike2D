@@ -61,7 +61,7 @@ std::vector<Button*>& buttons){
       leftMouseButtonDown = true;
       for (auto& button: buttons){
          if (button->mouseInText(mousePositionX,mousePositionY))
-            button->clicked();
+            button->clicked(buttons);
       }
       for (auto& tile : optionTiles){
          if (mouseInTile(mousePositionX,mousePositionY,tile)){
