@@ -25,5 +25,5 @@ void MenuOptionSelectMode::render(){
 }
 
 const char* MenuOptionSelectMode:: getPathToImage(){
-    return nullptr;
+    return "nothing";
 }

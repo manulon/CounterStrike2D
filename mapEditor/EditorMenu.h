@@ -9,6 +9,8 @@
 #include "MenuOptionSelectMode.h"
 #include "MenuOptionExitMode.h"
 
+#define NULL_PATH "no path"
+
 class EditorMenu{
     private:
         Window window;
@@ -31,7 +33,7 @@ class EditorMenu{
         void clear();
         bool handleEvents();
         bool runEditor();
-        const char* getPath();
+        std::string getPath();
 
 };
 

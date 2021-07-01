@@ -112,5 +112,4 @@ int SdlTexture::getHeight() const {
 
 void SdlTexture::changeColor(int r, int g, int b){
     SDL_SetTextureColorMod(texture,r,g,b);
-    std::cout<<"Estoy cambiandole el color"<< std::endl;
 }

@@ -18,7 +18,7 @@ int main(int argc, const char *argv[]){
 	}
     menu.close(); 
     
-    std::cout<<"Path es: "<<menu.getPath()<<"#"<<std::endl;
+    
 
     if (menu.runEditor()){
         Window window("Counter Strike 2D", 800, 600, 
@@ -32,7 +32,7 @@ int main(int argc, const char *argv[]){
         Text textcito("assets/gfx/fonts/liberationsans.ttf", 40,"DFA",colorcito.getColor(),window);
         /*---------------------------------------*/
 
-        Editor editor(window,menu.getPath());
+        Editor editor(window,menu.getPath().c_str());
         editor.fillTileOptionList();
     
         bool runningEditor(true);

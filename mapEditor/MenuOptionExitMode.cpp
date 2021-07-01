@@ -19,5 +19,5 @@ void MenuOptionExitMode::render(){
 }
 
 const char* MenuOptionExitMode:: getPathToImage(){
-    return nullptr;
+    return "no path";
 }

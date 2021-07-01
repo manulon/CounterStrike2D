@@ -17,6 +17,5 @@ void MapOptionDust::render(){
 }
 
 bool MapOptionDust::clicked(std::vector<MenuOption*>& options){
-    std::cout<<"click dust"<< std::endl;
     return false;
 }

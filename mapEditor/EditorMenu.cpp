@@ -1,5 +1,6 @@
 #include "EditorMenu.h"
 #include <iostream>
+#include <string>
 
 EditorMenu::EditorMenu():
 window("Menu Editor", 500, 200, SDL_WINDOW_RESIZABLE, 
@@ -30,15 +31,16 @@ void EditorMenu::clear(){
 }
 
 bool EditorMenu::handleEvents(){
-    bool keepRunning(true);
+    bool keepRunning(false);
     keepRunning = handler.handleEvents(options);
-    if (getPath() != nullptr)
-        startEditor=true;
+    if (getPath() == NULL_PATH){
+        startEditor=false;
+    }
     return keepRunning;
 }
 
-const char* EditorMenu::getPath(){
-    return handler.getPath().c_str();
+std::string EditorMenu::getPath(){
+    return handler.getPath();
 }
 
 bool EditorMenu:: runEditor(){

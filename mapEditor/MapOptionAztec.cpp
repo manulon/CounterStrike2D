@@ -19,6 +19,5 @@ void MapOptionAztec::render(){
 }
 
 bool MapOptionAztec::clicked(std::vector<MenuOption*>& options){
-    std::cout<<"click aztec"<< std::endl;
     return false;
 }
