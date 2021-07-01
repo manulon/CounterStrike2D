@@ -10,4 +10,11 @@ add_library(mapEditor
             MapOptionInferno.cpp
             MapOptionDust.cpp
             MapOptionAztec.cpp
+            Button.cpp
+            ButtonBox.cpp
+            ButtonFloor.cpp
+            ButtonMisc.cpp
+            ButtonObstacles.cpp
+            ButtonWall.cpp
+            ButtonWeaponCharacter.cpp
             )       
