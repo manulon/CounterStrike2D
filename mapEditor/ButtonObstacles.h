@@ -16,7 +16,7 @@ class ButtonObstacles: public Button{
         ~ButtonObstacles();
 
         virtual void render();
-        virtual bool clicked();
+        virtual bool clicked(std::vector<Button*> buttons);
 };
 
 #endif

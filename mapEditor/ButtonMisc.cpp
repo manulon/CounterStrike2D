@@ -8,10 +8,11 @@ window(window){}
 ButtonMisc::~ButtonMisc(){}
 
 void ButtonMisc::render(){
-    Area renderArea(496,500,100,30);
+    Area renderArea(475,515,70,25);
     textBox.render(renderArea);
 }
 
 bool ButtonMisc::clicked(){
+    std::cout<<"Clickee misc"<< std::endl;
     return false;
 }

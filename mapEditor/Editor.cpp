@@ -22,10 +22,13 @@ void Editor:: showGrid(){
         }
     }
     selectedTile.render(selectedArea);
+    for (auto& button: tileOptionButton){
+        button->render();
+    }
 }
 
 bool Editor:: handleEvents(){
-    return eventHandler.handleEvents(tiles,optionTiles);
+    return eventHandler.handleEvents(tiles,optionTiles,tileOptionButton);
 }
 
 void Editor::fillTileOptionList(){
@@ -44,5 +47,9 @@ Editor::~Editor(){
 
     for(auto& tile : tiles){
         delete tile;
+    }
+
+    for(auto& button : tileOptionButton){
+        delete button;
     }
 }

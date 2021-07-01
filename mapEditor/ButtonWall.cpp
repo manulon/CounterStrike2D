@@ -8,10 +8,11 @@ window(window){}
 ButtonWall::~ButtonWall(){}
 
 void ButtonWall::render(){
-    Area renderArea(592,500,100,30);
+    Area renderArea(475,550,90,25);
     textBox.render(renderArea);
 }
 
 bool ButtonWall::clicked(){
+    std::cout<<"Clickee paredes"<< std::endl;
     return false;
 }

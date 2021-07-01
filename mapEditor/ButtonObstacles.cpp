@@ -8,10 +8,11 @@ window(window){}
 ButtonObstacles::~ButtonObstacles(){}
 
 void ButtonObstacles::render(){
-    Area renderArea(544,500,100,30);
+    Area renderArea(600,515,125,25);
     textBox.render(renderArea);
 }
 
 bool ButtonObstacles::clicked(){
+    std::cout<<"Clickee obstaculos"<< std::endl;
     return false;
 }

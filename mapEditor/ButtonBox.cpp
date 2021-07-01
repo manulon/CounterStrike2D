@@ -8,10 +8,11 @@ window(window){}
 ButtonBox::~ButtonBox(){}
 
 void ButtonBox::render(){
-    Area renderArea(400,500,100,30);
+    Area renderArea(475,485,70,25);
     textBox.render(renderArea);
 }
 
 bool ButtonBox::clicked(){
+    std::cout<<"Clickee cajas"<< std::endl;
     return false;
 }

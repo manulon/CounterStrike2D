@@ -16,7 +16,7 @@ class ButtonFloor: public Button{
         ~ButtonFloor();
 
         virtual void render();
-        virtual bool clicked();
+        virtual bool clicked(std::vector<Button*> buttons);
 };
 
 #endif

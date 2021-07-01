@@ -8,10 +8,11 @@ window(window){}
 ButtonWeaponCharacter::~ButtonWeaponCharacter(){}
 
 void ButtonWeaponCharacter::render(){
-    Area renderArea(642,625,100,30);
+    Area renderArea(600,550,140,25);
     textBox.render(renderArea);
 }
 
 bool ButtonWeaponCharacter::clicked(){
+    std::cout<<"Clickee duo"<< std::endl;
     return false;
 }

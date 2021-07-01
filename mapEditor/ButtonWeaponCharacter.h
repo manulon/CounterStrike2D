@@ -16,7 +16,7 @@ class ButtonWeaponCharacter: public Button{
         ~ButtonWeaponCharacter();
 
         virtual void render();
-        virtual bool clicked();
+        virtual bool clicked(std::vector<Button*> buttons);
 };
 
 #endif
