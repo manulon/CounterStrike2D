@@ -5,10 +5,12 @@
 EditorEventHandler::EditorEventHandler(Window& window,const Image& image): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
-actualType(-1),selectedZoneX(384),selectedZoneY(500),image(image){}
+actualType(-1),selectedZoneX(384),selectedZoneY(500),
+image(image),window(window){}
 
 bool EditorEventHandler::handleEvents
-(std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles){
+(std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
+std::vector<Button*>& buttons){
    SDL_Event event;
 
    buildTileClips();
@@ -20,7 +22,7 @@ bool EditorEventHandler::handleEvents
             break;
 
          case SDL_MOUSEBUTTONDOWN:
-            mouseMotionDown(event, tiles, optionTiles);
+            mouseMotionDown(event, tiles, optionTiles,buttons);
             break;
 
          case SDL_MOUSEBUTTONUP:
@@ -54,9 +56,14 @@ void EditorEventHandler::mouseMotionHandler
 }
 
 void EditorEventHandler::mouseMotionDown
-(SDL_Event& event,std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles){
+(SDL_Event& event,std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
+std::vector<Button*>& buttons){
    if (!leftMouseButtonDown && event.button.button == SDL_BUTTON_LEFT){ 
       leftMouseButtonDown = true;
+      for (auto& button: buttons){
+         if (button->mouseInText(mousePositionX,mousePositionY))
+            button->clicked(optionTiles,image);
+      }
       for (auto& tile : optionTiles){
          if (mouseInTile(mousePositionX,mousePositionY,tile)){
             actualType = tile->getType();

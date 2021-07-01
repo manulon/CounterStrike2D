@@ -25,6 +25,9 @@ add_subdirectory(mapEditor)
 add_executable(dragAndDrop test/pruebaDragAndDrop.cpp)
 target_link_libraries(dragAndDrop source mapEditor SDL2_ttf SDL2 SDL2_image yaml-cpp)
 
+add_executable(teswt test/teswt.cpp)
+target_link_libraries(teswt source mapEditor SDL2_ttf SDL2 SDL2_image yaml-cpp)
+
 add_executable(showAnImage test/showAnImage.cpp)
 target_link_libraries(showAnImage source server SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 

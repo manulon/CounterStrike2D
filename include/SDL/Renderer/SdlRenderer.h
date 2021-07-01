@@ -14,6 +14,7 @@ class SdlRenderer {
         void destroyRenderer();
     
     public:
+        SdlRenderer();
         SdlRenderer(SdlWindow &window);
         SdlRenderer(SdlWindow &window, uint32_t flags);
         SdlRenderer(SdlWindow &window, int index, uint32_t flags);

@@ -5,12 +5,12 @@
 
 Editor::Editor(Window& window,const char* path): 
 window(window),grid("assets/gfx/emptySpace.png", window),
-selectedTile("assets/gfx/option2.png",window),image(path, window),               
+image(path,window),selectedTile("assets/gfx/option2.png",window),               
 eventHandler(window,image){}                                     
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
-    Area selectedArea(380,497,40,40);
+    Area selectedArea(384,497,40,40);
     while ( gridArea.getY() < (window.getHeight() - 128) ){ /* CONSTANTE EL 128 */
         grid.render(gridArea);
     
@@ -22,20 +22,22 @@ void Editor:: showGrid(){
         }
     }
     selectedTile.render(selectedArea);
+    for (auto& button: tileOptionButton){
+        button->render();
+    }
 }
 
 bool Editor:: handleEvents(){
-    return eventHandler.handleEvents(tiles,optionTiles);
+    return eventHandler.handleEvents(tiles,optionTiles,tileOptionButton);
 }
 
 void Editor::fillTileOptionList(){
-    //for( int i=0; i<75 ; i++){      /* aca deberia ir LOS TOTAL SPRITES */
-    optionTiles.push_back(new Tile(49,0,500,image));
-    optionTiles.push_back(new Tile(5,48,500,image));
-    optionTiles.push_back(new Tile(4,96,500,image));
-    optionTiles.push_back(new Tile(23,144,500,image));  
-    
-    //}
+    tileOptionButton.push_back(new ButtonBox(window));
+    tileOptionButton.push_back(new ButtonFloor(window));
+    tileOptionButton.push_back(new ButtonMisc(window));
+    tileOptionButton.push_back(new ButtonObstacles(window));
+    tileOptionButton.push_back(new ButtonWall(window));
+    tileOptionButton.push_back(new ButtonWeaponCharacter(window));
 }
 
 Editor::~Editor(){
@@ -45,5 +47,9 @@ Editor::~Editor(){
 
     for(auto& tile : tiles){
         delete tile;
+    }
+
+    for(auto& button : tileOptionButton){
+        delete button;
     }
 }

@@ -9,12 +9,20 @@
 
 Image::Image(const char *pathImg, Window &window) 
 	: sdlTexture(pathImg, window.getRenderer()), 
-	  sdlRenderer(window.getRenderer()) { }
+	  sdlRenderer(window.getRenderer()),path(pathImg) { }
 
 Image::Image(Image &&other) 
     : sdlTexture(std::move(other.sdlTexture)), sdlRenderer(other.sdlRenderer) { }
 
 Image::~Image() { }
+
+
+Image& Image::operator=(Image &&other) {
+    if (this == &other) return *this;
+    sdlTexture = std::move(other.sdlTexture);
+    sdlRenderer = std::move(other.sdlRenderer);
+    return *this;
+}
 
 void Image::render(const Area &dest) const {
 	SDL_Rect destrect = {dest.getX(), dest.getY(), 
@@ -53,4 +61,8 @@ int Image::getWidth() const{
 
 int Image::getHeight() const{
     return sdlTexture.getHeight();
+}
+
+const char* Image::getPath() const{
+    return path;
 }

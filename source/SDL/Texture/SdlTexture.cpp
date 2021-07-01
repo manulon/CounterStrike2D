@@ -3,6 +3,8 @@
 #include "SdlException.h"
 #include <iostream>
 
+SdlTexture::SdlTexture(){}
+
 SdlTexture::SdlTexture(const char *imgPath, const SdlRenderer &renderer) {
     SdlSurface surface(imgPath);
     texture = SDL_CreateTextureFromSurface(renderer.getRenderer(), surface.getSurface());

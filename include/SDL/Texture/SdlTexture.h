@@ -22,6 +22,7 @@ class SdlTexture {
         void setTextureAlphaMod(uint8_t alpha);
 
     public:
+        SdlTexture();
         SdlTexture(const char *imgPath, const SdlRenderer &renderer);
         SdlTexture(const char *text, SDL_Color textColor, 
                    const SdlRenderer &renderer,
