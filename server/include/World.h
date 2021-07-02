@@ -15,7 +15,7 @@ class World {
 		CollisionManager collisionManager;
 		std::list<std::unique_ptr<Entity>> entities;
 		std::queue<std::pair<Entity*, const b2BodyDef*>> bodiesToCreate;
-		std::queue<b2Body*> bodiesToDestroy;
+		std::queue<b2Body**> bodiesToDestroy;
 		float timeStep;
 		int32 velocityIterations;
 		int32 positionIterations;
@@ -34,7 +34,7 @@ class World {
 		~World();
 		void step();
 		b2Body* createBody(const b2BodyDef *bodyDef);
-		void destroyBody(b2Body &body);
+		void destroyBody(b2Body **body);
 		void spawnEntity(std::unique_ptr<Entity> &&entity);
 		friend std::ostream& operator<<(std::ostream &os, const World &world);
 

@@ -78,10 +78,11 @@ void Entity::attachToWorld(b2BodyDef &bodyDef,
 }
 
 void Entity::detachFromWorld() {
-    if (body != nullptr) {
-        world.destroyBody(*body);
+    //if (body != nullptr) {
+    if (!detached) { 
+        world.destroyBody(&body);
         detached = true;
-        body = nullptr;        
+        //body = nullptr;        
     }
 }
 
