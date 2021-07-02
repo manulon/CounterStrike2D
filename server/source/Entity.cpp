@@ -8,8 +8,10 @@ Entity::Entity(World &world) :
 
 Entity::Entity(Entity &&other) : 
     body(other.body),
-    world(other.world) {
+    world(other.world),
+    detached(other.detached) {
     other.body = nullptr;
+    other.detached = true;
 }
 
 Entity::~Entity() { }
@@ -57,6 +59,10 @@ float Entity::getAngle() const {
     return angle;
 }
 
+void Entity::attachToWorld(b2BodyDef &bodyDef, Entity &context) {
+    world.createBody(bodyDef, context);
+}
+
 void Entity::attachToWorld(b2BodyDef &bodyDef, 
                   const b2Shape &shape, float density) {
     body = world.createBody(&bodyDef); 
@@ -98,3 +104,21 @@ bool Entity::isDetached() {
 void Entity::setTransform(float x, float y, float angle) {
     body->SetTransform(b2Vec2(x, y), angle * b2_pi/180);
 }
+
+Entity& Entity::clone(const Entity &other) {
+    if (this == &other) return *this;
+    body = other.body;
+    //world = other.world; //MISMO PROBLEMA QUE EN LOADER
+    detached = other.detached;
+    return *this;
+}
+
+void Entity::setBody(b2Body &body) {
+    this->body = &body;
+    detached = false;
+}
+
+World& Entity::getWorld() {
+    return world;
+}
+

@@ -114,8 +114,8 @@ int main(int argc, const char *argv[]){
         Soldier soldier_renderer(soldier_img2);
         Soldier soldier_renderer2(soldier_img1);
         Music music("assets/sfx/menu.wav");
-        FireArm fa(world, 0.3f,0.3f,10);
-        fa.attachToWorld(0,3);
+        // FireArm fa(world, 0.3f,0.3f,10); DESACTUALIZADO
+        // fa.attachToWorld(0,3); DESACTUALIZADO
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
         SDL_Color textColor {0,0,0};

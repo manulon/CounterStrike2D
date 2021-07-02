@@ -7,13 +7,15 @@ class World;
 
 class Obstacle : public Entity {
 	private:
-		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
-		void setShapeParams(b2PolygonShape &polygonShape,
-                      		float width, float height);
-
+		b2BodyDef bodyDef;
+		b2PolygonShape polygonShape;
+		
 		Obstacle(const Obstacle &other) = delete;
 		Obstacle& operator=(const Obstacle &other) = delete;
 		Obstacle& operator=(Obstacle &&other) = delete;
+		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
+		void setShapeParams(b2PolygonShape &polygonShape,
+                      		float width, float height);
 
 	public:
 		Obstacle(World &world, 
@@ -27,6 +29,7 @@ class Obstacle : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+		virtual void setBody(b2Body &body) override;
 };
 
 #endif // _OBSTACLE_H_

@@ -12,6 +12,9 @@ class World;
 class FireArm : public Entity {
 	private:
 		Loader loader;
+	    b2BodyDef bodyDef;
+    	b2PolygonShape polygonShape;
+		b2FixtureDef fixtureDef;
 		float width;
 		float height;
 		//float x, y;
@@ -44,9 +47,14 @@ class FireArm : public Entity {
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
 
-		void attachToWorld(float x, float y);
+		void earlyAttachToWorld(float x, float y);
+		void lateAttachToWorld(float x, float y);
+		void drop(float x, float y);
 		//void attachToPlayer(Player &player,float xOrigin, 
         //sfloat yOrigin, float x, float y);
+        FireArm& clone(const FireArm &other);
+        
+       	virtual void setBody(b2Body &body) override;
 };
 
 #endif // _FIRE_ARM_H_

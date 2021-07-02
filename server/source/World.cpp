@@ -1,5 +1,6 @@
 #include "World.h"
 #include "Entity.h"
+#include <iostream>
 
 #define TIME_STEP 1.0f/60.0f
 #define VELOCITY_ITERATIONS 6
@@ -22,6 +23,20 @@ b2Body* World::createBody(const b2BodyDef *bodyDef) {
 	return world.CreateBody(bodyDef);
 }
 
+void World::createBody(const b2BodyDef &bodyDef, Entity &context) {
+	bodiesToCreate.push(std::pair<Entity*, const b2BodyDef*>(&context, &bodyDef));
+}
+
+void World::cleanBodiesToCreate() {
+	b2Body *body = nullptr;
+	while(!bodiesToCreate.empty()) {
+		std::pair<Entity*, const b2BodyDef*> bodyPair = bodiesToCreate.front();
+		body = world.CreateBody(bodyPair.second);
+		bodyPair.first->setBody(*body);
+		bodiesToCreate.pop();
+	}
+}
+
 void World::destroyBody(b2Body &body) {
 	bodiesToDestroy.push(&body);
 }
@@ -29,10 +44,12 @@ void World::destroyBody(b2Body &body) {
 void World::step() {
     world.Step(timeStep, velocityIterations, positionIterations);
     clean();
+    //NUEVO, downside
 }
 
 void World::clean() {
-	cleanBodies();
+    cleanBodiesToCreate();
+	cleanBodiesToDestroy();
 	cleanDetachedEntities();
 }
 
@@ -44,7 +61,7 @@ void World::spawnEntity(std::unique_ptr<Entity> &&entity) {
 	entities.push_back(std::move(entity));
 }
 
-void World::cleanBodies() {
+void World::cleanBodiesToDestroy() {
 	b2Body *body = nullptr;
 	while(!bodiesToDestroy.empty()) {
 		body = bodiesToDestroy.front();

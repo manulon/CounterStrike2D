@@ -10,19 +10,21 @@ class World;
 class Player : public Entity {
 	private:
 		b2Vec2 force;
-		FireArm fireArm;
+		std::unique_ptr<FireArm> fireArm;
+		b2BodyDef bodyDef;
+    	b2PolygonShape polygonShape;
+    	b2FixtureDef fixtureDef;
 		float width;
 		float height;
 
+		Player(const Player &other) = delete;
+		Player& operator=(const Player &other) = delete;
+		Player& operator=(Player &&other) = delete;
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2PolygonShape &polygonShape,
                       		float width, float height);
 		void setFixtureParams(const b2PolygonShape &polygonShape, 
 							  b2FixtureDef &fixtureDef);
-
-		Player(const Player &other) = delete;
-		Player& operator=(const Player &other) = delete;
-		Player& operator=(Player &&other) = delete;
 
 	public:
 		Player(World &world, 
@@ -36,6 +38,7 @@ class Player : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+		virtual void setBody(b2Body &body) override;
 		void moveRight();
 		void moveLeft();
 		void moveUp();
@@ -47,7 +50,8 @@ class Player : public Entity {
 		void update();
 		void bindFixture(b2FixtureDef &fixtureDef);
 		void shoot(float angle);
-		void reload(size_t ammunition);
+		void reload(size_t &ammunition);
+		void setFireArm(std::unique_ptr<FireArm> &&fireArm);
 };
 
 #endif // _PLAYER_H_

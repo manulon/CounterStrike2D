@@ -1,4 +1,5 @@
 #include "Obstacle.h"
+#include "Bullet.h"
 
 #define DENSITY 1.0f
 
@@ -7,13 +8,13 @@ Obstacle::Obstacle(World &world,
 				   float width, float height) : 
     Entity(world) {
     b2BodyDef bodyDef;
-    b2PolygonShape polygonShape;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     Entity::attachToWorld(bodyDef, polygonShape, DENSITY);
 }
 
-Obstacle::Obstacle(Obstacle &&other) : Entity(std::move(other)) { }
+Obstacle::Obstacle(Obstacle &&other) : 
+    Entity(std::move(other)) { }
 
 Obstacle::~Obstacle() { }
 
@@ -49,4 +50,9 @@ void Obstacle::collideWithPlayer(Player &player) {
 
 void Obstacle::collideWithBorder(Border &border) {
     std::cout << "Obstacle chocado por border\n";
+}
+
+void Obstacle::setBody(b2Body &body) {
+    Entity::setBody(body);
+    Entity::bindFixture(polygonShape, DENSITY);
 }

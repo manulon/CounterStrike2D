@@ -12,19 +12,12 @@ Player::Player(World &world,
                float x, float y,
                float width, float height) :
     Entity(world), force(0,0),
-    fireArm(world, 0.2f, 0.2f, 10), 
+    fireArm(new FireArm(world, 0.2f, 0.2f, 10)), 
     width(width), height(height) { 
-    b2BodyDef bodyDef;
-    b2PolygonShape polygonShape;
-    b2FixtureDef fixtureDef;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
     Entity::attachToWorld(bodyDef, fixtureDef);
-    /*fireArm.attachToPlayer(*this, getPositionX(),
-                           getPositionY(),
-                           getPositionX() + width/2, 
-                           getPositionY());*/
 }
 
 Player::Player(Player &&other) : 
@@ -75,6 +68,7 @@ void Player::moveUp() {
 void Player::moveDown() {
     force.Set(force.x, MOVING_FORCE); 
 }
+
 void Player::stopMoveRight() {
     force.Set(STOP_FORCE, force.y);
 }
@@ -104,11 +98,11 @@ void Player::shoot(float angle) {
     float shootRadius = width;
     float xShoot = getPositionX() + shootRadius*cos(angle*b2_pi/180.0f);
     float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
-    fireArm.shoot(angle, xShoot, yShoot);
+    fireArm->shoot(angle, xShoot, yShoot);
 }
 
-void Player::reload(size_t ammunition) {
-    fireArm.reload(ammunition);
+void Player::reload(size_t &ammunition) {
+    fireArm->reload(ammunition);
 }
 
 void Player::collideWithBullet(Bullet &bullet) {
@@ -119,8 +113,15 @@ void Player::collideWithObstacle(Obstacle &obstacle) {
     std::cout << "player chocado por obstaculo\n";
 }
 
-void Player::collideWithFireArm(FireArm &fireArm) {
+void Player::collideWithFireArm(FireArm &other) {
     std::cout << "player chocado por firearm\n";
+
+    fireArm->lateAttachToWorld(getPositionX()+5, getPositionY());
+    Entity::moveToWorld(std::move(this->fireArm));
+    other.detachFromWorld();
+    std::unique_ptr<FireArm> fireArmAux(new FireArm(getWorld(), 0.2f, 0.2f, 10));
+    fireArm = std::move(fireArmAux);
+    fireArm->clone(other);
 }
 
 void Player::collideWithPlayer(Player &player) {
@@ -129,4 +130,9 @@ void Player::collideWithPlayer(Player &player) {
 
 void Player::collideWithBorder(Border &border) {
     std::cout << "Player chocado por border\n";
+}
+
+void Player::setBody(b2Body &body) {
+    Entity::setBody(body);
+    Entity::bindFixture(fixtureDef);
 }
