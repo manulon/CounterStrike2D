@@ -5,7 +5,7 @@
 EditorEventHandler::EditorEventHandler(Window& window,const Image& image,const char* mapName): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
-actualType(-1),selectedZoneX(384),selectedZoneY(500),
+actualType(-1),selectedZoneX(388),selectedZoneY(500),
 image(image),window(window),finalMap(),mapName(mapName){}
 
 bool EditorEventHandler::handleEvents
