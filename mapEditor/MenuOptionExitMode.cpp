@@ -9,7 +9,6 @@ MenuOption(fontPath,ptsize,textToRender,window){}
 MenuOptionExitMode::~MenuOptionExitMode(){}
 
 bool MenuOptionExitMode::clicked(std::vector<MenuOption*>& options){
-    std::cout <<"Aprete la opcion salir"<< std::endl;
     return false;
 }
 
@@ -25,3 +24,5 @@ const char* MenuOptionExitMode:: getPathToImage(){
 const char* MenuOptionExitMode:: getMapName(){
     return "";
 }
+
+void MenuOptionExitMode::setPair(std::pair<int,int>& pair){}

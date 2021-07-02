@@ -17,8 +17,7 @@ int main(int argc, const char *argv[]){
 	    menu.render();
 	}
     menu.close(); 
-    
-    
+        
 
     if (menu.runEditor()){
         Window window("Counter Strike 2D", 800, 600, 

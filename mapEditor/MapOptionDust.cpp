@@ -23,3 +23,5 @@ void MapOptionDust::render(){
 bool MapOptionDust::clicked(std::vector<MenuOption*>& options){
     return false;
 }
+
+void MapOptionDust::setPair(std::pair<int,int>& pair){}

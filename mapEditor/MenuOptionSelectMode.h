@@ -24,6 +24,8 @@ class MenuOptionSelectMode : public MenuOption{
         virtual void render() override;
         virtual const char* getPathToImage() override;
         virtual const char* getMapName() override;
+
+        virtual void setPair(std::pair<int,int>& pair) override;
 };
 
 #endif

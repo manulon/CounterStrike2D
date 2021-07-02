@@ -8,6 +8,7 @@
 #include "MenuOption.h"
 #include "MenuOptionSelectMode.h"
 #include "MenuOptionExitMode.h"
+#include "SizeSelectorMenu.h"
 
 #define NULL_PATH "no path"
 
@@ -19,6 +20,7 @@ class EditorMenu{
         MenuEditorEventHandler handler;
         std::vector<MenuOption*> options;
         bool startEditor;
+        SizeSelectorMenu selectorMenu;
 
     EditorMenu(const EditorMenu &other) = delete;
     EditorMenu& operator=(const EditorMenu &other) = delete;

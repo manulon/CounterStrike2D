@@ -25,3 +25,5 @@ void MapOptionAztec::render(){
 bool MapOptionAztec::clicked(std::vector<MenuOption*>& options){
     return false;
 }
+
+void MapOptionAztec::setPair(std::pair<int,int>& pair){}

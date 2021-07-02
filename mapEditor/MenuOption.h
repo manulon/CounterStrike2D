@@ -29,6 +29,7 @@ class MenuOption{
         virtual void render() = 0;
         virtual const char* getPathToImage() = 0;
         virtual const char* getMapName() = 0;
+        virtual void setPair(std::pair<int,int>& pair) = 0;
 };
 
 #endif

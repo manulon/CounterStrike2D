@@ -18,4 +18,8 @@ add_library(mapEditor
             ButtonWall.cpp
             ButtonWeaponCharacter.cpp
             EditorConfig.cpp
+            SizeSelectorMenu.cpp
+            SizeOptionSmall.cpp
+            SizeOptionBig.cpp
+            SizeOptionHuge.cpp
             )       

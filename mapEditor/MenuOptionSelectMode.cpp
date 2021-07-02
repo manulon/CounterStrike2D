@@ -10,7 +10,6 @@ window(window){}
 MenuOptionSelectMode::~MenuOptionSelectMode(){}
 
 bool MenuOptionSelectMode::clicked(std::vector<MenuOption*>& options){
-    std::cout <<"Aprete la opcion seleccionar modo"<< std::endl;
     options.push_back(new MapOptionAztec(window));
     options.push_back(new MapOptionDust(window));
     options.push_back(new MapOptionInferno(window));
@@ -31,3 +30,5 @@ const char* MenuOptionSelectMode:: getPathToImage(){
 const char* MenuOptionSelectMode:: getMapName(){
     return "";
 }
+
+void MenuOptionSelectMode::setPair(std::pair<int,int>& pair){}

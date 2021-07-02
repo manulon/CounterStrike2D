@@ -24,3 +24,5 @@ void MapOptionInferno::render(){
 bool MapOptionInferno::clicked(std::vector<MenuOption*>& options){
     return false;
 }
+
+void MapOptionInferno::setPair(std::pair<int,int>& pair){}
