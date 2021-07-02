@@ -8,6 +8,14 @@ class World;
 
 class Border : public Entity {
 	private:
+		b2BodyDef borderDef;
+    	b2PolygonShape side;
+    	b2FixtureDef fixtureDef;
+    	float x;
+    	float y;
+    	float width;
+    	float height;
+
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setFixtureParams(const b2PolygonShape &polygonShape, 
                               b2FixtureDef &fixtureDef);
@@ -23,6 +31,8 @@ class Border : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+
+		virtual void setBody(b2Body &body) override;
 };
 
 #endif // _BORDER_H_

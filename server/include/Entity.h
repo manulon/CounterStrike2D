@@ -15,12 +15,10 @@ class Entity {
 		b2Body *body;
 		World &world;
 		bool detached;
-
-		void bindFixture(const b2Shape &shape, float density);
-		float radiansToAngle(float radians) const;
 		Entity(const Entity &other) = delete;
 		Entity& operator=(const Entity &other) = delete;
 		Entity& operator=(Entity &&other) = delete;
+		float radiansToAngle(float radians) const;
 
 	public:		
 		Entity(World &world);
@@ -33,21 +31,27 @@ class Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) = 0;
 		virtual void collideWithPlayer(Player &player) = 0;
 		virtual void collideWithBorder(Border &border) = 0;
+		virtual void setBody(b2Body &body);
+		void attachToWorld(b2BodyDef &bodyDef, Entity &context);
 		void attachToWorld(b2BodyDef &bodyDef, const b2Shape &shape, 
-				  float density);
+				  		   float density);
 		void attachToWorld(b2BodyDef &bodyDef, const b2FixtureDef &fixtureDef);
 		void detachFromWorld();
+		void bindFixture(const b2FixtureDef &fixtureDef);
+		void bindFixture(const b2Shape &shape, float density);
+		void moveToWorld(std::unique_ptr<Entity> &&entity);
+		void setTransform(float x, float y, float angle);
+		bool isDetached();
 		void applyForceToCenter(const b2Vec2 &force, bool wake);
 		void applyLinearImpulseToCenter(const b2Vec2 &force, 
                              			bool wake);
-		void bindFixture(const b2FixtureDef &fixtureDef);
+		Entity& clone(const Entity &other);
+		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		float getPositionX() const;
 		float getPositionY() const;
 		float getAngle() const;
-		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
-		void moveToWorld(std::unique_ptr<Entity> &&entity);
-		bool isDetached();
-		void setTransform(float x, float y, float angle);
+		World& getWorld();
+		
 };
 	
 #endif // _ENTITY_H_

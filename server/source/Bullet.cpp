@@ -12,9 +12,6 @@ Bullet::Bullet(World &world) :
 }
 
 void Bullet::attachToWorld(float x, float y) {
-    b2BodyDef bodyDef;
-    b2CircleShape circleShape;
-    b2FixtureDef fixtureDef;
     setBodyParams(bodyDef, x, y);
     setShapeParams(circleShape);
     setFixtureParams(circleShape, fixtureDef);
@@ -89,4 +86,23 @@ void Bullet::collideWithBorder(Border &border) {
 
 float Bullet::getRadius() {
     return RADIUS;
+}
+
+Bullet& Bullet::clone(const Bullet &other) {
+    if (this == &other) return *this;
+    Entity::clone(other);
+    // TODO: SI ALGO FALLA PUEDE QUE SE NECESITE
+    // AÑADIR AL MUNDO UN NUEVO BODY CON
+    //if (!Entity::isDetached()) { 
+    //    attachToWorld(getPositionX(), getPositionY()); 
+    //}
+    bodyDef = other.bodyDef;
+    circleShape = other.circleShape;
+    fixtureDef = other.fixtureDef;
+    return *this;
+}
+
+void Bullet::setBody(b2Body &body) {
+    Entity::setBody(body);
+    Entity::bindFixture(fixtureDef);
 }
