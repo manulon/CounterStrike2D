@@ -12,6 +12,7 @@
 #include "ButtonObstacles.h"
 #include "ButtonWall.h"
 #include "ButtonWeaponCharacter.h"
+#include "EditorConfig.h"
 #include <vector>
 
 class Editor{
@@ -28,10 +29,11 @@ class Editor{
         std::vector<Tile*> optionTiles;
         std::vector<Button*> tileOptionButton;
         EditorEventHandler eventHandler;
-        
+        EditorConfig editor;
+       
 
    public:
-        Editor(Window& window, const char* path);
+        Editor(Window& window, const char* path, const char* mapName);
         ~Editor();
 
         void showGrid();

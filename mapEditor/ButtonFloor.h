@@ -12,7 +12,7 @@ class ButtonFloor: public Button{
     Window& window;
 
     public:
-        ButtonFloor(Window &window);
+        ButtonFloor(Window &window,EditorConfig& editor);
         ~ButtonFloor();
 
         virtual void render();

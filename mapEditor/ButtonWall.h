@@ -12,7 +12,7 @@ class ButtonWall: public Button{
     Window& window;
 
     public:
-        ButtonWall(Window &window);
+        ButtonWall(Window &window,EditorConfig& editor);
         ~ButtonWall();
 
         virtual void render();

@@ -1,8 +1,8 @@
 #include "ButtonWeaponCharacter.h"
 #include <iostream>
 
-ButtonWeaponCharacter:: ButtonWeaponCharacter(Window& window): 
-Button("assets/gfx/fonts/liberationsans.ttf",40,"Armas/Personajes",window),
+ButtonWeaponCharacter:: ButtonWeaponCharacter(Window& window,EditorConfig& editor): 
+Button("assets/gfx/fonts/liberationsans.ttf",40,"Armas/Personajes",window,editor),
 window(window){}
 
 ButtonWeaponCharacter::~ButtonWeaponCharacter(){}

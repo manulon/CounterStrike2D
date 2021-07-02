@@ -32,7 +32,7 @@ int main(int argc, const char *argv[]){
         Text textcito("assets/gfx/fonts/liberationsans.ttf", 40,"DFA",colorcito.getColor(),window);
         /*---------------------------------------*/
 
-        Editor editor(window,menu.getPath().c_str());
+        Editor editor(window,menu.getPath().c_str(),menu.getMapName());
         editor.fillTileOptionList();
     
         bool runningEditor(true);

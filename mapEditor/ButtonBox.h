@@ -12,7 +12,7 @@ class ButtonBox: public Button{
     Window& window;
 
     public:
-        ButtonBox(Window &window);
+        ButtonBox(Window &window, EditorConfig& editor);
         ~ButtonBox();
 
         virtual void render();

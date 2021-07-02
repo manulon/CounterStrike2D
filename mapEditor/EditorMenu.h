@@ -34,6 +34,7 @@ class EditorMenu{
         bool handleEvents();
         bool runEditor();
         std::string getPath();
+        const char* getMapName();
 
 };
 

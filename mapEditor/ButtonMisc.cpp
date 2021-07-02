@@ -1,8 +1,8 @@
 #include "ButtonMisc.h"
 #include <iostream>
 
-ButtonMisc:: ButtonMisc(Window& window): 
-Button("assets/gfx/fonts/liberationsans.ttf",40,"Misc",window),
+ButtonMisc:: ButtonMisc(Window& window,EditorConfig& editor): 
+Button("assets/gfx/fonts/liberationsans.ttf",40,"Misc",window,editor),
 window(window){}
 
 ButtonMisc::~ButtonMisc(){}
@@ -18,6 +18,8 @@ bool ButtonMisc::clicked(std::vector<Tile*>& options,const Image& image){
         options.pop_back();
     }
 
+    editor.getAtributes("misc",options,image);
+
     /*--- PARA AZTEC ---*/
     /*options.push_back(new Tile(5,0,500,image));
     options.push_back(new Tile(24,48,500,image));
@@ -28,11 +30,11 @@ bool ButtonMisc::clicked(std::vector<Tile*>& options,const Image& image){
     options.push_back(new Tile(46,146,500,image));*/
 
     /*--- PARA DUST ---*/
-    options.push_back(new Tile(61,0,500,image));
+    /*options.push_back(new Tile(61,0,500,image));
     options.push_back(new Tile(62,48,500,image));
     options.push_back(new Tile(63,98,500,image));
     options.push_back(new Tile(65,48,548,image));
     options.push_back(new Tile(70,0,548,image));   
-
+    */
     return false;
 }
