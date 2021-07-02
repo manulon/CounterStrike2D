@@ -5,11 +5,11 @@ color(0,0,0),selectedWidth(0),selectedHeight(0),
 pair(selectedWidth,selectedHeight),mousePositionX(0),mousePositionY(0){}
 
 void SizeSelectorMenu::setSizeOptions(Window& window){
-    sizeOptions.push_back(new SizeOptionSmall("assets/gfx/fonts/liberationsans.ttf", 40,"small",
+    sizeOptions.push_back(new SizeOptionSmall("assets/gfx/fonts/liberationsans.ttf", 40,"Pequeno",
                           window));
-    sizeOptions.push_back(new SizeOptionBig("assets/gfx/fonts/liberationsans.ttf", 40,"big",
+    sizeOptions.push_back(new SizeOptionBig("assets/gfx/fonts/liberationsans.ttf", 40,"Grande",
                           window));
-    sizeOptions.push_back(new SizeOptionHuge("assets/gfx/fonts/liberationsans.ttf", 40,"huge",
+    sizeOptions.push_back(new SizeOptionHuge("assets/gfx/fonts/liberationsans.ttf", 40,"Monstruoso",
                           window));
 }
 

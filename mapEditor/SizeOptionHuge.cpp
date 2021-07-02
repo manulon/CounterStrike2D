@@ -13,7 +13,7 @@ bool SizeOptionHuge::clicked(std::vector<MenuOption*>& options){
 }
 
 void SizeOptionHuge::render(){
-    Area selectArea(300, 50, 75, 40);              
+    Area selectArea(275, 50, 125, 40);              
     optionText.render(selectArea);
 }
 
