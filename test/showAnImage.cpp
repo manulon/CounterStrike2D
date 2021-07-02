@@ -139,7 +139,6 @@ int main(int argc, const char *argv[]){
             window.clear();
             world.step();
             camera.render(player.getPositionX()*32,(3.0f+player.getPositionY())*32, cameraArea);
-            camera.renderSoldiers(player.getPositionX()*32,(3.0f+player.getPositionY())*32);
             stencil.render(stencilArea, mm.getAngle());
             // text.render(textArea);
             soldier_renderer.render();
@@ -147,8 +146,8 @@ int main(int argc, const char *argv[]){
             window.render();
             usleep(FRAME_RATE);  
             if (i%15 == 0){
-                std::cout<<"player x: "<<player.getPositionX()<<" y: "<<player.getPositionY()<<std::endl;
-                std::cout <<"angle: "<<mm.getAngle()<<std::endl;
+                // std::cout<<"player x: "<<player.getPositionX()<<" y: "<<player.getPositionY()<<std::endl;
+                // std::cout <<"angle: "<<mm.getAngle()<<std::endl;
                 // std::cout <<"firearm: "<<fa.getPositionX()<<" y: "<<fa.getPositionY()<<std::endl;
                 // std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
                 // std::cout <<"x: "<< soldier_renderer2.getX()<<" y: "<<soldier_renderer2.getY()<<std::endl;
