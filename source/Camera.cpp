@@ -13,3 +13,6 @@ void Camera::render(int x, int y, const Area &dest){
     //img.render(-x,-y,dest);
     map.render(-x,-y,dest);
 }
+void Camera::renderSoldiers(int x, int y){
+    map.renderSoldiers(-x,-y);
+}

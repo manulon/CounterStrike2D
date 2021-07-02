@@ -32,7 +32,6 @@ private:
 	TileMap(const TileMap &other) = delete;
     TileMap& operator=(const TileMap &other) = delete;
     TileMap& operator=(TileMap &&other) = delete;
-	void renderSoldiers(int x,int y);
 public:
 	TileMap(const char *pathText, const Image &image, const Image &obs);
 	~TileMap();
@@ -40,6 +39,7 @@ public:
 	bool loadMedia();
 	bool setTiles();
 	void render(int x, int y, const Area &dest);
+	void renderSoldiers(int x,int y);
 };
 
 #endif

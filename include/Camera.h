@@ -13,6 +13,7 @@ class Camera{
         Camera(Camera &&other);
         ~Camera();
         void render(int x, int y, const Area &dest);
+        void renderSoldiers(int x, int y);
  
 
     private:

@@ -22,7 +22,7 @@
 #include "Pointer.h"
 #define PPM 32
 
-static bool handleEvents(Soldier &soldier,Camera& camera, Player &player) {
+static bool handleEvents(Soldier &soldier,Camera& camera, Player &player, float angle) {
     SDL_Event event;
     // Para el alumno: Buscar diferencia entre waitEvent y pollEvent
 
@@ -76,6 +76,8 @@ static bool handleEvents(Soldier &soldier,Camera& camera, Player &player) {
             case SDL_QUIT:
                 std::cout << "Quit :(" << std::endl;
                 return false;
+            case SDL_MOUSEBUTTONDOWN:
+                player.shoot(angle - 90);
         } // fin switch(event)
     } // fin while(SDL_PollEvents)
     return true;
@@ -131,12 +133,13 @@ int main(int argc, const char *argv[]){
         mapTest.addSoldier(&soldier_renderer2);
         while (running) {
             
-            running = handleEvents(soldier_renderer,camera, player);
+            running = handleEvents(soldier_renderer,camera, player, mm.getAngle());
             update(soldier_renderer,player, FRAME_RATE,mm);
             soldier_renderer2.setPos(player2.getPositionX()*32, (player2.getPositionY()+3)*32);
             window.clear();
             world.step();
             camera.render(player.getPositionX()*32,(3.0f+player.getPositionY())*32, cameraArea);
+            camera.renderSoldiers(player.getPositionX()*32,(3.0f+player.getPositionY())*32);
             stencil.render(stencilArea, mm.getAngle());
             // text.render(textArea);
             soldier_renderer.render();
@@ -145,6 +148,7 @@ int main(int argc, const char *argv[]){
             usleep(FRAME_RATE);  
             if (i%15 == 0){
                 std::cout<<"player x: "<<player.getPositionX()<<" y: "<<player.getPositionY()<<std::endl;
+                std::cout <<"angle: "<<mm.getAngle()<<std::endl;
                 // std::cout <<"firearm: "<<fa.getPositionX()<<" y: "<<fa.getPositionY()<<std::endl;
                 // std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
                 // std::cout <<"x: "<< soldier_renderer2.getX()<<" y: "<<soldier_renderer2.getY()<<std::endl;

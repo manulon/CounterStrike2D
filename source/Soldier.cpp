@@ -2,6 +2,7 @@
 #include "Area.h"
 #include <utility>
 #include <iostream>
+#define PPM 32
 
 // TODO Tal vez agregar un enum que sea
 // enum {soldado_tipo_1, soldado_tipo_2, soldado_tipo3..., soldado_tipoN};
@@ -12,8 +13,8 @@
 // imagen solicitada para renderizar.
 
 Soldier::Soldier(const Image &image) : 
-    Animation(image, 3, 2, 32, 32, true), direction(RIGHT), moving(false),
-    x(100), y(100), width(32), height(32), angle(90) { }
+    Animation(image, 3, 2, PPM, PPM, true), direction(RIGHT), moving(false),
+    x(100), y(100), width(PPM), height(PPM), angle(90) { }
 
 Soldier::Soldier(Soldier &&other) : 
     Animation(std::move(other)), direction(other.direction),
@@ -38,8 +39,8 @@ void Soldier::update(float dt) {
 }
 
 void Soldier::render() {
-    // Area dest((800/2)-(32/2), (600/2)-(32/2), height, width);
-    Area dest((800/2)-(32/2), (600/2)-(32/2), height, width);
+    // Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
+    Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
 }
 
@@ -48,8 +49,7 @@ void Soldier::render(int otherX, int otherY){
     int yCenter = (600/2);
     int distX = x - otherX;
     int distY = y - otherY;
-    std::cout <<"dist x: " << distX << " y: " << distY << std::endl;
-    Area dest(xCenter - distX-(32/2), yCenter - distY-(32/2), height, width);
+    Area dest(xCenter - distX-(PPM/2), yCenter - distY-(PPM/2), height, width);
     Area src(0,0,width,height);
     image.render(src,dest);
 }

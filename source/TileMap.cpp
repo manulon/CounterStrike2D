@@ -111,7 +111,7 @@ void TileMap::render(int x, int y, const Area &dst){
             tile->render(finalArea);
         }
     }
-    renderSoldiers(x,y);
+    // renderSoldiers(x,y);
 }
 
 void TileMap::renderSoldiers(int x,int y){
