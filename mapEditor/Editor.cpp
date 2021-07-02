@@ -6,7 +6,7 @@
 Editor::Editor(Window& window,const char* path,const char* mapName): 
 window(window),grid("assets/gfx/emptySpace.png", window),
 image(path,window),selectedTile("assets/gfx/option2.png",window),               
-eventHandler(window,image),editor(mapName){}                                     
+eventHandler(window,image,mapName),editor(mapName){}                                     
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);

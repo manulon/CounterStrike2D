@@ -30,6 +30,8 @@ class EditorEventHandler {
       SDL_Rect tileClips[ 75 ];
       const Image& image;
       Window& window;
+      std::map<std::pair<int,int>,int> finalMap;
+      const char* mapName;
 
       bool mouseInTile(int x, int y,Tile* tile);
       void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles);
@@ -43,7 +45,7 @@ class EditorEventHandler {
       std::vector<Button*>& buttons);
 
    public:
-      EditorEventHandler(Window &window,const Image& image);
+      EditorEventHandler(Window &window,const Image& image, const char* mapName);
       ~EditorEventHandler();
 
       bool handleEvents

@@ -30,7 +30,7 @@ class Editor{
         std::vector<Button*> tileOptionButton;
         EditorEventHandler eventHandler;
         EditorConfig editor;
-       
+        
 
    public:
         Editor(Window& window, const char* path, const char* mapName);

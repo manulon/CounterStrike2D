@@ -2,11 +2,11 @@
 #include "Image.h"
 #include "MapEditor.h"
 
-EditorEventHandler::EditorEventHandler(Window& window,const Image& image): 
+EditorEventHandler::EditorEventHandler(Window& window,const Image& image,const char* mapName): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
 actualType(-1),selectedZoneX(384),selectedZoneY(500),
-image(image),window(window){}
+image(image),window(window),finalMap(),mapName(mapName){}
 
 bool EditorEventHandler::handleEvents
 (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
@@ -31,9 +31,9 @@ std::vector<Button*>& buttons){
 
          case SDL_QUIT:
             MapEditor map;
-            map.createMap("MapaDePruebaEditor","dust");
-            for (auto& tile : tiles){
-               map.addField((tile->getX()/PPM),(tile->getY()/PPM),tile->getType());
+            map.createMap("MapaDePruebaEditor",mapName);
+            for (auto& e : finalMap){
+               map.addField(e.first.first,e.first.second,e.second);
             }
             map.generateMap();
             return false;
@@ -77,6 +77,8 @@ std::vector<Button*>& buttons){
                            mousePositionX,mousePositionY,image));
          tileNumber=(tiles.size()-1);
          putTileInCorrectPosition(tiles[tileNumber]);
+         finalMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
+                                 tiles[tileNumber]->getY()/PPM)] = tiles[tileNumber]->getType();
       }
    }
 }
