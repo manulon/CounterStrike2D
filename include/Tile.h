@@ -25,7 +25,6 @@ public:
     void setY(int y);
     void setMBox(const SDL_Rect &mBox);
     bool mouseInTile(int x , int y);
-    bool tileOutOfPosition();
     bool tileInOptionBox(int y);
     int getInitialPositionX();
     int getInitialPositionY();

@@ -33,7 +33,7 @@ std::vector<Button*>& buttons){
             MapEditor map;
             map.createMap("MapaDePruebaEditor","dust");
             for (auto& tile : tiles){
-               map.addField(tile->getX(),tile->getY(),tile->getType());
+               map.addField((tile->getX()/PPM),(tile->getY()/PPM),tile->getType());
             }
             map.generateMap();
             return false;
@@ -76,7 +76,7 @@ std::vector<Button*>& buttons){
          tiles.push_back(new Tile(actualType,
                            mousePositionX,mousePositionY,image));
          tileNumber=(tiles.size()-1);
-         checkPosition(tiles[tileNumber]);
+         putTileInCorrectPosition(tiles[tileNumber]);
       }
    }
 }
@@ -84,9 +84,6 @@ std::vector<Button*>& buttons){
 void EditorEventHandler::mouseMotionUp
 (SDL_Event& event, std::vector<Tile*>& tiles){
    leftMouseButtonDown = false;
-   for (auto& tile : tiles){
-      checkPosition(tile);
-   }
 }
 
 void EditorEventHandler::renderTiles
@@ -141,14 +138,12 @@ bool EditorEventHandler::mouseInGrid(int mousePositionX,int mousePositionY){
    return false;
 }
 
-void EditorEventHandler::checkPosition(Tile* tile){
-   if (tile->tileOutOfPosition()){
-         int auxX(mousePositionX/32);
-         int auxY(mousePositionY/32);
+void EditorEventHandler::putTileInCorrectPosition(Tile* tile){
+   int auxX(mousePositionX/32);
+   int auxY(mousePositionY/32);
 
-         tile->setX(auxX*32);
-         tile->setY(auxY*32);
-      }
+   tile->setX(auxX*32);
+   tile->setY(auxY*32);
 }
 
 EditorEventHandler::~EditorEventHandler(){}

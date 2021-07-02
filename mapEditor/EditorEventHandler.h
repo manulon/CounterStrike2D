@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 
+#define PPM 32
 
 class EditorEventHandler {
    private:
@@ -34,7 +35,7 @@ class EditorEventHandler {
       void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles);
       void buildTileClips();
       bool mouseInGrid(int mousePositionX,int mousePositionY);
-      void checkPosition(Tile* tile);
+      void putTileInCorrectPosition(Tile* tile);
       void mouseMotionHandler(SDL_Event& event, std::vector<Tile*>& tiles);
       void mouseMotionUp(SDL_Event& event, std::vector<Tile*>& tiles);
       void mouseMotionDown

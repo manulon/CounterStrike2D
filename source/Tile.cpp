@@ -60,16 +60,6 @@ bool Tile::mouseInTile(int x, int y){// El 32 tiene que ser del YAML
     return false;
 }
 
-bool Tile::tileOutOfPosition(){
-    if ((posX % 32) == 0)       // CONSTANTE
-        return false;
-
-    if ((posY % 32) == 0)       // CONSTANTE
-        return false;
-
-    return true;
-}
-
 bool Tile::tileInOptionBox(int y){
     if (posY >= y)
         return true;

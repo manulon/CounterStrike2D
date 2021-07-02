@@ -136,7 +136,6 @@ void EditorConfig::getAtributes(std::string atributeName,
                                    readerNode[mapName][atributeNumber][i][3].as<int>(),
                                    image));
     }
-
 }
 
 int EditorConfig:: getAtributeNumber(const std::string& name){
