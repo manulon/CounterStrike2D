@@ -5,10 +5,12 @@
 MouseManager::MouseManager(int windowWidth, int windowHeight) : 
                         windowWidth(windowWidth), windowHeight(windowHeight){}
 int MouseManager::getPositionX(){
+    SDL_GetMouseState(&x, &y);
     return x;
 }
 
 int MouseManager::getPositionY(){
+    SDL_GetMouseState(&x, &y);
     return y;
 }
 
@@ -17,7 +19,7 @@ void MouseManager::update(){
 }
 
 int MouseManager::getAngle(){
-    // SDL_GetMouseState(&x, &y);
+    SDL_GetMouseState(&x, &y);
     int xAux = x-(windowWidth/2);
     int yAux = (windowHeight/2)-y;
     if (yAux != 0){

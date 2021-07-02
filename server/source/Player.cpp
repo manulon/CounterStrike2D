@@ -12,7 +12,7 @@ Player::Player(World &world,
                float x, float y,
                float width, float height) :
     Entity(world), force(0,0),
-    fireArm(new FireArm(world, 0.2f, 0.2f, 10)), 
+    fireArm(new FireArm(world, 0.2f, 0.2f, 100)), 
     width(width), height(height) { 
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
