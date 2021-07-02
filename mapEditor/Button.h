@@ -4,6 +4,7 @@
 #include "SdlColor.h"
 #include "Text.h"
 #include "Tile.h"
+#include "EditorConfig.h"
 #include <vector>
 
 class Button{
@@ -16,10 +17,12 @@ class Button{
 
     protected:
         Text textBox;
+        EditorConfig& editor;
 
     public:
         Button(const char *fontPath, int ptsize,
-		       const char *textToRender,Window &window);
+		       const char *textToRender,Window &window,
+               EditorConfig& editor);
         virtual ~Button();
 
         bool mouseInText(int x, int y);

@@ -11,6 +11,10 @@ const char* MapOptionInferno:: getPathToImage(){
     return "assets/gfx/tiles/default_inferno.png";            // Tiene que estar en YAML config
 }
 
+const char* MapOptionInferno::getMapName(){
+    return "inferno";
+}
+
 void MapOptionInferno::render(){
     Area renderArea(300,75,100,30);
     optionText.render(renderArea);

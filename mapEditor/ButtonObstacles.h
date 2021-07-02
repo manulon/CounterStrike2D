@@ -12,7 +12,7 @@ class ButtonObstacles: public Button{
     Window& window;
 
     public:
-        ButtonObstacles(Window &window);
+        ButtonObstacles(Window &window,EditorConfig& editor);
         ~ButtonObstacles();
 
         virtual void render();

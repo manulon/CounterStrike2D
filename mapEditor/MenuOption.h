@@ -28,6 +28,7 @@ class MenuOption{
         virtual bool clicked(std::vector<MenuOption*>& options) = 0;
         virtual void render() = 0;
         virtual const char* getPathToImage() = 0;
+        virtual const char* getMapName() = 0;
 };
 
 #endif

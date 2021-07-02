@@ -23,6 +23,7 @@ class MenuOptionSelectMode : public MenuOption{
         virtual bool clicked(std::vector<MenuOption*>& options) override;
         virtual void render() override;
         virtual const char* getPathToImage() override;
+        virtual const char* getMapName() override;
 };
 
 #endif

@@ -1,8 +1,8 @@
 #include "ButtonFloor.h"
 #include <iostream>
 
-ButtonFloor:: ButtonFloor(Window& window): 
-Button("assets/gfx/fonts/liberationsans.ttf",40,"Pisos",window),
+ButtonFloor:: ButtonFloor(Window& window,EditorConfig& editor): 
+Button("assets/gfx/fonts/liberationsans.ttf",40,"Pisos",window,editor),
 window(window){}
 
 ButtonFloor::~ButtonFloor(){}
@@ -18,6 +18,8 @@ bool ButtonFloor::clicked
         delete option;
         options.pop_back();
     }
+
+    editor.getAtributes("floor",options,image);
 
     /*--- PARA AZTEC ---*/
     /*options.push_back(new Tile(2,0,500,image));
@@ -42,7 +44,7 @@ bool ButtonFloor::clicked
     options.push_back(new Tile(60,242,500,image));*/
 
     /*--- PARA INFERNO ---*/
-    options.push_back(new Tile(2,0,500,image));
+    /*options.push_back(new Tile(2,0,500,image));
     options.push_back(new Tile(5,0,548,image));
     options.push_back(new Tile(58,48,500,image));
     options.push_back(new Tile(59,48,548,image));
@@ -56,7 +58,7 @@ bool ButtonFloor::clicked
     options.push_back(new Tile(67,242,548,image));
     options.push_back(new Tile(68,290,500,image));
     options.push_back(new Tile(69,290,548,image));
-    options.push_back(new Tile(70,338,500,image));
+    options.push_back(new Tile(70,338,500,image));*/
 
     return false;
 }

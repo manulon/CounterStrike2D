@@ -11,6 +11,10 @@ const char* MapOptionDust:: getPathToImage(){
     return "assets/gfx/tiles/default_dust.png";            // Tiene que estar en YAML config
 }
 
+const char* MapOptionDust::getMapName(){
+    return "dust";
+}
+
 void MapOptionDust::render(){
     Area renderArea(300,50,100,30);
     optionText.render(renderArea);

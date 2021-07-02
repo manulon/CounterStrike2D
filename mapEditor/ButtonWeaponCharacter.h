@@ -12,7 +12,7 @@ class ButtonWeaponCharacter: public Button{
     Window& window;
 
     public:
-        ButtonWeaponCharacter(Window &window);
+        ButtonWeaponCharacter(Window &window,EditorConfig& editor);
         ~ButtonWeaponCharacter();
 
         virtual void render();

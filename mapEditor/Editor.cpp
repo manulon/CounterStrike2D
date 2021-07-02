@@ -3,10 +3,10 @@
 #include <unistd.h>
 #include <utility>
 
-Editor::Editor(Window& window,const char* path): 
+Editor::Editor(Window& window,const char* path,const char* mapName): 
 window(window),grid("assets/gfx/emptySpace.png", window),
 image(path,window),selectedTile("assets/gfx/option2.png",window),               
-eventHandler(window,image){}                                     
+eventHandler(window,image),editor(mapName){}                                     
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
@@ -32,12 +32,12 @@ bool Editor:: handleEvents(){
 }
 
 void Editor::fillTileOptionList(){
-    tileOptionButton.push_back(new ButtonBox(window));
-    tileOptionButton.push_back(new ButtonFloor(window));
-    tileOptionButton.push_back(new ButtonMisc(window));
-    tileOptionButton.push_back(new ButtonObstacles(window));
-    tileOptionButton.push_back(new ButtonWall(window));
-    tileOptionButton.push_back(new ButtonWeaponCharacter(window));
+    tileOptionButton.push_back(new ButtonBox(window,editor));
+    tileOptionButton.push_back(new ButtonFloor(window,editor));
+    tileOptionButton.push_back(new ButtonMisc(window,editor));
+    tileOptionButton.push_back(new ButtonObstacles(window,editor));
+    tileOptionButton.push_back(new ButtonWall(window,editor));
+    tileOptionButton.push_back(new ButtonWeaponCharacter(window,editor));
 }
 
 Editor::~Editor(){

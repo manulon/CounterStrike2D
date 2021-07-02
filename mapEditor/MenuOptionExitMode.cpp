@@ -21,3 +21,7 @@ void MenuOptionExitMode::render(){
 const char* MenuOptionExitMode:: getPathToImage(){
     return "no path";
 }
+
+const char* MenuOptionExitMode:: getMapName(){
+    return "";
+}

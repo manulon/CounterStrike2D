@@ -17,6 +17,7 @@ class MenuEditorEventHandler{
         int mousePositionX;
         int mousePositionY;
         std::string path;
+        std::string mapName;
 
         bool mouseMotionHandler(SDL_Event& event,std::vector<MenuOption*>& options);
         bool mouseMotionDown(SDL_Event& event,std::vector<MenuOption*>& options);
@@ -28,6 +29,7 @@ class MenuEditorEventHandler{
 
         bool handleEvents(std::vector<MenuOption*>& options);
         std::string& getPath();
+        std::string& getMapName();
 };
 
 #endif

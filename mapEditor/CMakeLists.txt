@@ -17,4 +17,5 @@ add_library(mapEditor
             ButtonObstacles.cpp
             ButtonWall.cpp
             ButtonWeaponCharacter.cpp
+            EditorConfig.cpp
             )       

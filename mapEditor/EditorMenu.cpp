@@ -47,4 +47,8 @@ bool EditorMenu:: runEditor(){
     return startEditor;
 }
 
+const char* EditorMenu::getMapName(){
+    return handler.getMapName().c_str();
+}
+
 EditorMenu::~EditorMenu(){}

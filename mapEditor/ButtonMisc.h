@@ -12,7 +12,7 @@ class ButtonMisc: public Button{
     Window& window;
 
     public:
-        ButtonMisc(Window &window);
+        ButtonMisc(Window &window,EditorConfig& editor);
         ~ButtonMisc();
 
         virtual void render();

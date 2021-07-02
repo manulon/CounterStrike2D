@@ -1,8 +1,8 @@
 #include "ButtonWall.h"
 #include <iostream>
 
-ButtonWall:: ButtonWall(Window& window): 
-Button("assets/gfx/fonts/liberationsans.ttf",40,"Paredes",window),
+ButtonWall:: ButtonWall(Window& window,EditorConfig& editor): 
+Button("assets/gfx/fonts/liberationsans.ttf",40,"Paredes",window,editor),
 window(window){}
 
 ButtonWall::~ButtonWall(){}
@@ -18,6 +18,8 @@ bool ButtonWall::clicked(std::vector<Tile*>& options,const Image& image){
         options.pop_back();
     }
     
+    editor.getAtributes("wall",options,image);
+
     /*--- PARA AZTEC ---*/
     /*options.push_back(new Tile(7,0,500,image));
     options.push_back(new Tile(11,0,548,image));
@@ -32,13 +34,13 @@ bool ButtonWall::clicked(std::vector<Tile*>& options,const Image& image){
     options.push_back(new Tile(19,242,500,image));*/
 
     /*--- PARA DUST ---*/
-    options.push_back(new Tile(3,0,500,image));
+    /*options.push_back(new Tile(3,0,500,image));
     options.push_back(new Tile(4,0,548,image));
     options.push_back(new Tile(5,48,500,image));
     options.push_back(new Tile(38,48,548,image));
     options.push_back(new Tile(39,98,500,image));   
     options.push_back(new Tile(43,98,548,image));
-    options.push_back(new Tile(44,146,500,image));
+    options.push_back(new Tile(44,146,500,image));*/
 
     return false;
 }

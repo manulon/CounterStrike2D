@@ -13,6 +13,10 @@ const char* MapOptionAztec:: getPathToImage(){
     return "assets/gfx/tiles/default_aztec.png";            // Tiene que estar en YAML config
 }
 
+const char* MapOptionAztec::getMapName(){
+    return "aztec";
+}
+
 void MapOptionAztec::render(){
     Area renderArea(300,25,100,30);
     optionText.render(renderArea);
