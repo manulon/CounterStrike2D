@@ -13,9 +13,11 @@ int main(int argc, const char *argv[]) {
         Border border(world, 0.0f, 0.0f, 100.0f, 100.0f);
         Player player(world, 2.0f, 8.0f, 2.0f, 2.0f);
 
+        // SPAWNEAR UN ARMA EN EL JUEGO
         std::unique_ptr<FireArm> fireArm(new FireArm(world, 0.2f, 0.2f, 1));
         fireArm->earlyAttachToWorld(4.3f, 8.0f);
         world.spawnEntity(std::move(fireArm));
+        // 
 
         std::cout << world;
         for (int32 i = 0; i < 120; ++i) {
