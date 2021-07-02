@@ -37,8 +37,8 @@ void World::cleanBodiesToCreate() {
 	}
 }
 
-void World::destroyBody(b2Body &body) {
-	bodiesToDestroy.push(&body);
+void World::destroyBody(b2Body **body) {
+	bodiesToDestroy.push(body);
 }
 
 void World::step() {
@@ -62,10 +62,11 @@ void World::spawnEntity(std::unique_ptr<Entity> &&entity) {
 }
 
 void World::cleanBodiesToDestroy() {
-	b2Body *body = nullptr;
+	b2Body **body = nullptr;
 	while(!bodiesToDestroy.empty()) {
 		body = bodiesToDestroy.front();
-		world.DestroyBody(body);
+		world.DestroyBody(*body);
+		*body = nullptr;
 		bodiesToDestroy.pop();
 	}
 }

@@ -3,7 +3,7 @@
 #define IMPULSE 1000.0f // NO IMPORTA SI AUMENTAMOS MAS HAY UN MAXIMO
 #define RADIUS 0.1f
 #define RESTITUTION 0.0f
-#define DENSITY 1.0f
+#define DENSITY 0.1f
 #define IS_BULLET true
 #define BODY_TYPE b2_dynamicBody
 
