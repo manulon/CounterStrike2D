@@ -22,6 +22,7 @@ class Soldier : public Animation {
         ~Soldier();
         void update(float dt);
         void render();
+        void render(int x, int y);
         void stopMoving();
         void stopLeft();
         void stopRight();
@@ -30,6 +31,7 @@ class Soldier : public Animation {
         void move(char dir);
         int getX();
         int getY();
+        void setPos(int xx, int yy);
         int getAngle();
         void setAngle(int angle);
 };

@@ -7,8 +7,9 @@
 class Area;
 
 class Animation {
-   private:
+   protected:
       const Image &image;
+   private:
       int rows;
       int columns;
       int currentRow;
@@ -24,7 +25,6 @@ class Animation {
       void advanceDefaultOrder();
       void advanceInverseOrder();
       void advanceFrame();
-   
    public:
       Animation(const Image &image, int rows, int columns,
                 int width, int height, bool inverseOrder);
@@ -32,6 +32,7 @@ class Animation {
       virtual ~Animation();
       virtual void update(float dt);
       virtual void render(const Area &dst, int angle, const SDL_RendererFlip &flipType);
+      
 };
 
 #endif  // _ANIMATION_H_

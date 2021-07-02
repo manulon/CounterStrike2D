@@ -1,6 +1,7 @@
 #include "Soldier.h"
 #include "Area.h"
 #include <utility>
+#include <iostream>
 
 // TODO Tal vez agregar un enum que sea
 // enum {soldado_tipo_1, soldado_tipo_2, soldado_tipo3..., soldado_tipoN};
@@ -40,6 +41,17 @@ void Soldier::render() {
     // Area dest((800/2)-(32/2), (600/2)-(32/2), height, width);
     Area dest((800/2)-(32/2), (600/2)-(32/2), height, width);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
+}
+
+void Soldier::render(int otherX, int otherY){
+    int xCenter = (800/2);
+    int yCenter = (600/2);
+    int distX = x - otherX;
+    int distY = y - otherY;
+    std::cout <<"dist x: " << distX << " y: " << distY << std::endl;
+    Area dest(xCenter - distX-(32/2), yCenter - distY-(32/2), height, width);
+    Area src(0,0,width,height);
+    image.render(src,dest);
 }
 
 void Soldier::stopMoving() {
@@ -86,4 +98,8 @@ int Soldier:: getAngle(){
 
 void Soldier::setAngle(int angle){
     this->angle = angle;
+}
+
+void Soldier::setPos(int xx, int yy){
+    x = -xx; y = -yy;
 }

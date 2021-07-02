@@ -32,6 +32,10 @@ bool TileMap::loadMedia(){
     return true;
 }
 
+void TileMap::addSoldier(Soldier *soldier){
+    soldiers.push_back(soldier);
+}
+
 bool TileMap::setTiles(){
     YAML::Node map = YAML::LoadFile(mapName);
     YAML::Node fields = map["fields"];
@@ -105,6 +109,13 @@ void TileMap::render(int x, int y, const Area &dst){
             Area finalArea(xOffset + x,yOffset + y, 
                        obsClips[type-1].w, obsClips[type-1].h);
             tile->render(finalArea);
-        } 
+        }
+    }
+    renderSoldiers(x,y);
+}
+
+void TileMap::renderSoldiers(int x,int y){
+    for (auto &soldier : soldiers){
+        soldier->render(x,y);
     }
 }

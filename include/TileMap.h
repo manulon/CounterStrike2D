@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Area.h"
 #include <list>
+#include "Soldier.h"
 // #include "yaml-cpp/yaml"
 
 /* Esto no deberia estar en un archivo aparte? Preguntar al profe */
@@ -26,15 +27,16 @@ private:
 	SDL_Rect obsClips[80];
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
+	std::list<Soldier*> soldiers;
 
 	TileMap(const TileMap &other) = delete;
     TileMap& operator=(const TileMap &other) = delete;
     TileMap& operator=(TileMap &&other) = delete;
-
+	void renderSoldiers(int x,int y);
 public:
 	TileMap(const char *pathText, const Image &image, const Image &obs);
 	~TileMap();
-
+	void addSoldier(Soldier *soldier);
 	bool loadMedia();
 	bool setTiles();
 	void render(int x, int y, const Area &dest);

@@ -94,6 +94,9 @@ int main(int argc, const char *argv[]){
         Player player(world, 
     				  0.0f, 0.0f, 
     				  0.45f, 0.45f);
+        Player player2(world, 
+    				  1.0f, 0.0f, 
+    				  0.45f, 0.45f);
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -125,10 +128,12 @@ int main(int argc, const char *argv[]){
         MouseManager mm(800,600);
         bool running = true;
         int i = 0;
+        mapTest.addSoldier(&soldier_renderer2);
         while (running) {
             
             running = handleEvents(soldier_renderer,camera, player);
             update(soldier_renderer,player, FRAME_RATE,mm);
+            soldier_renderer2.setPos(player2.getPositionX()*32, (player2.getPositionY()+3)*32);
             window.clear();
             world.step();
             camera.render(player.getPositionX()*32,(3.0f+player.getPositionY())*32, cameraArea);
@@ -140,8 +145,9 @@ int main(int argc, const char *argv[]){
             usleep(FRAME_RATE);  
             if (i%15 == 0){
                 std::cout<<"player x: "<<player.getPositionX()<<" y: "<<player.getPositionY()<<std::endl;
-                std::cout <<"firearm: "<<fa.getPositionX()<<" y: "<<fa.getPositionY()<<std::endl;
-                std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
+                // std::cout <<"firearm: "<<fa.getPositionX()<<" y: "<<fa.getPositionY()<<std::endl;
+                // std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
+                // std::cout <<"x: "<< soldier_renderer2.getX()<<" y: "<<soldier_renderer2.getY()<<std::endl;
             }
             i++;  
         }
