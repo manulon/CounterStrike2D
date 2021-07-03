@@ -31,13 +31,15 @@ class Bullet : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+		virtual void collideWithKnife(Knife &knife) override;
+		virtual void setBody(b2Body &body) override;
+		
 		void attachToWorld(float x, float y);
 		void shoot(float angle, float x, float y);
 		float getRadius();
 		//friend std::ostream& operator<<(std::ostream &os, const Bullet &obj);
 		Bullet& clone(const Bullet &other);
 
-		virtual void setBody(b2Body &body) override;
 };
 
 #endif // _BULLET_H_

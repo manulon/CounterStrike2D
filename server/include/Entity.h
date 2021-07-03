@@ -9,6 +9,7 @@ class Obstacle;
 class FireArm;
 class Player;
 class Border;
+class Knife;
 
 class Entity {
 	private:
@@ -31,7 +32,9 @@ class Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) = 0;
 		virtual void collideWithPlayer(Player &player) = 0;
 		virtual void collideWithBorder(Border &border) = 0;
+		virtual void collideWithKnife(Knife &knife) = 0;
 		virtual void setBody(b2Body &body);
+		
 		void attachToWorld(b2BodyDef &bodyDef, Entity &context);
 		void attachToWorld(b2BodyDef &bodyDef, const b2Shape &shape, 
 				  		   float density);

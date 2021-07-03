@@ -80,6 +80,10 @@ void Bullet::collideWithBorder(Border &border) {
     Entity::detachFromWorld();
 }
 
+void Bullet::collideWithKnife(Knife &knife) {
+    std::cout << "Bullet chocado por knife" << std::endl;
+}
+
 /*std::ostream& operator<<(std::ostream &os, const Bullet &obj) {
     os << "bullet";
     return os;

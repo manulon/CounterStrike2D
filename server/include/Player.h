@@ -38,6 +38,7 @@ class Player : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+		virtual void collideWithKnife(Knife &knife) override;
 		virtual void setBody(b2Body &body) override;
 		void moveRight();
 		void moveLeft();

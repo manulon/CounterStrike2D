@@ -8,4 +8,5 @@ add_library(server
             source/Entity.cpp
             source/CollisionManager.cpp
             source/Border.cpp
-            source/PhysicalMapFactory.cpp)
+            source/PhysicalMapFactory.cpp
+            source/Knife.cpp)

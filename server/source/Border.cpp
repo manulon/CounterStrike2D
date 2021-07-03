@@ -63,6 +63,10 @@ void Border::collideWithBorder(Border &border) {
     std::cout << "Border chocado por border\n";
 }
 
+void Border::collideWithKnife(Knife &knife) {
+    std::cout << "Border chocado por knife" << std::endl;
+}
+
 void Border::setBody(b2Body &body) {
     Entity::setBody(body);
     side.SetAsBox(width, DELTA, b2Vec2(x, y - height/2), 0);

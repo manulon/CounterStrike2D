@@ -89,6 +89,10 @@ void FireArm::collideWithBorder(Border &border) {
     std::cout << "FireArm chocado por border\n";
 }
 
+void FireArm::collideWithKnife(Knife &knife) {
+    std::cout << "FireArm chocado por knife" << std::endl;
+}
+
 FireArm& FireArm::clone(const FireArm &other) {
     if (this == &other) return *this;
     Entity::clone(other);

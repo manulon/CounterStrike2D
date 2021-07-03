@@ -44,7 +44,6 @@ void World::destroyBody(b2Body **body) {
 void World::step() {
     world.Step(timeStep, velocityIterations, positionIterations);
     clean();
-    //NUEVO, downside
 }
 
 void World::clean() {

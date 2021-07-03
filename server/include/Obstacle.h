@@ -29,6 +29,7 @@ class Obstacle : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+		virtual void collideWithKnife(Knife &Knife) override;
 		virtual void setBody(b2Body &body) override;
 };
 

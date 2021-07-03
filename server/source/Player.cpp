@@ -132,6 +132,10 @@ void Player::collideWithBorder(Border &border) {
     std::cout << "Player chocado por border\n";
 }
 
+void Player::collideWithKnife(Knife &knife) {
+    std::cout << "Player chocado por knife" << std::endl;
+}
+
 void Player::setBody(b2Body &body) {
     Entity::setBody(body);
     Entity::bindFixture(fixtureDef);

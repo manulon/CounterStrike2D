@@ -46,15 +46,13 @@ class FireArm : public Entity {
 		virtual void collideWithFireArm(FireArm &fireArm) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
+		virtual void collideWithKnife(Knife &knife) override;
+       	virtual void setBody(b2Body &body) override;
 
 		void earlyAttachToWorld(float x, float y);
 		void lateAttachToWorld(float x, float y);
-		void drop(float x, float y);
-		//void attachToPlayer(Player &player,float xOrigin, 
-        //sfloat yOrigin, float x, float y);
         FireArm& clone(const FireArm &other);
         
-       	virtual void setBody(b2Body &body) override;
 };
 
 #endif // _FIRE_ARM_H_

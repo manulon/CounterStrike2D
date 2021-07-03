@@ -52,6 +52,10 @@ void Obstacle::collideWithBorder(Border &border) {
     std::cout << "Obstacle chocado por border\n";
 }
 
+void Obstacle::collideWithKnife(Knife &knife) {
+    std::cout << "Obstacle chocado por knife" << std::endl;
+}
+
 void Obstacle::setBody(b2Body &body) {
     Entity::setBody(body);
     Entity::bindFixture(polygonShape, DENSITY);
