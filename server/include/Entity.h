@@ -20,9 +20,10 @@ class Entity {
 		Entity& operator=(const Entity &other) = delete;
 		Entity& operator=(Entity &&other) = delete;
 		float radiansToAngle(float radians) const;
+		short id;
 
 	public:		
-		Entity(World &world);
+		Entity(World &world, short id);
 		Entity(Entity &&other);
 		virtual ~Entity();
 
@@ -34,7 +35,7 @@ class Entity {
 		virtual void collideWithBorder(Border &border) = 0;
 		virtual void collideWithKnife(Knife &knife) = 0;
 		virtual void setBody(b2Body &body);
-		
+		short getId();
 		void attachToWorld(b2BodyDef &bodyDef, Entity &context);
 		void attachToWorld(b2BodyDef &bodyDef, const b2Shape &shape, 
 				  		   float density);

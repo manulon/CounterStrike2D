@@ -35,7 +35,7 @@ class FireArm : public Entity {
 	public:
 		FireArm(World &world, 
 				float width, float height,
-                size_t maxAmmunition);
+                size_t maxAmmunition, short id);
 		FireArm(FireArm &&other);
 		~FireArm();
 		void shoot(float angle, float x, float y);

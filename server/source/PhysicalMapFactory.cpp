@@ -30,3 +30,9 @@ Border* PhysicalMapFactory::createBorders(){
     return (new Border(world, 0,0.3f, width + 1, height + 1));    
 }
 
+int PhysicalMapFactory::getHeight(){
+    return height + 1;
+}
+int PhysicalMapFactory::getWidth(){
+    return width;
+}

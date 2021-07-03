@@ -1,6 +1,6 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
-
+#include <map>
 #include "Tile.h"
 #include "Image.h"
 #include "Window.h"
@@ -8,6 +8,7 @@
 #include <list>
 #include "Soldier.h"
 #include "DynamicObject.h"
+#include "Entity.h"// esto tiene que volar
 // #include "yaml-cpp/yaml"
 
 /* Esto no deberia estar en un archivo aparte? Preguntar al profe */
@@ -28,7 +29,7 @@ private:
 	SDL_Rect obsClips[80];
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
-	std::list<DynamicObject*> objects;
+	std::map<short,DynamicObject*> objects;
 
 	TileMap(const TileMap &other) = delete;
     TileMap& operator=(const TileMap &other) = delete;
@@ -36,11 +37,13 @@ private:
 public:
 	TileMap(const char *pathText, const Image &image, const Image &obs);
 	~TileMap();
-	void addDynamicObject(DynamicObject *object);
+	void addDynamicObject(short id, DynamicObject *object);
 	bool loadMedia();
 	bool setTiles();
 	void render(int x, int y, const Area &dest);
 	void renderSoldiers(int x,int y);
+	void update(std::list<Entity*> serverObjects);// este metodo emula el mensaje que llega del server
+	
 };
 
 #endif

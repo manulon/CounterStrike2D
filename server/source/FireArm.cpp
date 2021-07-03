@@ -7,8 +7,8 @@
 
 FireArm::FireArm(World &world,
 				 float width, float height,
-                 size_t maxAmmunition) : 
-	Entity(world), loader(world, maxAmmunition), 
+                 size_t maxAmmunition, short id) : 
+	Entity(world, id), loader(world, maxAmmunition), 
     width(width), height(height) { }
 
 FireArm::FireArm(FireArm &&other) : 

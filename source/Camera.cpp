@@ -10,10 +10,6 @@ map(other.map), x(other.x), y(other.y) {}
 Camera:: ~Camera(){}
 
 void Camera::render(int x, int y, const Area &dest){
-    //img.render(-x,-y,dest);
     map.render(-x,-y,dest);
-    renderSoldiers(x,y);
-}
-void Camera::renderSoldiers(int x, int y){
     map.renderSoldiers(-x,-y);
 }

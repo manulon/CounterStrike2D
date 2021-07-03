@@ -1,10 +1,10 @@
 #include "Entity.h"
 #include "World.h"
 
-Entity::Entity(World &world) : 
+Entity::Entity(World &world, short id) : 
     body(nullptr), 
     world(world),
-    detached(true) { }
+    detached(true) , id(id){ }
 
 Entity::Entity(Entity &&other) : 
     body(other.body),
@@ -12,6 +12,10 @@ Entity::Entity(Entity &&other) :
     detached(other.detached) {
     other.body = nullptr;
     other.detached = true;
+}
+
+short Entity::getId(){
+    return id;
 }
 
 Entity::~Entity() { }

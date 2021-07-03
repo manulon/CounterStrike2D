@@ -10,9 +10,9 @@
 
 Player::Player(World &world, 
                float x, float y,
-               float width, float height) :
-    Entity(world), force(0,0),
-    fireArm(new FireArm(world, 0.2f, 0.2f, 100)), 
+               float width, float height, short id) :
+    Entity(world, id), force(0,0),
+    fireArm(new FireArm(world, 0.2f, 0.2f, 100, 5)), 
     width(width), height(height) { 
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
@@ -119,7 +119,7 @@ void Player::collideWithFireArm(FireArm &other) {
     fireArm->lateAttachToWorld(getPositionX()+5, getPositionY());
     Entity::moveToWorld(std::move(this->fireArm));
     other.detachFromWorld();
-    std::unique_ptr<FireArm> fireArmAux(new FireArm(getWorld(), 0.2f, 0.2f, 10));
+    std::unique_ptr<FireArm> fireArmAux(new FireArm(getWorld(), 0.2f, 0.2f, 10,55));
     fireArm = std::move(fireArmAux);
     fireArm->clone(other);
 }

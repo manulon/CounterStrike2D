@@ -19,7 +19,6 @@ class World {
 		float timeStep;
 		int32 velocityIterations;
 		int32 positionIterations;
-
 		World(const World &other) = delete;
 		World& operator=(const World &other) = delete;
 		World& operator=(World &&other) = delete;

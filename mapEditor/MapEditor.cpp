@@ -20,7 +20,7 @@ void MapEditor::addObstacle(int x, int y, int sprite){
     map["obstacles"].push_back(obstacle);
 }
 void MapEditor::generateMap(){
-    std::ofstream file(mapName +".yaml");
+    std::ofstream file(mapName+".yaml");
     file<<map;
     file.close();
 }

@@ -29,7 +29,7 @@ class Player : public Entity {
 	public:
 		Player(World &world, 
                float x, float y,
-               float width, float height);
+               float width, float height, short id);
 		Player(Player &&other);
 		~Player();
 		virtual void collideWith(Entity &entity) override;

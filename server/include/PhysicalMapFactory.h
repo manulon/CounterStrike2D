@@ -17,7 +17,8 @@ private:
 public:
     PhysicalMapFactory(World &w,std::string mapName);
     Border* createBorders();
-
+    int getWidth();
+    int getHeight();
 };
 
 

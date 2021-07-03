@@ -32,8 +32,8 @@ bool TileMap::loadMedia(){
     return true;
 }
 
-void TileMap::addDynamicObject(DynamicObject *object){
-    objects.push_back(object);
+void TileMap::addDynamicObject(short id, DynamicObject *object){
+    objects[id] = (object);
 }
 
 bool TileMap::setTiles(){
@@ -116,6 +116,13 @@ void TileMap::render(int x, int y, const Area &dst){
 
 void TileMap::renderSoldiers(int x,int y){
     for (auto &object : objects){
-        object->render(x,y);
+        object.second->render(x,y);
+    }
+}
+
+void TileMap::update(std::list<Entity*> serverObjects){
+    for (auto &object : serverObjects){
+        short id = object->getId();
+        objects[id]->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
     }
 }
