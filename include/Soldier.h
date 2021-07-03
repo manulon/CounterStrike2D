@@ -23,7 +23,7 @@ class Soldier : public Animation , public DynamicObject{
         ~Soldier();
         void update(float dt);
         void render();
-        void render(int x, int y);
+        virtual void render(int x, int y) override;
         void stopMoving();
         void stopLeft();
         void stopRight();

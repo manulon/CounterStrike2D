@@ -20,6 +20,7 @@
 #include "PhysicalMapFactory.h"
 #include "FireArm.h"
 #include "Pointer.h"
+#include "Weapon.h"
 #define PPM 32
 
 static bool handleEvents(Soldier &soldier,Camera& camera, Player &player, float angle) {
@@ -116,8 +117,10 @@ int main(int argc, const char *argv[]){
         Soldier soldier_renderer(soldier_img2);
         Soldier soldier_renderer2(soldier_img1);
         Music music("assets/sfx/menu.wav");
-        // FireArm fa(world, 0.3f,0.3f,10); DESACTUALIZADO
-        // fa.attachToWorld(0,3); DESACTUALIZADO
+        FireArm fa(world, 0.3f,0.3f,10);
+        fa.earlyAttachToWorld(2,3);
+        Image weaponImg("assets/gfx/weapons/ak47_d.bmp",window);
+        Weapon weapon(weaponImg,16,32);
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
         SDL_Color textColor {0,0,0};
@@ -130,12 +133,14 @@ int main(int argc, const char *argv[]){
         MouseManager mm(800,600);
         bool running = true;
         int i = 0;
-        mapTest.addSoldier(&soldier_renderer2);
+        mapTest.addDynamicObject(&soldier_renderer2);
+        mapTest.addDynamicObject(&weapon);
         while (running) {
             
             running = handleEvents(soldier_renderer,camera, player, mm.getAngle());
             update(soldier_renderer,player, FRAME_RATE,mm);
             soldier_renderer2.setPos(player2.getPositionX()*32, (player2.getPositionY()+3)*32);
+            weapon.setPos(fa.getPositionX()*32, (fa.getPositionY()+3)*32);
             window.clear();
             world.step();
             camera.render(player.getPositionX()*32,(3.0f+player.getPositionY())*32, cameraArea);

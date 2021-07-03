@@ -45,11 +45,6 @@ void Soldier::render() {
 }
 
 void Soldier::render(int otherX, int otherY){
-    // int xCenter = (800/2);
-    // int yCenter = (600/2);
-    // int distX = x - otherX;
-    // int distY = y - otherY;
-    // Area dest(xCenter - distX-(PPM/2), yCenter - distY-(PPM/2), height, width);
     Area dest = DynamicObject::getDest(otherX, otherY);
     Area src(0,0,width,height);
     image.render(src,dest);

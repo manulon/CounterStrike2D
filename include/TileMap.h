@@ -7,6 +7,7 @@
 #include "Area.h"
 #include <list>
 #include "Soldier.h"
+#include "DynamicObject.h"
 // #include "yaml-cpp/yaml"
 
 /* Esto no deberia estar en un archivo aparte? Preguntar al profe */
@@ -27,7 +28,7 @@ private:
 	SDL_Rect obsClips[80];
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
-	std::list<Soldier*> soldiers;
+	std::list<DynamicObject*> objects;
 
 	TileMap(const TileMap &other) = delete;
     TileMap& operator=(const TileMap &other) = delete;
@@ -35,7 +36,7 @@ private:
 public:
 	TileMap(const char *pathText, const Image &image, const Image &obs);
 	~TileMap();
-	void addSoldier(Soldier *soldier);
+	void addDynamicObject(DynamicObject *object);
 	bool loadMedia();
 	bool setTiles();
 	void render(int x, int y, const Area &dest);

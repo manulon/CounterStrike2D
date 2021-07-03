@@ -32,8 +32,8 @@ bool TileMap::loadMedia(){
     return true;
 }
 
-void TileMap::addSoldier(Soldier *soldier){
-    soldiers.push_back(soldier);
+void TileMap::addDynamicObject(DynamicObject *object){
+    objects.push_back(object);
 }
 
 bool TileMap::setTiles(){
@@ -115,7 +115,7 @@ void TileMap::render(int x, int y, const Area &dst){
 }
 
 void TileMap::renderSoldiers(int x,int y){
-    for (auto &soldier : soldiers){
-        soldier->render(x,y);
+    for (auto &object : objects){
+        object->render(x,y);
     }
 }
