@@ -14,6 +14,7 @@ add_library(source
 			TileMap.cpp
 			Weapon.cpp
 			Pointer.cpp
+			DynamicObject.cpp
        	    Exception/Exception.cpp 
 	    	Exception/SdlException.cpp
 	    	Exception/SdlFontException.cpp

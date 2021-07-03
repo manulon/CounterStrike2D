@@ -2,13 +2,14 @@
 #define _SOLDIER_H_
 #include "Directions.h"
 #include "Animation.h"
+#include "DynamicObject.h"
 
-class Soldier : public Animation {        
+class Soldier : public Animation , public DynamicObject{        
     private:
         int direction;
         bool moving;
-        int x;
-        int y;
+        // int x;
+        // int y;
         int width;
         int height;
         int angle;
@@ -18,7 +19,7 @@ class Soldier : public Animation {
 
     public:
         Soldier(const Image &image);
-        Soldier(Soldier &&other);
+        // Soldier(Soldier &&other);
         ~Soldier();
         void update(float dt);
         void render();
@@ -31,7 +32,6 @@ class Soldier : public Animation {
         void move(char dir);
         int getX();
         int getY();
-        void setPos(int xx, int yy);
         int getAngle();
         void setAngle(int angle);
 };

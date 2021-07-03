@@ -13,22 +13,22 @@
 // imagen solicitada para renderizar.
 
 Soldier::Soldier(const Image &image) : 
-    Animation(image, 3, 2, PPM, PPM, true), direction(RIGHT), moving(false),
-    x(100), y(100), width(PPM), height(PPM), angle(90) { }
+    Animation(image, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)/*,
+    x(100), y(100)*/, width(PPM), height(PPM), angle(90) { }
 
-Soldier::Soldier(Soldier &&other) : 
-    Animation(std::move(other)), direction(other.direction),
-    moving(other.moving), x(other.x), y(other.y), 
-    width(other.width), height(other.height),
-    angle(other.angle) {
-    // ACA NO SERIA OTHER.direction etc etc....
-    direction = 0;
-    x = 0;
-    y = 0;
-    width = 0;
-    height = 0;
-    angle = 0;
-}
+// Soldier::Soldier(Soldier &&other) : 
+//     Animation(std::move(other)), direction(other.direction),
+//     moving(other.moving), x(other.x), y(other.y), 
+//     width(other.width), height(other.height),
+//     angle(other.angle) {
+//     // ACA NO SERIA OTHER.direction etc etc....
+//     direction = 0;
+//     x = 0;
+//     y = 0;
+//     width = 0;
+//     height = 0;
+//     angle = 0;
+// }
 
 Soldier::~Soldier() { }
 
@@ -45,11 +45,12 @@ void Soldier::render() {
 }
 
 void Soldier::render(int otherX, int otherY){
-    int xCenter = (800/2);
-    int yCenter = (600/2);
-    int distX = x - otherX;
-    int distY = y - otherY;
-    Area dest(xCenter - distX-(PPM/2), yCenter - distY-(PPM/2), height, width);
+    // int xCenter = (800/2);
+    // int yCenter = (600/2);
+    // int distX = x - otherX;
+    // int distY = y - otherY;
+    // Area dest(xCenter - distX-(PPM/2), yCenter - distY-(PPM/2), height, width);
+    Area dest = DynamicObject::getDest(otherX, otherY);
     Area src(0,0,width,height);
     image.render(src,dest);
 }
@@ -100,6 +101,6 @@ void Soldier::setAngle(int angle){
     this->angle = angle;
 }
 
-void Soldier::setPos(int xx, int yy){
-    x = -xx; y = -yy;
-}
+// void Soldier::setPos(int xx, int yy){
+//     x = -xx; y = -yy;
+// }
