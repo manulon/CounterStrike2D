@@ -14,7 +14,7 @@ Entity::Entity(Entity &&other) :
     other.detached = true;
 }
 
-short Entity::getId(){
+short Entity::getId() const {
     return id;
 }
 
@@ -95,9 +95,10 @@ std::ostream& operator<<(std::ostream &os, const Entity &entity) {
     // CORREGIR FORMATO LUEGO
     float positionX = entity.getPositionX();
     float positionY = entity.getPositionY();
+    short id = entity.getId();
     float angle = entity.getAngle();
     char buffer[100];
-    snprintf(buffer, sizeof(buffer), "%4.2f %4.2f %4.2f", positionX, positionY, angle);
+    snprintf(buffer, sizeof(buffer), "%i %4.2f %4.2f %4.2f",id, positionX, positionY, angle);
     os << buffer;
     return os;
 }

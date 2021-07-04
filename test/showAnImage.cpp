@@ -96,33 +96,26 @@ int main(int argc, const char *argv[]){
         World world;
         Player player(world, 
     				  0.0f, 0.0f, 
-    				  0.45f, 0.45f,0);
+    				  0.45f, 0.45f,16);
         Player player2(world, 
     				  1.0f, 0.0f, 
-    				  0.45f, 0.45f,1);
+    				  0.45f, 0.45f,0);
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
         Image de_dust("assets/gfx/tiles/default_dust.png", window);
         Image obsimg("assets/gfx/tiles/dust.bmp", window);
-        TileMap mapTest("assets/maps/mapTest.yaml", de_dust, obsimg);
+        TileMap mapTest(window,"assets/maps/mapTest.yaml", de_dust, obsimg);
         // TileMap mapTest("pepe.yaml", de_dust, obsimg);
         PhysicalMapFactory g(world,"assets/maps/mapTest.yaml");
-        // PhysicalMapFactory g(world,"pepe.yaml");
         Image pointImg("assets/gfx/pointer.bmp",window);
         Pointer pointer(pointImg);
         Camera camera(mapTest);
-        // Obstacle obs(world,1,1,0.5f,0.5f);
-        Image soldier_img1("assets/gfx/player/t1.bmp", window);
-        Image soldier_img2("assets/gfx/player/t4.bmp", window);
-        Soldier soldier_renderer(soldier_img2);
-        Soldier soldier_renderer2(soldier_img1);
+        Soldier soldier_renderer("assets/gfx/player/t4.bmp", window);
         Music music("assets/sfx/menu.wav");
-        FireArm fa(world, 0.3f,0.3f,10,2);
+        FireArm fa(world, 0.3f,0.3f,10,1);
         fa.earlyAttachToWorld(2,3);
-        Image weaponImg("assets/gfx/weapons/ak47_d.bmp",window);
-        Weapon weapon(weaponImg,16,32);
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
         SDL_Color textColor {0,0,0};
@@ -140,8 +133,8 @@ int main(int argc, const char *argv[]){
         MouseManager mm(800,600);
         bool running = true;
         int i = 0;
-        mapTest.addDynamicObject(player2.getId(), &soldier_renderer2);
-        mapTest.addDynamicObject(fa.getId(),&weapon);
+        // mapTest.addDynamicObject(player2.getId(), &soldier_renderer2);
+        // mapTest.addDynamicObject(fa.getId(),&weapon);
         // int offsetY = g.getHeight()/2 - window.getHeight()/32/2 - 1  ;
         // int offsetX = g.getWidth()/2 - window.getWidth()/32/2 - 1  ;
         // std::cout <<offsetY <<std::endl;
@@ -149,10 +142,9 @@ int main(int argc, const char *argv[]){
             
             running = handleEvents(soldier_renderer,camera, player, mm.getAngle());
             update(soldier_renderer,player, FRAME_RATE,mm);
-            mapTest.update(serverObjects);
             window.clear();
             world.step();
-            camera.render(player.getPositionX()*32,(player.getPositionY()+3)*32, cameraArea);
+            camera.render(player.getPositionX()*32,(player.getPositionY()+3)*32, cameraArea, serverObjects);
             stencil.render(stencilArea, mm.getAngle());
             // text.render(textArea);
             soldier_renderer.render();
@@ -165,6 +157,7 @@ int main(int argc, const char *argv[]){
                 // std::cout <<"firearm: "<<fa.getPositionX()<<" y: "<<fa.getPositionY()<<std::endl;
                 // std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
                 // std::cout <<"x: "<< soldier_renderer2.getX()<<" y: "<<soldier_renderer2.getY()<<std::endl;
+                std::cout<<world<<std::endl;
             }
             i++;  
         }

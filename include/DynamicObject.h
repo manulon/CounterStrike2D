@@ -11,7 +11,7 @@ class DynamicObject{
 
     public:
         DynamicObject(int width, int height);
-        ~DynamicObject(){}
+        virtual ~DynamicObject(){}
         virtual void setPos(int xx,int yy);
         virtual void render(int x, int y) = 0;
 };

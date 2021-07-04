@@ -18,7 +18,7 @@ class Soldier : public Animation , public DynamicObject{
         Soldier& operator=(Soldier &&other) = delete;
 
     public:
-        Soldier(const Image &image);
+        Soldier(std::string imgPath, Window &window);
         // Soldier(Soldier &&other);
         ~Soldier();
         void update(float dt);

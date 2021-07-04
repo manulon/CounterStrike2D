@@ -8,7 +8,7 @@
 #define BODY_TYPE b2_dynamicBody
 
 Bullet::Bullet(World &world) : 
-    Entity(world,1) {
+    Entity(world,15) {
 }
 
 void Bullet::attachToWorld(float x, float y) {

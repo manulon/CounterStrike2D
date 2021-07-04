@@ -1,7 +1,8 @@
+#include <iostream>
 #include "Weapon.h"
 #define PPM 32
 
-Weapon::Weapon(const Image &image,int width,int height) : DynamicObject(width,height),image(image){ }
+Weapon::Weapon(std::string imgPath, Window &window, int width,int height) : DynamicObject(width,height),image(imgPath.c_str(),window){ }
 
 Weapon::~Weapon() { }
 

@@ -35,7 +35,7 @@ class Entity {
 		virtual void collideWithBorder(Border &border) = 0;
 		virtual void collideWithKnife(Knife &knife) = 0;
 		virtual void setBody(b2Body &body);
-		short getId();
+		short getId() const ;
 		void attachToWorld(b2BodyDef &bodyDef, Entity &context);
 		void attachToWorld(b2BodyDef &bodyDef, const b2Shape &shape, 
 				  		   float density);

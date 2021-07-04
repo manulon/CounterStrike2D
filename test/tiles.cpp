@@ -27,7 +27,7 @@ int main(int argc, const char *argv[]){
 
 
 
-    TileMap mapTest("assets/maps/testMap.txt", de_dust, obsImg);
+    TileMap mapTest(window,"assets/maps/testMap.txt", de_dust, obsImg);
         
     //mapTest.render(windowArea);
 

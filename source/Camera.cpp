@@ -9,7 +9,8 @@ map(other.map), x(other.x), y(other.y) {}
 
 Camera:: ~Camera(){}
 
-void Camera::render(int x, int y, const Area &dest){
+void Camera::render(int x, int y, const Area &dest, std::list<Entity*> &serverObjects){
     map.render(-x,-y,dest);
-    map.renderSoldiers(-x,-y);
+    map.updateAndRenderObjects(-x,-y, serverObjects);
+    // map.renderSoldiers(-x,-y);
 }

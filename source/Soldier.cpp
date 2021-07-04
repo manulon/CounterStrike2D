@@ -12,8 +12,8 @@
 // e internamente, aca que cada enum referencie al path en donde se encuentra la
 // imagen solicitada para renderizar.
 
-Soldier::Soldier(const Image &image) : 
-    Animation(image, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)/*,
+Soldier::Soldier(std::string imgPath , Window &window) : 
+    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)/*,
     x(100), y(100)*/, width(PPM), height(PPM), angle(90) { }
 
 // Soldier::Soldier(Soldier &&other) : 
@@ -47,6 +47,7 @@ void Soldier::render() {
 void Soldier::render(int otherX, int otherY){
     Area dest = DynamicObject::getDest(otherX, otherY);
     Area src(0,0,width,height);
+    std::cout<<"por renderizar el soldier\n";
     image.render(src,dest);
 }
 

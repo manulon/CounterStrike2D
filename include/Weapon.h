@@ -4,14 +4,14 @@
 #include "DynamicObject.h"
 class Weapon : public DynamicObject{
     private:
-        const Image &image; 
+        const Image image; 
         int x, y;
         int width, height;
         Weapon(const Weapon &other) = delete;
         Weapon& operator=(const Weapon &other) = delete;
         Weapon& operator=(Weapon &&other) = delete;
     public:
-        Weapon(const Image &image,int width,int height);
+        Weapon(std::string imgPath,Window &window,int width,int height);
         Weapon(Weapon &&other);
         virtual void render(int x, int y) override;
         // void setPos(int xx, int yy);

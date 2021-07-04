@@ -22,6 +22,7 @@
 
 class TileMap{
 private:
+	Window &window;
 	const Image &image;
 	std::string mapName;
 	SDL_Rect tileClips[ TOTAL_TILE_SPRITES ];
@@ -30,19 +31,20 @@ private:
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
 	std::map<short,DynamicObject*> objects;
+	// std::list<std::unique_ptr<DynamicObject>> renderizables;
 
 	TileMap(const TileMap &other) = delete;
     TileMap& operator=(const TileMap &other) = delete;
     TileMap& operator=(TileMap &&other) = delete;
 public:
-	TileMap(const char *pathText, const Image &image, const Image &obs);
+	TileMap(Window &window, const char *pathText, const Image &image, const Image &obs);
 	~TileMap();
 	void addDynamicObject(short id, DynamicObject *object);
 	bool loadMedia();
 	bool setTiles();
 	void render(int x, int y, const Area &dest);
-	void renderSoldiers(int x,int y);
-	void update(std::list<Entity*> serverObjects);// este metodo emula el mensaje que llega del server
+	void renderObjects(int x,int y, std::list<DynamicObject*> &renderizables);
+	void updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects);// este metodo emula el mensaje que llega del server
 	
 };
 

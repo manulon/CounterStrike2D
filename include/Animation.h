@@ -4,11 +4,12 @@
 #define FRAME_RATE 1000000/25
 
 #include "Image.h"
+#include <iostream>
 class Area;
 
 class Animation {
    protected:
-      const Image &image;
+      const Image image;
    private:
       int rows;
       int columns;
@@ -26,7 +27,7 @@ class Animation {
       void advanceInverseOrder();
       void advanceFrame();
    public:
-      Animation(const Image &image, int rows, int columns,
+      Animation(std::string imgPath,Window &window, int rows, int columns,
                 int width, int height, bool inverseOrder);
       Animation(Animation &&other);
       virtual ~Animation();

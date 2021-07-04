@@ -2,9 +2,10 @@
 #include <iostream>
 #include <utility>
 #include "yaml-cpp/yaml.h"
+#include "RenderizableFactory.h"
 
-TileMap::TileMap(const char *pathText, const Image &image, const Image &obs) :
-image(image),mapName(pathText),imgObstacles(obs),tiles(), obstacles(){
+TileMap::TileMap(Window & window,const char *pathText, const Image &image, const Image &obs) :
+window(window),image(image),mapName(pathText),imgObstacles(obs),tiles(), obstacles(){
 	
     //Deberia tirar excepcion
     // if( map.fail() )
@@ -114,15 +115,22 @@ void TileMap::render(int x, int y, const Area &dst){
     // renderSoldiers(x,y);
 }
 
-void TileMap::renderSoldiers(int x,int y){
-    for (auto &object : objects){
-        object.second->render(x,y);
+void TileMap::renderObjects(int x,int y, std::list<DynamicObject*> &renderizables){
+    for (DynamicObject* object : renderizables){
+        object->render(x,y);
+        delete object;// con unique_ptr habia un error de doble delete
     }
 }
 
-void TileMap::update(std::list<Entity*> serverObjects){
+void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects){
+    RenderizableFactory fac(window);
+    std::list<DynamicObject*> renderizables;
     for (auto &object : serverObjects){
         short id = object->getId();
-        objects[id]->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
+        DynamicObject* obj = fac.createRenderizable(id);
+        obj->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
+        renderizables.push_back(std::move(obj));
+        // objects[id]->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
     }
+    renderObjects(x,`y, renderizables);
 }
