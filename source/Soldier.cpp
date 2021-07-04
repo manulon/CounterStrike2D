@@ -47,7 +47,6 @@ void Soldier::render() {
 void Soldier::render(int otherX, int otherY){
     Area dest = DynamicObject::getDest(otherX, otherY);
     Area src(0,0,width,height);
-    std::cout<<"por renderizar el soldier\n";
     image.render(src,dest);
 }
 
@@ -96,7 +95,3 @@ int Soldier:: getAngle(){
 void Soldier::setAngle(int angle){
     this->angle = angle;
 }
-
-// void Soldier::setPos(int xx, int yy){
-//     x = -xx; y = -yy;
-// }

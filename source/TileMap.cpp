@@ -132,5 +132,5 @@ void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObj
         renderizables.push_back(std::move(obj));
         // objects[id]->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
     }
-    renderObjects(x,`y, renderizables);
+    renderObjects(x,y, renderizables);
 }
