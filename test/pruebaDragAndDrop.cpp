@@ -20,7 +20,7 @@ int main(int argc, const char *argv[]){
         
 
     if (menu.runEditor()){
-        Window window("Counter Strike 2D", 800, 600, 
+        Window window("Counter Strike 2D", menu.getWidth(), menu.getHeight(), 
                     SDL_WINDOW_RESIZABLE, 
                     SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 

@@ -8,7 +8,7 @@ window(window){}
 ButtonObstacles::~ButtonObstacles(){}
 
 void ButtonObstacles::render(){
-    Area renderArea(600,515,125,25);
+    Area renderArea(window.getWidth()-150,window.getHeight()-80,125,25);
     textBox.render(renderArea);
 }
 

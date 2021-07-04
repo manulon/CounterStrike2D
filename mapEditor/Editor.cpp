@@ -10,13 +10,13 @@ eventHandler(window,image,mapName),editor(mapName){}
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
-    Area selectedArea(384,497,40,40);
+    Area selectedArea(window.getWidth()/2,window.getHeight()-90,40,40);
     while ( gridArea.getY() < (window.getHeight() - 128) ){ /* CONSTANTE EL 128 */
         grid.render(gridArea);
     
         gridArea.setX( gridArea.getX() + 32); /*ACA VA LO DEL YAML CREO (tile width).*/
 
-        if ( gridArea.getX()>window.getWidth() ){
+        if ( gridArea.getX()>(window.getWidth() - 32 )){
             gridArea.setX(0);
             gridArea.setY( gridArea.getY() + 32); /*ACA VA LO DEL YAML CREO (tile height).*/ 
         }
