@@ -26,6 +26,6 @@ const char* SizeOptionBig:: getMapName(){
 }
 
 void SizeOptionBig::setPair(std::pair<int,int>& pair){
-    pair.first = 1000;
-    pair.second = 1000;
+    pair.first = 1056;
+    pair.second = 472;
 }

@@ -7,10 +7,6 @@
 #include <fstream>
 #include <string>
 
-#define BOX 1
-#define FLOOR 2
-#define MISC 3
-#define WALL 4
 
 class EditorConfig{
     private:
@@ -19,7 +15,6 @@ class EditorConfig{
         EditorConfig& operator=(EditorConfig &&other) = delete;
 
         void createFile();
-        int getAtributeNumber(const std::string& name);
 
         YAML::Node fileNode;
         YAML::Node readerNode;

@@ -21,6 +21,7 @@ class EditorMenu{
         std::vector<MenuOption*> options;
         bool startEditor;
         SizeSelectorMenu selectorMenu;
+        std::pair<int,int> pairSize;
 
     EditorMenu(const EditorMenu &other) = delete;
     EditorMenu& operator=(const EditorMenu &other) = delete;
@@ -37,6 +38,8 @@ class EditorMenu{
         bool runEditor();
         std::string getPath();
         const char* getMapName();
+        int getWidth();
+        int getHeight();
 
 };
 
