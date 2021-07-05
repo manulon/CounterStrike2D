@@ -28,13 +28,17 @@ class EditorEventHandler {
       int selectedZoneX;
       int selectedZoneY;
       SDL_Rect tileClips[ 75 ];
-      const Image& image;
+      Image& image;
+      Image& obsImage;
+      std::string actualImage;
       Window& window;
-      std::map<std::pair<int,int>,int> finalMap;
+      std::map<std::pair<int,int>,int> finalMapTiles;
+      std::map<std::pair<int,int>,int> finalMapObstacles;
       const char* mapName;
 
       bool mouseInTile(int x, int y,Tile* tile);
-      void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles);
+      void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
+                       std::vector<Tile*>& obstaclesOptionTiles);
       void buildTileClips();
       bool mouseInGrid(int mousePositionX,int mousePositionY);
       void putTileInCorrectPosition(Tile* tile);
@@ -42,15 +46,19 @@ class EditorEventHandler {
       void mouseMotionUp(SDL_Event& event, std::vector<Tile*>& tiles);
       void mouseMotionDown
       (SDL_Event& event, std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
-      std::vector<Button*>& buttons, const std::string& sizeName);
+      std::vector<Tile*>& obstaclesOptionTiles,std::vector<Button*>& buttons, 
+      const std::string& sizeName);
+      Image& getActualImage();
+      void changeActualImage(const std::string& newImage);
 
    public:
-      EditorEventHandler(Window &window,const Image& image, const char* mapName);
+      EditorEventHandler(Window &window,Image& image,Image& obsImage,const char* mapName);
       ~EditorEventHandler();
 
       bool handleEvents
       (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
-      std::vector<Button*>& buttons, const std::string& sizeName);
+      std::vector<Tile*>& obstaclesOptionTiles,std::vector<Button*>& buttons, 
+      const std::string& sizeName);
 };
 
 #endif  // _EDITOR_EVENT_HANDLER_H_

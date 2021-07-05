@@ -6,8 +6,8 @@ fileNode(),readerNode(),mapName(mapName){
 }
 
 void EditorConfig::createFile(){
-    std::ofstream file("editor_config.yaml");
-
+    /*std::ofstream file("editor_config.yaml");
+    
     fileNode["dust"]["small"]["box"][0] = YAML::Load("[21, 0, 360]");
     fileNode["dust"]["small"]["box"][1] = YAML::Load("[22, 0, 408]");
     fileNode["dust"]["small"]["box"][2] = YAML::Load("[23, 48, 360]");
@@ -326,22 +326,52 @@ void EditorConfig::createFile(){
     fileNode["inferno"]["huge"]["wall"][11] = YAML::Load("[38, 242, 504]");
     fileNode["inferno"]["huge"]["wall"][12] = YAML::Load("[39, 290, 552]");
 
+    fileNode["small"]["obstacles"][0] = YAML::Load("[2, 0, 360]");
+    fileNode["small"]["obstacles"][1] = YAML::Load("[3, 0, 408]");
+    fileNode["small"]["obstacles"][2] = YAML::Load("[4, 48, 360]");
+    fileNode["small"]["obstacles"][3] = YAML::Load("[5, 48, 408]");
+    fileNode["small"]["obstacles"][4] = YAML::Load("[36, 98, 360]");
+    fileNode["small"]["obstacles"][5] = YAML::Load("[37, 98, 408]");
+
+    fileNode["big"]["obstacles"][0] = YAML::Load("[2, 0, 360]");
+    fileNode["big"]["obstacles"][1] = YAML::Load("[3, 0, 408]");
+    fileNode["big"]["obstacles"][2] = YAML::Load("[4, 48, 360]");
+    fileNode["big"]["obstacles"][3] = YAML::Load("[5, 48, 408]");
+    fileNode["big"]["obstacles"][4] = YAML::Load("[36, 98, 360]");
+    fileNode["big"]["obstacles"][5] = YAML::Load("[37, 98, 408]");
+
+    fileNode["huge"]["obstacles"][0] = YAML::Load("[2, 0, 552]");
+    fileNode["huge"]["obstacles"][1] = YAML::Load("[3, 0, 504]");
+    fileNode["huge"]["obstacles"][2] = YAML::Load("[4, 48, 552]");
+    fileNode["huge"]["obstacles"][3] = YAML::Load("[5, 48, 504]");
+    fileNode["huge"]["obstacles"][4] = YAML::Load("[36, 98, 552]");
+    fileNode["huge"]["obstacles"][5] = YAML::Load("[37, 98, 504]");
 
     file << fileNode;
 
-    file.close();
+    file.close();*/
 }
 
 void EditorConfig::getAtributes(std::string atributeName,const std::string& sizeName,
-                                std::vector<Tile*>& options,const Image& image){
+                                std::vector<Tile*>& options,std::vector<Tile*>& obstacleOptionsTiles,
+                                const Image& image,const Image& obsImage){
+     std::cout<<"POST GET ATRIBUTES EL SIZE ES: "<<options.size()<<std::endl;
+
     readerNode = YAML::LoadFile("editor_config.yaml");
 
     for(size_t i=0; i<readerNode[mapName][sizeName][atributeName].size(); i++){
-        
         options.push_back(new Tile(readerNode[mapName][sizeName][atributeName][i][0].as<int>(),
                                    readerNode[mapName][sizeName][atributeName][i][1].as<int>(),
                                    readerNode[mapName][sizeName][atributeName][i][2].as<int>(),
                                    image));
+
+    }
+    for(size_t i=0; i<readerNode[sizeName][atributeName].size(); i++){
+
+        obstacleOptionsTiles.push_back(new Tile(readerNode[sizeName][atributeName][i][0].as<int>(),
+                                                readerNode[sizeName][atributeName][i][1].as<int>(),
+                                                readerNode[sizeName][atributeName][i][2].as<int>(),
+                                                obsImage));
     }
 }
 

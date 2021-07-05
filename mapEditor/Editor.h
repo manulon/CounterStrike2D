@@ -27,11 +27,13 @@ class Editor{
         Editor& operator=(Editor &&other) = delete;
     
         Window& window;
-        const Image grid;
-        const Image image;
-        const Image selectedTile;
+        Image grid;
+        Image image;
+        Image selectedTile;
+        Image obsImage;
         std::vector<Tile*> tiles;
         std::vector<Tile*> optionTiles;
+        std::vector<Tile*> obstaclesOptionTiles;
         std::vector<Button*> tileOptionButton;
         EditorEventHandler eventHandler;
         EditorConfig editor;
