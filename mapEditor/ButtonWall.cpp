@@ -12,13 +12,14 @@ void ButtonWall::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonWall::clicked(std::vector<Tile*>& options,const Image& image){
+bool ButtonWall::clicked(std::vector<Tile*>& options,const Image& image,
+						 const std::string& sizeName){
     for (auto& option: options){
         delete option;
         options.pop_back();
     }
     
-    editor.getAtributes("wall",options,image);
+    editor.getAtributes("wall",sizeName,options,image);
 
     return false;
 }

@@ -24,7 +24,7 @@ class EditorConfig{
         EditorConfig(const char* mapName);
         ~EditorConfig();
 
-        void getAtributes(std::string atributeName, 
+        void getAtributes(std::string atributeName,const std::string& sizeName, 
                           std::vector<Tile*>& options,const Image& image);
 };
 

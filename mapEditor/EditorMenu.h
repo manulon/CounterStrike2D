@@ -40,6 +40,7 @@ class EditorMenu{
         const char* getMapName();
         int getWidth();
         int getHeight();
+        std::pair<int,int>& getSize();
 
 };
 

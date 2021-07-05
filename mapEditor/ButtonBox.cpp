@@ -12,13 +12,14 @@ void ButtonBox::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonBox::clicked(std::vector<Tile*>& options,const Image& image){
+bool ButtonBox::clicked(std::vector<Tile*>& options,const Image& image,
+						const std::string& sizeName){
     for (auto& option: options){
         delete option;
         options.pop_back();
     }
 
-    editor.getAtributes("box",options,image);
+    editor.getAtributes("box",sizeName,options,image);
     
     return false;
 }

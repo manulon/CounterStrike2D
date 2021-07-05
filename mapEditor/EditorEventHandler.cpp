@@ -10,7 +10,7 @@ image(image),window(window),finalMap(),mapName(mapName){}
 
 bool EditorEventHandler::handleEvents
 (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
-std::vector<Button*>& buttons){
+std::vector<Button*>& buttons,const std::string& sizeName){
    SDL_Event event;
 
    buildTileClips();
@@ -22,7 +22,7 @@ std::vector<Button*>& buttons){
             break;
 
          case SDL_MOUSEBUTTONDOWN:
-            mouseMotionDown(event, tiles, optionTiles,buttons);
+            mouseMotionDown(event, tiles, optionTiles, buttons, sizeName);
             break;
 
          case SDL_MOUSEBUTTONUP:
@@ -57,12 +57,12 @@ void EditorEventHandler::mouseMotionHandler
 
 void EditorEventHandler::mouseMotionDown
 (SDL_Event& event,std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
-std::vector<Button*>& buttons){
+std::vector<Button*>& buttons, const std::string& sizeName){
    if (!leftMouseButtonDown && event.button.button == SDL_BUTTON_LEFT){ 
       leftMouseButtonDown = true;
       for (auto& button: buttons){
          if (button->mouseInText(mousePositionX,mousePositionY))
-            button->clicked(optionTiles,image);
+            button->clicked(optionTiles,image,sizeName);
       }
       for (auto& tile : optionTiles){
          if (mouseInTile(mousePositionX,mousePositionY,tile)){

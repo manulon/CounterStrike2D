@@ -12,7 +12,8 @@ void ButtonObstacles::render(){
     textBox.render(renderArea);
 }
 
-bool ButtonObstacles::clicked(std::vector<Tile*>& options,const Image& image){
+bool ButtonObstacles::clicked(std::vector<Tile*>& options,const Image& image,
+							  const std::string& sizeName){
     std::cout<<"Clickee obstaculos"<< std::endl;
     return false;
 }
