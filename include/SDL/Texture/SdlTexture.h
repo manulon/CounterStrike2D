@@ -17,7 +17,7 @@ class SdlTexture {
 
         void destroyTexture();
         SdlTexture(const SdlTexture &other) = delete;
-        SdlTexture operator=(const SdlTexture &other) = delete;
+        SdlTexture operator=(SdlTexture &other) = delete;
         void setTextureBlendMode(SDL_BlendMode blending);
         void setTextureAlphaMod(uint8_t alpha);
 

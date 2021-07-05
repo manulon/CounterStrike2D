@@ -16,8 +16,8 @@ class ButtonBox: public Button{
         ~ButtonBox();
 
         virtual void render();
-        virtual bool clicked(std::vector<Tile*>& options,const Image& image,
-                             const std::string& sizeName);
+        virtual bool clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,
+                            const Image& image,const Image& obsImage,const std::string& sizeName);
 };
 
 #endif

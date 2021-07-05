@@ -24,6 +24,13 @@ Image& Image::operator=(Image &&other) {
     return *this;
 }
 
+/*Image& Image::operator=(const Image &other){
+    if (this == &other) return *this;
+    sdlTexture = std::move(other.sdlTexture);
+    sdlRenderer = std::move(other.sdlRenderer);
+    return *this;
+}*/
+
 void Image::render(const Area &dest) const {
 	SDL_Rect destrect = {dest.getX(), dest.getY(), 
                          dest.getWidth(), dest.getHeight()};

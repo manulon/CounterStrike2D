@@ -2,15 +2,18 @@
 #include "Image.h"
 #include "MapEditor.h"
 
-EditorEventHandler::EditorEventHandler(Window& window,const Image& image,const char* mapName): 
+EditorEventHandler::EditorEventHandler(Window& window,Image& image,
+                                       Image& obsImage,const char* mapName): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
-actualType(-1),selectedZoneX(388),selectedZoneY(500),
-image(image),window(window),finalMap(),mapName(mapName){}
+actualType(-1),selectedZoneX(windowWidth/2+4),selectedZoneY(windowHeight-86),
+image(image),obsImage(obsImage),actualImage(""),window(window),
+finalMap(),mapName(mapName){}
 
 bool EditorEventHandler::handleEvents
 (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
-std::vector<Button*>& buttons,const std::string& sizeName){
+std::vector<Tile*>& obstaclesOptionTiles,std::vector<Button*>& buttons,
+const std::string& sizeName){
    SDL_Event event;
 
    buildTileClips();
@@ -22,7 +25,7 @@ std::vector<Button*>& buttons,const std::string& sizeName){
             break;
 
          case SDL_MOUSEBUTTONDOWN:
-            mouseMotionDown(event, tiles, optionTiles, buttons, sizeName);
+            mouseMotionDown(event, tiles, optionTiles, obstaclesOptionTiles, buttons, sizeName);
             break;
 
          case SDL_MOUSEBUTTONUP:
@@ -40,7 +43,7 @@ std::vector<Button*>& buttons,const std::string& sizeName){
         }
    }
 
-   renderTiles(tiles,optionTiles);
+   renderTiles(tiles,optionTiles,obstaclesOptionTiles);
 
    return true;
 }
@@ -57,24 +60,36 @@ void EditorEventHandler::mouseMotionHandler
 
 void EditorEventHandler::mouseMotionDown
 (SDL_Event& event,std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
-std::vector<Button*>& buttons, const std::string& sizeName){
+std::vector<Tile*>& obstaclesOptionTiles,std::vector<Button*>& buttons, 
+const std::string& sizeName){
    if (!leftMouseButtonDown && event.button.button == SDL_BUTTON_LEFT){ 
       leftMouseButtonDown = true;
       for (auto& button: buttons){
          if (button->mouseInText(mousePositionX,mousePositionY))
-            button->clicked(optionTiles,image,sizeName);
+            button->clicked(optionTiles,obstaclesOptionTiles,image,obsImage,sizeName);
       }
       for (auto& tile : optionTiles){
          if (mouseInTile(mousePositionX,mousePositionY,tile)){
             actualType = tile->getType();
             optionTiles.push_back(new Tile(tile->getType(),
                            selectedZoneX,selectedZoneY,image));
+            changeActualImage("no_obstacle");
             break;
          }
       }
+      for (auto& tile : obstaclesOptionTiles){
+         if (mouseInTile(mousePositionX,mousePositionY,tile)){
+            actualType = tile->getType();
+            optionTiles.push_back(new Tile(tile->getType(),
+                           selectedZoneX,selectedZoneY,obsImage));
+            changeActualImage("obstacle");
+            break;
+         }
+      }
+
       if (mouseInGrid(mousePositionX,mousePositionY) && actualType!=-1){
          tiles.push_back(new Tile(actualType,
-                           mousePositionX,mousePositionY,image));
+                           mousePositionX,mousePositionY,getActualImage()));
          tileNumber=(tiles.size()-1);
          putTileInCorrectPosition(tiles[tileNumber]);
          finalMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
@@ -89,7 +104,8 @@ void EditorEventHandler::mouseMotionUp
 }
 
 void EditorEventHandler::renderTiles
-(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles){
+(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
+std::vector<Tile*>& obstaclesOptionTiles){
    for (auto& tile: tiles){     
       int xOffset(tile->getX());
       int yOffset(tile->getY());
@@ -102,6 +118,17 @@ void EditorEventHandler::renderTiles
    }
 
    for (auto& optionTile: optionTiles){     
+      int xOffset(optionTile->getX());
+      int yOffset(optionTile->getY());
+      int type(optionTile->getType());
+      optionTile->setMBox(tileClips[type-1]);
+
+      Area finalArea(xOffset,yOffset, 
+                       tileClips[type-1].w, tileClips[type-1].h);
+      optionTile->render(finalArea);
+   }
+
+   for (auto& optionTile: obstaclesOptionTiles){     
       int xOffset(optionTile->getX());
       int yOffset(optionTile->getY());
       int type(optionTile->getType());
@@ -146,6 +173,16 @@ void EditorEventHandler::putTileInCorrectPosition(Tile* tile){
 
    tile->setX(auxX*32);
    tile->setY(auxY*32);
+}
+
+Image& EditorEventHandler::getActualImage(){
+  if (actualImage == "obstacle")
+    return obsImage;
+  return image;
+}
+
+void EditorEventHandler::changeActualImage(const std::string& newImage){
+  actualImage = newImage;
 }
 
 EditorEventHandler::~EditorEventHandler(){}

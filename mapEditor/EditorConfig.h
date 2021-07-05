@@ -25,7 +25,8 @@ class EditorConfig{
         ~EditorConfig();
 
         void getAtributes(std::string atributeName,const std::string& sizeName, 
-                          std::vector<Tile*>& options,const Image& image);
+                          std::vector<Tile*>& options,std::vector<Tile*>& obstacleOptionsTiles,
+                          const Image& image, const Image& obsImage);
 };
 
 #endif

@@ -6,8 +6,9 @@
 Editor::Editor(Window& window,const char* path,const char* mapName,
                std::pair<int,int>& size): 
 window(window),grid("assets/gfx/emptySpace.png", window),
-image(path,window),selectedTile("assets/gfx/selectedTile.png",window),               
-eventHandler(window,image,mapName),editor(mapName),size(size),sizeName(""){}                                     
+image(path,window),selectedTile("assets/gfx/selectedTile.png",window),
+obsImage("assets/gfx/tiles/obstacles.png",window),               
+eventHandler(window,image,obsImage,mapName),editor(mapName),size(size),sizeName(""){}                                     
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
@@ -30,7 +31,8 @@ void Editor:: showGrid(){
 
 bool Editor:: handleEvents(){
     setSizeName();
-    return eventHandler.handleEvents(tiles,optionTiles,tileOptionButton,sizeName);
+    return eventHandler.handleEvents(tiles,optionTiles,obstaclesOptionTiles,
+                                     tileOptionButton,sizeName);
 }
 
 void Editor::fillTileOptionList(){

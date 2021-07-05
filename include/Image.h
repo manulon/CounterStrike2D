@@ -13,7 +13,7 @@ class Image {
         const char* path;
 
         Image(const Image &other) = delete;
-        Image& operator=(const Image &other) = delete;
+        //Image& operator=(const Image &other) = delete;
         //Image& operator=(Image &&other) = delete;
     
     public:
@@ -23,6 +23,7 @@ class Image {
 
         Image(Image &&other);
         Image& operator=(Image &&other);
+        Image& operator=(const Image &other);
         ~Image();
         void render(int x, int y,const Area &dest) const;
         void render(const Area &dest) const;
