@@ -6,11 +6,29 @@
 #define AK47 1
 RenderizableFactory::RenderizableFactory(Window & window) : window(window){}
 
-DynamicObject* RenderizableFactory::createRenderizable(short id){
-    if (id == SOLDIER){
-        return (new Soldier("assets/gfx/player/t1.bmp",window));
-    } else if (id == AK47){    
-        return(new Weapon("assets/gfx/weapons/ak47_d.bmp",window,16,32));
+void RenderizableFactory::createRenderizable(short id, std::map<short,DynamicObject*> &objects){
+    if (isPresent(id,objects)) return;
+    if (isSoldier(id)){
+        objects[id] = new Soldier("assets/gfx/player/t1.bmp",window);
+    } else if (isAk47(id)){    
+        objects[id] = new Weapon("assets/gfx/weapons/ak47_d.bmp",window,16,32);
     }
-    return NULL;
+}
+
+bool RenderizableFactory::isPresent(short id, std::map<short,DynamicObject*> &objects){
+    if (objects.find(id) == objects.end()){
+        return false;
+    }
+    return true;
+}
+bool RenderizableFactory::isSoldier(short id){
+    if (id >=0 && id < 10)
+        return true;
+    return false;
+}
+
+bool RenderizableFactory::isAk47(short id){
+    if (id >= 10 && id < 20)
+        return true;
+    return false;
 }

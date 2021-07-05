@@ -3,14 +3,18 @@
 #include "DynamicObject.h"
 #include "Window.h"
 #include <memory>
+#include <map>
 class RenderizableFactory {
     private:
         Window &window;
+        bool isPresent(short id, std::map<short,DynamicObject*> &objects);
+        bool isSoldier(short id);
+        bool isAk47(short id);
     public:
         RenderizableFactory(Window &window);
         ~RenderizableFactory(){}
-        DynamicObject* createRenderizable(short id);
-        
+        void createRenderizable(short id, std::map<short,DynamicObject*> &objects);
+
 };
 
 

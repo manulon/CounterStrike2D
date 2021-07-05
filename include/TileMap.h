@@ -43,7 +43,7 @@ public:
 	bool loadMedia();
 	bool setTiles();
 	void render(int x, int y, const Area &dest);
-	void renderObjects(int x,int y, std::list<DynamicObject*> &renderizables);
+	void renderObjects(int x,int y);
 	void updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects);// este metodo emula el mensaje que llega del server
 	
 };
