@@ -8,7 +8,7 @@ leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
 actualType(-1),selectedZoneX(windowWidth/2+4),selectedZoneY(windowHeight-86),
 image(image),obsImage(obsImage),actualImage(""),window(window),
-finalMap(),mapName(mapName){}
+finalMapTiles(),finalMapObstacles(),mapName(mapName){}
 
 bool EditorEventHandler::handleEvents
 (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
@@ -35,8 +35,11 @@ const std::string& sizeName){
          case SDL_QUIT:
             MapEditor map;
             map.createMap("MapaDePruebaEditor",mapName);
-            for (auto& e : finalMap){
+            for (auto& e : finalMapTiles){
                map.addField(e.first.first,e.first.second,e.second);
+            }
+            for (auto& e : finalMapObstacles){
+               map.addObstacle(e.first.first,e.first.second,e.second);
             }
             map.generateMap();
             return false;
@@ -92,8 +95,13 @@ const std::string& sizeName){
                            mousePositionX,mousePositionY,getActualImage()));
          tileNumber=(tiles.size()-1);
          putTileInCorrectPosition(tiles[tileNumber]);
-         finalMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
-                                 tiles[tileNumber]->getY()/PPM)] = tiles[tileNumber]->getType();
+         if (actualImage == "obstacle"){
+            finalMapObstacles[std::make_pair(tiles[tileNumber]->getX()/PPM,
+                                             tiles[tileNumber]->getY()/PPM)] = tiles[tileNumber]->getType();
+         }else{
+            finalMapTiles[std::make_pair(tiles[tileNumber]->getX()/PPM,
+                                         tiles[tileNumber]->getY()/PPM)] = tiles[tileNumber]->getType();
+        }
       }
    }
 }

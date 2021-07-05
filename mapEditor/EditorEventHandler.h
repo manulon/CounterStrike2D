@@ -32,7 +32,8 @@ class EditorEventHandler {
       Image& obsImage;
       std::string actualImage;
       Window& window;
-      std::map<std::pair<int,int>,int> finalMap;
+      std::map<std::pair<int,int>,int> finalMapTiles;
+      std::map<std::pair<int,int>,int> finalMapObstacles;
       const char* mapName;
 
       bool mouseInTile(int x, int y,Tile* tile);
