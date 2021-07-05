@@ -30,7 +30,7 @@ private:
 	SDL_Rect obsClips[80];
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
-	std::map<short,DynamicObject*> objects;
+	std::map<short,std::unique_ptr<DynamicObject>> objects;
 	// std::list<std::unique_ptr<DynamicObject>> renderizables;
 
 	TileMap(const TileMap &other) = delete;

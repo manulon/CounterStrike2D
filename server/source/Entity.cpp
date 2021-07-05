@@ -8,10 +8,11 @@ Entity::Entity(World &world, short id) :
 
 Entity::Entity(Entity &&other) : 
     body(other.body),
-    world(other.world),
-    detached(other.detached) {
+    world(other.world), 
+    detached(other.detached), id(other.id) {
     other.body = nullptr;
     other.detached = true;
+    other.id =0;
 }
 
 short Entity::getId() const {
@@ -116,6 +117,7 @@ Entity& Entity::clone(const Entity &other) {
     body = other.body;
     //world = other.world; //MISMO PROBLEMA QUE EN LOADER
     detached = other.detached;
+    id = other.id;
     return *this;
 }
 

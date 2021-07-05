@@ -23,9 +23,9 @@ TileMap::~TileMap(){
     for (auto& obstacle : obstacles){
         delete obstacle;
     }
-    for (auto& object : objects){
-        delete object.second;
-    }
+    // for (auto& object : objects){
+    //     delete object.second;
+    // }
 }
 
 bool TileMap::loadMedia(){
@@ -37,7 +37,7 @@ bool TileMap::loadMedia(){
 }
 
 void TileMap::addDynamicObject(short id, DynamicObject *object){
-    objects[id] = (object);
+    // objects[id] = (object);
 }
 
 bool TileMap::setTiles(){
@@ -79,7 +79,7 @@ bool TileMap::setTiles(){
 
         x_aux += TILE_WIDTH;
 
-        if (x_aux==256){
+        if (x_aux==160){
         	x_aux=0;
         	y_aux+=TILE_HEIGHT;
         }
@@ -115,25 +115,21 @@ void TileMap::render(int x, int y, const Area &dst){
             tile->render(finalArea);
         }
     }
-    // renderSoldiers(x,y);
 }
 
 void TileMap::renderObjects(int x,int y){
     for (auto& object : objects){
         object.second->render(x,y);
-        // delete object;// con unique_ptr habia un error de doble delete
     }
 }
 
 void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects){
     RenderizableFactory fac(window);
-    // std::list<DynamicObject*> renderizables;
     for (auto &object : serverObjects){
         short id = object->getId();
         if(fac.createRenderizable(id, objects))
             objects[id]->setPos(object->getPositionX()*32,(object->getPositionY()-4)*32);
-        // obj->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
-        // renderizables.push_back(std::move(obj));
     }
     renderObjects(x,y);
+    objects.clear();
 }

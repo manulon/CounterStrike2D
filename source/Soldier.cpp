@@ -13,8 +13,8 @@
 // imagen solicitada para renderizar.
 
 Soldier::Soldier(std::string imgPath , Window &window) : 
-    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)/*,
-    x(100), y(100)*/, width(PPM), height(PPM), angle(90) { }
+    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
+    , width(PPM), height(PPM), angle(90) { }
 
 // Soldier::Soldier(Soldier &&other) : 
 //     Animation(std::move(other)), direction(other.direction),

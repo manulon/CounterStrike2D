@@ -15,6 +15,7 @@ add_library(source
 			Weapon.cpp
 			Pointer.cpp
 			DynamicObject.cpp
+			Bullett.cpp
 			RenderizableFactory.cpp
        	    Exception/Exception.cpp 
 	    	Exception/SdlException.cpp

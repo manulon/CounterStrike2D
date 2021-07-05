@@ -7,13 +7,13 @@
 class RenderizableFactory {
     private:
         Window &window;
-        bool isPresent(short id, std::map<short,DynamicObject*> &objects);
+        bool isPresent(short id, std::map<short,std::unique_ptr<DynamicObject>> &objects);
         bool isSoldier(short id);
         bool isAk47(short id);
     public:
         RenderizableFactory(Window &window);
         ~RenderizableFactory(){}
-        bool createRenderizable(short id, std::map<short,DynamicObject*> &objects);
+        bool createRenderizable(short id, std::map<short,std::unique_ptr<DynamicObject>> &objects);
 
 };
 

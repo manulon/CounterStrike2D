@@ -114,7 +114,7 @@ int main(int argc, const char *argv[]){
         Camera camera(mapTest);
         Soldier soldier_renderer("assets/gfx/player/t4.bmp", window);
         Music music("assets/sfx/menu.wav");
-        FireArm fa(world, 0.3f,0.3f,10,11);
+        FireArm fa(world, 0.3f,0.3f,1,11);
         fa.earlyAttachToWorld(2,3);
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
@@ -159,7 +159,7 @@ int main(int argc, const char *argv[]){
                 // std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
                 // std::cout <<"x: "<< soldier_renderer2.getX()<<" y: "<<soldier_renderer2.getY()<<std::endl;
             }
-                std::cout<<world<<std::endl;
+                // std::cout<<world<<std::endl;
             i++;  
         }
     } catch (std::exception &e) {

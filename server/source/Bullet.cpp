@@ -77,6 +77,7 @@ void Bullet::collideWithPlayer(Player &player) {
 void Bullet::collideWithBorder(Border &border) {
     // std::cout << "Bullet chocado por border\n";
     // std::cout <<"x: "<<getPositionX()<<" y: "<<getPositionY()<<std::endl;
+    std::cout<<"el id del bullet es "<<getId()<<std::endl;
     Entity::detachFromWorld();
 }
 
