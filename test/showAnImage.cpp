@@ -105,10 +105,10 @@ int main(int argc, const char *argv[]){
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
         Image de_dust("assets/gfx/tiles/default_dust.png", window);
-        Image obsimg("assets/gfx/tiles/dust.bmp", window);
-        TileMap mapTest(window,"assets/maps/mapTest.yaml", de_dust, obsimg);
+        Image obsimg("assets/gfx/tiles/obstacles.png", window);
+        TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
         // TileMap mapTest("pepe.yaml", de_dust, obsimg);
-        PhysicalMapFactory g(world,"assets/maps/mapTest.yaml");
+        PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
         Image pointImg("assets/gfx/pointer.bmp",window);
         Pointer pointer(pointImg);
         Camera camera(mapTest);
@@ -145,7 +145,7 @@ int main(int argc, const char *argv[]){
             window.clear();
             world.step();
             world.getServerObjects(serverObjects);
-            camera.render(player.getPositionX()*32,(player.getPositionY()+3)*32, cameraArea, serverObjects);
+            camera.render(player.getPositionX()*32,(player.getPositionY()-4)*32, cameraArea, serverObjects);
             stencil.render(stencilArea, mm.getAngle());
             // text.render(textArea);
             soldier_renderer.render();
