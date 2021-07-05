@@ -6,7 +6,7 @@
 Obstacle::Obstacle(World &world, 
 				   float x, float y,
 				   float width, float height) : 
-    Entity(world,1) {
+    Entity(world,50) {
     b2BodyDef bodyDef;
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);

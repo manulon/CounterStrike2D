@@ -92,3 +92,14 @@ std::ostream& operator<<(std::ostream &os, const World &world) {
     }
     return os;
 }
+void World::getServerObjects(std::list<Entity*> &serverObjects){
+	serverObjects.clear();
+	const b2Body *node = getBodyList();
+    while(node != nullptr) {
+    	Entity *entity = static_cast<Entity*>(node->GetUserData());
+    	if(entity != nullptr) {
+    		serverObjects.push_back(entity);
+    	}
+    	node = node->GetNext();
+    }
+}

@@ -8,7 +8,7 @@
 #define BODY_TYPE b2_dynamicBody
 
 Bullet::Bullet(World &world) : 
-    Entity(world,15) {
+    Entity(world,60) {
 }
 
 void Bullet::attachToWorld(float x, float y) {
@@ -75,8 +75,8 @@ void Bullet::collideWithPlayer(Player &player) {
 }
 
 void Bullet::collideWithBorder(Border &border) {
-    std::cout << "Bullet chocado por border\n";
-    std::cout <<"x: "<<getPositionX()<<" y: "<<getPositionY()<<std::endl;
+    // std::cout << "Bullet chocado por border\n";
+    // std::cout <<"x: "<<getPositionX()<<" y: "<<getPositionY()<<std::endl;
     Entity::detachFromWorld();
 }
 

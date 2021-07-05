@@ -13,7 +13,7 @@ class RenderizableFactory {
     public:
         RenderizableFactory(Window &window);
         ~RenderizableFactory(){}
-        void createRenderizable(short id, std::map<short,DynamicObject*> &objects);
+        bool createRenderizable(short id, std::map<short,DynamicObject*> &objects);
 
 };
 

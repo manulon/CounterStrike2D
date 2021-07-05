@@ -7,7 +7,7 @@
 #define HEIGHT 0.1f //
 
 Knife::Knife(World &world) : 
-	Entity(world,1) { 
+	Entity(world,21) { 
 }
 
 Knife::Knife(Knife &&other) : 

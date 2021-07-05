@@ -130,8 +130,8 @@ void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObj
     // std::list<DynamicObject*> renderizables;
     for (auto &object : serverObjects){
         short id = object->getId();
-        fac.createRenderizable(id, objects);
-        objects[id]->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
+        if(fac.createRenderizable(id, objects))
+            objects[id]->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
         // obj->setPos(object->getPositionX()*32,(object->getPositionY()+3)*32);
         // renderizables.push_back(std::move(obj));
     }

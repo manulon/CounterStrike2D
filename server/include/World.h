@@ -39,6 +39,7 @@ class World {
 
 		void createBody(const b2BodyDef &bodyDef, Entity &context);
 		void cleanBodiesToCreate();
+		void getServerObjects(std::list<Entity*> &serverObjects);
 };
 
 #endif // _WORLD_H_

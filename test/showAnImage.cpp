@@ -96,7 +96,7 @@ int main(int argc, const char *argv[]){
         World world;
         Player player(world, 
     				  0.0f, 0.0f, 
-    				  0.45f, 0.45f,16);
+    				  0.45f, 0.45f,100);
         Player player2(world, 
     				  1.0f, 0.0f, 
     				  0.45f, 0.45f,0);
@@ -114,7 +114,7 @@ int main(int argc, const char *argv[]){
         Camera camera(mapTest);
         Soldier soldier_renderer("assets/gfx/player/t4.bmp", window);
         Music music("assets/sfx/menu.wav");
-        FireArm fa(world, 0.3f,0.3f,10,1);
+        FireArm fa(world, 0.3f,0.3f,10,11);
         fa.earlyAttachToWorld(2,3);
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
@@ -124,8 +124,8 @@ int main(int argc, const char *argv[]){
 
         std::list<Entity*> serverObjects;
         // serverObjects.push_back(&player);
-        serverObjects.push_back(&player2);
-        serverObjects.push_back(&fa);
+        // serverObjects.push_back(&player2);
+        // serverObjects.push_back(&fa);
 
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
         Area textArea((800/2)-(200/2), (600/2)-(100/2), 200, 100);       
@@ -144,6 +144,7 @@ int main(int argc, const char *argv[]){
             update(soldier_renderer,player, FRAME_RATE,mm);
             window.clear();
             world.step();
+            world.getServerObjects(serverObjects);
             camera.render(player.getPositionX()*32,(player.getPositionY()+3)*32, cameraArea, serverObjects);
             stencil.render(stencilArea, mm.getAngle());
             // text.render(textArea);
@@ -157,8 +158,8 @@ int main(int argc, const char *argv[]){
                 // std::cout <<"firearm: "<<fa.getPositionX()<<" y: "<<fa.getPositionY()<<std::endl;
                 // std::cout<<"mouse x: "<<mm.getPositionX()<<" y: "<<mm.getPositionY()<<std::endl;
                 // std::cout <<"x: "<< soldier_renderer2.getX()<<" y: "<<soldier_renderer2.getY()<<std::endl;
-                std::cout<<world<<std::endl;
             }
+                std::cout<<world<<std::endl;
             i++;  
         }
     } catch (std::exception &e) {
