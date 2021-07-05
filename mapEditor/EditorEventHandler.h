@@ -42,7 +42,7 @@ class EditorEventHandler {
       void mouseMotionUp(SDL_Event& event, std::vector<Tile*>& tiles);
       void mouseMotionDown
       (SDL_Event& event, std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
-      std::vector<Button*>& buttons);
+      std::vector<Button*>& buttons, const std::string& sizeName);
 
    public:
       EditorEventHandler(Window &window,const Image& image, const char* mapName);
@@ -50,7 +50,7 @@ class EditorEventHandler {
 
       bool handleEvents
       (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
-      std::vector<Button*>& buttons);
+      std::vector<Button*>& buttons, const std::string& sizeName);
 };
 
 #endif  // _EDITOR_EVENT_HANDLER_H_

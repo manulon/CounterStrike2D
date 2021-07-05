@@ -3,10 +3,11 @@
 #include <unistd.h>
 #include <utility>
 
-Editor::Editor(Window& window,const char* path,const char* mapName): 
+Editor::Editor(Window& window,const char* path,const char* mapName,
+               std::pair<int,int>& size): 
 window(window),grid("assets/gfx/emptySpace.png", window),
 image(path,window),selectedTile("assets/gfx/selectedTile.png",window),               
-eventHandler(window,image,mapName),editor(mapName){}                                     
+eventHandler(window,image,mapName),editor(mapName),size(size),sizeName(""){}                                     
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
@@ -28,7 +29,8 @@ void Editor:: showGrid(){
 }
 
 bool Editor:: handleEvents(){
-    return eventHandler.handleEvents(tiles,optionTiles,tileOptionButton);
+    setSizeName();
+    return eventHandler.handleEvents(tiles,optionTiles,tileOptionButton,sizeName);
 }
 
 void Editor::fillTileOptionList(){
@@ -39,6 +41,17 @@ void Editor::fillTileOptionList(){
     tileOptionButton.push_back(new ButtonWall(window,editor));
     tileOptionButton.push_back(new ButtonWeaponCharacter(window,editor));
 }
+
+void Editor::setSizeName(){
+    if (size.first == SMALL_WIDTH){
+        sizeName = "small";
+    }else if (size.first == BIG_WIDTH){
+        sizeName = "big";
+    }else if (size.first == HUGE_WIDTH){
+        sizeName = "huge";
+    }
+}
+
 
 Editor::~Editor(){
     for(auto& tile : optionTiles){

@@ -15,6 +15,11 @@
 #include "EditorConfig.h"
 #include <vector>
 
+#define SMALL_WIDTH 800
+#define BIG_WIDTH   1056
+#define HUGE_WIDTH  1312
+
+
 class Editor{
     private:
         Editor(const Editor &other) = delete;
@@ -30,10 +35,13 @@ class Editor{
         std::vector<Button*> tileOptionButton;
         EditorEventHandler eventHandler;
         EditorConfig editor;
+        std::pair<int,int>& size;
+        std::string sizeName;
         
 
    public:
-        Editor(Window& window, const char* path, const char* mapName);
+        Editor(Window& window, const char* path, const char* mapName, 
+               std::pair<int,int>& size);
         ~Editor();
 
         void showGrid();
@@ -41,6 +49,7 @@ class Editor{
         void fillTileOptionList();
         void showMenu();
         void startEditor();
+        void setSizeName();
 };
 
 #endif //_EDITOR_H

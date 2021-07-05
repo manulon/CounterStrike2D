@@ -62,4 +62,8 @@ const char* EditorMenu::getMapName(){
     return handler.getMapName().c_str();
 }
 
+std::pair<int,int>& EditorMenu::getSize(){
+    return pairSize;
+}
+
 EditorMenu::~EditorMenu(){}

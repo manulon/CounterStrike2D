@@ -13,13 +13,13 @@ void ButtonFloor::render(){
 }
 
 bool ButtonFloor::clicked
-(std::vector<Tile*>& options, const Image& image){
+(std::vector<Tile*>& options, const Image& image,const std::string& sizeName){
     for (auto& option: options){
         delete option;
         options.pop_back();
     }
 
-    editor.getAtributes("floor",options,image);
+    editor.getAtributes("floor",sizeName,options,image);
 
     return false;
 }
