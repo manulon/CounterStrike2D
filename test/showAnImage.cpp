@@ -95,7 +95,7 @@ int main(int argc, const char *argv[]){
     try {
         World world;
         Player player(world, 
-    				  0.0f, 0.0f, 
+    				  3.0f, 0.0f, 
     				  0.45f, 0.45f,100);
         Player player2(world, 
     				  1.0f, 0.0f, 
@@ -106,9 +106,10 @@ int main(int argc, const char *argv[]){
 
         Image de_dust("assets/gfx/tiles/default_dust.png", window);
         Image obsimg("assets/gfx/tiles/obstacles.png", window);
-        TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
-        // TileMap mapTest("pepe.yaml", de_dust, obsimg);
-        PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
+        // TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
+        TileMap mapTest(window, "MapaDePruebaEditor.yaml", de_dust, obsimg);
+        // PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
+        PhysicalMapFactory g(world,"MapaDePruebaEditor.yaml");
         Image pointImg("assets/gfx/pointer.bmp",window);
         Pointer pointer(pointImg);
         Camera camera(mapTest);
@@ -152,7 +153,7 @@ int main(int argc, const char *argv[]){
             window.clear();
             world.step();
             world.getServerObjects(serverObjects);
-            camera.render(player.getPositionX()*32,(player.getPositionY()-4)*32, cameraArea, serverObjects);
+            camera.render((player.getPositionX()+8)*32,(player.getPositionY()-2)*32, cameraArea, serverObjects);
             stencil.render(stencilArea, mm.getAngle());
             // text.render(textArea);
             soldier_renderer.render();

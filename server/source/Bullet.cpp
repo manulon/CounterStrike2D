@@ -72,11 +72,11 @@ void Bullet::collideWithFireArm(FireArm &fireArm) {
 
 void Bullet::collideWithPlayer(Player &player) {
     std::cout << "bullet chocado por player\n";
+    Entity::detachFromWorld();
 }
 
 void Bullet::collideWithBorder(Border &border) {
     std::cout << "Bullet chocado por border\n";
-    std::cout <<"x: "<<getPositionX()<<" y: "<<getPositionY()<<std::endl;
     Entity::detachFromWorld();
 }
 

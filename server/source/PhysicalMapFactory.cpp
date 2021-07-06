@@ -27,7 +27,7 @@ Border* PhysicalMapFactory::createBorders(){
         if (obstacles[i][1].as<int>() > height) height = obstacles[i][1].as<int>();
     }
     std::cout << "width"<<width<<"height"<<height<<std::endl;
-    return (new Border(world, 0,0.3f, width + 1, height + 1));    
+    return (new Border(world, 0,0, width + 1, height + 1));    
 }
 
 int PhysicalMapFactory::getHeight(){
