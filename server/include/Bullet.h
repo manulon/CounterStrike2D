@@ -38,8 +38,6 @@ class Bullet : public Entity {
 		void shoot(float angle, float x, float y);
 		float getRadius();
 		//friend std::ostream& operator<<(std::ostream &os, const Bullet &obj);
-		//Bullet& clone(const Bullet &other);
-
 };
 
 #endif // _BULLET_H_

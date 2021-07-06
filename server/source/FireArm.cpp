@@ -93,23 +93,6 @@ void FireArm::collideWithKnife(Knife &knife) {
     std::cout << "FireArm chocado por knife" << std::endl;
 }
 
-/*FireArm& FireArm::clone(const FireArm &other) {
-    if (this == &other) return *this;
-    Entity::clone(other);
-    // TODO: SI ALGO FALLA PUEDE QUE SE NECESITE
-    // AÑADIR AL MUNDO UN NUEVO BODY CON
-    //if (!Entity::isDetached()) { 
-    //    attachToWorld(getPositionX(), getPositionY()); 
-    //}
-    loader.clone(other.loader);
-    bodyDef = other.bodyDef;
-    polygonShape = other.polygonShape;
-    fixtureDef = other.fixtureDef;
-    width = other.width;
-    height = other.height;
-    return *this;
-}*/
-
 void FireArm::setBody(b2Body &body) {
     Entity::setBody(body);
     Entity::bindFixture(fixtureDef);

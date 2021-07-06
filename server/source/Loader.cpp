@@ -40,20 +40,3 @@ void Loader::fillLoader(size_t &ammunition) {
 		bullets.push_front(Bullet(world));
 	}
 }
-
-/*Loader& Loader::clone(const Loader &other) {
-	if (this == &other) return *this;
-	//world = other.world; // OJO QUE NO PUEDEN HABER LOADERS EN
-	//DIFERENTES WORLDS Y SER COPIADOS LUEGO DE CREADOS.
-	bullets.clear();
-
-	std::list<Bullet>::const_iterator it = other.bullets.begin();
-	while(it != other.bullets.end()) {
-		Bullet bullet(world);
-		bullet.clone(*it);
-		bullets.push_back(std::move(bullet));
-		it++;
-	}
-	maxAmmunition = other.maxAmmunition;
-	return *this;
-}*/

@@ -92,14 +92,6 @@ void Entity::setTransform(float x, float y, float angle) {
     body->SetTransform(b2Vec2(x, y), angle * b2_pi/180);
 }
 
-/*Entity& Entity::clone(const Entity &other) {
-    if (this == &other) return *this;
-    body = other.body;
-    //world = other.world; //MISMO PROBLEMA QUE EN LOADER
-    detached = other.detached;
-    return *this;
-}*/
-
 void Entity::setBody(b2Body &body) {
     this->body = &body;
     detached = false;

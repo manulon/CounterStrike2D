@@ -45,7 +45,6 @@ class Entity {
 		void applyForceToCenter(const b2Vec2 &force, bool wake);
 		void applyLinearImpulseToCenter(const b2Vec2 &force, 
                              			bool wake);
-		//Entity& clone(const Entity &other);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		float getPositionX() const;
 		float getPositionY() const;

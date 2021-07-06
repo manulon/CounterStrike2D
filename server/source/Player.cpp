@@ -118,6 +118,7 @@ void Player::collideWithFireArm(FireArm &other) {
     fireArm->lateAttachToWorld(getPositionX()+5, getPositionY());
     Entity::getWorld().spawnFireArm(std::move(fireArm));
     // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
+    // SI NO EXISTE EL ARMA EN EL MUNDO 
     fireArm = std::move(Entity::getWorld().retrieveSpawnedFireArm(other));
     fireArm->detachFromWorld();
 }

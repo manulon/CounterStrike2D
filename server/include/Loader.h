@@ -23,7 +23,6 @@ class Loader {
 		~Loader();
 		Bullet releaseBullet();
 		void reload(size_t &ammunition);
-		//Loader& clone(const Loader &other);
 };
 
 #endif // _LOADER_H_
