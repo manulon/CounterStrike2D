@@ -114,8 +114,15 @@ int main(int argc, const char *argv[]){
         Camera camera(mapTest);
         Soldier soldier_renderer("assets/gfx/player/t4.bmp", window);
         Music music("assets/sfx/menu.wav");
-        FireArm fa(world, 0.3f,0.3f,1,11);
-        fa.earlyAttachToWorld(2,3);
+
+        std::unique_ptr<FireArm> fa(new FireArm(world, 0.3f, 0.3f, 1, 11));
+        fa->earlyAttachToWorld(2.0f, 3.0f);
+        world.spawnFireArm(std::move(fa));
+
+        // TE COMENTE LA LINEA 123 Y 124 PORQUE EL SPAWN ES DIFERENTE AHORA
+        //FireArm fa(world, 0.3f,0.3f,1,11);
+        //fa.earlyAttachToWorld(2,3);
+
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
         SDL_Color textColor {0,0,0};
