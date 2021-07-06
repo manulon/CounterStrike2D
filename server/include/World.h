@@ -13,7 +13,14 @@ class World {
 		b2Vec2 gravity;
 		b2World world;
 		CollisionManager collisionManager;
-		std::list<std::unique_ptr<Entity>> entities;
+
+
+		// // //
+		//std::list<std::unique_ptr<Entity>> entities;
+		std::list<std::unique_ptr<FireArm>> fireArms;
+		std::list<std::unique_ptr<Bullet>> bullets;
+		// // //
+
 		std::queue<std::pair<Entity*, const b2BodyDef*>> bodiesToCreate;
 		std::queue<b2Body**> bodiesToDestroy;
 		float timeStep;
@@ -25,7 +32,7 @@ class World {
 		World(World &&other) = delete;
 		void clean();
 		void cleanBodiesToDestroy();
-		void cleanDetachedEntities();
+		//void cleanDetachedEntities();
 		const b2Body* getBodyList() const;
 
 	public: 
@@ -34,11 +41,17 @@ class World {
 		void step();
 		b2Body* createBody(const b2BodyDef *bodyDef);
 		void destroyBody(b2Body **body);
-		void spawnEntity(std::unique_ptr<Entity> &&entity);
+		//void spawnEntity(std::unique_ptr<Entity> &&entity);
+		void spawnBullet(std::unique_ptr<Bullet> &&bullet);
+		void spawnFireArm(std::unique_ptr<FireArm> &&fireArm);
+		//std::unique_ptr<Entity> retrieveSpawnedEntity(Entity &entity);
+		std::unique_ptr<FireArm> retrieveSpawnedFireArm(FireArm &fireArm);
 		friend std::ostream& operator<<(std::ostream &os, const World &world);
 
 		void createBody(const b2BodyDef &bodyDef, Entity &context);
 		void cleanBodiesToCreate();
+		void cleanFireArms();
+		void cleanBullets();
 		void getServerObjects(std::list<Entity*> &serverObjects);
 };
 

@@ -8,11 +8,12 @@ Entity::Entity(World &world, short id) :
 
 Entity::Entity(Entity &&other) : 
     body(other.body),
-    world(other.world), 
-    detached(other.detached), id(other.id) {
+    world(other.world),
+    detached(other.detached),
+    id(other.id) {
     other.body = nullptr;
     other.detached = true;
-    other.id =0;
+    other.id = 0;
 }
 
 short Entity::getId() const {
@@ -21,9 +22,13 @@ short Entity::getId() const {
 
 Entity::~Entity() { }
 
-void Entity::moveToWorld(std::unique_ptr<Entity> &&entity) {
+/*void Entity::moveToWorld(std::unique_ptr<Entity> &&entity) {
     world.spawnEntity(std::move(entity));
-}
+}*/
+
+/*std::unique_ptr<Entity> Entity::retrieveFromWorld() {
+    return world.retrieveSpawnedEntity(*this);
+}*/
 
 void Entity::bindFixture(const b2Shape &shape, float density) {
     body->CreateFixture(&shape, density);
@@ -83,11 +88,9 @@ void Entity::attachToWorld(b2BodyDef &bodyDef,
 }
 
 void Entity::detachFromWorld() {
-    //if (body != nullptr) {
     if (!detached) { 
         world.destroyBody(&body);
         detached = true;
-        //body = nullptr;        
     }
 }
 
@@ -99,7 +102,7 @@ std::ostream& operator<<(std::ostream &os, const Entity &entity) {
     short id = entity.getId();
     float angle = entity.getAngle();
     char buffer[100];
-    snprintf(buffer, sizeof(buffer), "%i %4.2f %4.2f %4.2f",id, positionX, positionY, angle);
+    snprintf(buffer, sizeof(buffer), "%i %4.2f %4.2f %4.2f", id, positionX, positionY, angle);
     os << buffer;
     return os;
 }
@@ -117,7 +120,6 @@ Entity& Entity::clone(const Entity &other) {
     body = other.body;
     //world = other.world; //MISMO PROBLEMA QUE EN LOADER
     detached = other.detached;
-    id = other.id;
     return *this;
 }
 

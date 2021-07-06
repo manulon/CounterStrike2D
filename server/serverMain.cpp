@@ -12,28 +12,28 @@ int main(int argc, const char *argv[]) {
     try {
     	World world;
         Border border(world, 0.0f, 0.0f, 100.0f, 100.0f);
-        Player player(world, 2.0f, 8.0f, 2.0f, 2.0f);
+        Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
 
-        /*std::unique_ptr<FireArm> fireArm(new FireArm(world, 0.2f, 0.2f, 1));
+        std::unique_ptr<FireArm> fireArm(new FireArm(world, 0.2f, 0.2f, 1, 2));
         fireArm->earlyAttachToWorld(4.3f, 8.0f);
-        world.spawnEntity(std::move(fireArm));*/
-        Knife knife(world);
-        knife.attack(0, 2.0f, 8.0f);
+        world.spawnFireArm(std::move(fireArm));
+        //Knife knife(world);
+        //knife.attack(0, 2.0f, 8.0f);
 
         std::cout << world;
         for (int32 i = 0; i < 120; ++i) {
-            /*player.shoot(90);
+            player.shoot(90);
             player.moveRight();
-            player.update();*/
+            player.update();
 
         	world.step();
-            /*if(i == 90) {
+            if(i == 90) {
                 size_t amm = 1;
                 player.reload(amm);
                 std::cout << "-----Reloaded-----" << std::endl;
                 std::cout << amm << std::endl;
             }
-            std::cout << "-----Disparo-----" << std::endl;*/
+            std::cout << "-----Disparo-----" << std::endl;
             std::cout << world;
         }
 

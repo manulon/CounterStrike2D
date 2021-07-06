@@ -1,5 +1,7 @@
 #include "World.h"
 #include "Entity.h"
+#include "Bullet.h"
+#include "FireArm.h"
 #include <iostream>
 
 #define TIME_STEP 1.0f/60.0f
@@ -49,15 +51,63 @@ void World::step() {
 void World::clean() {
     cleanBodiesToCreate();
 	cleanBodiesToDestroy();
-	cleanDetachedEntities();
+	//cleanDetachedEntities();
+	cleanFireArms();
+	cleanBullets();
 }
 
 const b2Body* World::getBodyList() const {
 	return world.GetBodyList();
 }
 
-void World::spawnEntity(std::unique_ptr<Entity> &&entity) {
+/*void World::spawnEntity(std::unique_ptr<Entity> &&entity) {
 	entities.push_back(std::move(entity));
+}*/
+
+void World::spawnBullet(std::unique_ptr<Bullet> &&bullet) {
+	bullets.push_back(std::move(bullet));
+}
+
+void World::spawnFireArm(std::unique_ptr<FireArm> &&fireArm) {
+	fireArms.push_back(std::move(fireArm));
+}
+
+/*std::unique_ptr<Entity> World::retrieveSpawnedEntity(Entity &entity) {
+	// SI NO FUE SPAWNEADO EL OBJETO AL MUNDO HABRA UN ERROR
+	// PORQUE NO LO ENCONTRARA NUNCA	
+	std::list<std::unique_ptr<Entity>>::iterator it = entities.begin();
+	std::unique_ptr<Entity> spawnedEntity;
+	bool found = false;
+
+	while(it != entities.end() && found == false) {
+		if ((*it).get() == &entity) {
+			found = true;
+			spawnedEntity = std::move((*it));
+			it = entities.erase(it); // OJO ACA
+		} else {
+			it++;
+		}
+	}
+	return spawnedEntity;
+}*/
+
+std::unique_ptr<FireArm> World::retrieveSpawnedFireArm(FireArm &fireArm) {
+	// SI NO FUE SPAWNEADO EL OBJETO AL MUNDO HABRA UN ERROR
+	// PORQUE NO LO ENCONTRARA NUNCA	
+	std::list<std::unique_ptr<FireArm>>::iterator it = fireArms.begin();
+	std::unique_ptr<FireArm> spawnedEntity;
+	bool found = false;
+
+	while(it != fireArms.end() && found == false) {
+		if ((*it).get() == &fireArm) {
+			found = true;
+			spawnedEntity = std::move((*it));
+			it = fireArms.erase(it); // OJO ACA
+		} else {
+			it++;
+		}
+	}
+	return spawnedEntity;
 }
 
 void World::cleanBodiesToDestroy() {
@@ -70,11 +120,33 @@ void World::cleanBodiesToDestroy() {
 	}
 }
 
-void World::cleanDetachedEntities() {
+/*void World::cleanDetachedEntities() {
 	std::list<std::unique_ptr<Entity>>::iterator it = entities.begin();
 	while(it != entities.end()) {
 		if ((*it)->isDetached()) {
 			it = entities.erase(it);
+		} else {
+			++it;
+		}
+	}
+}*/
+
+void World::cleanFireArms() {
+	std::list<std::unique_ptr<FireArm>>::iterator it = fireArms.begin();
+	while(it != fireArms.end()) {
+		if ((*it)->isDetached()) {
+			it = fireArms.erase(it);
+		} else {
+			++it;
+		}
+	}
+}
+
+void World::cleanBullets() {
+	std::list<std::unique_ptr<Bullet>>::iterator it = bullets.begin();
+	while(it != bullets.end()) {
+		if ((*it)->isDetached()) { // agregar condicion || (*it)->outOfRange() 
+			it = bullets.erase(it);
 		} else {
 			++it;
 		}
@@ -92,6 +164,7 @@ std::ostream& operator<<(std::ostream &os, const World &world) {
     }
     return os;
 }
+
 void World::getServerObjects(std::list<Entity*> &serverObjects){
 	serverObjects.clear();
 	const b2Body *node = getBodyList();

@@ -53,7 +53,6 @@ class Player : public Entity {
 		void shoot(float angle);
 		void reload(size_t &ammunition);
 		void setFireArm(std::unique_ptr<FireArm> &&fireArm);
-		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 };
 
 #endif // _PLAYER_H_

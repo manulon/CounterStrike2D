@@ -16,11 +16,11 @@ class Entity {
 		b2Body *body;
 		World &world;
 		bool detached;
+		short id;
 		Entity(const Entity &other) = delete;
 		Entity& operator=(const Entity &other) = delete;
 		Entity& operator=(Entity &&other) = delete;
 		float radiansToAngle(float radians) const;
-		short id;
 
 	public:		
 		Entity(World &world, short id);
@@ -43,7 +43,8 @@ class Entity {
 		void detachFromWorld();
 		void bindFixture(const b2FixtureDef &fixtureDef);
 		void bindFixture(const b2Shape &shape, float density);
-		void moveToWorld(std::unique_ptr<Entity> &&entity);
+		//void moveToWorld(std::unique_ptr<Entity> &&entity);
+		//std::unique_ptr<Entity> retrieveFromWorld();
 		void setTransform(float x, float y, float angle);
 		bool isDetached();
 		void applyForceToCenter(const b2Vec2 &force, bool wake);
@@ -54,7 +55,8 @@ class Entity {
 		float getPositionX() const;
 		float getPositionY() const;
 		float getAngle() const;
-		World& getWorld();		
+		World& getWorld();
+		
 };
 	
 #endif // _ENTITY_H_

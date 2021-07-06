@@ -57,7 +57,7 @@ void FireArm::shoot(float angle, float x, float y) {
     try {
         std::unique_ptr<Bullet> bullet(new Bullet(loader.releaseBullet()));
         bullet->shoot(angle, x, y);
-        Entity::moveToWorld(std::move(bullet));
+        Entity::getWorld().spawnBullet(std::move(bullet));
     } catch (...) { }
 }
 

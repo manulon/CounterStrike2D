@@ -17,8 +17,6 @@ class FireArm : public Entity {
 		b2FixtureDef fixtureDef;
 		float width;
 		float height;
-		//float x, y;
-		//float xOrigin, yOrigin;
 
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2PolygonShape &polygonShape,
