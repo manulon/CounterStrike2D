@@ -25,11 +25,7 @@ class Soldier : public Animation , public DynamicObject{
         void render();
         virtual void render(int x, int y) override;
         void stopMoving();
-        void stopLeft();
-        void stopRight();
-        void stopUp();    
-        void stopDown();
-        void move(char dir);
+        void move();
         int getX();
         int getY();
         int getAngle();

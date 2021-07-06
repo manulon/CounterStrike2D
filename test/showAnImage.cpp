@@ -21,68 +21,9 @@
 #include "FireArm.h"
 #include "Pointer.h"
 #include "Weapon.h"
+#include "EventHandler.h"
 #define PPM 32
 
-static bool handleEvents(Soldier &soldier,Camera& camera, Player &player, float angle) {
-    SDL_Event event;
-    // Para el alumno: Buscar diferencia entre waitEvent y pollEvent
-
-    while (SDL_PollEvent(&event)){
-        switch (event.type) {
-            case SDL_KEYDOWN: {
-                // ¿Qué pasa si mantengo presionada la tecla?    
-                const Uint8 *state = SDL_GetKeyboardState(NULL);
-                if (state[SDL_SCANCODE_LEFT]){
-                    soldier.move(LEFT);
-                    player.moveLeft();
-                }
-                if (state[SDL_SCANCODE_RIGHT]){
-                    soldier.move(RIGHT);
-                    player.moveRight();
-                }
-                if (state[SDL_SCANCODE_DOWN]){
-                    soldier.move(DOWN);
-                    player.moveDown();
-                }
-                if (state[SDL_SCANCODE_UP]){
-                    soldier.move(UP);
-                    player.moveUp();
-                }
-            } // Fin KEY_DOWN
-                break;
-            case SDL_KEYUP: {
-                SDL_KeyboardEvent& keyEvent = (SDL_KeyboardEvent&) event;
-                switch (keyEvent.keysym.sym) {
-                    case SDLK_LEFT:
-                        soldier.stopLeft();
-                        player.stopMoveLeft();
-                        break;
-                    case SDLK_RIGHT:
-                        soldier.stopRight();
-                        player.stopMoveRight();
-                        break;
-                    case SDLK_UP:
-                        soldier.stopUp();
-                        player.stopMoveUp();
-                        break;
-                    case SDLK_DOWN:
-                        soldier.stopDown();
-                        player.stopMoveDown();
-                        break;
-                    } 
-                }// Fin KEY_UP
-                break;
-            case SDL_MOUSEMOTION:
-                break;
-            case SDL_QUIT:
-                std::cout << "Quit :(" << std::endl;
-                return false;
-            case SDL_MOUSEBUTTONDOWN:
-                player.shoot(angle - 90);
-        } // fin switch(event)
-    } // fin while(SDL_PollEvents)
-    return true;
-}
 
 static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) {
     soldier.update(dt);
@@ -107,9 +48,9 @@ int main(int argc, const char *argv[]){
         Image de_dust("assets/gfx/tiles/default_dust.png", window);
         Image obsimg("assets/gfx/tiles/obstacles.png", window);
         // TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
-        TileMap mapTest(window, "MapaDePruebaEditor.yaml", de_dust, obsimg);
+        TileMap mapTest(window, "mapaGiganteDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
         // PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
-        PhysicalMapFactory g(world,"MapaDePruebaEditor.yaml");
+        PhysicalMapFactory g(world,"mapaGiganteDust.yaml");
         Image pointImg("assets/gfx/pointer.bmp",window);
         Pointer pointer(pointImg);
         Camera camera(mapTest);
@@ -119,10 +60,6 @@ int main(int argc, const char *argv[]){
         std::unique_ptr<FireArm> fa(new FireArm(world, 0.3f, 0.3f, 1, 11));
         fa->earlyAttachToWorld(2.0f, 3.0f);
         world.spawnFireArm(std::move(fa));
-
-        // TE COMENTE LA LINEA 123 Y 124 PORQUE EL SPAWN ES DIFERENTE AHORA
-        //FireArm fa(world, 0.3f,0.3f,1,11);
-        //fa.earlyAttachToWorld(2,3);
 
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
@@ -141,14 +78,10 @@ int main(int argc, const char *argv[]){
         MouseManager mm(800,600);
         bool running = true;
         int i = 0;
-        // mapTest.addDynamicObject(player2.getId(), &soldier_renderer2);
-        // mapTest.addDynamicObject(fa.getId(),&weapon);
-        // int offsetY = g.getHeight()/2 - window.getHeight()/32/2 - 1  ;
-        // int offsetX = g.getWidth()/2 - window.getWidth()/32/2 - 1  ;
-        // std::cout <<offsetY <<std::endl;
+        EventHandler eh;
         while (running) {
             
-            running = handleEvents(soldier_renderer,camera, player, mm.getAngle());
+            running = eh.handleEvents(soldier_renderer, player, mm.getAngle());
             update(soldier_renderer,player, FRAME_RATE,mm);
             window.clear();
             world.step();

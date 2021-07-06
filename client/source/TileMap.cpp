@@ -4,8 +4,9 @@
 #include "yaml-cpp/yaml.h"
 #include "RenderizableFactory.h"
 
-TileMap::TileMap(Window & window,const char *pathText, const Image &image, const Image &obs) :
-window(window),image(image),mapName(pathText),imgObstacles(obs),tiles(), obstacles(){
+TileMap::TileMap(Window & window,const char *pathText, const std::string &pathTiles, const std::string &pathObs) :
+window(window),image(pathTiles.c_str(),window),mapName(pathText),
+imgObstacles(pathObs.c_str(),window),tiles(), obstacles(){
 	
     //Deberia tirar excepcion
     // if( map.fail() )

@@ -23,10 +23,10 @@
 class TileMap{
 private:
 	Window &window;
-	const Image &image;
+	const Image image;
 	std::string mapName;
 	SDL_Rect tileClips[ TOTAL_TILE_SPRITES ];
-	const Image &imgObstacles;
+	const Image imgObstacles;
 	SDL_Rect obsClips[80];
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
@@ -37,7 +37,7 @@ private:
     TileMap& operator=(const TileMap &other) = delete;
     TileMap& operator=(TileMap &&other) = delete;
 public:
-	TileMap(Window &window, const char *pathText, const Image &image, const Image &obs);
+	TileMap(Window &window, const char *pathText, const std::string &pathTiles, const std::string &pathObs);
 	~TileMap();
 	void addDynamicObject(short id, DynamicObject *object);
 	bool loadMedia();

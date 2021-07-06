@@ -54,31 +54,10 @@ void Soldier::stopMoving() {
     moving = false;
 }
 
-void Soldier:: move(char dir){
+void Soldier:: move(){
     moving = true;
-    direction = dir;
 }
 
-void Soldier:: stopLeft(){
-    if (direction == DOWN_LEFT) direction = DOWN;
-    else if (direction == UP_LEFT) direction = UP;
-    else if (direction == LEFT) stopMoving();
-}
-void Soldier:: stopRight(){
-    if (direction == DOWN_RIGHT) direction = DOWN;
-    else if (direction == UP_RIGHT) direction = UP;
-    else if (direction == RIGHT) stopMoving();
-}
-void Soldier:: stopUp(){
-    if (direction == UP_RIGHT) direction = RIGHT;
-    else if (direction == UP_LEFT) direction = LEFT;
-    else if (direction == UP) stopMoving();
-}
-void Soldier:: stopDown(){
-    if (direction == DOWN_RIGHT) direction = RIGHT;
-    else if (direction == DOWN_LEFT) direction = LEFT;
-    else if (direction == DOWN) stopMoving();
-}
 
 int Soldier:: getX(){
     return x;
