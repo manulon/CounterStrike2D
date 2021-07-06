@@ -2,18 +2,27 @@
 #define _PLAYER_H_
 
 #include "Entity.h"
-#include "FireArm.h"
 #include <Box2D/Box2D.h>
 
 class World;
+class PrimaryWeapon;
 
 class Player : public Entity {
 	private:
-		b2Vec2 force;
-		std::unique_ptr<FireArm> fireArm;
 		b2BodyDef bodyDef;
     	b2PolygonShape polygonShape;
     	b2FixtureDef fixtureDef;
+
+		b2Vec2 force;
+		std::unique_ptr<SWeapon> weapon;
+
+
+		// primaria
+		// secundaria
+		// terciaria
+
+
+
 		float width;
 		float height;
 
@@ -35,10 +44,9 @@ class Player : public Entity {
 		virtual void collideWith(Entity &entity) override;
 		virtual void collideWithBullet(Bullet &bullet) override;
 		virtual void collideWithObstacle(Obstacle &obstacle) override;
-		virtual void collideWithFireArm(FireArm &fireArm) override;
+		virtual void collideWithWeapon(SWeapon &weapon) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
-		virtual void collideWithKnife(Knife &knife) override;
 		virtual void setBody(b2Body &body) override;
 		void moveRight();
 		void moveLeft();
@@ -51,8 +59,9 @@ class Player : public Entity {
 		void update();
 		void shoot(float angle);
 		void reload(size_t &ammunition);
-		void setFireArm(std::unique_ptr<FireArm> &&fireArm);
+		void setWeapon(std::unique_ptr<SWeapon> &&other);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
+		void collideWithPrimaryWeapon(PrimaryWeapon &other);
 };
 
 #endif // _PLAYER_H_

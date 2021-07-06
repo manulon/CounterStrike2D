@@ -10,6 +10,19 @@
 
 class World {
 	private:
+
+		World(const World &other) = delete;
+		World& operator=(const World &other) = delete;
+		World& operator=(World &&other) = delete;
+		World(World &&other) = delete;
+		void clean();
+		void cleanBodiesToCreate();
+		void cleanBodiesToDestroy();
+		void cleanWeapons();
+		void cleanBullets();
+		const b2Body* getBodyList() const;
+
+	public: 
 		b2Vec2 gravity;
 		b2World world;
 		CollisionManager collisionManager;
@@ -19,29 +32,16 @@ class World {
 		int32 velocityIterations;
 		int32 positionIterations;
 
-		std::list<std::unique_ptr<FireArm>> fireArms;
+		std::list<std::unique_ptr<SWeapon>> weapons;
 		std::list<std::unique_ptr<Bullet>> bullets;
-
-		World(const World &other) = delete;
-		World& operator=(const World &other) = delete;
-		World& operator=(World &&other) = delete;
-		World(World &&other) = delete;
-		void clean();
-		void cleanBodiesToCreate();
-		void cleanBodiesToDestroy();
-		void cleanFireArms();
-		void cleanBullets();
-		const b2Body* getBodyList() const;
-
-	public: 
 		World();
 		~World();
 		void step();
 		b2Body* createBody(const b2BodyDef *bodyDef);
 		void destroyBody(b2Body **body);
 		void spawnBullet(std::unique_ptr<Bullet> &&bullet);
-		void spawnFireArm(std::unique_ptr<FireArm> &&fireArm);
-		std::unique_ptr<FireArm> retrieveSpawnedFireArm(FireArm &fireArm);
+		void spawnWeapon(std::unique_ptr<SWeapon> &&weapon);
+		std::unique_ptr<SWeapon> retrieveSpawnedWeapon(SWeapon &weapon);
 		friend std::ostream& operator<<(std::ostream &os, const World &world);
 
 		void createBody(const b2BodyDef &bodyDef, Entity &context);

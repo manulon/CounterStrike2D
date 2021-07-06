@@ -3,7 +3,7 @@
 
 #include "Entity.h"
 
-class Knife : public Entity {
+class Knife {
 	private:
 		b2BodyDef bodyDef;
     	b2PolygonShape polygonShape;
@@ -21,15 +21,15 @@ class Knife : public Entity {
 		Knife(Knife &&other);
 		~Knife();
 
-		virtual void collideWith(Entity &entity) override;
-		virtual void collideWithBullet(Bullet &bullet) override;
-		virtual void collideWithObstacle(Obstacle &obstacle) override;
-		virtual void collideWithFireArm(FireArm &fireArm) override;
-		virtual void collideWithPlayer(Player &player) override;
-		virtual void collideWithBorder(Border &border) override;
-		virtual void collideWithKnife(Knife &knife) override;
+		virtual void collideWith(Entity &entity);
+		virtual void collideWithBullet(Bullet &bullet);
+		virtual void collideWithObstacle(Obstacle &obstacle);
+		virtual void collideWithPlayer(Player &player);
+		virtual void collideWithBorder(Border &border);
+		virtual void collideWithKnife(Knife &knife);
 
-		virtual void setBody(b2Body &body) override;
+		virtual void setBody(b2Body &body);
+		
 		void attack(float angle, float x, float y);
 };
 

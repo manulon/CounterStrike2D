@@ -6,10 +6,9 @@
 class World;
 class Bullet;
 class Obstacle;
-class FireArm;
+class SWeapon;
 class Player;
 class Border;
-class Knife;
 
 class Entity {
 	private:
@@ -30,12 +29,11 @@ class Entity {
 		virtual void collideWith(Entity &entity) = 0;
 		virtual void collideWithBullet(Bullet &bullet) = 0;
 		virtual void collideWithObstacle(Obstacle &obstacle) = 0;
-		virtual void collideWithFireArm(FireArm &fireArm) = 0;
+		virtual void collideWithWeapon(SWeapon &weapon) = 0;
 		virtual void collideWithPlayer(Player &player) = 0;
 		virtual void collideWithBorder(Border &border) = 0;
-		virtual void collideWithKnife(Knife &knife) = 0;
 		virtual void setBody(b2Body &body);
-		short getId() const ;
+
 		void earlyAttachToWorld(b2BodyDef &bodyDef, const b2FixtureDef &fixtureDef);
 		void lateAttachToWorld(b2BodyDef &bodyDef, Entity &context);
 		void detachFromWorld();
@@ -50,6 +48,7 @@ class Entity {
 		float getPositionY() const;
 		float getAngle() const;
 		World& getWorld();
+		short getId() const ;
 };
 	
 #endif // _ENTITY_H_

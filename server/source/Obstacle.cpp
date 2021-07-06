@@ -6,7 +6,7 @@
 Obstacle::Obstacle(World &world, 
 				   float x, float y,
 				   float width, float height) : 
-    Entity(world,-1) {
+    Entity(world,1) {
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
@@ -46,8 +46,8 @@ void Obstacle::collideWithObstacle(Obstacle &obstacle) {
     std::cout << "obstacle chocado por obstaculo\n";
 }
 
-void Obstacle::collideWithFireArm(FireArm &fireArm) {
-    std::cout << "obstacle chocado por firearm\n";
+void Obstacle::collideWithWeapon(SWeapon &weapon) {
+    std::cout << "obstacle chocado por weapon\n";
 }
 
 void Obstacle::collideWithPlayer(Player &player) {
@@ -56,10 +56,6 @@ void Obstacle::collideWithPlayer(Player &player) {
 
 void Obstacle::collideWithBorder(Border &border) {
     std::cout << "Obstacle chocado por border\n";
-}
-
-void Obstacle::collideWithKnife(Knife &knife) {
-    std::cout << "Obstacle chocado por knife" << std::endl;
 }
 
 void Obstacle::setBody(b2Body &body) {

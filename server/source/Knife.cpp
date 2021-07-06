@@ -6,7 +6,7 @@
 #define WIDTH 0.2f //Dimensiones del cuchillo
 #define HEIGHT 0.1f //
 
-Knife::Knife(World &world) : 
+/*Knife::Knife(World &world) : 
 	Entity(world,1) { 
 }
 
@@ -81,4 +81,4 @@ void Knife::collideWithKnife(Knife &knife) {
 void Knife::setBody(b2Body &body) {
     Entity::setBody(body);
     Entity::bindFixture(fixtureDef);
-}
+}*/

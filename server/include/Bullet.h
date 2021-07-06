@@ -28,10 +28,9 @@ class Bullet : public Entity {
 		virtual void collideWith(Entity &entity) override;
 		virtual void collideWithBullet(Bullet &bullet) override;
 		virtual void collideWithObstacle(Obstacle &obstacle) override;
-		virtual void collideWithFireArm(FireArm &fireArm) override;
+		virtual void collideWithWeapon(SWeapon &weapon) override;
 		virtual void collideWithPlayer(Player &player) override;
 		virtual void collideWithBorder(Border &border) override;
-		virtual void collideWithKnife(Knife &knife) override;
 		virtual void setBody(b2Body &body) override;
 		
 		void attachToWorld(float x, float y);

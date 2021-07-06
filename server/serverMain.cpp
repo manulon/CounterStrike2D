@@ -4,9 +4,12 @@
 #include "Obstacle.h"
 #include "Bullet.h"
 #include "Loader.h"
-#include "FireArm.h"
+#include "SWeapon.h"
 #include "Border.h"
 #include "Knife.h"
+
+#include "Ak47.h"
+#include "SWeapon.h"
 
 int main(int argc, const char *argv[]) {
     try {
@@ -14,9 +17,19 @@ int main(int argc, const char *argv[]) {
         Border border(world, 0.0f, 0.0f, 100.0f, 100.0f);
         Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
 
-        std::unique_ptr<FireArm> fireArm(new FireArm(world, 0.2f, 0.2f, 1, 2));
-        fireArm->earlyAttachToWorld(4.3f, 8.0f);
-        world.spawnFireArm(std::move(fireArm));
+        // CREACION ARMA Y SETEO A PLAYER
+        std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
+        std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
+
+        player.setWeapon(std::move(weapon));
+
+
+        // SPAWN DE ARMA
+        std::unique_ptr<Ak47> ak(new Ak47(world, 0.2f, 0.2f));
+        std::unique_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
+        w->earlyAttachToWorld(4.3f, 8.0f);
+        world.spawnWeapon(std::move(w));
+
         //Knife knife(world);
         //knife.attack(0, 2.0f, 8.0f);
 

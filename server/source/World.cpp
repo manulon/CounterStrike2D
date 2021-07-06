@@ -1,7 +1,7 @@
 #include "World.h"
 #include "Entity.h"
 #include "Bullet.h"
-#include "FireArm.h"
+#include "SWeapon.h"
 #include <iostream>
 
 #define TIME_STEP 1.0f/60.0f
@@ -41,7 +41,7 @@ void World::step() {
 void World::clean() {
     cleanBodiesToCreate();
 	cleanBodiesToDestroy();
-	cleanFireArms();
+	cleanWeapons();
 	cleanBullets();
 }
 
@@ -65,11 +65,11 @@ void World::cleanBodiesToDestroy() {
 	}
 }
 
-void World::cleanFireArms() {
-	std::list<std::unique_ptr<FireArm>>::iterator it = fireArms.begin();
-	while(it != fireArms.end()) {
+void World::cleanWeapons() {
+	std::list<std::unique_ptr<SWeapon>>::iterator it = weapons.begin();
+	while(it != weapons.end()) {
 		if ((*it)->isDetached()) {
-			it = fireArms.erase(it);
+			it = weapons.erase(it);
 		} else {
 			++it;
 		}
@@ -91,22 +91,22 @@ void World::spawnBullet(std::unique_ptr<Bullet> &&bullet) {
 	bullets.push_back(std::move(bullet));
 }
 
-void World::spawnFireArm(std::unique_ptr<FireArm> &&fireArm) {
-	fireArms.push_back(std::move(fireArm));
+void World::spawnWeapon(std::unique_ptr<SWeapon> &&weapon) {
+	weapons.push_back(std::move(weapon));
 }
 
-std::unique_ptr<FireArm> World::retrieveSpawnedFireArm(FireArm &fireArm) {
+std::unique_ptr<SWeapon> World::retrieveSpawnedWeapon(SWeapon &weapon) {
 	// SI NO FUE SPAWNEADO EL OBJETO AL MUNDO HABRA UN ERROR
 	// PORQUE NO LO ENCONTRARA NUNCA	
-	std::list<std::unique_ptr<FireArm>>::iterator it = fireArms.begin();
-	std::unique_ptr<FireArm> spawnedEntity;
+	std::list<std::unique_ptr<SWeapon>>::iterator it = weapons.begin();
+	std::unique_ptr<SWeapon> spawnedEntity;
 	bool found = false;
 
-	while(it != fireArms.end() && found == false) {
-		if ((*it).get() == &fireArm) {
+	while(it != weapons.end() && found == false) {
+		if ((*it).get() == &weapon) {
 			found = true;
 			spawnedEntity = std::move((*it));
-			it = fireArms.erase(it); // OJO ACA
+			it = weapons.erase(it); // OJO ACA
 		} else {
 			it++;
 		}

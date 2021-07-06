@@ -66,22 +66,18 @@ void Bullet::collideWithObstacle(Obstacle &obstacle) {
     Entity::detachFromWorld();
 }
 
-void Bullet::collideWithFireArm(FireArm &fireArm) {
-    std::cout << "bullet chocado por firearm\n";
+void Bullet::collideWithWeapon(SWeapon &weapon) {
+    std::cout << "bullet chocado por weapon\n";
 }
 
 void Bullet::collideWithPlayer(Player &player) {
     std::cout << "bullet chocado por player\n";
-    Entity::detachFromWorld();
 }
 
 void Bullet::collideWithBorder(Border &border) {
     std::cout << "Bullet chocado por border\n";
+    std::cout <<"x: "<<getPositionX()<<" y: "<<getPositionY()<<std::endl;
     Entity::detachFromWorld();
-}
-
-void Bullet::collideWithKnife(Knife &knife) {
-    std::cout << "Bullet chocado por knife" << std::endl;
 }
 
 /*std::ostream& operator<<(std::ostream &os, const Bullet &obj) {

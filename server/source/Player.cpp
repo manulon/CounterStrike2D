@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "World.h"
+#include "SWeapon.h"
+#include "PrimaryWeapon.h"
 
 #define DAMPING 10.0f
 #define DENSITY 1.0f
@@ -13,7 +15,6 @@ Player::Player(World &world,
                float x, float y,
                float width, float height, short id) :
     Entity(world, id), force(0,0),
-    fireArm(new FireArm(world, 0.2f, 0.2f, 100, 13)), 
     width(width), height(height) { 
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
@@ -23,10 +24,14 @@ Player::Player(World &world,
 
 Player::Player(Player &&other) : 
     Entity(std::move(other)), 
-    fireArm(std::move(other.fireArm)),
+    weapon(std::move(other.weapon)), //implementar constructor movimiento weapon
     width(other.width), height(other.height) {
     other.width = 0;
     other.height = 0;
+}
+
+void Player::setWeapon(std::unique_ptr<SWeapon> &&other) {
+    weapon = std::move(other);
 }
 
 Player::~Player() { }
@@ -86,20 +91,20 @@ void Player::update() {
     Entity::applyForceToCenter(force, true);
 }
 
-void Player::collideWith(Entity &entity) {
-    entity.collideWithPlayer(*this);
-}
-
 void Player::shoot(float angle) {
     Entity::setTransform(getPositionX(), getPositionY(), angle);
     float shootRadius = width;
     float xShoot = getPositionX() + shootRadius*cos(angle*b2_pi/180.0f);
     float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
-    fireArm->shoot(angle, xShoot, yShoot);
+    weapon->attack(angle, xShoot, yShoot);
 }
 
 void Player::reload(size_t &ammunition) {
-    fireArm->reload(ammunition);
+    weapon->reload(ammunition);
+}
+
+void Player::collideWith(Entity &entity) {
+    entity.collideWithPlayer(*this);
 }
 
 void Player::collideWithBullet(Bullet &bullet) {
@@ -110,17 +115,8 @@ void Player::collideWithObstacle(Obstacle &obstacle) {
     std::cout << "player chocado por obstaculo\n";
 }
 
-void Player::collideWithFireArm(FireArm &other) {
+void Player::collideWithWeapon(SWeapon &other) {
     std::cout << "player chocado por firearm\n";
-
-    // other.collideWithPlayer(*this);
-
-    fireArm->lateAttachToWorld(getPositionX()+3, getPositionY());
-    Entity::getWorld().spawnFireArm(std::move(fireArm));
-    // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
-    // SI NO EXISTE EL ARMA EN EL MUNDO 
-    fireArm = std::move(Entity::getWorld().retrieveSpawnedFireArm(other));
-    fireArm->detachFromWorld();
 }
 
 void Player::collideWithPlayer(Player &player) {
@@ -131,8 +127,16 @@ void Player::collideWithBorder(Border &border) {
     std::cout << "Player chocado por border\n";
 }
 
-void Player::collideWithKnife(Knife &knife) {
-    std::cout << "Player chocado por knife" << std::endl;
+void Player::collideWithPrimaryWeapon(PrimaryWeapon &other) {
+    std::cout << "player chocado por primaryWeapon\n";
+    // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
+    // SI NO EXISTE EL ARMA EN EL MUNDO 
+
+    weapon->lateAttachToWorld(getPositionX()+5, getPositionY());
+    Entity::getWorld().spawnWeapon(std::move(weapon));
+    SWeapon *otherWeapon = other.getContext();
+    weapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
+    weapon->detachFromWorld();
 }
 
 void Player::setBody(b2Body &body) {

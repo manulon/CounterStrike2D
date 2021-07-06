@@ -51,8 +51,8 @@ void Border::collideWithObstacle(Obstacle &obstacle) {
     std::cout << "Border chocado por obstaculo\n";
 }
 
-void Border::collideWithFireArm(FireArm &fireArm) {
-    std::cout << "Border chocado por firearm\n";
+void Border::collideWithWeapon(SWeapon &weapon) {
+    std::cout << "Border chocado por weapon\n";
 }
 
 void Border::collideWithPlayer(Player &player) {
@@ -61,10 +61,6 @@ void Border::collideWithPlayer(Player &player) {
 
 void Border::collideWithBorder(Border &border) {
     std::cout << "Border chocado por border\n";
-}
-
-void Border::collideWithKnife(Knife &knife) {
-    std::cout << "Border chocado por knife" << std::endl;
 }
 
 void Border::setBody(b2Body &body) {

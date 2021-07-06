@@ -1,5 +1,4 @@
 #include "PhysicalMapFactory.h"
-#include "FireArm.h"
 
 PhysicalMapFactory::PhysicalMapFactory(World &w,std::string mapName) : world(w),map(YAML::LoadFile(mapName)), border(createBorders()) {
     YAML::Node obstaclesyaml = map["obstacles"];
@@ -7,7 +6,7 @@ PhysicalMapFactory::PhysicalMapFactory(World &w,std::string mapName) : world(w),
     for (unsigned int i = 0; i < obstaclesyaml.size();i++){
         YAML::Node obstacle = obstaclesyaml[i];
         std::unique_ptr<Obstacle> ptr(new Obstacle(world,
-                                     obstacle[0].as<int>()-(width/2),obstacle[1].as<int>()-(height/2)
+                                      obstacle[0].as<int>()-(width/2),obstacle[1].as<int>()-(height/2)
                                      ,0.45f,0.45f));
         obstacles.push_back(std::move(ptr));
     }
@@ -27,7 +26,7 @@ Border* PhysicalMapFactory::createBorders(){
         if (obstacles[i][1].as<int>() > height) height = obstacles[i][1].as<int>();
     }
     std::cout << "width"<<width<<"height"<<height<<std::endl;
-    return (new Border(world, 0,0, width + 1, height + 1));    
+    return (new Border(world, 0,0.3f, width + 1, height + 1));    
 }
 
 int PhysicalMapFactory::getHeight(){
