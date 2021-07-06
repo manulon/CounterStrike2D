@@ -6,19 +6,19 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -ggdb -Werror -pedantic -pedantic-errors -O3")
 
-include_directories(include 
-					include/Exception 
-					include/SDL/Init
-					include/SDL/Color
-					include/SDL/Renderer
-					include/SDL/Sound
-					include/SDL/Texture
-					include/SDL/Window
+include_directories(client/include 
+					client/include/Exception 
+					client/include/SDL/Init
+					client/include/SDL/Color
+					client/include/SDL/Renderer
+					client/include/SDL/Sound
+					client/include/SDL/Texture
+					client/include/SDL/Window
 					)
 include_directories(server/include)
 include_directories(mapEditor)
 
-FILE(GLOB_RECURSE source "source/*.cpp")
+FILE(GLOB_RECURSE source "client/source/*.cpp")
 FILE(GLOB_RECURSE server "server/source/*.cpp")
 FILE(GLOB_RECURSE mapEditor "mapEditor/*.cpp")
 
