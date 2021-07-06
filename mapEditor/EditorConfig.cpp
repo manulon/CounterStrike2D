@@ -2,11 +2,11 @@
 
 EditorConfig::EditorConfig(const char* mapName):
 fileNode(),readerNode(),mapName(mapName){
-    //createFile();
+    createFile();
 }
 
 void EditorConfig::createFile(){
-    /*std::ofstream file("editor_config.yaml");
+    std::ofstream file("editor_config.yaml");
     
     fileNode["dust"]["small"]["box"][0] = YAML::Load("[21, 0, 360]");
     fileNode["dust"]["small"]["box"][1] = YAML::Load("[22, 0, 408]");
@@ -49,7 +49,7 @@ void EditorConfig::createFile(){
     fileNode["aztec"]["small"]["box"][4] = YAML::Load("[27, 48, 408]");
     fileNode["aztec"]["small"]["floor"][0] = YAML::Load("[2, 0, 360]");
     fileNode["aztec"]["small"]["floor"][1] = YAML::Load("[3, 48, 360]");
-    fileNode["aztec"]["small"]["floor"][2] = YAML::Load("[4, 98, 360]");
+    fileNode["aztec"]["small"]["floor"][2] = YAML::Load("[5, 98, 360]");
     fileNode["aztec"]["small"]["misc"][0] = YAML::Load("[38, 0, 360]");
     fileNode["aztec"]["small"]["misc"][1] = YAML::Load("[39, 48, 360]");
     fileNode["aztec"]["small"]["misc"][2] = YAML::Load("[43, 0, 408]");
@@ -67,52 +67,23 @@ void EditorConfig::createFile(){
     fileNode["aztec"]["small"]["wall"][10] = YAML::Load("[19, 242, 360]");
 
     fileNode["inferno"]["small"]["box"][0] = YAML::Load("[21, 0, 360]");
-    fileNode["inferno"]["small"]["box"][1] = YAML::Load("[22, 0, 408]");
-    fileNode["inferno"]["small"]["box"][2] = YAML::Load("[23, 48, 360]");
-    fileNode["inferno"]["small"]["box"][3] = YAML::Load("[24, 48, 408]");
-    fileNode["inferno"]["small"]["box"][4] = YAML::Load("[25, 98, 360]");
-    fileNode["inferno"]["small"]["box"][5] = YAML::Load("[26, 98, 408]");
-    fileNode["inferno"]["small"]["box"][6] = YAML::Load("[27, 146, 360]");
-    fileNode["inferno"]["small"]["box"][7] = YAML::Load("[28, 146, 408]");
-    fileNode["inferno"]["small"]["box"][8] = YAML::Load("[29, 194, 408]");
-    fileNode["inferno"]["small"]["box"][9] = YAML::Load("[30, 194, 360]");
-    fileNode["inferno"]["small"]["box"][10] = YAML::Load("[31, 242, 360]");
-    fileNode["inferno"]["small"]["box"][11] = YAML::Load("[32, 242, 408]");
-    fileNode["inferno"]["small"]["box"][12] = YAML::Load("[33, 290, 360]");
-    fileNode["inferno"]["small"]["box"][13] = YAML::Load("[34, 290, 408]");
-    fileNode["inferno"]["small"]["box"][14] = YAML::Load("[35, 338, 360]");
+    fileNode["inferno"]["small"]["box"][1] = YAML::Load("[22, 48, 360]");
+    fileNode["inferno"]["small"]["box"][2] = YAML::Load("[23, 96, 360]");
+    fileNode["inferno"]["small"]["box"][3] = YAML::Load("[26, 0, 408]");
+    fileNode["inferno"]["small"]["box"][4] = YAML::Load("[27, 48, 408]");
     fileNode["inferno"]["small"]["floor"][0] = YAML::Load("[2, 0, 360]");
-    fileNode["inferno"]["small"]["floor"][1] = YAML::Load("[5, 0, 408]");
-    fileNode["inferno"]["small"]["floor"][2] = YAML::Load("[58, 48, 360]");
+    fileNode["inferno"]["small"]["floor"][1] = YAML::Load("[3, 48, 360]");
+    fileNode["inferno"]["small"]["floor"][2] = YAML::Load("[5, 0, 408]");
     fileNode["inferno"]["small"]["floor"][3] = YAML::Load("[59, 48, 408]");
-    fileNode["inferno"]["small"]["floor"][4] = YAML::Load("[60, 98, 360]");
-    fileNode["inferno"]["small"]["floor"][5] = YAML::Load("[61, 98, 408]");
-    fileNode["inferno"]["small"]["floor"][6] = YAML::Load("[62, 146, 360]");
-    fileNode["inferno"]["small"]["floor"][7] = YAML::Load("[63, 146, 408]");
-    fileNode["inferno"]["small"]["floor"][8] = YAML::Load("[64, 194, 408]");
-    fileNode["inferno"]["small"]["floor"][9] = YAML::Load("[65, 194, 360]");
-    fileNode["inferno"]["small"]["floor"][10] = YAML::Load("[66, 242, 360]");
-    fileNode["inferno"]["small"]["floor"][11] = YAML::Load("[67, 242, 408]");
-    fileNode["inferno"]["small"]["floor"][12] = YAML::Load("[68, 290, 360]");
-    fileNode["inferno"]["small"]["floor"][13] = YAML::Load("[69, 290, 408]");
-    fileNode["inferno"]["small"]["floor"][14] = YAML::Load("[70, 338, 360]");
     fileNode["inferno"]["small"]["misc"][0]= YAML::Load("[71, 0, 360]");
     fileNode["inferno"]["small"]["misc"][1] = YAML::Load("[72, 0, 408]");
     fileNode["inferno"]["small"]["misc"][2] = YAML::Load("[73, 48, 360]");
     fileNode["inferno"]["small"]["misc"][3] = YAML::Load("[74, 48, 408]");
-    fileNode["inferno"]["small"]["wall"][0] = YAML::Load("[3, 0, 360]");
-    fileNode["inferno"]["small"]["wall"][1] = YAML::Load("[4, 0, 408]");
-    fileNode["inferno"]["small"]["wall"][2] = YAML::Load("[6, 48, 360]");
-    fileNode["inferno"]["small"]["wall"][3] = YAML::Load("[7, 48, 408]");
-    fileNode["inferno"]["small"]["wall"][4] = YAML::Load("[8, 98, 360]");
-    fileNode["inferno"]["small"]["wall"][5] = YAML::Load("[9, 98, 408]");
-    fileNode["inferno"]["small"]["wall"][6] = YAML::Load("[10, 146, 360]");
-    fileNode["inferno"]["small"]["wall"][7] = YAML::Load("[15, 146, 408]");
-    fileNode["inferno"]["small"]["wall"][8] = YAML::Load("[20, 194, 408]");
-    fileNode["inferno"]["small"]["wall"][9] = YAML::Load("[33, 194, 360]");
-    fileNode["inferno"]["small"]["wall"][10] = YAML::Load("[34, 242, 360]");
-    fileNode["inferno"]["small"]["wall"][11] = YAML::Load("[38, 242, 408]");
-    fileNode["inferno"]["small"]["wall"][12] = YAML::Load("[39, 290, 360]");
+    fileNode["inferno"]["small"]["wall"][0] = YAML::Load("[39, 0, 360]");
+    fileNode["inferno"]["small"]["wall"][1] = YAML::Load("[43, 48, 360]");
+    fileNode["inferno"]["small"]["wall"][2] = YAML::Load("[4, 96, 360]");
+    fileNode["inferno"]["small"]["wall"][3] = YAML::Load("[38, 0, 408]");
+    fileNode["inferno"]["small"]["wall"][4] = YAML::Load("[44, 48, 408]");
 
     fileNode["dust"]["big"]["box"][0] = YAML::Load("[21, 0, 360]");
     fileNode["dust"]["big"]["box"][1] = YAML::Load("[22, 0, 408]");
@@ -173,52 +144,23 @@ void EditorConfig::createFile(){
     fileNode["aztec"]["big"]["wall"][10] = YAML::Load("[19, 242, 360]");
 
     fileNode["inferno"]["big"]["box"][0] = YAML::Load("[21, 0, 360]");
-    fileNode["inferno"]["big"]["box"][1] = YAML::Load("[22, 0, 408]");
-    fileNode["inferno"]["big"]["box"][2] = YAML::Load("[23, 48, 360]");
-    fileNode["inferno"]["big"]["box"][3] = YAML::Load("[24, 48, 408]");
-    fileNode["inferno"]["big"]["box"][4] = YAML::Load("[25, 98, 360]");
-    fileNode["inferno"]["big"]["box"][5] = YAML::Load("[26, 98, 408]");
-    fileNode["inferno"]["big"]["box"][6] = YAML::Load("[27, 146, 360]");
-    fileNode["inferno"]["big"]["box"][7] = YAML::Load("[28, 146, 408]");
-    fileNode["inferno"]["big"]["box"][8] = YAML::Load("[29, 194, 408]");
-    fileNode["inferno"]["big"]["box"][9] = YAML::Load("[30, 194, 360]");
-    fileNode["inferno"]["big"]["box"][10] = YAML::Load("[31, 242, 360]");
-    fileNode["inferno"]["big"]["box"][11] = YAML::Load("[32, 242, 408]");
-    fileNode["inferno"]["big"]["box"][12] = YAML::Load("[33, 290, 360]");
-    fileNode["inferno"]["big"]["box"][13] = YAML::Load("[34, 290, 408]");
-    fileNode["inferno"]["big"]["box"][14] = YAML::Load("[35, 338, 360]");
+    fileNode["inferno"]["big"]["box"][1] = YAML::Load("[22, 48, 360]");
+    fileNode["inferno"]["big"]["box"][2] = YAML::Load("[23, 96, 360]");
+    fileNode["inferno"]["big"]["box"][3] = YAML::Load("[26, 0, 408]");
+    fileNode["inferno"]["big"]["box"][4] = YAML::Load("[27, 48, 408]");
     fileNode["inferno"]["big"]["floor"][0] = YAML::Load("[2, 0, 360]");
-    fileNode["inferno"]["big"]["floor"][1] = YAML::Load("[5, 0, 408]");
-    fileNode["inferno"]["big"]["floor"][2] = YAML::Load("[58, 48, 360]");
+    fileNode["inferno"]["big"]["floor"][1] = YAML::Load("[3, 48, 360]");
+    fileNode["inferno"]["big"]["floor"][2] = YAML::Load("[5, 0, 408]");
     fileNode["inferno"]["big"]["floor"][3] = YAML::Load("[59, 48, 408]");
-    fileNode["inferno"]["big"]["floor"][4] = YAML::Load("[60, 98, 360]");
-    fileNode["inferno"]["big"]["floor"][5] = YAML::Load("[61, 98, 408]");
-    fileNode["inferno"]["big"]["floor"][6] = YAML::Load("[62, 146, 360]");
-    fileNode["inferno"]["big"]["floor"][7] = YAML::Load("[63, 146, 408]");
-    fileNode["inferno"]["big"]["floor"][8] = YAML::Load("[64, 194, 408]");
-    fileNode["inferno"]["big"]["floor"][9] = YAML::Load("[65, 194, 360]");
-    fileNode["inferno"]["big"]["floor"][10] = YAML::Load("[66, 242, 360]");
-    fileNode["inferno"]["big"]["floor"][11] = YAML::Load("[67, 242, 408]");
-    fileNode["inferno"]["big"]["floor"][12] = YAML::Load("[68, 290, 360]");
-    fileNode["inferno"]["big"]["floor"][13] = YAML::Load("[69, 290, 408]");
-    fileNode["inferno"]["big"]["floor"][14] = YAML::Load("[70, 338, 360]");
     fileNode["inferno"]["big"]["misc"][0]= YAML::Load("[71, 0, 360]");
     fileNode["inferno"]["big"]["misc"][1] = YAML::Load("[72, 0, 408]");
     fileNode["inferno"]["big"]["misc"][2] = YAML::Load("[73, 48, 360]");
     fileNode["inferno"]["big"]["misc"][3] = YAML::Load("[74, 48, 408]");
-    fileNode["inferno"]["big"]["wall"][0] = YAML::Load("[3, 0, 360]");
-    fileNode["inferno"]["big"]["wall"][1] = YAML::Load("[4, 0, 408]");
-    fileNode["inferno"]["big"]["wall"][2] = YAML::Load("[6, 48, 360]");
-    fileNode["inferno"]["big"]["wall"][3] = YAML::Load("[7, 48, 408]");
-    fileNode["inferno"]["big"]["wall"][4] = YAML::Load("[8, 98, 360]");
-    fileNode["inferno"]["big"]["wall"][5] = YAML::Load("[9, 98, 408]");
-    fileNode["inferno"]["big"]["wall"][6] = YAML::Load("[10, 146, 360]");
-    fileNode["inferno"]["big"]["wall"][7] = YAML::Load("[15, 146, 408]");
-    fileNode["inferno"]["big"]["wall"][8] = YAML::Load("[20, 194, 408]");
-    fileNode["inferno"]["big"]["wall"][9] = YAML::Load("[33, 194, 360]");
-    fileNode["inferno"]["big"]["wall"][10] = YAML::Load("[34, 242, 360]");
-    fileNode["inferno"]["big"]["wall"][11] = YAML::Load("[38, 242, 408]");
-    fileNode["inferno"]["big"]["wall"][12] = YAML::Load("[39, 290, 360]");
+    fileNode["inferno"]["big"]["wall"][0] = YAML::Load("[39, 0, 360]");
+    fileNode["inferno"]["big"]["wall"][1] = YAML::Load("[43, 48, 360]");
+    fileNode["inferno"]["big"]["wall"][2] = YAML::Load("[4, 96, 360]");
+    fileNode["inferno"]["big"]["wall"][3] = YAML::Load("[38, 0, 408]");
+    fileNode["inferno"]["big"]["wall"][4] = YAML::Load("[44, 48, 408]");
 
     fileNode["dust"]["huge"]["box"][0] = YAML::Load("[21, 0, 552]");
     fileNode["dust"]["huge"]["box"][1] = YAML::Load("[22, 0, 504]");
@@ -278,53 +220,24 @@ void EditorConfig::createFile(){
     fileNode["aztec"]["huge"]["wall"][9] = YAML::Load("[18, 194, 552]");
     fileNode["aztec"]["huge"]["wall"][10] = YAML::Load("[19, 242, 552]");
     
-    fileNode["inferno"]["huge"]["box"][0] = YAML::Load("[21, 0, 552]");
-    fileNode["inferno"]["huge"]["box"][1] = YAML::Load("[22, 0, 504]");
-    fileNode["inferno"]["huge"]["box"][2] = YAML::Load("[23, 48, 552]");
-    fileNode["inferno"]["huge"]["box"][3] = YAML::Load("[24, 48, 504]");
-    fileNode["inferno"]["huge"]["box"][4] = YAML::Load("[25, 98, 552]");
-    fileNode["inferno"]["huge"]["box"][5] = YAML::Load("[26, 98, 504]");
-    fileNode["inferno"]["huge"]["box"][6] = YAML::Load("[27, 146, 552]");
-    fileNode["inferno"]["huge"]["box"][7] = YAML::Load("[28, 146, 504]");
-    fileNode["inferno"]["huge"]["box"][8] = YAML::Load("[29, 194, 504]");
-    fileNode["inferno"]["huge"]["box"][9] = YAML::Load("[30, 194, 552]");
-    fileNode["inferno"]["huge"]["box"][10] = YAML::Load("[31, 242, 552]");
-    fileNode["inferno"]["huge"]["box"][11] = YAML::Load("[32, 242, 504]");
-    fileNode["inferno"]["huge"]["box"][12] = YAML::Load("[33, 290, 552]");
-    fileNode["inferno"]["huge"]["box"][13] = YAML::Load("[34, 290, 504]");
-    fileNode["inferno"]["huge"]["box"][14] = YAML::Load("[35, 338, 552]");
-    fileNode["inferno"]["huge"]["floor"][0] = YAML::Load("[2, 0, 552]");
-    fileNode["inferno"]["huge"]["floor"][1] = YAML::Load("[5, 0, 504]");
-    fileNode["inferno"]["huge"]["floor"][2] = YAML::Load("[58, 48, 552]");
-    fileNode["inferno"]["huge"]["floor"][3] = YAML::Load("[59, 48, 504]");
-    fileNode["inferno"]["huge"]["floor"][4] = YAML::Load("[60, 98, 552]");
-    fileNode["inferno"]["huge"]["floor"][5] = YAML::Load("[61, 98, 504]");
-    fileNode["inferno"]["huge"]["floor"][6] = YAML::Load("[62, 146, 552]");
-    fileNode["inferno"]["huge"]["floor"][7] = YAML::Load("[63, 146, 504]");
-    fileNode["inferno"]["huge"]["floor"][8] = YAML::Load("[64, 194, 504]");
-    fileNode["inferno"]["huge"]["floor"][9] = YAML::Load("[65, 194, 552]");
-    fileNode["inferno"]["huge"]["floor"][10] = YAML::Load("[66, 242, 552]");
-    fileNode["inferno"]["huge"]["floor"][11] = YAML::Load("[67, 242, 504]");
-    fileNode["inferno"]["huge"]["floor"][12] = YAML::Load("[68, 290, 552]");
-    fileNode["inferno"]["huge"]["floor"][13] = YAML::Load("[69, 290, 504]");
-    fileNode["inferno"]["huge"]["floor"][14] = YAML::Load("[70, 338, 552]");
+    fileNode["inferno"]["huge"]["box"][0] = YAML::Load("[21, 0, 504]");
+    fileNode["inferno"]["huge"]["box"][1] = YAML::Load("[22, 48, 504]");
+    fileNode["inferno"]["huge"]["box"][2] = YAML::Load("[23, 96, 504]");
+    fileNode["inferno"]["huge"]["box"][3] = YAML::Load("[26, 0, 552]");
+    fileNode["inferno"]["huge"]["box"][4] = YAML::Load("[27, 48, 552]");
+    fileNode["inferno"]["huge"]["floor"][0] = YAML::Load("[2, 0, 504]");
+    fileNode["inferno"]["huge"]["floor"][1] = YAML::Load("[3, 48, 504]");
+    fileNode["inferno"]["huge"]["floor"][2] = YAML::Load("[5, 0, 552]");
+    fileNode["inferno"]["huge"]["floor"][3] = YAML::Load("[59, 48, 552]");
     fileNode["inferno"]["huge"]["misc"][0]= YAML::Load("[71, 0, 552]");
     fileNode["inferno"]["huge"]["misc"][1] = YAML::Load("[72, 0, 504]");
     fileNode["inferno"]["huge"]["misc"][2] = YAML::Load("[73, 48, 552]");
     fileNode["inferno"]["huge"]["misc"][3] = YAML::Load("[74, 48, 504]");
-    fileNode["inferno"]["huge"]["wall"][0] = YAML::Load("[3, 0, 552]");
-    fileNode["inferno"]["huge"]["wall"][1] = YAML::Load("[4, 0, 504]");
-    fileNode["inferno"]["huge"]["wall"][2] = YAML::Load("[6, 48, 552]");
-    fileNode["inferno"]["huge"]["wall"][3] = YAML::Load("[7, 48, 504]");
-    fileNode["inferno"]["huge"]["wall"][4] = YAML::Load("[8, 98, 552]");
-    fileNode["inferno"]["huge"]["wall"][5] = YAML::Load("[9, 98, 504]");
-    fileNode["inferno"]["huge"]["wall"][6] = YAML::Load("[10, 146, 552]");
-    fileNode["inferno"]["huge"]["wall"][7] = YAML::Load("[15, 146, 504]");
-    fileNode["inferno"]["huge"]["wall"][8] = YAML::Load("[20, 194, 504]");
-    fileNode["inferno"]["huge"]["wall"][9] = YAML::Load("[33, 194, 552]");
-    fileNode["inferno"]["huge"]["wall"][10] = YAML::Load("[34, 242, 552]");
-    fileNode["inferno"]["huge"]["wall"][11] = YAML::Load("[38, 242, 504]");
-    fileNode["inferno"]["huge"]["wall"][12] = YAML::Load("[39, 290, 552]");
+    fileNode["inferno"]["huge"]["wall"][0] = YAML::Load("[39, 0, 504]");
+    fileNode["inferno"]["huge"]["wall"][1] = YAML::Load("[43, 48, 504]");
+    fileNode["inferno"]["huge"]["wall"][2] = YAML::Load("[4, 96, 504]");
+    fileNode["inferno"]["huge"]["wall"][3] = YAML::Load("[38, 0, 552]");
+    fileNode["inferno"]["huge"]["wall"][4] = YAML::Load("[44, 48, 552]");
 
     fileNode["small"]["obstacles"][0] = YAML::Load("[2, 0, 360]");
     fileNode["small"]["obstacles"][1] = YAML::Load("[3, 0, 408]");
@@ -349,7 +262,7 @@ void EditorConfig::createFile(){
 
     file << fileNode;
 
-    file.close();*/
+    file.close();
 }
 
 void EditorConfig::getAtributes(std::string atributeName,const std::string& sizeName,
