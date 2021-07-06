@@ -20,19 +20,15 @@ int main(int argc, const char *argv[]){
         
 
     if (menu.runEditor()){
-        Window window("Counter Strike 2D", menu.getWidth(), menu.getHeight(), 
-                    SDL_WINDOW_RESIZABLE, 
-                    SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-
-        Editor editor(window,menu.getPath().c_str(),menu.getMapName(),menu.getSize());
+        Editor editor(menu.getPath().c_str(),menu.getMapName(),menu.getSize());
         editor.fillTileOptionList();
     
         bool runningEditor(true);
         while (runningEditor) {
-            window.clear();
+            editor.clearWindow();
             editor.showGrid();    	
             runningEditor = editor.handleEvents();
-            window.render();
+            editor.render();
         }
         return 0;
     }

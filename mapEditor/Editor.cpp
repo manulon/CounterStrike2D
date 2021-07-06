@@ -3,12 +3,14 @@
 #include <unistd.h>
 #include <utility>
 
-Editor::Editor(Window& window,const char* path,const char* mapName,
+Editor::Editor(const char* path,const char* mapName,
                std::pair<int,int>& size): 
-window(window),grid("assets/gfx/emptySpace.png", window),
+window("Counter Strike 2D", size.first, size.second, 
+        SDL_WINDOW_RESIZABLE,SDL_INIT_VIDEO | SDL_INIT_AUDIO),
+grid("assets/gfx/emptySpace.png", window),
 image(path,window),selectedTile("assets/gfx/selectedTile.png",window),
 obsImage("assets/gfx/tiles/obstacles.png",window),               
-eventHandler(window,image,obsImage,mapName),editor(mapName),size(size),sizeName(""){}                                     
+eventHandler(window,image,obsImage,mapName),editor(mapName),sizeName(""){}                                     
 
 void Editor:: showGrid(){    
     Area gridArea(0, 0, 32, 32);
@@ -45,15 +47,22 @@ void Editor::fillTileOptionList(){
 }
 
 void Editor::setSizeName(){
-    if (size.first == SMALL_WIDTH){
+    if (window.getWidth() == SMALL_WIDTH){
         sizeName = "small";
-    }else if (size.first == BIG_WIDTH){
+    }else if (window.getWidth() == BIG_WIDTH){
         sizeName = "big";
-    }else if (size.first == HUGE_WIDTH){
+    }else if (window.getWidth() == HUGE_WIDTH){
         sizeName = "huge";
     }
 }
 
+void Editor::clearWindow(){
+    window.clear();
+}
+
+void Editor::render(){
+    window.render();
+}
 
 Editor::~Editor(){
     for(auto& tile : optionTiles){

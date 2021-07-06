@@ -2,7 +2,7 @@
 
 EditorConfig::EditorConfig(const char* mapName):
 fileNode(),readerNode(),mapName(mapName){
-    createFile();
+    //createFile();
 }
 
 void EditorConfig::createFile(){
@@ -355,7 +355,6 @@ void EditorConfig::createFile(){
 void EditorConfig::getAtributes(std::string atributeName,const std::string& sizeName,
                                 std::vector<Tile*>& options,std::vector<Tile*>& obstacleOptionsTiles,
                                 const Image& image,const Image& obsImage){
-     std::cout<<"POST GET ATRIBUTES EL SIZE ES: "<<options.size()<<std::endl;
 
     readerNode = YAML::LoadFile("editor_config.yaml");
 

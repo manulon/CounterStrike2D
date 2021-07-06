@@ -26,7 +26,7 @@ class Editor{
         Editor& operator=(const Editor &other) = delete;
         Editor& operator=(Editor &&other) = delete;
     
-        Window& window;
+        Window window;
         Image grid;
         Image image;
         Image selectedTile;
@@ -37,12 +37,11 @@ class Editor{
         std::vector<Button*> tileOptionButton;
         EditorEventHandler eventHandler;
         EditorConfig editor;
-        std::pair<int,int>& size;
         std::string sizeName;
         
 
    public:
-        Editor(Window& window, const char* path, const char* mapName, 
+        Editor(const char* path, const char* mapName, 
                std::pair<int,int>& size);
         ~Editor();
 
@@ -52,6 +51,8 @@ class Editor{
         void showMenu();
         void startEditor();
         void setSizeName();
+        void clearWindow();
+        void render();
 };
 
 #endif //_EDITOR_H

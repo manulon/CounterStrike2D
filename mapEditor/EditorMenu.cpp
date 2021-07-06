@@ -29,14 +29,6 @@ void EditorMenu::close(){
     pairSize = selectorMenu.getPair();
 }
 
-int EditorMenu::getWidth(){
-    return pairSize.first;
-}
-
-int EditorMenu::getHeight(){
-    return pairSize.second;
-}
-
 void EditorMenu::clear(){
     window.clear();
 }

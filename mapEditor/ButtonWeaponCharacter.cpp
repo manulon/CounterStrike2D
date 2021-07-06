@@ -14,6 +14,5 @@ void ButtonWeaponCharacter::render(){
 
 bool ButtonWeaponCharacter::clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,
                             		const Image& image,const Image& obsImage,const std::string& sizeName){
-    std::cout<<"Clickee duo"<< std::endl;
     return false;
 }

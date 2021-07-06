@@ -38,8 +38,6 @@ class EditorMenu{
         bool runEditor();
         std::string getPath();
         const char* getMapName();
-        int getWidth();
-        int getHeight();
         std::pair<int,int>& getSize();
 
 };
