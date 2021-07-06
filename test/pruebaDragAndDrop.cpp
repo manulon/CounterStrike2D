@@ -31,7 +31,7 @@ int main(int argc, const char *argv[]){
             editor.render();
         }
         return 0;
-    }
+    }   
 
     return 0;
 }
