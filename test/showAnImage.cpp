@@ -18,9 +18,10 @@
 #include "Obstacle.h"
 #include "MouseManager.h"
 #include "PhysicalMapFactory.h"
-#include "FireArm.h"
+#include "SWeapon.h"
 #include "Pointer.h"
 #include "Weapon.h"
+#include "Ak47.h"
 #include "EventHandler.h"
 #define PPM 32
 
@@ -41,12 +42,22 @@ int main(int argc, const char *argv[]){
         Player player2(world, 
     				  1.0f, 0.0f, 
     				  0.45f, 0.45f,0);
+
+        // CREACION ARMA Y SETEO A PLAYER
+        std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
+        std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
+        player.setWeapon(std::move(weapon));
+
+        std::unique_ptr<Ak47> a(new Ak47(world, 0.2f, 0.2f));
+        std::unique_ptr<SWeapon> weap(new SWeapon(world, std::move(a)));
+        player2.setWeapon(std::move(weap));
+
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
-        Image de_dust("assets/gfx/tiles/default_dust.png", window);
-        Image obsimg("assets/gfx/tiles/obstacles.png", window);
+        //Image de_dust("assets/gfx/tiles/default_dust.png", window);
+        //Image obsimg("assets/gfx/tiles/obstacles.png", window);
         // TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
         TileMap mapTest(window, "mapaGiganteDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
         // PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
@@ -57,9 +68,15 @@ int main(int argc, const char *argv[]){
         Soldier soldier_renderer("assets/gfx/player/t4.bmp", window);
         Music music("assets/sfx/menu.wav");
 
-        std::unique_ptr<FireArm> fa(new FireArm(world, 0.3f, 0.3f, 1, 11));
+        /*std::unique_ptr<FireArm> fa(new FireArm(world, 0.3f, 0.3f, 1, 11));
         fa->earlyAttachToWorld(2.0f, 3.0f);
-        world.spawnFireArm(std::move(fa));
+        world.spawnFireArm(std::move(fa));*/
+
+        std::unique_ptr<Ak47> ak(new Ak47(world, 0.2f, 0.2f));
+        std::unique_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
+        w->earlyAttachToWorld(4.3f, 8.0f);
+        world.spawnWeapon(std::move(w));
+
 
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
