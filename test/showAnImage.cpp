@@ -74,7 +74,7 @@ int main(int argc, const char *argv[]){
 
         std::unique_ptr<Ak47> ak(new Ak47(world, 0.2f, 0.2f));
         std::unique_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
-        w->earlyAttachToWorld(4.3f, 8.0f);
+        w->earlyAttachToWorld(2.0f, 3.0f);
         world.spawnWeapon(std::move(w));
 
 
