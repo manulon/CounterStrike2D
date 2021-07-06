@@ -11,10 +11,6 @@ class Image {
         SdlTexture sdlTexture;
         SdlRenderer &sdlRenderer;
         const char* path;
-        int posX;
-        int posY;
-        int width;
-        int height;
 
         Image(const Image &other) = delete;
         //Image& operator=(const Image &other) = delete;
