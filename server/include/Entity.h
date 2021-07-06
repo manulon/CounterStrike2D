@@ -56,7 +56,6 @@ class Entity {
 		float getPositionY() const;
 		float getAngle() const;
 		World& getWorld();
-		
 };
 	
 #endif // _ENTITY_H_

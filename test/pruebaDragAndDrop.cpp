@@ -24,13 +24,6 @@ int main(int argc, const char *argv[]){
                     SDL_WINDOW_RESIZABLE, 
                     SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
-        /* ------------------------------------- */
-        Image de_dust("assets/gfx/backgroundTest.png", window);
-        Tile tilexx(1,1,1,de_dust);
-        SdlColor colorcito(0,0,0);
-        Text textcito("assets/gfx/fonts/liberationsans.ttf", 40,"DFA",colorcito.getColor(),window);
-        /*---------------------------------------*/
-
         Editor editor(window,menu.getPath().c_str(),menu.getMapName(),menu.getSize());
         editor.fillTileOptionList();
     

@@ -6,7 +6,7 @@
 Border::Border(World &world,
                float x, float y,
                float width, float height) : 
-    Entity(world,1), x(x), y(y),
+    Entity(world, 150), x(x), y(y),
     width(width), height(height) {
     setBodyParams(borderDef, x, y);
     setFixtureParams(side, fixtureDef);
