@@ -15,6 +15,7 @@ class MenuOptionExitMode : public MenuOption{
 		           const char *textToRender,Window &window);
         ~MenuOptionExitMode();
 
+        virtual bool mouseInButton(int x, int y);
         virtual bool clicked(std::vector<MenuOption*>& options) override;
         virtual void render() override;
         virtual const char* getPathToImage() override;

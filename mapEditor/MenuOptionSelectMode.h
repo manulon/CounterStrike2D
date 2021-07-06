@@ -20,6 +20,7 @@ class MenuOptionSelectMode : public MenuOption{
 		           const char *textToRender,Window &window);
         ~MenuOptionSelectMode();
 
+        virtual bool mouseInButton(int x, int y);
         virtual bool clicked(std::vector<MenuOption*>& options) override;
         virtual void render() override;
         virtual const char* getPathToImage() override;

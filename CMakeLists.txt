@@ -25,16 +25,16 @@ FILE(GLOB_RECURSE mapEditor "mapEditor/*.cpp")
 add_executable(dragAndDrop test/pruebaDragAndDrop.cpp ${mapEditor} ${server} ${source})
 target_link_libraries(dragAndDrop SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-add_executable(showAnImage test/showAnImage.cpp ${server} ${source})
-target_link_libraries(showAnImage SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
+# add_executable(showAnImage test/showAnImage.cpp ${server} ${source})
+# target_link_libraries(showAnImage SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-add_executable(tiles test/tiles.cpp ${server} ${source})
-target_link_libraries(tiles SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
+# add_executable(tiles test/tiles.cpp ${server} ${source})
+# target_link_libraries(tiles SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-add_executable(box2dTest server/serverMain.cpp ${server})
-target_link_libraries(box2dTest Box2D yaml-cpp)
+# add_executable(box2dTest server/serverMain.cpp ${server})
+# target_link_libraries(box2dTest Box2D yaml-cpp)
 
-add_executable(mapTest test/makeMap.cpp ${source} ${server} ${mapEditor})
-target_link_libraries(mapTest SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
+# add_executable(mapTest test/makeMap.cpp ${source} ${server} ${mapEditor})
+# target_link_libraries(mapTest SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

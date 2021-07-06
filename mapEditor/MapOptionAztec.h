@@ -15,6 +15,7 @@ class MapOptionAztec : public MenuOption{
         MapOptionAztec(Window& window);
         ~MapOptionAztec();
 
+        virtual bool mouseInButton(int x, int y);
         virtual const char* getPathToImage() override;
         virtual void render() override;
         virtual bool clicked(std::vector<MenuOption*>& options) override;

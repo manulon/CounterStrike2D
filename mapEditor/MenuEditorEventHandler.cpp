@@ -32,18 +32,13 @@ bool MenuEditorEventHandler::mouseMotionHandler
 (SDL_Event& event,std::vector<MenuOption*>& options){
     mousePositionX = event.motion.x;
     mousePositionY = event.motion.y;
-    for(auto& option: options){
-        if (option->mouseInText(mousePositionX,mousePositionY)){
-            //option->changeColor(255,250,0);
-        }
-    }
     return true;
 }
 
 bool MenuEditorEventHandler::mouseMotionDown
 (SDL_Event& event,std::vector<MenuOption*>& options){
     for(auto& option: options){
-        if (option->mouseInText(mousePositionX,mousePositionY)){
+        if (option->mouseInButton(mousePositionX,mousePositionY)){
             if (option->getPathToImage() != nullptr){
                 path = option->getPathToImage();
                 mapName = option->getMapName();

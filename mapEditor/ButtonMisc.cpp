@@ -2,14 +2,14 @@
 #include <iostream>
 
 ButtonMisc:: ButtonMisc(Window& window,EditorConfig& editor): 
-Button("assets/gfx/fonts/liberationsans.ttf",40,"Misc",window,editor),
+Button("assets/gfx/buttons/ButtonMisc.png",window,editor,
+        window.getWidth()-275,window.getHeight()-80,70,25),
 window(window){}
 
 ButtonMisc::~ButtonMisc(){}
 
 void ButtonMisc::render(){
-    Area renderArea(window.getWidth()-275,window.getHeight()-80,70,25);
-    textBox.render(renderArea);
+    button.render(buttonArea);
 }
 
 bool ButtonMisc::clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,

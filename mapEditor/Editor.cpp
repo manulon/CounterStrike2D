@@ -12,7 +12,7 @@ image(path,window),selectedTile("assets/gfx/selectedTile.png",window),
 obsImage("assets/gfx/tiles/obstacles.png",window),               
 eventHandler(window,image,obsImage,mapName),editor(mapName),sizeName(""){}                                     
 
-void Editor:: showGrid(){    
+void Editor::showGrid(){    
     Area gridArea(0, 0, 32, 32);
     Area selectedArea(window.getWidth()/2,window.getHeight()-90,40,40);
     while ( gridArea.getY() < (window.getHeight() - 128) ){ /* CONSTANTE EL 128 */
@@ -31,7 +31,7 @@ void Editor:: showGrid(){
     }
 }
 
-bool Editor:: handleEvents(){
+bool Editor::handleEvents(){
     setSizeName();
     return eventHandler.handleEvents(tiles,optionTiles,obstaclesOptionTiles,
                                      tileOptionButton,sizeName);
@@ -42,7 +42,6 @@ void Editor::fillTileOptionList(){
     tileOptionButton.push_back(new ButtonFloor(window,editor));
     tileOptionButton.push_back(new ButtonMisc(window,editor));
     tileOptionButton.push_back(new ButtonObstacles(window,editor));
-    tileOptionButton.push_back(new ButtonWall(window,editor));
     tileOptionButton.push_back(new ButtonWeaponCharacter(window,editor));
 }
 

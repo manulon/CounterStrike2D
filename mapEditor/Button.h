@@ -1,10 +1,10 @@
 #ifndef _BUTTON_H_
 #define _BUTTON_H_
 
-#include "SdlColor.h"
-#include "Text.h"
+#include "Area.h"
 #include "Tile.h"
 #include "EditorConfig.h"
+#include "Image.h"
 #include <vector>
 
 class Button{
@@ -13,16 +13,14 @@ class Button{
         Button& operator=(const Button &other) = delete;
         Button& operator=(Button &&other) = delete;
 
-        SdlColor color;
-
     protected:
-        Text textBox;
+        Image button;
+        Area buttonArea;
         EditorConfig& editor;
 
     public:
-        Button(const char *fontPath, int ptsize,
-		       const char *textToRender,Window &window,
-               EditorConfig& editor);
+        Button(const char *path,Window &window,EditorConfig& editor,
+               int x, int y, int w, int h);
         virtual ~Button();
 
         bool mouseInText(int x, int y);

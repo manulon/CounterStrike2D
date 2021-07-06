@@ -2,7 +2,7 @@
 #include <iostream>
 
 MapOptionDust:: MapOptionDust(Window& window): 
-MenuOption("assets/gfx/fonts/liberationsans.ttf",40,"Dust",window),
+MenuOption("assets/gfx/buttons/ButtonDust.png",window,250,25,239,32),
 window(window){}
 
 MapOptionDust::~MapOptionDust(){}
@@ -16,8 +16,7 @@ const char* MapOptionDust::getMapName(){
 }
 
 void MapOptionDust::render(){
-    Area renderArea(300,50,100,30);
-    optionText.render(renderArea);
+    button.render(buttonArea);
 }
 
 bool MapOptionDust::clicked(std::vector<MenuOption*>& options){
@@ -25,3 +24,11 @@ bool MapOptionDust::clicked(std::vector<MenuOption*>& options){
 }
 
 void MapOptionDust::setPair(std::pair<int,int>& pair){}
+
+bool MapOptionDust::mouseInButton(int x, int y){
+    if ( (x > buttonArea.getX() && x < (buttonArea.getX() + buttonArea.getWidth()) &&
+         (y > buttonArea.getY() && y < (buttonArea.getY() + buttonArea.getHeight())) )) {
+         return true;
+    }
+    return false;
+}

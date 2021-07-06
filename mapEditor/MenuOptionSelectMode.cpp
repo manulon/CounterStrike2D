@@ -4,7 +4,7 @@
 MenuOptionSelectMode:: MenuOptionSelectMode
 (const char *fontPath, int ptsize,
 const char *textToRender,Window &window):
-MenuOption(fontPath,ptsize,textToRender,window),
+MenuOption("assets/gfx/buttons/ButtonMap.png",window,5,50,237,32),
 window(window){}
 
 MenuOptionSelectMode::~MenuOptionSelectMode(){}
@@ -16,11 +16,8 @@ bool MenuOptionSelectMode::clicked(std::vector<MenuOption*>& options){
     return true;
 }
 
-
-
 void MenuOptionSelectMode::render(){
-    Area selectArea(0, 50, 150, 40);              
-    optionText.render(selectArea);
+    button.render(buttonArea);
 }
 
 const char* MenuOptionSelectMode:: getPathToImage(){
@@ -32,3 +29,11 @@ const char* MenuOptionSelectMode:: getMapName(){
 }
 
 void MenuOptionSelectMode::setPair(std::pair<int,int>& pair){}
+
+bool MenuOptionSelectMode::mouseInButton(int x, int y){
+    if ( (x > buttonArea.getX() && x < (buttonArea.getX() + buttonArea.getWidth()) &&
+         (y > buttonArea.getY() && y < (buttonArea.getY() + buttonArea.getHeight())) )) {
+         return true;
+    }
+    return false;
+}

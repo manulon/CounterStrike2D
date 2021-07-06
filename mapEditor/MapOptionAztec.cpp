@@ -4,7 +4,7 @@
 
 
 MapOptionAztec:: MapOptionAztec(Window& window): 
-MenuOption("assets/gfx/fonts/liberationsans.ttf",40,"Aztec",window),
+MenuOption("assets/gfx/buttons/ButtonAztec.png",window,250,60,239,32),
 window(window){}
 
 MapOptionAztec::~MapOptionAztec(){}
@@ -18,8 +18,7 @@ const char* MapOptionAztec::getMapName(){
 }
 
 void MapOptionAztec::render(){
-    Area renderArea(300,25,100,30);
-    optionText.render(renderArea);
+    button.render(buttonArea);
 }
 
 bool MapOptionAztec::clicked(std::vector<MenuOption*>& options){
@@ -27,3 +26,11 @@ bool MapOptionAztec::clicked(std::vector<MenuOption*>& options){
 }
 
 void MapOptionAztec::setPair(std::pair<int,int>& pair){}
+
+bool MapOptionAztec::mouseInButton(int x, int y){
+    if ( (x > buttonArea.getX() && x < (buttonArea.getX() + buttonArea.getWidth()) &&
+         (y > buttonArea.getY() && y < (buttonArea.getY() + buttonArea.getHeight())) )) {
+         return true;
+    }
+    return false;
+}

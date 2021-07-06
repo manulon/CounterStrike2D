@@ -10,7 +10,6 @@
 #include "ButtonFloor.h"
 #include "ButtonMisc.h"
 #include "ButtonObstacles.h"
-#include "ButtonWall.h"
 #include "ButtonWeaponCharacter.h"
 #include "EditorConfig.h"
 #include <vector>
