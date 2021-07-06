@@ -1,9 +1,7 @@
 #include "SizeOptionHuge.h"
 
-SizeOptionHuge:: SizeOptionHuge
-(const char *fontPath, int ptsize,
-const char *textToRender,Window &window):
-MenuOption(fontPath,ptsize,textToRender,window),
+SizeOptionHuge:: SizeOptionHuge(Window &window):
+MenuOption("assets/gfx/buttons/ButtonHuge.png",window,480,50,237,32),
 window(window){}
 
 SizeOptionHuge::~SizeOptionHuge(){}
@@ -13,8 +11,7 @@ bool SizeOptionHuge::clicked(std::vector<MenuOption*>& options){
 }
 
 void SizeOptionHuge::render(){
-    Area selectArea(275, 50, 125, 40);              
-    optionText.render(selectArea);
+    button.render(buttonArea);
 }
 
 const char* SizeOptionHuge:: getPathToImage(){
@@ -28,4 +25,12 @@ const char* SizeOptionHuge:: getMapName(){
 void SizeOptionHuge::setPair(std::pair<int,int>& pair){
     pair.first = 1312;
     pair.second = 600;
+}
+
+bool SizeOptionHuge::mouseInButton(int x, int y){
+    if ( (x > buttonArea.getX() && x < (buttonArea.getX() + buttonArea.getWidth()) &&
+         (y > buttonArea.getY() && y < (buttonArea.getY() + buttonArea.getHeight())) )) {
+         return true;
+    }
+    return false;
 }

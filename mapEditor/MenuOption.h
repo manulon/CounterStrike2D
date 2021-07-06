@@ -1,10 +1,9 @@
 #ifndef _MENU_OPTION_H
 #define _MENU_OPTION_H
 
-#include "SdlColor.h"
 #include "Window.h"
-#include "Text.h"
 #include "Area.h"
+#include "Image.h"
 #include <vector>
 
 class MenuOption{
@@ -12,19 +11,17 @@ class MenuOption{
         MenuOption(const MenuOption &other) = delete;
         MenuOption& operator=(const MenuOption &other) = delete;
         MenuOption& operator=(MenuOption &&other) = delete;
-
-    SdlColor color;
-
+        
     protected:
-        Text optionText;
+        Image button;
+        Area buttonArea;
 
     public:
-        MenuOption(const char *fontPath, int ptsize,
-		           const char *textToRender,Window &window);
+        MenuOption(const char* pontPath, Window &window, int x, int y, int w, int h);
         virtual ~MenuOption();
 
         
-        bool mouseInText(int x, int y);
+        virtual bool mouseInButton(int x, int y) = 0;
         virtual bool clicked(std::vector<MenuOption*>& options) = 0;
         virtual void render() = 0;
         virtual const char* getPathToImage() = 0;

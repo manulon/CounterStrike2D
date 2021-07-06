@@ -5,12 +5,9 @@ color(0,0,0),selectedWidth(0),selectedHeight(0),
 pair(selectedWidth,selectedHeight),mousePositionX(0),mousePositionY(0){}
 
 void SizeSelectorMenu::setSizeOptions(Window& window){
-    sizeOptions.push_back(new SizeOptionSmall("assets/gfx/fonts/liberationsans.ttf", 40,"Pequeno",
-                          window));
-    sizeOptions.push_back(new SizeOptionBig("assets/gfx/fonts/liberationsans.ttf", 40,"Grande",
-                          window));
-    sizeOptions.push_back(new SizeOptionHuge("assets/gfx/fonts/liberationsans.ttf", 40,"Monstruoso",
-                          window));
+    sizeOptions.push_back(new SizeOptionSmall(window));
+    sizeOptions.push_back(new SizeOptionBig(window));
+    sizeOptions.push_back(new SizeOptionHuge(window));
 }
 
 bool SizeSelectorMenu::handleEvents(){
@@ -40,7 +37,7 @@ bool SizeSelectorMenu::mouseMotionUp(SDL_Event& event){
 
 bool SizeSelectorMenu::mouseMotionDown(SDL_Event& event){
     for(auto& option: sizeOptions){
-        if (option->mouseInText(mousePositionX,mousePositionY)){
+        if (option->mouseInButton(mousePositionX,mousePositionY)){
             option->setPair(pair);
             return false;
         }
@@ -59,12 +56,12 @@ bool SizeSelectorMenu::mouseMotionHandler(SDL_Event& event){
 }
 
 void SizeSelectorMenu::run(){
-    Window window("Menu principal",400,100,
+    Window window("Menu editor",725,100,
                   SDL_WINDOW_RESIZABLE,(SDL_INIT_VIDEO | SDL_INIT_AUDIO));
 
     Text title("assets/gfx/fonts/liberationsans.ttf", 40,"Seleccione un tamano de mapa",
                color.getColor(),window);
-    Area titleRenderArea(0,0,400,45);
+    Area titleRenderArea(180,0,400,45);
     setSizeOptions(window);
 
     bool keepRunning(true);

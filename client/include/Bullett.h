@@ -1,5 +1,6 @@
 #ifndef _BULLETT_H_
 #define _BULLETT_H_
+
 //ACLARACION: BULLET SE ESCRIBE CON UNA SOLA T PERO LO PUSE CON 2 PARA DIFERENCIAR DEL BULLET DEL SERVER
 #include "Image.h"
 #include "DynamicObject.h"

@@ -31,9 +31,10 @@ Image& Image::operator=(Image &&other) {
     return *this;
 }*/
 
+
 void Image::render(const Area &dest) const {
 	SDL_Rect destrect = {dest.getX(), dest.getY(), 
-                         dest.getWidth(), dest.getHeight()};
+                        dest.getWidth(), dest.getHeight()};
 	sdlRenderer.renderCopy(sdlTexture.getTexture(), nullptr, &destrect);   
 }
 

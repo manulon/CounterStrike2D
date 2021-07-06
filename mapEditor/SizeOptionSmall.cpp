@@ -1,9 +1,7 @@
 #include "SizeOptionSmall.h"
 
-SizeOptionSmall:: SizeOptionSmall
-(const char *fontPath, int ptsize,
-const char *textToRender,Window &window):
-MenuOption(fontPath,ptsize,textToRender,window),
+SizeOptionSmall:: SizeOptionSmall(Window &window):
+MenuOption("assets/gfx/buttons/ButtonSmall.png",window,0,50,237,32),
 window(window){}
 
 SizeOptionSmall::~SizeOptionSmall(){}
@@ -13,8 +11,7 @@ bool SizeOptionSmall::clicked(std::vector<MenuOption*>& options){
 }
 
 void SizeOptionSmall::render(){
-    Area selectArea(0, 50, 125, 40);              
-    optionText.render(selectArea);
+    button.render(buttonArea);
 }
 
 const char* SizeOptionSmall:: getPathToImage(){
@@ -28,4 +25,12 @@ const char* SizeOptionSmall:: getMapName(){
 void SizeOptionSmall::setPair(std::pair<int,int>& pair){
     pair.first = 800;
     pair.second = 472;
+}
+
+bool SizeOptionSmall::mouseInButton(int x, int y){
+    if ( (x > buttonArea.getX() && x < (buttonArea.getX() + buttonArea.getWidth()) &&
+         (y > buttonArea.getY() && y < (buttonArea.getY() + buttonArea.getHeight())) )) {
+         return true;
+    }
+    return false;
 }

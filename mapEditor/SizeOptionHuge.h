@@ -13,10 +13,10 @@ class SizeOptionHuge : public MenuOption{
     Window& window;
 
     public:
-        SizeOptionHuge(const char *fontPath, int ptsize,
-		           const char *textToRender,Window &window);
+        SizeOptionHuge(Window &window);
         ~SizeOptionHuge();
 
+        virtual bool mouseInButton(int x, int y);
         virtual bool clicked(std::vector<MenuOption*>& options) override;
         virtual void render() override;
         virtual const char* getPathToImage() override;

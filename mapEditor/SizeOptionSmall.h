@@ -13,10 +13,10 @@ class SizeOptionSmall : public MenuOption{
     Window& window;
 
     public:
-        SizeOptionSmall(const char *fontPath, int ptsize,
-		           const char *textToRender,Window &window);
+        SizeOptionSmall(Window &window);
         ~SizeOptionSmall();
-
+        
+        virtual bool mouseInButton(int x, int y);
         virtual bool clicked(std::vector<MenuOption*>& options) override;
         virtual void render() override;
         virtual const char* getPathToImage() override;

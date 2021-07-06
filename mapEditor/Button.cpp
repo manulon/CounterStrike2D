@@ -1,15 +1,16 @@
 #include "Button.h"
 #include <iostream>
 
-Button::Button(const char *fontPath, int ptsize,
-		               const char *textToRender, 
-		               Window &window,EditorConfig& editor):
-color(0,0,0),
-textBox(fontPath,ptsize,textToRender,color.getColor(),window),
-editor(editor){}
+Button::Button(const char *path,Window &window,EditorConfig& editor,
+               int x, int y, int w, int h):
+button(path,window),buttonArea(0,0,0,0),editor(editor){}
 
 bool Button::mouseInText(int x, int y){
-    return textBox.mouseInText(x,y);
+    if ( (x > buttonArea.getX() && x < (buttonArea.getX() + buttonArea.getWidth()) &&
+         (y > buttonArea.getY() && y < (buttonArea.getY() + buttonArea.getHeight())) )) {
+         return true;
+    }
+    return false;
 }
 
 Button::~Button(){}

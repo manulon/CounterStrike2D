@@ -2,14 +2,14 @@
 #include <iostream>
 
 ButtonBox:: ButtonBox(Window& window,EditorConfig& editor): 
-Button("assets/gfx/fonts/liberationsans.ttf",40,"Cajas",window,editor),
+Button("assets/gfx/buttons/ButtonBox.png",window,editor,
+        window.getWidth()-275,window.getHeight()-105,70,25),
 window(window){}
 
 ButtonBox::~ButtonBox(){}
 
 void ButtonBox::render(){
-    Area renderArea(window.getWidth()-275,window.getHeight()-105,70,25);
-    textBox.render(renderArea);
+    button.render(buttonArea);
 }
 
 bool ButtonBox::clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,
