@@ -35,7 +35,7 @@ void Knife::earlyAttachToWorld(float x, float y) {
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape);
     setFixtureParams(polygonShape, fixtureDef);
-    Entity::attachToWorld(bodyDef, fixtureDef);
+    Entity::earlyAttachToWorld(bodyDef, fixtureDef);
 }
 
 void Knife::attack(float angle, float x, float y) {

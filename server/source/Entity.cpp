@@ -16,23 +16,7 @@ Entity::Entity(Entity &&other) :
     other.id = 0;
 }
 
-short Entity::getId() const {
-    return id;
-}
-
 Entity::~Entity() { }
-
-/*void Entity::moveToWorld(std::unique_ptr<Entity> &&entity) {
-    world.spawnEntity(std::move(entity));
-}*/
-
-/*std::unique_ptr<Entity> Entity::retrieveFromWorld() {
-    return world.retrieveSpawnedEntity(*this);
-}*/
-
-void Entity::bindFixture(const b2Shape &shape, float density) {
-    body->CreateFixture(&shape, density);
-}
 
 void Entity::bindFixture(const b2FixtureDef &fixtureDef) {
     body->CreateFixture(&fixtureDef);
@@ -69,22 +53,15 @@ float Entity::getAngle() const {
     return angle;
 }
 
-void Entity::attachToWorld(b2BodyDef &bodyDef, Entity &context) {
-    world.createBody(bodyDef, context);
-}
-
-void Entity::attachToWorld(b2BodyDef &bodyDef, 
-                  const b2Shape &shape, float density) {
-    body = world.createBody(&bodyDef); 
-    bindFixture(shape, density);
-    detached = false;
-}
-
-void Entity::attachToWorld(b2BodyDef &bodyDef, 
+void Entity::earlyAttachToWorld(b2BodyDef &bodyDef, 
 				  const b2FixtureDef &fixtureDef) {
     body = world.createBody(&bodyDef); 
     bindFixture(fixtureDef);
     detached = false;
+}
+
+void Entity::lateAttachToWorld(b2BodyDef &bodyDef, Entity &context) {
+    world.createBody(bodyDef, context);
 }
 
 void Entity::detachFromWorld() {
@@ -115,13 +92,13 @@ void Entity::setTransform(float x, float y, float angle) {
     body->SetTransform(b2Vec2(x, y), angle * b2_pi/180);
 }
 
-Entity& Entity::clone(const Entity &other) {
+/*Entity& Entity::clone(const Entity &other) {
     if (this == &other) return *this;
     body = other.body;
     //world = other.world; //MISMO PROBLEMA QUE EN LOADER
     detached = other.detached;
     return *this;
-}
+}*/
 
 void Entity::setBody(b2Body &body) {
     this->body = &body;
@@ -130,5 +107,9 @@ void Entity::setBody(b2Body &body) {
 
 World& Entity::getWorld() {
     return world;
+}
+
+short Entity::getId() const {
+    return id;
 }
 

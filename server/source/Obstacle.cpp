@@ -7,10 +7,14 @@ Obstacle::Obstacle(World &world,
 				   float x, float y,
 				   float width, float height) : 
     Entity(world,1) {
-    b2BodyDef bodyDef;
+    /*setBodyParams(bodyDef, x, y);
+    setShapeParams(polygonShape, width, height);
+    Entity::attachToWorld(bodyDef, polygonShape, DENSITY);*/
+
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
-    Entity::attachToWorld(bodyDef, polygonShape, DENSITY);
+    setFixtureParams(polygonShape, fixtureDef);
+    Entity::earlyAttachToWorld(bodyDef, fixtureDef);
 }
 
 Obstacle::Obstacle(Obstacle &&other) : 
@@ -26,6 +30,12 @@ void Obstacle::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
 void Obstacle::setShapeParams(b2PolygonShape &polygonShape,
                       		  float width, float height) {
     polygonShape.SetAsBox(width, height);	
+}
+
+void Obstacle::setFixtureParams(const b2PolygonShape &polygonShape, 
+                              b2FixtureDef &fixtureDef) {
+    fixtureDef.shape = &polygonShape;
+    fixtureDef.density = DENSITY;
 }
 
 void Obstacle::collideWith(Entity &entity) {
@@ -58,5 +68,5 @@ void Obstacle::collideWithKnife(Knife &knife) {
 
 void Obstacle::setBody(b2Body &body) {
     Entity::setBody(body);
-    Entity::bindFixture(polygonShape, DENSITY);
+    Entity::bindFixture(fixtureDef);
 }

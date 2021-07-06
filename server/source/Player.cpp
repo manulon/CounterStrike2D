@@ -18,7 +18,7 @@ Player::Player(World &world,
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
-    Entity::attachToWorld(bodyDef, fixtureDef);
+    Entity::earlyAttachToWorld(bodyDef, fixtureDef);
 }
 
 Player::Player(Player &&other) : 
@@ -30,10 +30,6 @@ Player::Player(Player &&other) :
 }
 
 Player::~Player() { }
-
-void Player::bindFixture(b2FixtureDef &fixtureDef) {
-    Entity::bindFixture(fixtureDef);
-}
 
 void Player::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
     bodyDef.userData = static_cast<void*>(this);

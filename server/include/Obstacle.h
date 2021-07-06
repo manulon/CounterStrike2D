@@ -8,7 +8,8 @@ class World;
 class Obstacle : public Entity {
 	private:
 		b2BodyDef bodyDef;
-		b2PolygonShape polygonShape;
+    	b2PolygonShape polygonShape;
+    	b2FixtureDef fixtureDef;
 		
 		Obstacle(const Obstacle &other) = delete;
 		Obstacle& operator=(const Obstacle &other) = delete;
@@ -16,6 +17,8 @@ class Obstacle : public Entity {
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2PolygonShape &polygonShape,
                       		float width, float height);
+		void setFixtureParams(const b2PolygonShape &polygonShape, 
+							  b2FixtureDef &fixtureDef);
 
 	public:
 		Obstacle(World &world, 

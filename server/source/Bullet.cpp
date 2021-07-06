@@ -15,7 +15,7 @@ void Bullet::attachToWorld(float x, float y) {
     setBodyParams(bodyDef, x, y);
     setShapeParams(circleShape);
     setFixtureParams(circleShape, fixtureDef);
-    Entity::attachToWorld(bodyDef, fixtureDef);
+    Entity::earlyAttachToWorld(bodyDef, fixtureDef);
 }
 
 Bullet::Bullet(Bullet &&other) : 
@@ -93,7 +93,7 @@ float Bullet::getRadius() {
     return RADIUS;
 }
 
-Bullet& Bullet::clone(const Bullet &other) {
+/*Bullet& Bullet::clone(const Bullet &other) {
     if (this == &other) return *this;
     Entity::clone(other);
     // TODO: SI ALGO FALLA PUEDE QUE SE NECESITE
@@ -105,7 +105,7 @@ Bullet& Bullet::clone(const Bullet &other) {
     circleShape = other.circleShape;
     fixtureDef = other.fixtureDef;
     return *this;
-}
+}*/
 
 void Bullet::setBody(b2Body &body) {
     Entity::setBody(body);

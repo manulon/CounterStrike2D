@@ -22,14 +22,14 @@ void FireArm::earlyAttachToWorld(float x, float y) {
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height, x, y);
     setFixtureParams(polygonShape, fixtureDef);
-    Entity::attachToWorld(bodyDef, fixtureDef);
+    Entity::earlyAttachToWorld(bodyDef, fixtureDef);
 }
 
 void FireArm::lateAttachToWorld(float x, float y) {
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height, x, y);
     setFixtureParams(polygonShape, fixtureDef);
-    Entity::attachToWorld(bodyDef, *this);   
+    Entity::lateAttachToWorld(bodyDef, *this);   
 }
 
 FireArm::~FireArm() { }
@@ -93,7 +93,7 @@ void FireArm::collideWithKnife(Knife &knife) {
     std::cout << "FireArm chocado por knife" << std::endl;
 }
 
-FireArm& FireArm::clone(const FireArm &other) {
+/*FireArm& FireArm::clone(const FireArm &other) {
     if (this == &other) return *this;
     Entity::clone(other);
     // TODO: SI ALGO FALLA PUEDE QUE SE NECESITE
@@ -108,7 +108,7 @@ FireArm& FireArm::clone(const FireArm &other) {
     width = other.width;
     height = other.height;
     return *this;
-}
+}*/
 
 void FireArm::setBody(b2Body &body) {
     Entity::setBody(body);

@@ -36,21 +36,16 @@ class Entity {
 		virtual void collideWithKnife(Knife &knife) = 0;
 		virtual void setBody(b2Body &body);
 		short getId() const ;
-		void attachToWorld(b2BodyDef &bodyDef, Entity &context);
-		void attachToWorld(b2BodyDef &bodyDef, const b2Shape &shape, 
-				  		   float density);
-		void attachToWorld(b2BodyDef &bodyDef, const b2FixtureDef &fixtureDef);
+		void earlyAttachToWorld(b2BodyDef &bodyDef, const b2FixtureDef &fixtureDef);
+		void lateAttachToWorld(b2BodyDef &bodyDef, Entity &context);
 		void detachFromWorld();
 		void bindFixture(const b2FixtureDef &fixtureDef);
-		void bindFixture(const b2Shape &shape, float density);
-		//void moveToWorld(std::unique_ptr<Entity> &&entity);
-		//std::unique_ptr<Entity> retrieveFromWorld();
 		void setTransform(float x, float y, float angle);
 		bool isDetached();
 		void applyForceToCenter(const b2Vec2 &force, bool wake);
 		void applyLinearImpulseToCenter(const b2Vec2 &force, 
                              			bool wake);
-		Entity& clone(const Entity &other);
+		//Entity& clone(const Entity &other);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		float getPositionX() const;
 		float getPositionY() const;

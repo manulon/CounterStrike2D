@@ -49,7 +49,7 @@ class FireArm : public Entity {
 
 		void earlyAttachToWorld(float x, float y);
 		void lateAttachToWorld(float x, float y);
-        FireArm& clone(const FireArm &other);
+        //FireArm& clone(const FireArm &other);
         
 };
 

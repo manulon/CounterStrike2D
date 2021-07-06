@@ -41,7 +41,7 @@ void Loader::fillLoader(size_t &ammunition) {
 	}
 }
 
-Loader& Loader::clone(const Loader &other) {
+/*Loader& Loader::clone(const Loader &other) {
 	if (this == &other) return *this;
 	//world = other.world; // OJO QUE NO PUEDEN HABER LOADERS EN
 	//DIFERENTES WORLDS Y SER COPIADOS LUEGO DE CREADOS.
@@ -56,4 +56,4 @@ Loader& Loader::clone(const Loader &other) {
 	}
 	maxAmmunition = other.maxAmmunition;
 	return *this;
-}
+}*/
