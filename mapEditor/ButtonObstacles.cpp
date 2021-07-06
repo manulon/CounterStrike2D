@@ -3,7 +3,7 @@
 
 ButtonObstacles:: ButtonObstacles(Window& window,EditorConfig& editor): 
 Button("assets/gfx/buttons/ButtonObstacles.png",window,editor,
-        window.getWidth()-150,window.getHeight()-80,125,25),
+        window.getWidth()-150,window.getHeight()-82,80,32),
 window(window){}
 
 ButtonObstacles::~ButtonObstacles(){}

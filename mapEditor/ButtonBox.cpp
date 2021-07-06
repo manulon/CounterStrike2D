@@ -3,7 +3,7 @@
 
 ButtonBox:: ButtonBox(Window& window,EditorConfig& editor): 
 Button("assets/gfx/buttons/ButtonBox.png",window,editor,
-        window.getWidth()-275,window.getHeight()-105,70,25),
+        window.getWidth()-275,window.getHeight()-115,80,32),
 window(window){}
 
 ButtonBox::~ButtonBox(){}

@@ -27,16 +27,8 @@ const char* MenuOptionExitMode:: getMapName(){
 void MenuOptionExitMode::setPair(std::pair<int,int>& pair){}
 
 bool MenuOptionExitMode::mouseInButton(int x, int y){
-    std::cout<<"------------"<<std::endl;
-    std::cout<<"X e y: "<<x<<" - "<<y<<std::endl;
-    std::cout<<"area X e y: "<<buttonArea.getX()<<" - "<<buttonArea.getY()<<std::endl;
-    std::cout<<"suma X e y: "<<buttonArea.getX() + buttonArea.getWidth()<<" - "<<
-    buttonArea.getY() + buttonArea.getHeight()<<std::endl;
-
-
     if ( (x > buttonArea.getX() && x < (buttonArea.getX() + buttonArea.getWidth()) &&
          (y > buttonArea.getY() && y < (buttonArea.getY() + buttonArea.getHeight())) )) {
-         std::cout<<"Entre al if"<<std::endl;
          return true;
     }
     return false;

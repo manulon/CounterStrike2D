@@ -3,7 +3,7 @@
 
 ButtonWeaponCharacter:: ButtonWeaponCharacter(Window& window,EditorConfig& editor): 
 Button("assets/gfx/buttons/ButtonDuo.png",window,editor,
-        window.getWidth()-150,window.getHeight()-55,140,25),
+        window.getWidth()-235,window.getHeight()-45,122,32),
 window(window){}
 
 ButtonWeaponCharacter::~ButtonWeaponCharacter(){}

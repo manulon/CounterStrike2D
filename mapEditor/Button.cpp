@@ -3,7 +3,7 @@
 
 Button::Button(const char *path,Window &window,EditorConfig& editor,
                int x, int y, int w, int h):
-button(path,window),buttonArea(0,0,0,0),editor(editor){}
+button(path,window),buttonArea(x,y,w,h),editor(editor){}
 
 bool Button::mouseInText(int x, int y){
     if ( (x > buttonArea.getX() && x < (buttonArea.getX() + buttonArea.getWidth()) &&

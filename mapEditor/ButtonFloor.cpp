@@ -3,7 +3,7 @@
 
 ButtonFloor:: ButtonFloor(Window& window,EditorConfig& editor): 
 Button("assets/gfx/buttons/ButtonFloor.png",window,editor,
-        window.getWidth()-150,window.getHeight()-105,70,25),
+        window.getWidth()-150,window.getHeight()-115,80,32),
 window(window){}
 
 ButtonFloor::~ButtonFloor(){}
