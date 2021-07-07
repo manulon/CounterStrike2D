@@ -36,17 +36,17 @@ Player::Player(Player &&other) :
 void Player::setPrimaryWeapon(std::unique_ptr<PrimaryWeapon> &&other) {
     std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     primaryWeapon = std::move(weapon);
-    setCurrentWeapon(primaryWeapon.get());
+    setIfNullCurrentWeapon(primaryWeapon.get());
 }
 
 void Player::setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other) {
     std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     tertiaryWeapon = std::move(weapon);
-    setCurrentWeapon(tertiaryWeapon.get());
+    setIfNullCurrentWeapon(tertiaryWeapon.get());
 }
 
-void Player::setCurrentWeapon(SWeapon *weapon) {
-    if (weapon != nullptr) {
+void Player::setIfNullCurrentWeapon(SWeapon *weapon) {
+    if (currentWeapon == nullptr) {
         currentWeapon = weapon;
     }
 }
@@ -149,12 +149,15 @@ void Player::swapAndDropPrimaryWeapon(PrimaryWeapon &other) {
     std::cout << "player chocado por primaryWeapon\n";
     // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
     // SI NO EXISTE EL ARMA EN EL MUNDO 
+    bool isCurrentWeapon = false; // este codigo es para cambiar el arma actual
+    // si se toma un arma primaria
+    if (currentWeapon == primaryWeapon.get()) isCurrentWeapon = true;
     primaryWeapon->lateAttachToWorld(getPositionX()+5, getPositionY());
     Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
     SWeapon *otherWeapon = other.getContext();
     primaryWeapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
     primaryWeapon->detachFromWorld();
-    //currentWeapon = primaryWeapon.get();
+    if (isCurrentWeapon) currentWeapon = primaryWeapon.get();
 }
 
 void Player::swapAndDropTertiaryWeapon(TertiaryWeapon &other) {

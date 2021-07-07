@@ -35,7 +35,7 @@ class Player : public Entity {
                       		float width, float height);
 		void setFixtureParams(const b2PolygonShape &polygonShape, 
 							  b2FixtureDef &fixtureDef);
-		void setCurrentWeapon(SWeapon *weapon);
+		void setIfNullCurrentWeapon(SWeapon *weapon);
 
 	public:
 		Player(World &world, 
