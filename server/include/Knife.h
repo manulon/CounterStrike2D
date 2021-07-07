@@ -1,36 +1,20 @@
 #ifndef _KINFE_H_
 #define _KINFE_H_
 
-#include "Entity.h"
+#include "TertiaryWeapon.h"
 
-class Knife {
+class Knife : public TertiaryWeapon {
 	private:
-		b2BodyDef bodyDef;
-    	b2PolygonShape polygonShape;
-    	b2FixtureDef fixtureDef;
-
-    	void setBodyParams(b2BodyDef &bodyDef, float x, float y);
-		void setShapeParams(b2PolygonShape &polygonShape);
-		void setFixtureParams(const b2PolygonShape &polygonShape, 
-						      b2FixtureDef &fixtureDef);
-    	void earlyAttachToWorld(float x, float y);
-		float angleToRadians(float angle);
+		Knife(const Knife &other) = delete;
+		Knife& operator=(const Knife &other) = delete;
+		Knife& operator=(Knife &&other) = delete;
 
 	public:
-		Knife(World &world);
+		Knife(float width, float height);
 		Knife(Knife &&other);
 		~Knife();
-
-		virtual void collideWith(Entity &entity);
-		virtual void collideWithBullet(Bullet &bullet);
-		virtual void collideWithObstacle(Obstacle &obstacle);
-		virtual void collideWithPlayer(Player &player);
-		virtual void collideWithBorder(Border &border);
-		virtual void collideWithKnife(Knife &knife);
-
-		virtual void setBody(b2Body &body);
-		
-		void attack(float angle, float x, float y);
+		void attack(float angle, float x, float y) override;
+		void reload(size_t &ammunition) override;
 };
 
 #endif // _KINFE_H_
