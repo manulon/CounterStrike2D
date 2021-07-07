@@ -23,9 +23,9 @@ ssize_t CommunicationProtocol:: receive_message
 }
 
 int CommunicationProtocol:: receive_size(){
-    uint16_t size2(0);
-    this->socket->socket_receive(2,(char*)&size2);
-    return (int)ntohs(size2);
+    uint16_t size(0);
+    this->socket->socket_receive(2,(char*)&size);
+    return (int)ntohs(size);
 }
 
 CommunicationProtocol:: ~CommunicationProtocol(){}
