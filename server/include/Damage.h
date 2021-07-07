@@ -13,6 +13,7 @@ class Damage{
 
     public:
         Damage();
+        Damage(int value);
         ~Damage();
 
         int getDamage();

@@ -64,6 +64,7 @@ class Player : public Entity {
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		void swapAndDropPrimaryWeapon(PrimaryWeapon &other);
 		void swapAndDropTertiaryWeapon(TertiaryWeapon &other);
+		void decreaseLife(int valueToDecrease);
 };
 
 #endif // _PLAYER_H_

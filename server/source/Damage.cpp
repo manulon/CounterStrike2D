@@ -2,6 +2,8 @@
 
 Damage::Damage():damageValue(0){}
 
+Damage::Damage(int value):damageValue(value){}
+
 Damage::~Damage(){}
 
 int Damage::getDamage(){
