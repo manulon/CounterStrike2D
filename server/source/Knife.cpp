@@ -14,7 +14,7 @@ Knife::Knife(Knife &&other) :
 Knife::~Knife() { }
 
 void Knife::attack(float angle, float x, float y) {
-    //std::cout << "Entro a atacar con cuchillo" << std::endl;
+    std::cout << "Entro a atacar con cuchillo" << std::endl;
     float radians = (angle * M_PI) / 180.0f;
     float radius = sqrt(pow(getWidth(), 2) + pow(getHeight(), 2));
     SWeapon *context = WeaponType::getContext();
@@ -27,6 +27,3 @@ void Knife::attack(float angle, float x, float y) {
 void Knife::reload(size_t &ammunition) { 
     // Lanzar excepcion a lo sumo
 }
-//earlyAttachToWorld(x + radius*cos(radians)*2, 
-//      	           y + radius*sin(radians)*2);
-//Entity::detachFromWorld();
