@@ -14,7 +14,7 @@ class TertiaryWeapon : public WeaponType {
 		TertiaryWeapon(TertiaryWeapon &&other);
 		virtual ~TertiaryWeapon();
 
-		void collideWithPlayer(Player &player) override;
+		virtual void collideWithPlayer(Player &player) = 0;
 		virtual void attack(float angle, float x, float y) = 0;
 		virtual void reload(size_t &ammunition) = 0;
 };

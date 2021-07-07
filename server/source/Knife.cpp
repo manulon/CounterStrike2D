@@ -5,10 +5,10 @@
 #include <iostream>
 
 Knife::Knife(float width, float height) : 
-	TertiaryWeapon(width, height) { }
+	TertiaryWeapon(width, height), damage(50) { }
 
 Knife::Knife(Knife &&other) : 
-	TertiaryWeapon(std::move(other)) {
+	TertiaryWeapon(std::move(other)), damage(50) {
 }
 
 Knife::~Knife() { }
@@ -26,4 +26,10 @@ void Knife::attack(float angle, float x, float y) {
 
 void Knife::reload(size_t &ammunition) { 
     // Lanzar excepcion a lo sumo
+}
+
+void Knife::collideWithPlayer(Player &player) {
+	std::cout << "TertiaryWeapon choco con player" << std::endl;
+	player.swapAndDropTertiaryWeapon(*this);
+    player.decreaseLife(damage.getDamage());
 }

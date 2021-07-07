@@ -174,3 +174,7 @@ void Player::setBody(b2Body &body) {
     Entity::setBody(body);
     Entity::bindFixture(fixtureDef);
 }
+
+void Player::decreaseLife(int valueToDecrease){
+    life.decreaseLife(valueToDecrease);
+}

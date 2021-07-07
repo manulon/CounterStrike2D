@@ -1,9 +1,10 @@
 #ifndef _WEAPON_TYPE_H_
 #define _WEAPON_TYPE_H_
 
+#include "Player.h"
 #include <cstddef>
 class SWeapon;
-class Player;
+
 
 class WeaponType {
 	private:
