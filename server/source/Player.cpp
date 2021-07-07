@@ -132,6 +132,7 @@ void Player::collideWithPrimaryWeapon(PrimaryWeapon &other) {
     std::cout << "player chocado por primaryWeapon\n";
     // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
     // SI NO EXISTE EL ARMA EN EL MUNDO 
+
     weapon->lateAttachToWorld(getPositionX()+5, getPositionY());
     Entity::getWorld().spawnWeapon(std::move(weapon));
     SWeapon *otherWeapon = other.getContext();

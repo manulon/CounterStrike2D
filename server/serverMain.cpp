@@ -15,13 +15,12 @@ int main(int argc, const char *argv[]) {
     try {
     	World world;
         Border border(world, 0.0f, 0.0f, 100.0f, 100.0f);
-        Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
         //Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
+        Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
 
         // CREACION ARMA Y SETEO A PLAYER
         std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
         std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
-
         player.setWeapon(std::move(weapon));
 
         //SPAWN DE ARMA
@@ -30,17 +29,18 @@ int main(int argc, const char *argv[]) {
         w->earlyAttachToWorld(5.0f, 8.0f);
         world.spawnWeapon(std::move(w));
         //Obstacle obstacle(world, 5.0f, 8.0f, 0.5f, 0.5f);
-
         
-        //std::unique_ptr<Knife> knife(new Knife(0.1f, 0.1f));
-        //std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
-        //player.setWeapon(std::move(weapon));
+        // CUCHILLO
+        /*std::unique_ptr<Knife> knife(new Knife(0.2f, 0.2f));
+        std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
+        player.setWeapon(std::move(weapon));*/
         //knife.attack(0, 2.0f, 8.0f);
 
         std::cout << world;
         for (int32 i = 0; i < 120; ++i) {
-            player.attack(90);
-            //player.attack(0);
+            //player.attack(90);
+            player.attack(90.0f);
+            //weapon->attack(0, 4.25f, 8.0f);
             player.moveRight();
             player.update();
 
