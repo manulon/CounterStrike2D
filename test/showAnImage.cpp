@@ -38,20 +38,20 @@ int main(int argc, const char *argv[]){
     try {
         World world;
         Player player(world, 
-    				  3.0f, 0.0f, 
-    				  0.45f, 0.45f,100);
+                      3.0f, 0.0f, 
+                      0.45f, 0.45f,100);
         Player player2(world, 
-    				  1.0f, 0.0f, 
-    				  0.45f, 0.45f,0);
+                      1.0f, 0.0f, 
+                      0.45f, 0.45f,0);
 
         // CREACION ARMA Y SETEO A PLAYER
         std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
-        std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
-        player.setWeapon(std::move(weapon));
+        //std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
+        player.setPrimaryWeapon(std::move(ak47));
 
         std::unique_ptr<Ak47> a(new Ak47(world, 0.2f, 0.2f));
-        std::unique_ptr<SWeapon> weap(new SWeapon(world, std::move(a)));
-        player2.setWeapon(std::move(weap));
+        //std::unique_ptr<SWeapon> weap(new SWeapon(world, std::move(a)));
+        player2.setPrimaryWeapon(std::move(a));
 
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
@@ -60,9 +60,9 @@ int main(int argc, const char *argv[]){
         //Image de_dust("assets/gfx/tiles/default_dust.png", window);
         //Image obsimg("assets/gfx/tiles/obstacles.png", window);
         // TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
-        TileMap mapTest(window, "mapaGiganteDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
+        TileMap mapTest(window, "../mapaGiganteDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
         // PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
-        PhysicalMapFactory g(world,"mapaGiganteDust.yaml");
+        PhysicalMapFactory g(world,"../mapaGiganteDust.yaml");
         Image pointImg("assets/gfx/pointer.bmp",window);
         Pointer pointer(pointImg);
         Camera camera(mapTest);
