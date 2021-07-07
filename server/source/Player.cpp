@@ -33,22 +33,16 @@ Player::Player(Player &&other) :
     other.height = 0;
 }
 
-/*void Player::setWeapon(std::unique_ptr<SWeapon> &&other) {
-    weapon = std::move(other);
-}*/
-
 void Player::setPrimaryWeapon(std::unique_ptr<PrimaryWeapon> &&other) {
     std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     primaryWeapon = std::move(weapon);
     setCurrentWeapon(primaryWeapon.get());
-    //currentWeapon = primaryWeapon.get();
 }
 
 void Player::setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other) {
     std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     tertiaryWeapon = std::move(weapon);
     setCurrentWeapon(tertiaryWeapon.get());
-    //currentWeapon = tertiaryWeapon.get();
 }
 
 void Player::setCurrentWeapon(SWeapon *weapon) {
@@ -119,12 +113,10 @@ void Player::attack(float angle) {
     float shootRadius = width;
     float xShoot = getPositionX() + shootRadius*cos(angle*b2_pi/180.0f);
     float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
-    //weapon->attack(angle, xShoot, yShoot);
     currentWeapon->attack(angle, xShoot, yShoot);
 }
 
 void Player::reload(size_t &ammunition) {
-    //weapon->reload(ammunition);
     currentWeapon->reload(ammunition);
 }
 
@@ -157,12 +149,12 @@ void Player::swapAndDropPrimaryWeapon(PrimaryWeapon &other) {
     std::cout << "player chocado por primaryWeapon\n";
     // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
     // SI NO EXISTE EL ARMA EN EL MUNDO 
-
     primaryWeapon->lateAttachToWorld(getPositionX()+5, getPositionY());
     Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
     SWeapon *otherWeapon = other.getContext();
     primaryWeapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
     primaryWeapon->detachFromWorld();
+    //currentWeapon = primaryWeapon.get();
 }
 
 void Player::swapAndDropTertiaryWeapon(TertiaryWeapon &other) {

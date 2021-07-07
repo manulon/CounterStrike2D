@@ -18,7 +18,6 @@ class Player : public Entity {
 		b2Vec2 force;
 		Life life;
 		
-		//std::unique_ptr<SWeapon> weapon;
 		SWeapon *currentWeapon;
 		std::unique_ptr<SWeapon> primaryWeapon;
 		//std::unique_ptr<SWeapon> secondaryWeapon;
@@ -62,7 +61,6 @@ class Player : public Entity {
 		void update();
 		void attack(float angle);
 		void reload(size_t &ammunition);
-		//void setWeapon(std::unique_ptr<SWeapon> &&other);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		void swapAndDropPrimaryWeapon(PrimaryWeapon &other);
 		void swapAndDropTertiaryWeapon(TertiaryWeapon &other);
