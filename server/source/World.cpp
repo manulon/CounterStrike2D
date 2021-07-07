@@ -39,8 +39,8 @@ void World::step() {
 }
 
 void World::clean() {
-    cleanBodiesToCreate();
-	cleanBodiesToDestroy();
+	cleanBodiesToDestroy(); // OJO CON EL ORDEN EN QUE LLAMO A LAS FUNCIONES
+    cleanBodiesToCreate(); // PUEDE SER FUENTE DE ERROR
 	cleanWeapons();
 	cleanBullets();
 }
@@ -60,7 +60,9 @@ void World::cleanBodiesToDestroy() {
 	while(!bodiesToDestroy.empty()) {
 		body = bodiesToDestroy.front();
 		world.DestroyBody(*body);
-		*body = nullptr;
+		*body = nullptr; //OJO CON ESTE NULLPTR QUE PUEDE CAUSAR PROBLEMAS
+		// LO AGREGUE POR SEGURIDAD PERO EN CASO DE ERROR ESTE PUEDE SER EL 
+		// PROBLEMA
 		bodiesToDestroy.pop();
 	}
 }
@@ -132,8 +134,11 @@ void World::getServerObjects(std::list<Entity*> &serverObjects){
 
 std::ostream& operator<<(std::ostream &os, const World &world) {
     const b2Body *node = world.getBodyList();
+    //std::cout << world.world.GetBodyCount() << std::endl;
+
     while(node != nullptr) {
     	Entity *entity = static_cast<Entity*>(node->GetUserData());
+    	//std::cout << entity << std::endl;
     	if(entity != nullptr) {
     		os << *entity << std::endl;
     	}
