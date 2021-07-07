@@ -40,7 +40,6 @@ int main(int argc, const char *argv[]) {
         for (int32 i = 0; i < 120; ++i) {
             //player.attack(90);
             player.attack(90.0f);
-            //weapon->attack(0, 4.25f, 8.0f);
             player.moveRight();
             player.update();
 

@@ -128,7 +128,7 @@ void Player::collideWithBorder(Border &border) {
     std::cout << "Player chocado por border\n";
 }
 
-void Player::collideWithPrimaryWeapon(PrimaryWeapon &other) {
+void Player::swapAndDropPrimaryWeapon(PrimaryWeapon &other) {
     std::cout << "player chocado por primaryWeapon\n";
     // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
     // SI NO EXISTE EL ARMA EN EL MUNDO 
@@ -140,7 +140,7 @@ void Player::collideWithPrimaryWeapon(PrimaryWeapon &other) {
     weapon->detachFromWorld();
 }
 
-void Player::collideWithTertiaryWeapon(TertiaryWeapon &other) {
+void Player::swapAndDropTertiaryWeapon(TertiaryWeapon &other) {
     std::cout << "player chocado por TertiaryWeapon\n";
     // SI HICIERA FALTA AGREGAR CODIGO DE RESPUESTA
 }

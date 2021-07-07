@@ -72,6 +72,7 @@ void Bullet::collideWithWeapon(SWeapon &weapon) {
 
 void Bullet::collideWithPlayer(Player &player) {
     std::cout << "bullet chocado por player\n";
+    Entity::detachFromWorld();
 }
 
 void Bullet::collideWithBorder(Border &border) {

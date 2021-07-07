@@ -16,9 +16,11 @@ class Player : public Entity {
 
 		b2Vec2 force;
 		std::unique_ptr<SWeapon> weapon;
-		// primaria
-		// secundaria
-		// terciaria
+		
+		//std::unique_ptr<SWeapon> primaryWeapon;
+		//std::unique_ptr<SWeapon> secondaryWeapon;
+		//srd::unique_ptr<SWeapon> tertiaryWeapon;
+
 
 		float width;
 		float height;
@@ -58,8 +60,8 @@ class Player : public Entity {
 		void reload(size_t &ammunition);
 		void setWeapon(std::unique_ptr<SWeapon> &&other);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
-		void collideWithPrimaryWeapon(PrimaryWeapon &other);
-		void collideWithTertiaryWeapon(TertiaryWeapon &other);
+		void swapAndDropPrimaryWeapon(PrimaryWeapon &other);
+		void swapAndDropTertiaryWeapon(TertiaryWeapon &other);
 };
 
 #endif // _PLAYER_H_
