@@ -8,7 +8,7 @@
 #define BODY_TYPE b2_dynamicBody
 
 Bullet::Bullet(World &world) : 
-    Entity(world, 60) {
+    Entity(world, 60), damage() {
 }
 
 void Bullet::attachToWorld(float x, float y) {
@@ -19,7 +19,7 @@ void Bullet::attachToWorld(float x, float y) {
 }
 
 Bullet::Bullet(Bullet &&other) : 
-    Entity(std::move(other)) { }
+    Entity(std::move(other)), damage(){}
 
 Bullet::~Bullet() { }
 
@@ -93,4 +93,12 @@ float Bullet::getRadius() {
 void Bullet::setBody(b2Body &body) {
     Entity::setBody(body);
     Entity::bindFixture(fixtureDef);
+}
+
+int Bullet::getDamage(){
+    return damage.getDamage();
+}
+
+void Bullet::setDamage(int value){
+    damage.setDamage(value);
 }

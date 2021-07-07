@@ -15,6 +15,7 @@ void Ak47::attack(float angle, float x, float y) {
     try {
         std::unique_ptr<Bullet> bullet(new Bullet(loader.releaseBullet()));
         bullet->shoot(angle, x, y);
+        bullet->setDamage(15);
         world.spawnBullet(std::move(bullet));
     } catch (...) { }
 }

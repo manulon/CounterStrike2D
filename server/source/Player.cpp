@@ -16,7 +16,7 @@ Player::Player(World &world,
                float x, float y,
                float width, float height, short id) :
     Entity(world, id), force(0,0),
-    width(width), height(height) { 
+    life(),width(width), height(height) { 
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
@@ -110,6 +110,7 @@ void Player::collideWith(Entity &entity) {
 
 void Player::collideWithBullet(Bullet &bullet) {
     std::cout << "player chocado por bala\n";
+    life.decreaseLife(bullet.getDamage());
 }
 
 void Player::collideWithObstacle(Obstacle &obstacle) {

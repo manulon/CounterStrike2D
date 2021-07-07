@@ -2,6 +2,7 @@
 #define _BULLET_H_
 
 #include "Entity.h"
+#include "Damage.h"
 #include <Box2D/Box2D.h>
 class World;
 
@@ -10,6 +11,7 @@ class Bullet : public Entity {
 		b2BodyDef bodyDef;
     	b2CircleShape circleShape;
 		b2FixtureDef fixtureDef;
+		Damage damage;
 
 		void setBodyParams(b2BodyDef &bodyDef, float x, float y);
 		void setShapeParams(b2CircleShape &circleShape);
@@ -36,6 +38,8 @@ class Bullet : public Entity {
 		void attachToWorld(float x, float y);
 		void shoot(float angle, float x, float y);
 		float getRadius();
+		int getDamage();
+		void setDamage(int value);
 		//friend std::ostream& operator<<(std::ostream &os, const Bullet &obj);
 };
 

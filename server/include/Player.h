@@ -2,6 +2,7 @@
 #define _PLAYER_H_
 
 #include "Entity.h"
+#include "Life.h"
 #include <Box2D/Box2D.h>
 
 class World;
@@ -16,6 +17,7 @@ class Player : public Entity {
 
 		b2Vec2 force;
 		std::unique_ptr<SWeapon> weapon;
+		Life life;
 		
 		//std::unique_ptr<SWeapon> primaryWeapon;
 		//std::unique_ptr<SWeapon> secondaryWeapon;
