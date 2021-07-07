@@ -16,12 +16,13 @@ class Player : public Entity {
     	b2FixtureDef fixtureDef;
 
 		b2Vec2 force;
-		std::unique_ptr<SWeapon> weapon;
 		Life life;
 		
-		//std::unique_ptr<SWeapon> primaryWeapon;
+		//std::unique_ptr<SWeapon> weapon;
+		SWeapon *currentWeapon;
+		std::unique_ptr<SWeapon> primaryWeapon;
 		//std::unique_ptr<SWeapon> secondaryWeapon;
-		//srd::unique_ptr<SWeapon> tertiaryWeapon;
+		std::unique_ptr<SWeapon> tertiaryWeapon;
 
 
 		float width;
@@ -35,6 +36,7 @@ class Player : public Entity {
                       		float width, float height);
 		void setFixtureParams(const b2PolygonShape &polygonShape, 
 							  b2FixtureDef &fixtureDef);
+		void setCurrentWeapon(SWeapon *weapon);
 
 	public:
 		Player(World &world, 
@@ -60,10 +62,12 @@ class Player : public Entity {
 		void update();
 		void attack(float angle);
 		void reload(size_t &ammunition);
-		void setWeapon(std::unique_ptr<SWeapon> &&other);
+		//void setWeapon(std::unique_ptr<SWeapon> &&other);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		void swapAndDropPrimaryWeapon(PrimaryWeapon &other);
 		void swapAndDropTertiaryWeapon(TertiaryWeapon &other);
+		void setPrimaryWeapon(std::unique_ptr<PrimaryWeapon> &&other);
+		void setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other);
 };
 
 #endif // _PLAYER_H_
