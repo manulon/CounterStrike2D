@@ -12,6 +12,7 @@
 #include "ButtonObstacles.h"
 #include "ButtonWeaponCharacter.h"
 #include "EditorConfig.h"
+#include "yaml-cpp/yaml.h"
 #include <vector>
 
 #define SMALL_WIDTH 800
@@ -37,6 +38,10 @@ class Editor{
         EditorEventHandler eventHandler;
         EditorConfig editor;
         std::string sizeName;
+        int tileBoxHeight;
+        int tileWidth;
+        int tileHeight;
+        
         
 
    public:

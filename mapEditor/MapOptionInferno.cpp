@@ -3,12 +3,15 @@
 
 MapOptionInferno:: MapOptionInferno(Window& window): 
 MenuOption("assets/gfx/buttons/ButtonInferno.png",window,250,95,239,32),
-window(window){}
+window(window),path(""){
+    YAML::Node readerNode = YAML::LoadFile("editor_config.yaml");
+    path = readerNode["config"]["inferno_path"].as<std::string>();
+}
 
 MapOptionInferno::~MapOptionInferno(){}
 
 const char* MapOptionInferno:: getPathToImage(){
-    return "assets/gfx/tiles/default_inferno.png";            // Tiene que estar en YAML config
+    return path.c_str();            // Tiene que estar en YAML config
 }
 
 const char* MapOptionInferno::getMapName(){

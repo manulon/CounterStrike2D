@@ -35,6 +35,9 @@ class EditorEventHandler {
       std::map<std::pair<int,int>,int> finalMapTiles;
       std::map<std::pair<int,int>,int> finalMapObstacles;
       const char* mapName;
+      int tileBoxHeight;
+      int tileWidth;
+      int tileHeight;
 
       bool mouseInTile(int x, int y,Tile* tile);
       void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,

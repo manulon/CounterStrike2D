@@ -21,7 +21,7 @@ void MenuOptionSelectMode::render(){
 }
 
 const char* MenuOptionSelectMode:: getPathToImage(){
-    return "nothing";
+    return "";
 }
 
 const char* MenuOptionSelectMode:: getMapName(){

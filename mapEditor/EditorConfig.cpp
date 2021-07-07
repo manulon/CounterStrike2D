@@ -2,11 +2,11 @@
 
 EditorConfig::EditorConfig(const char* mapName):
 fileNode(),readerNode(),mapName(mapName){
-    createFile();
+    //createFile();
 }
 
 void EditorConfig::createFile(){
-    std::ofstream file("editor_config.yaml");
+    /*std::ofstream file("editor_config.yaml");
     
     fileNode["dust"]["small"]["box"][0] = YAML::Load("[21, 0, 360]");
     fileNode["dust"]["small"]["box"][1] = YAML::Load("[22, 0, 408]");
@@ -262,7 +262,7 @@ void EditorConfig::createFile(){
 
     file << fileNode;
 
-    file.close();
+    file.close();*/
 }
 
 void EditorConfig::getAtributes(std::string atributeName,const std::string& sizeName,

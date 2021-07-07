@@ -10,6 +10,7 @@ class MapOptionInferno : public MenuOption{
         MapOptionInferno& operator=(MapOptionInferno &&other) = delete;
 
     Window& window;
+    std::string path;
 
     public:
         MapOptionInferno(Window& Window);

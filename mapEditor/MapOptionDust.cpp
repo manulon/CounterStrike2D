@@ -3,12 +3,15 @@
 
 MapOptionDust:: MapOptionDust(Window& window): 
 MenuOption("assets/gfx/buttons/ButtonDust.png",window,250,25,239,32),
-window(window){}
+window(window),path(""){
+    YAML::Node readerNode = YAML::LoadFile("editor_config.yaml");
+    path = readerNode["config"]["dust_path"].as<std::string>();
+}
 
 MapOptionDust::~MapOptionDust(){}
 
 const char* MapOptionDust:: getPathToImage(){
-    return "assets/gfx/tiles/default_dust.png";            // Tiene que estar en YAML config
+    return path.c_str();            // Tiene que estar en YAML config
 }
 
 const char* MapOptionDust::getMapName(){

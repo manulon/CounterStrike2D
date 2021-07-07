@@ -10,6 +10,7 @@ class MapOptionDust : public MenuOption{
         MapOptionDust& operator=(MapOptionDust &&other) = delete;
 
     Window& window;
+    std::string path;
 
     public:
         MapOptionDust(Window& window);

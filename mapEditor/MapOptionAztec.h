@@ -10,6 +10,7 @@ class MapOptionAztec : public MenuOption{
         MapOptionAztec& operator=(MapOptionAztec &&other) = delete;
 
     Window& window;
+    std::string path;
 
     public:
         MapOptionAztec(Window& window);

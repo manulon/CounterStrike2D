@@ -292,3 +292,10 @@ huge:
     - [5, 48, 504]
     - [36, 98, 552]
     - [37, 98, 504]
+config:
+  tile_box_height: 128
+  tile_width: 32
+  tile_height: 32
+  dust_path: "assets/gfx/tiles/default_dust.png"
+  inferno_path: "assets/gfx/tiles/default_inferno.png"
+  aztec_path: "assets/gfx/tiles/default_aztec.png"

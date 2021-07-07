@@ -2,6 +2,7 @@
 #define _MENU_OPTION_H
 
 #include "Window.h"
+#include "yaml-cpp/yaml.h"
 #include "Area.h"
 #include "Image.h"
 #include <vector>

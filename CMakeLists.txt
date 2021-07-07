@@ -23,8 +23,8 @@ FILE(GLOB_RECURSE server "server/source/*.cpp")
 FILE(GLOB_RECURSE common "common/*.cpp")
 FILE(GLOB_RECURSE mapEditor "mapEditor/*.cpp")
 
-# add_executable(dragAndDrop test/pruebaDragAndDrop.cpp ${mapEditor} ${server} ${source} ${common})
-# target_link_libraries(dragAndDrop SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
+add_executable(dragAndDrop test/pruebaDragAndDrop.cpp ${mapEditor} ${server} ${source} ${common})
+target_link_libraries(dragAndDrop SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
 add_executable(showAnImage test/showAnImage.cpp ${server} ${source})
 target_link_libraries(showAnImage SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)

@@ -8,7 +8,13 @@ leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
 actualType(-1),selectedZoneX(windowWidth/2+4),selectedZoneY(windowHeight-86),
 image(image),obsImage(obsImage),actualImage(""),window(window),
-finalMapTiles(),finalMapObstacles(),mapName(mapName){}
+finalMapTiles(),finalMapObstacles(),mapName(mapName),
+tileBoxHeight(0),tileWidth(0),tileHeight(0){
+   YAML::Node readerNode = YAML::LoadFile("editor_config.yaml");
+   tileBoxHeight = readerNode["config"]["tile_box_height"].as<int>();
+   tileWidth     = readerNode["config"]["tile_width"].as<int>();
+   tileHeight    = readerNode["config"]["tile_height"].as<int>();
+}
 
 bool EditorEventHandler::handleEvents
 (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
@@ -155,32 +161,32 @@ void EditorEventHandler::buildTileClips(){
    for (int i=0; i<75; i++){
         tileClips[i].x = x_aux;
         tileClips[i].y = y_aux;
-        tileClips[i].w = 32;
-        tileClips[i].h = 32;
+        tileClips[i].w = tileWidth;
+        tileClips[i].h = tileHeight;
 
-        x_aux += 32;
+        x_aux += tileWidth;
 
-        if (x_aux==160){
+        if (x_aux==tileWidth*5){
         	x_aux=0;
-        	y_aux+=32;
+        	y_aux+=tileHeight;
         }
    }
 }
 
 bool EditorEventHandler::mouseInGrid(int mousePositionX,int mousePositionY){
    if ( (mousePositionX >= 0) && (mousePositionX < windowWidth) && 
-        (mousePositionY >= 0) && (mousePositionY < windowHeight - 128)){
+        (mousePositionY >= 0) && (mousePositionY < windowHeight - tileBoxHeight)){
       return true;
    }
    return false;
 }
 
 void EditorEventHandler::putTileInCorrectPosition(Tile* tile){
-   int auxX(mousePositionX/32);
-   int auxY(mousePositionY/32);
+   int auxX(mousePositionX/PPM);
+   int auxY(mousePositionY/PPM);
 
-   tile->setX(auxX*32);
-   tile->setY(auxY*32);
+   tile->setX(auxX*PPM);
+   tile->setY(auxY*PPM);
 }
 
 Image& EditorEventHandler::getActualImage(){

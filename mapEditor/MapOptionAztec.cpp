@@ -5,12 +5,15 @@
 
 MapOptionAztec:: MapOptionAztec(Window& window): 
 MenuOption("assets/gfx/buttons/ButtonAztec.png",window,250,60,239,32),
-window(window){}
+window(window),path(""){
+    YAML::Node readerNode = YAML::LoadFile("editor_config.yaml");
+    path = readerNode["config"]["aztec_path"].as<std::string>();
+}
 
 MapOptionAztec::~MapOptionAztec(){}
 
 const char* MapOptionAztec:: getPathToImage(){
-    return "assets/gfx/tiles/default_aztec.png";            // Tiene que estar en YAML config
+    return path.c_str();            // Tiene que estar en YAML config
 }
 
 const char* MapOptionAztec::getMapName(){
