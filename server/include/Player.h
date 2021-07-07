@@ -6,6 +6,7 @@
 
 class World;
 class PrimaryWeapon;
+class TertiaryWeapon;
 
 class Player : public Entity {
 	private:
@@ -15,13 +16,9 @@ class Player : public Entity {
 
 		b2Vec2 force;
 		std::unique_ptr<SWeapon> weapon;
-
-
 		// primaria
 		// secundaria
 		// terciaria
-
-
 
 		float width;
 		float height;
@@ -57,11 +54,12 @@ class Player : public Entity {
 		void stopMoveLeft();
 		void stopMoveRight();
 		void update();
-		void shoot(float angle);
+		void attack(float angle);
 		void reload(size_t &ammunition);
 		void setWeapon(std::unique_ptr<SWeapon> &&other);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		void collideWithPrimaryWeapon(PrimaryWeapon &other);
+		void collideWithTertiaryWeapon(TertiaryWeapon &other);
 };
 
 #endif // _PLAYER_H_

@@ -55,7 +55,7 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                 std::cout << "Quit :(" << std::endl;
                 return false;
             case SDL_MOUSEBUTTONDOWN:
-                player.shoot(angle - 90);
+                player.attack(angle - 90);
         } // fin switch(event)
     } // fin while(SDL_PollEvents)
     return true;

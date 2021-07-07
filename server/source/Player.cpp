@@ -2,6 +2,7 @@
 #include "World.h"
 #include "SWeapon.h"
 #include "PrimaryWeapon.h"
+#include "TertiaryWeapon.h"
 
 #define DAMPING 10.0f
 #define DENSITY 1.0f
@@ -91,7 +92,7 @@ void Player::update() {
     Entity::applyForceToCenter(force, true);
 }
 
-void Player::shoot(float angle) {
+void Player::attack(float angle) {
     Entity::setTransform(getPositionX(), getPositionY(), angle);
     float shootRadius = width;
     float xShoot = getPositionX() + shootRadius*cos(angle*b2_pi/180.0f);
@@ -116,7 +117,7 @@ void Player::collideWithObstacle(Obstacle &obstacle) {
 }
 
 void Player::collideWithWeapon(SWeapon &other) {
-    std::cout << "player chocado por firearm\n";
+    std::cout << "player chocado por SWeapon\n";
 }
 
 void Player::collideWithPlayer(Player &player) {
@@ -131,12 +132,16 @@ void Player::collideWithPrimaryWeapon(PrimaryWeapon &other) {
     std::cout << "player chocado por primaryWeapon\n";
     // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
     // SI NO EXISTE EL ARMA EN EL MUNDO 
-
     weapon->lateAttachToWorld(getPositionX()+5, getPositionY());
     Entity::getWorld().spawnWeapon(std::move(weapon));
     SWeapon *otherWeapon = other.getContext();
     weapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
     weapon->detachFromWorld();
+}
+
+void Player::collideWithTertiaryWeapon(TertiaryWeapon &other) {
+    std::cout << "player chocado por TertiaryWeapon\n";
+    // SI HICIERA FALTA AGREGAR CODIGO DE RESPUESTA
 }
 
 void Player::setBody(b2Body &body) {

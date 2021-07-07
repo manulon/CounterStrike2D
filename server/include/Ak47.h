@@ -15,8 +15,6 @@ class Ak47 : public PrimaryWeapon {
 		~Ak47();
 		void attack(float angle, float x, float y) override;
 		void reload(size_t &ammunition) override;
-
-
 };
 
 #endif // _AK47_H_
