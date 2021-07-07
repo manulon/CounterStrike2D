@@ -22,6 +22,7 @@
 #include "Pointer.h"
 #include "Weapon.h"
 #include "Ak47.h"
+#include "Knife.h"
 #include "EventHandler.h"
 #define PPM 32
 
@@ -59,9 +60,9 @@ int main(int argc, const char *argv[]){
         //Image de_dust("assets/gfx/tiles/default_dust.png", window);
         //Image obsimg("assets/gfx/tiles/obstacles.png", window);
         // TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
-        TileMap mapTest(window, "mapaGiganteDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
+        TileMap mapTest(window, "assets/maps/SmallDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
         // PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
-        PhysicalMapFactory g(world,"mapaGiganteDust.yaml");
+        PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
         Image pointImg("assets/gfx/pointer.bmp",window);
         Pointer pointer(pointImg);
         Camera camera(mapTest);
@@ -76,6 +77,11 @@ int main(int argc, const char *argv[]){
         std::unique_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
         w->earlyAttachToWorld(2.0f, 3.0f);
         world.spawnWeapon(std::move(w));
+
+        // CUCHILLO
+        /*std::unique_ptr<Knife> knife(new Knife(0.1f, 0.1f));
+        std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
+        player.setWeapon(std::move(weapon));*/
 
 
         SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
