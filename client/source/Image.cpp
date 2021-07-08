@@ -9,7 +9,13 @@
 
 Image::Image(const char *pathImg, Window &window) 
 	: sdlTexture(pathImg, window.getRenderer()), 
-	  sdlRenderer(window.getRenderer()),path(pathImg) { }
+	  sdlRenderer(window.getRenderer()),
+      path(pathImg) { }
+
+Image::Image(const char *pathImg, Window &window, Color key) : 
+    sdlTexture(pathImg, window.getRenderer(), key),
+    sdlRenderer(window.getRenderer()), 
+    path(pathImg) { }
 
 Image::Image(Image &&other) 
     : sdlTexture(std::move(other.sdlTexture)), sdlRenderer(other.sdlRenderer) { }

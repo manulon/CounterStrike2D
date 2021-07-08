@@ -60,10 +60,11 @@ int main(int argc, const char *argv[]){
         //Image de_dust("assets/gfx/tiles/default_dust.png", window);
         //Image obsimg("assets/gfx/tiles/obstacles.png", window);
         // TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
-        TileMap mapTest(window, "../mapaGiganteDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
+        TileMap mapTest(window, "mapaGiganteDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
         // PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
-        PhysicalMapFactory g(world,"../mapaGiganteDust.yaml");
-        Image pointImg("assets/gfx/pointer.bmp",window);
+        PhysicalMapFactory g(world,"mapaGiganteDust.yaml");
+        Color key = {0xFF, 0, 0xFF};
+        Image pointImg("assets/gfx/pointer.bmp", window, key);
         Pointer pointer(pointImg);
         Camera camera(mapTest);
         Soldier soldier_renderer("assets/gfx/player/t4.bmp", window);

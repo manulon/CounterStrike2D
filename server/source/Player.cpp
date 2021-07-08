@@ -7,7 +7,6 @@
 
 #define DAMPING 70.0f //10.0f 
 #define DENSITY 1.0f
-#define FRICTION 0.0f
 #define MOVING_FORCE 1000.0f //250.0f
 #define STOP_FORCE 0.0f
 #define FIXED_ROTATION true
@@ -16,7 +15,7 @@
 Player::Player(World &world, 
                float x, float y,
                float width, float height, short id) :
-    Entity(world, id), force(0,0),life(), 
+    Entity(world, id), force(0,0), life(), 
     currentWeapon(nullptr), width(width), height(height) { 
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
@@ -28,6 +27,8 @@ Player::Player(Player &&other) :
     Entity(std::move(other)),
     currentWeapon(other.currentWeapon),
     primaryWeapon(std::move(other.primaryWeapon)),
+    secondaryWeapon(std::move(other.secondaryWeapon)),
+    tertiaryWeapon(std::move(other.tertiaryWeapon)),
     width(other.width), height(other.height) {
     currentWeapon = nullptr;
     other.width = 0;
@@ -76,7 +77,6 @@ void Player::setFixtureParams(const b2PolygonShape &polygonShape,
 						      b2FixtureDef &fixtureDef) {
     fixtureDef.shape = &polygonShape;
     fixtureDef.density = DENSITY;
-    fixtureDef.friction = FRICTION;
 }
 
 void Player::moveRight() {

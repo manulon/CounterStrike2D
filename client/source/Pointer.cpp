@@ -1,8 +1,6 @@
 #include "Pointer.h"
 
-Pointer::Pointer(const Image &img) : image(img){
-
-}
+Pointer::Pointer(const Image &img) : image(img) { }
 
 void Pointer::render(float x, float y){
     Area dest(x-10, y-10, 20,20);
