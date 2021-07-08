@@ -20,6 +20,7 @@ class Image {
         Image();
         Image(const char *pathImg);
         Image(const char *pathImg, Window &window);
+        Image(const char *pathImg, Window &window, Color key);
 
         Image(Image &&other);
         Image& operator=(Image &&other);
