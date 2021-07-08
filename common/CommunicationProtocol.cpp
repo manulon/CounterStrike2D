@@ -7,24 +7,23 @@ CommunicationProtocol:: CommunicationProtocol(){}
 CommunicationProtocol:: CommunicationProtocol(Socket* socket):
 socket(socket){}
 
-ssize_t CommunicationProtocol:: send_message(const char* msg,int length){
-    return this->socket->socket_send(msg,length);
+void CommunicationProtocol:: send_message(const char* msg,int length){
+    this->socket->send(msg,length);
 }
 
-ssize_t CommunicationProtocol:: send_size(uint16_t size){
+void CommunicationProtocol:: send_size(uint16_t size){
     size = htons(size);
-    this->socket->socket_send((char*)&size,2);
-    return 2;
+    this->socket->send((char*)&size,2);
 }
 
 ssize_t CommunicationProtocol:: receive_message
 (int length, char* buffer){
-    return this->socket->socket_receive(length,buffer);
+    return this->socket->receive(buffer,length);
 }
 
 int CommunicationProtocol:: receive_size(){
     uint16_t size(0);
-    this->socket->socket_receive(2,(char*)&size);
+    this->socket->receive((char*)&size,2);
     return (int)ntohs(size);
 }
 
