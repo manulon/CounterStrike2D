@@ -167,7 +167,6 @@ void Player::swapAndDropPrimaryWeapon(PrimaryWeapon &other) {
     if (isCurrentWeapon) currentWeapon = primaryWeapon.get();
 }
 
-<<<<<<< HEAD
 void Player::swapAndDropSecondaryWeapon(SecondaryWeapon &other) {
     std::cout << "player chocado por secondaryWeapon\n";
     // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
@@ -176,17 +175,7 @@ void Player::swapAndDropSecondaryWeapon(SecondaryWeapon &other) {
     if (currentWeapon == secondaryWeapon.get()) isCurrentWeapon = true;
     dropSecondaryWeapon();
     setSecondaryWeapon(other);
-    if (isCurrentWeapon) currentWeapon = secondaryWeapon.get();   
-=======
-void Player::dropPrimaryWeapon(){
-    if (primaryWeapon.get() != nullptr){
-        std::cout<<"Voy a dropear el arma"<<std::endl;
-        primaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
-        primaryWeapon->setId(15);
-        std::cout<<"dropee con id"<<primaryWeapon->getId()<<std::endl;
-        Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
-    }
->>>>>>> 8633a76acdb111dcf12975d4e947182cc78a0ce4
+    if (isCurrentWeapon) currentWeapon = secondaryWeapon.get();
 }
 
 void Player::setBody(b2Body &body) {
@@ -198,9 +187,12 @@ void Player::decreaseLife(int valueToDecrease){
     life.decreaseLife(valueToDecrease);
 }
 
-void Player::dropPrimaryWeapon() {
+void Player::dropPrimaryWeapon(){
     if (primaryWeapon.get() != nullptr){
+        std::cout<<"Voy a dropear el arma"<<std::endl;
         primaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
+        primaryWeapon->setId(15);
+        std::cout<<"dropee con id"<<primaryWeapon->getId()<<std::endl;
         Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
     }
 }
