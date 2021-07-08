@@ -2,12 +2,13 @@
 #include "World.h"
 #include "SWeapon.h"
 #include "PrimaryWeapon.h"
+#include "SecondaryWeapon.h"
 #include "TertiaryWeapon.h"
 
-#define DAMPING 10.0f
+#define DAMPING 70.0f //10.0f 
 #define DENSITY 1.0f
 #define FRICTION 0.0f
-#define MOVING_FORCE 250.0f
+#define MOVING_FORCE 1000.0f //250.0f
 #define STOP_FORCE 0.0f
 #define FIXED_ROTATION true
 #define BODY_TYPE b2_dynamicBody
@@ -15,8 +16,8 @@
 Player::Player(World &world, 
                float x, float y,
                float width, float height, short id) :
-    Entity(world, id), force(0,0),
-    life(),width(width), height(height) { 
+    Entity(world, id), force(0,0),life(), 
+    currentWeapon(nullptr), width(width), height(height) { 
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
@@ -26,7 +27,7 @@ Player::Player(World &world,
 Player::Player(Player &&other) : 
     Entity(std::move(other)),
     currentWeapon(other.currentWeapon),
-    primaryWeapon(std::move(other.primaryWeapon)), //implementar constructor movimiento weapon
+    primaryWeapon(std::move(other.primaryWeapon)),
     width(other.width), height(other.height) {
     currentWeapon = nullptr;
     other.width = 0;
@@ -37,6 +38,12 @@ void Player::setPrimaryWeapon(std::unique_ptr<PrimaryWeapon> &&other) {
     std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     primaryWeapon = std::move(weapon);
     setIfNullCurrentWeapon(primaryWeapon.get());
+}
+
+void Player::setSecondaryWeapon(std::unique_ptr<SecondaryWeapon> &&other) {
+    std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
+    secondaryWeapon = std::move(weapon);
+    setIfNullCurrentWeapon(secondaryWeapon.get());
 }
 
 void Player::setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other) {
@@ -153,25 +160,22 @@ void Player::swapAndDropPrimaryWeapon(PrimaryWeapon &other) {
     std::cout << "player chocado por primaryWeapon\n";
     // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
     // SI NO EXISTE EL ARMA EN EL MUNDO 
-    bool isCurrentWeapon = false; // este codigo es para cambiar el arma actual
-    // si se toma un arma primaria
+    bool isCurrentWeapon = false;
     if (currentWeapon == primaryWeapon.get()) isCurrentWeapon = true;
-    //primaryWeapon->lateAttachToWorld(getPositionX()+5, getPositionY());
     dropPrimaryWeapon();
-    //Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
-    SWeapon *otherWeapon = other.getContext();
-    primaryWeapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
-    primaryWeapon->detachFromWorld();
+    setPrimaryWeapon(other);
     if (isCurrentWeapon) currentWeapon = primaryWeapon.get();
 }
 
-void Player::dropPrimaryWeapon(){
-    if (primaryWeapon.get() != nullptr){
-        std::cout<<"Voy a dropear el arma"<<std::endl;
-        primaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
-        Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
-        std::cout<<"dropee"<<std::endl;
-    }
+void Player::swapAndDropSecondaryWeapon(SecondaryWeapon &other) {
+    std::cout << "player chocado por secondaryWeapon\n";
+    // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
+    // SI NO EXISTE EL ARMA EN EL MUNDO 
+    bool isCurrentWeapon = false;
+    if (currentWeapon == secondaryWeapon.get()) isCurrentWeapon = true;
+    dropSecondaryWeapon();
+    setSecondaryWeapon(other);
+    if (isCurrentWeapon) currentWeapon = secondaryWeapon.get();   
 }
 
 void Player::setBody(b2Body &body) {
@@ -181,4 +185,30 @@ void Player::setBody(b2Body &body) {
 
 void Player::decreaseLife(int valueToDecrease){
     life.decreaseLife(valueToDecrease);
+}
+
+void Player::dropPrimaryWeapon() {
+    if (primaryWeapon.get() != nullptr){
+        primaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
+        Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
+    }
+}
+
+void Player::setPrimaryWeapon(PrimaryWeapon &other) {
+    SWeapon *otherWeapon = other.getContext();
+    primaryWeapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
+    primaryWeapon->detachFromWorld();
+}
+
+void Player::dropSecondaryWeapon() {
+    if (secondaryWeapon.get() != nullptr){
+        secondaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
+        Entity::getWorld().spawnWeapon(std::move(secondaryWeapon));
+    }
+}
+
+void Player::setSecondaryWeapon(SecondaryWeapon &other) {
+    SWeapon *otherWeapon = other.getContext();
+    secondaryWeapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
+    secondaryWeapon->detachFromWorld();
 }
