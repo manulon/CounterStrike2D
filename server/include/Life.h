@@ -17,6 +17,7 @@ class Life{
         ~Life();
 
         void decreaseLife(int valueToDecrease);
+        int getLife();
         // void getInitialValue();  Aca lee del config.yaml        
 };
 

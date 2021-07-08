@@ -127,6 +127,8 @@ void Player::collideWith(Entity &entity) {
 void Player::collideWithBullet(Bullet &bullet) {
     std::cout << "player chocado por bala\n";
     life.decreaseLife(bullet.getDamage());
+    if (life.getLife() <= 0)
+        this->detachFromWorld();
 }
 
 void Player::collideWithObstacle(Obstacle &obstacle) {

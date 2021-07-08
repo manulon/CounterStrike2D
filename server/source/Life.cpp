@@ -14,4 +14,8 @@ void Life::decreaseLife(int valueToDecrease){
     std::cout<<"La vida del jugador es "<<value<<std::endl;
 }
 
+int Life::getLife(){
+    return value;
+}
+
 Life::~Life(){}
