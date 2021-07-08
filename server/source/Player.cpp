@@ -127,8 +127,10 @@ void Player::collideWith(Entity &entity) {
 void Player::collideWithBullet(Bullet &bullet) {
     std::cout << "player chocado por bala\n";
     life.decreaseLife(bullet.getDamage());
-    if (life.getLife() <= 0)
+    if (life.getLife() <= 0){
         this->detachFromWorld();
+        dropPrimaryWeapon();
+    }  
 }
 
 void Player::collideWithObstacle(Obstacle &obstacle) {
@@ -154,17 +156,22 @@ void Player::swapAndDropPrimaryWeapon(PrimaryWeapon &other) {
     bool isCurrentWeapon = false; // este codigo es para cambiar el arma actual
     // si se toma un arma primaria
     if (currentWeapon == primaryWeapon.get()) isCurrentWeapon = true;
-    primaryWeapon->lateAttachToWorld(getPositionX()+5, getPositionY());
-    Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
+    //primaryWeapon->lateAttachToWorld(getPositionX()+5, getPositionY());
+    dropPrimaryWeapon();
+    //Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
     SWeapon *otherWeapon = other.getContext();
     primaryWeapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
     primaryWeapon->detachFromWorld();
     if (isCurrentWeapon) currentWeapon = primaryWeapon.get();
 }
 
-void Player::swapAndDropTertiaryWeapon(TertiaryWeapon &other) {
-    std::cout << "player chocado por TertiaryWeapon\n";
-    // SI HICIERA FALTA AGREGAR CODIGO DE RESPUESTA
+void Player::dropPrimaryWeapon(){
+    if (primaryWeapon.get() != nullptr){
+        std::cout<<"Voy a dropear el arma"<<std::endl;
+        primaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
+        Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
+        std::cout<<"dropee"<<std::endl;
+    }
 }
 
 void Player::setBody(b2Body &body) {

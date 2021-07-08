@@ -30,6 +30,5 @@ void Knife::reload(size_t &ammunition) {
 
 void Knife::collideWithPlayer(Player &player) {
 	std::cout << "TertiaryWeapon choco con player" << std::endl;
-	player.swapAndDropTertiaryWeapon(*this);
     player.decreaseLife(damage.getDamage());
 }

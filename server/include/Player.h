@@ -36,6 +36,7 @@ class Player : public Entity {
 		void setFixtureParams(const b2PolygonShape &polygonShape, 
 							  b2FixtureDef &fixtureDef);
 		void setIfNullCurrentWeapon(SWeapon *weapon);
+		void dropPrimaryWeapon();
 
 	public:
 		Player(World &world, 
@@ -63,7 +64,6 @@ class Player : public Entity {
 		void reload(size_t &ammunition);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		void swapAndDropPrimaryWeapon(PrimaryWeapon &other);
-		void swapAndDropTertiaryWeapon(TertiaryWeapon &other);
 
 		void setPrimaryWeapon(std::unique_ptr<PrimaryWeapon> &&other);
 		void setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other);
