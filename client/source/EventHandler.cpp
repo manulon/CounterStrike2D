@@ -11,7 +11,7 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                 const Uint8 *state = SDL_GetKeyboardState(NULL);
                 if (state[SDL_SCANCODE_LEFT]){
                     soldier.move();
-                    player.moveLeft();
+                    player.moveLeft(); // 
                 }
                 if (state[SDL_SCANCODE_RIGHT]){
                     soldier.move();
@@ -48,8 +48,6 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                         break;
                     } 
                 }// Fin KEY_UP
-                break;
-            case SDL_MOUSEMOTION:
                 break;
             case SDL_QUIT:
                 std::cout << "Quit :(" << std::endl;
