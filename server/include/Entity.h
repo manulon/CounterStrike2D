@@ -49,6 +49,7 @@ class Entity {
 		float getAngle() const;
 		World& getWorld();
 		short getId() const ;
+		void setId(short idn);
 };
 	
 #endif // _ENTITY_H_

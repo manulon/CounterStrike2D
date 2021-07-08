@@ -60,6 +60,10 @@ void Entity::earlyAttachToWorld(b2BodyDef &bodyDef,
     detached = false;
 }
 
+void Entity::setId(short idn){
+    id = idn;
+}
+
 void Entity::lateAttachToWorld(b2BodyDef &bodyDef, Entity &context) {
     world.createBody(bodyDef, context);
 }

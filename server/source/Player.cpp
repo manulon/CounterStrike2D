@@ -169,8 +169,9 @@ void Player::dropPrimaryWeapon(){
     if (primaryWeapon.get() != nullptr){
         std::cout<<"Voy a dropear el arma"<<std::endl;
         primaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
+        primaryWeapon->setId(15);
+        std::cout<<"dropee con id"<<primaryWeapon->getId()<<std::endl;
         Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
-        std::cout<<"dropee"<<std::endl;
     }
 }
 
