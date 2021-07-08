@@ -3,10 +3,10 @@
 #include <utility>
 
 Glock::Glock(World &world, float width, float height) :
-	PrimaryWeapon(world, width, height, 20) { }
+	SecondaryWeapon(world, width, height, 20) { }
 
 Glock::Glock(Glock &&other) : 
-	PrimaryWeapon(std::move(other)) { }
+	SecondaryWeapon(std::move(other)) { }
 
 Glock::~Glock() { }
 
