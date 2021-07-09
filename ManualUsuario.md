@@ -50,18 +50,18 @@ TODO: Aun no esta la aplicacion servidor. ¿Que colocamos?
 ## Controles del juego ##
 TODO: Las teclas seria mas comodo awsd (discutirlo)
 - **Movimiento del jugador: Usar las siguientes teclas**
-   - Arriba: ↑ (Tecla UP)
-   - Abajo: ↓ (Tecla DOWN)
-   - Izquierda: ← (Tecla LEFT)
-   - Derecha: → (Tecla RIGHT)
+   - Arriba: W (Tecla W)
+   - Abajo: S (Tecla S)
+   - Izquierda: A (Tecla A)
+   - Derecha: D (Tecla D)
 - **Movimiento de la vista**
    - Mouse
 - **Disparo:**
    - Mouse: Click izquierdo.
 ## Editor ##
-Una vez iniciado el programa editor, aparecera un menu con dos opciones. Seleccionar mapa y Salir. El segundo, obviamente, al presionarlo realiza un cierre ordenado del programa. Y el restante, al presionarlo hace aparecer otras tres opciones con los tres tipos de mapa disponibles para este juego. 
-Una vez que se seleccione un modo de mapa, aparecera una nueva ventana en la cual de puede elegir el tamanio de mapa. Hay tres disponibles.
-Finalmente, luego de seleccionar el tamaño del terreno a editar, en la esquina inferior derecha de la pantalla apareceran cinco opciones de tipos de parcelas para elegir y poner en el mapa. Segun se vayan seleccionando estas apareceran en la esquina inferior izquierda las parcelas que representan al tipo seleccionado y al mapa que se eligio anteriormente. Si se presiona cualquiera de estas, apareceran marcadas como seleccionadas en el cuadrado blanco central que hay en la pantalla. 
-Para comenzar con la edicion del mapa lo unico que hay que hacer es realizar point and click en las grillas que ya estan determinadas en el mapa. Una vez finalizado el proceso de edicion, hay que cerrar la ventana con la cruz de cierre en la esquina superior derecha y automaticamente se generara un archivo .yaml que representara al mapa creado
+Una vez iniciado el programa editor, aparecerá un menú con dos opciones: "Seleccionar mapa" y Salir. El segundo, obviamente, al presionarlo, realiza un cierre ordenado del programa. Y el restante, al presionarlo hace aparecer otras tres opciones con los tres tipos de mapa disponibles para este juego. 
+Una vez que se seleccione un modo de mapa, aparecerá una nueva ventana en la cual se puede elegir el tamaño de mapa. Hay tres disponibles.
+Finalmente, luego de seleccionar el tamaño del terreno a editar, en la esquina inferior derecha de la pantalla apareceran cinco opciones de tipos de parcelas para elegir y poner en el mapa. Según se vayan seleccionando estas aparecerán en la esquina inferior izquierda las parcelas que representan al tipo seleccionado y al mapa que se eligió anteriormente. Si se presiona cualquiera de estas, aparecerán marcadas como seleccionadas en el cuadrado blanco central que hay en la pantalla. 
+Para comenzar con la edición del mapa lo único que hay que hacer es realizar "point and click" en las grillas que ya estan determinadas en el mapa. Una vez finalizado el proceso de edición, hay que cerrar la ventana con la cruz de cierre en la esquina superior derecha y automáticamente se generará un archivo .yaml que representará al mapa creado.
 
 
