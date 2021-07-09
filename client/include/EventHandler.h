@@ -1,12 +1,14 @@
 #ifndef _EVENT_HANDLER_H_
 #define _EVENT_HANDLER_H_
+
 #include "Soldier.h"
 #include "Player.h"
+#include "ClientProtocol.h"
 
 
 class EventHandler {
 private:
-    //ClientProtocol &prot; con quien interactua el cliente
+    ClientProtocol prot;
 public:
     EventHandler(/* args */){}
     ~EventHandler(){}

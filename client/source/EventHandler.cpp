@@ -3,19 +3,18 @@
 
 bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
     SDL_Event event;
-    // Para el alumno: Buscar diferencia entre waitEvent y pollEvent
+    
     while (SDL_PollEvent(&event)){
         switch (event.type) {
-            case SDL_KEYDOWN: {
-                // ¿Qué pasa si mantengo presionada la tecla?    
+            case SDL_KEYDOWN: {// todas las llamadas al player son al protocol en realidad
                 const Uint8 *state = SDL_GetKeyboardState(NULL);
                 if (state[SDL_SCANCODE_A]){
                     soldier.move();
-                    player.moveLeft(); // 
+                    player.moveLeft();
                 }
                 if (state[SDL_SCANCODE_D]){
                     soldier.move();
-                    player.moveRight();// aca es prot.moveRoght
+                    player.moveRight();
                 }
                 if (state[SDL_SCANCODE_S]){
                     soldier.move();
@@ -25,7 +24,7 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                     soldier.move();
                     player.moveUp();
                 }
-            } // Fin KEY_DOWN
+            }
                 break;
             case SDL_KEYUP: {
                 SDL_KeyboardEvent& keyEvent = (SDL_KeyboardEvent&) event;
@@ -47,14 +46,16 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                         player.stopMoveDown();
                         break;
                     } 
-                }// Fin KEY_UP
+                }
                 break;
             case SDL_QUIT:
+                //protocol.quit();
                 std::cout << "Quit :(" << std::endl;
                 return false;
             case SDL_MOUSEBUTTONDOWN:
+                //protocol.mouseDown()
                 player.attack(angle - 90);
-        } // fin switch(event)
-    } // fin while(SDL_PollEvents)
+        }
+    }
     return true;
 }
