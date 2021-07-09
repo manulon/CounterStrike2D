@@ -42,18 +42,16 @@ En el directorio en que se encuentra la descarga del proyecto ejecutar los sigui
 No hay.
 
 ## Ejecución del cliente ##
-TODO: Aun no esta la aplicacion cliente. ¿Que colocamos?
-
+Falta implementacion
 ## Ejecución del servidor ##
-TODO: Aun no esta la aplicacion servidor. ¿Que colocamos?
+Falta implementacion
 
 ## Controles del juego ##
-TODO: Las teclas seria mas comodo awsd (discutirlo)
 - **Movimiento del jugador: Usar las siguientes teclas**
-   - Arriba: W (Tecla W)
-   - Abajo: S (Tecla S)
-   - Izquierda: A (Tecla A)
-   - Derecha: D (Tecla D)
+   - Arriba: ↑ (Tecla UP)
+   - Abajo: ↓ (Tecla DOWN)
+   - Izquierda: ← (Tecla LEFT)
+   - Derecha: → (Tecla RIGHT)
 - **Movimiento de la vista**
    - Mouse
 - **Disparo:**
