@@ -3,7 +3,7 @@
 ## Requerimientos ##  
 
 1. **Sistema operativo**  
-Se debe utilizar un sistema operativo derivador de UNIX. Por ejemplo: Ubuntu.
+Se debe utilizar un sistema operativo derivados de UNIX. Por ejemplo: Ubuntu.
 
 2. **Dependencias**  
 Se deberan instalar las siguientes aplicaciones para moder compilar el proyecto, el interprete de comandos
@@ -39,7 +39,7 @@ En el directorio en que se encuentra la descarga del proyecto ejecutar los sigui
 4. cmake --build .
 
 ## Configuraciones adicionales ##
-TODO: ¿ Hay ?
+No hay.
 
 ## Ejecución del cliente ##
 TODO: Aun no esta la aplicacion cliente. ¿Que colocamos?
@@ -59,6 +59,9 @@ TODO: Las teclas seria mas comodo awsd (discutirlo)
 - **Disparo:**
    - Mouse: Click izquierdo.
 ## Editor ##
-TODO: Explicar.
+Una vez iniciado el programa editor, aparecera un menu con dos opciones. Seleccionar mapa y Salir. El segundo, obviamente, al presionarlo realiza un cierre ordenado del programa. Y el restante, al presionarlo hace aparecer otras tres opciones con los tres tipos de mapa disponibles para este juego. 
+Una vez que se seleccione un modo de mapa, aparecera una nueva ventana en la cual de puede elegir el tamanio de mapa. Hay tres disponibles.
+Finalmente, luego de seleccionar el tamaño del terreno a editar, en la esquina inferior derecha de la pantalla apareceran cinco opciones de tipos de parcelas para elegir y poner en el mapa. Segun se vayan seleccionando estas apareceran en la esquina inferior izquierda las parcelas que representan al tipo seleccionado y al mapa que se eligio anteriormente. Si se presiona cualquiera de estas, apareceran marcadas como seleccionadas en el cuadrado blanco central que hay en la pantalla. 
+Para comenzar con la edicion del mapa lo unico que hay que hacer es realizar point and click en las grillas que ya estan determinadas en el mapa. Una vez finalizado el proceso de edicion, hay que cerrar la ventana con la cruz de cierre en la esquina superior derecha y automaticamente se generara un archivo .yaml que representara al mapa creado
 
 
