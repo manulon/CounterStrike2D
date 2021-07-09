@@ -8,19 +8,19 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
         switch (event.type) {
             case SDL_KEYDOWN: {// todas las llamadas al player son al protocol en realidad
                 const Uint8 *state = SDL_GetKeyboardState(NULL);
-                if (state[SDL_SCANCODE_A]){
+                if (state[SDL_SCANCODE_LEFT]){
                     soldier.move();
                     player.moveLeft();
                 }
-                if (state[SDL_SCANCODE_D]){
+                if (state[SDL_SCANCODE_RIGHT]){
                     soldier.move();
                     player.moveRight();
                 }
-                if (state[SDL_SCANCODE_S]){
+                if (state[SDL_SCANCODE_DOWN]){
                     soldier.move();
                     player.moveDown();
                 }
-                if (state[SDL_SCANCODE_W]){
+                if (state[SDL_SCANCODE_UP]){
                     soldier.move();
                     player.moveUp();
                 }
@@ -29,19 +29,19 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
             case SDL_KEYUP: {
                 SDL_KeyboardEvent& keyEvent = (SDL_KeyboardEvent&) event;
                 switch (keyEvent.keysym.sym) {
-                    case SDLK_a:
+                    case SDLK_LEFT:
                         soldier.stopMoving();
                         player.stopMoveLeft();
                         break;
-                    case SDLK_d:
+                    case SDLK_RIGHT:
                         soldier.stopMoving();
                         player.stopMoveRight();
                         break;
-                    case SDLK_w:
+                    case SDLK_UP:
                         soldier.stopMoving();
                         player.stopMoveUp();
                         break;
-                    case SDLK_s:
+                    case SDLK_DOWN:
                         soldier.stopMoving();
                         player.stopMoveDown();
                         break;
