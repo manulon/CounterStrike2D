@@ -26,7 +26,7 @@ FILE(GLOB_RECURSE mapEditor "mapEditor/*.cpp")
 add_executable(editor test/editor.cpp ${mapEditor} ${server} ${source} ${common})
 target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-add_executable(showAnImage test/showAnImage.cpp ${server} ${source})
+add_executable(showAnImage test/showAnImage.cpp ${server} ${source} ${common})
 target_link_libraries(showAnImage SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
 # add_executable(tiles test/tiles.cpp ${server} ${source})
