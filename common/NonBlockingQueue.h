@@ -3,11 +3,7 @@
 #include <iostream>
 #include <mutex>
 #include <queue>
-#include <condition_variable>
 
-
-
-//sacado de clase 
 template <class T>
 class NonBlockingQueue{
     private:
