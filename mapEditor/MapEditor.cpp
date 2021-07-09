@@ -24,3 +24,7 @@ void MapEditor::generateMap(){
     file<<map;
     file.close();
 }
+
+void MapEditor::addSize(std::string size){
+    map["size"] = size;
+}

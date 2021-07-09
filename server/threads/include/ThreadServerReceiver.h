@@ -6,7 +6,7 @@
 class ThreadServerReceiver : public Thread{
 private:
     Socket &skt;
-    NonBlockingQueue<> &queue;
+    NonBlockingQueue<std::string> &queue;
 public:
     ThreadServerReceiver(Socket &skt, NonBlockingQueue<> &queue);
     ~ThreadServerReceiver();

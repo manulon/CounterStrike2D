@@ -12,7 +12,7 @@ class Camera{
         Camera(TileMap& map);
         Camera(Camera &&other);
         ~Camera();
-        void render(int x, int y, const Area &dest, std::list<Entity*> &serverObjects);
+        void render(float x, float y, const Area &dest, std::list<Entity*> &serverObjects);
  
 
     private:

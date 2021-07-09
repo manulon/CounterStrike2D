@@ -16,6 +16,7 @@ public:
     void addField(int x , int y, int sprite);
     void addObstacle(int x , int y, int sprite);
     void generateMap();
+    void addSize(std::string name);
 };
 
 

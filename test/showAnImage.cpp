@@ -90,12 +90,7 @@ int main(int argc, const char *argv[]){
         SDL_Color textColor {0,0,0};
         Text text("assets/gfx/fonts/liberationsans.ttf", 200,
                   "Hola Mundo !", textColor, window);
-
         std::list<Entity*> serverObjects;
-        // serverObjects.push_back(&player);
-        // serverObjects.push_back(&player2);
-        // serverObjects.push_back(&fa);
-
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
         Area textArea((800/2)-(200/2), (600/2)-(100/2), 200, 100);       
         Area cameraArea(0, 0, 800, 600);
@@ -110,7 +105,7 @@ int main(int argc, const char *argv[]){
             window.clear();
             world.step();
             world.getServerObjects(serverObjects);
-            camera.render((player.getPositionX()+8)*32,(player.getPositionY()-2)*32, cameraArea, serverObjects);
+            camera.render(player.getPositionX(),player.getPositionY(), cameraArea, serverObjects);
             stencil.render(stencilArea, mm.getAngle());
             // text.render(textArea);
             soldier_renderer.render();

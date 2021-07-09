@@ -19,7 +19,7 @@
 #define TOTAL_TILES  		625
 #define TOTAL_TILE_SPRITES  75
 #define ROW_WIDTH  			160
-
+#define PPM 32
 class TileMap{
 private:
 	Window &window;
@@ -31,14 +31,19 @@ private:
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
 	std::map<short,std::unique_ptr<DynamicObject>> objects;
+	int xOffset;
+	int yOffset;
 	// std::list<std::unique_ptr<DynamicObject>> renderizables;
 
 	TileMap(const TileMap &other) = delete;
     TileMap& operator=(const TileMap &other) = delete;
     TileMap& operator=(TileMap &&other) = delete;
+	void setOffset(std::string &size);
 public:
 	TileMap(Window &window, const char *pathText, const std::string &pathTiles, const std::string &pathObs);
 	~TileMap();
+	int getxOffset();
+	int getyOffset();
 	void addDynamicObject(short id, DynamicObject *object);
 	bool loadMedia();
 	bool setTiles();

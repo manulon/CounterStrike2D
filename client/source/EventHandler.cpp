@@ -9,19 +9,19 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
             case SDL_KEYDOWN: {
                 // ¿Qué pasa si mantengo presionada la tecla?    
                 const Uint8 *state = SDL_GetKeyboardState(NULL);
-                if (state[SDL_SCANCODE_LEFT]){
+                if (state[SDL_SCANCODE_A]){
                     soldier.move();
                     player.moveLeft(); // 
                 }
-                if (state[SDL_SCANCODE_RIGHT]){
+                if (state[SDL_SCANCODE_D]){
                     soldier.move();
                     player.moveRight();// aca es prot.moveRoght
                 }
-                if (state[SDL_SCANCODE_DOWN]){
+                if (state[SDL_SCANCODE_S]){
                     soldier.move();
                     player.moveDown();
                 }
-                if (state[SDL_SCANCODE_UP]){
+                if (state[SDL_SCANCODE_W]){
                     soldier.move();
                     player.moveUp();
                 }
@@ -30,19 +30,19 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
             case SDL_KEYUP: {
                 SDL_KeyboardEvent& keyEvent = (SDL_KeyboardEvent&) event;
                 switch (keyEvent.keysym.sym) {
-                    case SDLK_LEFT:
+                    case SDLK_a:
                         soldier.stopMoving();
                         player.stopMoveLeft();
                         break;
-                    case SDLK_RIGHT:
+                    case SDLK_d:
                         soldier.stopMoving();
                         player.stopMoveRight();
                         break;
-                    case SDLK_UP:
+                    case SDLK_w:
                         soldier.stopMoving();
                         player.stopMoveUp();
                         break;
-                    case SDLK_DOWN:
+                    case SDLK_s:
                         soldier.stopMoving();
                         player.stopMoveDown();
                         break;

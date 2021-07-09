@@ -40,6 +40,7 @@ const std::string& sizeName){
 
          case SDL_QUIT:
             MapEditor map;
+            map.addSize(sizeName);
             map.createMap("MapaDePruebaEditor",mapName);
             for (auto& e : finalMapTiles){
                map.addField(e.first.first,e.first.second,e.second);

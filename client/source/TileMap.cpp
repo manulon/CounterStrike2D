@@ -6,13 +6,8 @@
 
 TileMap::TileMap(Window & window,const char *pathText, const std::string &pathTiles, const std::string &pathObs) :
 window(window),image(pathTiles.c_str(),window),mapName(pathText),
-imgObstacles(pathObs.c_str(),window),tiles(), obstacles(){
-	
-    //Deberia tirar excepcion
-    // if( map.fail() )
-    //     printf( "Unable to load map file!\n" );
+imgObstacles(pathObs.c_str(),window),tiles(), obstacles(), xOffset(0), yOffset(0){
 
-    //Excepcion aca tambien???
     loadMedia();
 }
 
@@ -41,6 +36,27 @@ void TileMap::addDynamicObject(short id, DynamicObject *object){
     // objects[id] = (object);
 }
 
+void TileMap::setOffset(std::string &size){
+    if (size == "huge"){// yaml
+        xOffset = 8;
+        yOffset = -2;
+    } else if (size == "small"){
+        xOffset = 0;
+        yOffset = -4;
+    } else if (size == "big"){
+
+    }
+    
+}
+
+int TileMap::getxOffset(){
+    return xOffset;
+}
+
+int TileMap::getyOffset(){
+    return yOffset;
+}
+
 bool TileMap::setTiles(){
     YAML::Node map = YAML::LoadFile(mapName);
     YAML::Node fields = map["fields"];
@@ -48,7 +64,10 @@ bool TileMap::setTiles(){
         tiles.push_back(new Tile(fields[i][2].as<int>(), fields[i][0].as<int>()*32,
                                  fields[i][1].as<int>()*32,image));
     }
-
+    std::string size = map["size"].as<std::string>();
+    setOffset(size);
+    // std::string style = map["style"].as<std::string>(); 
+    
     int x_aux(0);
     int y_aux(0);
 
@@ -129,7 +148,7 @@ void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObj
     for (auto &object : serverObjects){
         short id = object->getId();
         if(fac.createRenderizable(id, objects))
-            objects[id]->setPos((object->getPositionX()+8)*32,(object->getPositionY()-2)*32);
+            objects[id]->setPos((object->getPositionX()+xOffset)*PPM,(object->getPositionY()+yOffset)*PPM);
     }
     renderObjects(x,y);
     objects.clear();
