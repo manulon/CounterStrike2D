@@ -1,4 +1,5 @@
 #include "BlockingQueue.h"
+#include "ClosedQueueException.h"
 #include <exception>
 
 template <class T>
