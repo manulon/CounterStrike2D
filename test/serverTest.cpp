@@ -42,6 +42,9 @@ int main(int argc, const char *argv[]) {
             //player.attack(90);
             player.attack(90.0f);
             player.moveRight();
+
+            // llamo al serverEvents.handleEvents (if de toda la lista con los opcodes)
+
             player.update();
 
         	world.step();

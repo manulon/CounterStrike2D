@@ -11,7 +11,7 @@ void CommunicationProtocol:: send_message(const char* msg,int length){
     this->socket->send(msg,length);
 }
 
-void CommunicationProtocol:: send_size(uint16_t size){
+void CommunicationProtocol:: send_int16(uint16_t size){
     size = htons(size);
     this->socket->send((char*)&size,2);
 }

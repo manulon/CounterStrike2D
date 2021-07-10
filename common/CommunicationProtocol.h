@@ -18,7 +18,7 @@ public:
     void send_message(const char* msg,int length);
     
     //Delega el envio del size recibido por parametro al socket.
-    void send_size(uint16_t size);
+    void send_int16(uint16_t size);
     
     //Delega la recepcion de un mensaje de largo length al socket.
     ssize_t receive_message(int length, char* buffer);

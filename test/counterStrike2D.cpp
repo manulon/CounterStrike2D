@@ -29,7 +29,7 @@
 
 static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) {
     soldier.update(dt);
-    mm.update();
+    mm.update();    // ESTO CREO QUE NO DEBERIA IR ACA.
     soldier.setAngle(mm.getAngle());
     player.update();
 }
@@ -101,6 +101,7 @@ int main(int argc, const char *argv[]){
         while (running) {
             
             running = eh.handleEvents(soldier_renderer, player, mm.getAngle());
+            //mm.update();   ????????
             update(soldier_renderer,player, FRAME_RATE,mm);
             window.clear();
             world.step();

@@ -53,7 +53,7 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                 std::cout << "Quit :(" << std::endl;
                 return false;
             case SDL_MOUSEBUTTONDOWN:
-                //protocol.mouseDown()
+                //protocol.attack()
                 player.attack(angle - 90);
         }
     }
