@@ -3,7 +3,7 @@
 #include "Thread.h"
 #include "Socket.h"
 #include "NonBlockingQueue.h"
-class ThreadServerReceiver : public Thread{
+class ThreadServerReceiver : public Thread {
 private:
     Socket &skt;
     NonBlockingQueue<std::string> &queue;
