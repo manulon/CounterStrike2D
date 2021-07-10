@@ -57,18 +57,18 @@ int main(int argc, const char *argv[]){
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
-        //Image de_dust("assets/gfx/tiles/default_dust.png", window);
-        //Image obsimg("assets/gfx/tiles/obstacles.png", window);
-        // TileMap mapTest(window,"assets/maps/SmallDust.yaml", de_dust, obsimg);
-        TileMap mapTest(window, "../mapaGiganteDust.yaml", "assets/gfx/tiles/default_dust.png", "assets/gfx/tiles/obstacles.png");
-        // PhysicalMapFactory g(world,"assets/maps/SmallDust.yaml");
+        //Image de_dust("../assets/gfx/tiles/default_dust.png", window);
+        //Image obsimg("../assets/gfx/tiles/obstacles.png", window);
+        // TileMap mapTest(window,"../assets/maps/SmallDust.yaml", de_dust, obsimg);
+        TileMap mapTest(window, "../mapaGiganteDust.yaml", "../assets/gfx/tiles/default_dust.png", "../assets/gfx/tiles/obstacles.png");
+        // PhysicalMapFactory g(world,"../assets/maps/SmallDust.yaml");
         PhysicalMapFactory g(world,"../mapaGiganteDust.yaml");
         Color key = {0xFF, 0, 0xFF};
-        Image pointImg("assets/gfx/pointer.bmp", window, key);
+        Image pointImg("../assets/gfx/pointer.bmp", window, key);
         Pointer pointer(pointImg);
         Camera camera(mapTest);
-        Soldier soldier_renderer("assets/gfx/player/t4.bmp", window);
-        Music music("assets/sfx/menu.wav");
+        Soldier soldier_renderer("../assets/gfx/player/t4.bmp", window);
+        Music music("../assets/sfx/menu.wav");
 
         /*std::unique_ptr<FireArm> fa(new FireArm(world, 0.3f, 0.3f, 1, 11));
         fa->earlyAttachToWorld(2.0f, 3.0f);
@@ -85,10 +85,10 @@ int main(int argc, const char *argv[]){
         player.setWeapon(std::move(weapon));*/
 
 
-        SoundEffect soundEffect("assets/sfx/weapons/ak47.wav");
+        SoundEffect soundEffect("../assets/sfx/weapons/ak47.wav");
         Stencil stencil(1000, 1000, 25, 90, 150, window);
         SDL_Color textColor {0,0,0};
-        Text text("assets/gfx/fonts/liberationsans.ttf", 200,
+        Text text("../assets/gfx/fonts/liberationsans.ttf", 200,
                   "Hola Mundo !", textColor, window);
         std::list<Entity*> serverObjects;
         Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);

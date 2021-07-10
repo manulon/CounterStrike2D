@@ -2,7 +2,7 @@
 #include <iostream>
 
 ButtonWeaponCharacter:: ButtonWeaponCharacter(Window& window,EditorConfig& editor): 
-Button("assets/gfx/buttons/ButtonDuo.png",window,editor,
+Button("../assets/gfx/buttons/ButtonDuo.png",window,editor,
         window.getWidth()-235,window.getHeight()-45,122,32),
 window(window){}
 

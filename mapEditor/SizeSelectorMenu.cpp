@@ -59,7 +59,7 @@ void SizeSelectorMenu::run(){
     Window window("Menu editor",725,100,
                   SDL_WINDOW_RESIZABLE,(SDL_INIT_VIDEO | SDL_INIT_AUDIO));
 
-    Text title("assets/gfx/fonts/liberationsans.ttf", 40,"Seleccione un tamano de mapa",
+    Text title("../assets/gfx/fonts/liberationsans.ttf", 40,"Seleccione un tamano de mapa",
                color.getColor(),window);
     Area titleRenderArea(180,0,400,45);
     setSizeOptions(window);

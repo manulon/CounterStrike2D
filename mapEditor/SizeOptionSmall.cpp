@@ -1,7 +1,7 @@
 #include "SizeOptionSmall.h"
 
 SizeOptionSmall:: SizeOptionSmall(Window &window):
-MenuOption("assets/gfx/buttons/ButtonSmall.png",window,0,50,237,32),
+MenuOption("../assets/gfx/buttons/ButtonSmall.png",window,0,50,237,32),
 window(window){}
 
 SizeOptionSmall::~SizeOptionSmall(){}

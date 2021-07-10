@@ -7,12 +7,12 @@ Editor::Editor(const char* path,const char* mapName,
                std::pair<int,int>& size): 
 window("Counter Strike 2D", size.first, size.second, 
         SDL_WINDOW_RESIZABLE,SDL_INIT_VIDEO | SDL_INIT_AUDIO),
-grid("assets/gfx/emptySpace.png", window),
-image(path,window),selectedTile("assets/gfx/selectedTile.png",window),
-obsImage("assets/gfx/tiles/obstacles.png",window),               
+grid("../assets/gfx/emptySpace.png", window),
+image(path,window),selectedTile("../assets/gfx/selectedTile.png",window),
+obsImage("../assets/gfx/tiles/obstacles.png",window),               
 eventHandler(window,image,obsImage,mapName),editor(mapName),sizeName(""),
 tileBoxHeight(0),tileWidth(0),tileHeight(0){
-    YAML::Node readerNode = YAML::LoadFile("editor/editor_config.yaml");
+    YAML::Node readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
     tileBoxHeight = readerNode["config"]["tile_box_height"].as<int>();
     tileWidth     = readerNode["config"]["tile_width"].as<int>();
     tileHeight    = readerNode["config"]["tile_height"].as<int>();

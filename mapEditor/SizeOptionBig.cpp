@@ -1,7 +1,7 @@
 #include "SizeOptionBig.h"
 
 SizeOptionBig:: SizeOptionBig(Window &window):
-MenuOption("assets/gfx/buttons/ButtonBig.png",window,240,50,237,32),
+MenuOption("../assets/gfx/buttons/ButtonBig.png",window,240,50,237,32),
 window(window){}
 
 SizeOptionBig::~SizeOptionBig(){}

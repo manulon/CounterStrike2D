@@ -4,7 +4,7 @@
 MenuOptionSelectMode:: MenuOptionSelectMode
 (const char *fontPath, int ptsize,
 const char *textToRender,Window &window):
-MenuOption("assets/gfx/buttons/ButtonMap.png",window,5,50,237,32),
+MenuOption("../assets/gfx/buttons/ButtonMap.png",window,5,50,237,32),
 window(window){}
 
 MenuOptionSelectMode::~MenuOptionSelectMode(){}

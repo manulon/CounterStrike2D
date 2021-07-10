@@ -10,15 +10,15 @@ RenderizableFactory::RenderizableFactory(Window & window) : window(window){}
 bool RenderizableFactory::createRenderizable(short id, std::map<short,std::unique_ptr<DynamicObject>> &objects){
     if (isPresent(id,objects)) return true;
     if (isSoldier(id)){
-        std::unique_ptr<DynamicObject> ptr(new Soldier("assets/gfx/player/t1.bmp",window));
+        std::unique_ptr<DynamicObject> ptr(new Soldier("../assets/gfx/player/t1.bmp",window));
         objects[id] = std::move(ptr);
         return true;
     } else if (isAk47(id)){    
-        std::unique_ptr<DynamicObject> ptr(new Weapon("assets/gfx/weapons/ak47_d.bmp",window,16,32));
+        std::unique_ptr<DynamicObject> ptr(new Weapon("../assets/gfx/weapons/ak47_d.bmp",window,16,32));
         objects[id] = std::move(ptr);
         return true;
     }  else if (id == 60){
-        std::unique_ptr<DynamicObject> ptr(new Bullett("assets/gfx/bullet.png",window));
+        std::unique_ptr<DynamicObject> ptr(new Bullett("../assets/gfx/bullet.png",window));
         objects[id] = std::move(ptr); 
         return true;
     }

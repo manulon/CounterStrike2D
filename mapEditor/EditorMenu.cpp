@@ -5,9 +5,9 @@
 EditorMenu::EditorMenu():
 window("Menu Editor", 500, 200, SDL_WINDOW_RESIZABLE, 
        SDL_INIT_VIDEO | SDL_INIT_AUDIO),
-textSelectMode("assets/gfx/fonts/liberationsans.ttf", 40,
+textSelectMode("../assets/gfx/fonts/liberationsans.ttf", 40,
                "Seleccionar modo ",window),
-textExit("assets/gfx/fonts/liberationsans.ttf", 40,
+textExit("../assets/gfx/fonts/liberationsans.ttf", 40,
          "Salir ", window),
 handler(),startEditor(true),selectorMenu(),pairSize(0,0){
     options.push_back(&textSelectMode);

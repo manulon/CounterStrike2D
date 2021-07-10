@@ -4,7 +4,7 @@
 MenuOptionExitMode:: MenuOptionExitMode
 (const char *fontPath, int ptsize,
 const char *textToRender,Window &window):
-MenuOption("assets/gfx/buttons/ButtonSalir.png",window,5,100,237,32){}
+MenuOption("../assets/gfx/buttons/ButtonSalir.png",window,5,100,237,32){}
 
 MenuOptionExitMode::~MenuOptionExitMode(){}
 

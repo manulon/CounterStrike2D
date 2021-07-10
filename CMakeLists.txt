@@ -29,13 +29,7 @@ target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 add_executable(counterStrike2D test/counterStrike2D.cpp ${server} ${source} ${common})
 target_link_libraries(counterStrike2D SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-# add_executable(tiles test/tiles.cpp ${server} ${source})
-# target_link_libraries(tiles SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
-
 add_executable(serverTest test/serverTest.cpp ${server})
 target_link_libraries(serverTest Box2D yaml-cpp)
-
-# add_executable(mapTest test/makeMap.cpp ${source} ${server} ${mapEditor})
-# target_link_libraries(mapTest SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

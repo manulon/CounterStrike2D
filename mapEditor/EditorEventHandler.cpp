@@ -10,7 +10,7 @@ actualType(-1),selectedZoneX(windowWidth/2+4),selectedZoneY(windowHeight-86),
 image(image),obsImage(obsImage),actualImage(""),window(window),
 finalMapTiles(),finalMapObstacles(),mapName(mapName),
 tileBoxHeight(0),tileWidth(0),tileHeight(0){
-   YAML::Node readerNode = YAML::LoadFile("editor/editor_config.yaml");
+   YAML::Node readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
    tileBoxHeight = readerNode["config"]["tile_box_height"].as<int>();
    tileWidth     = readerNode["config"]["tile_width"].as<int>();
    tileHeight    = readerNode["config"]["tile_height"].as<int>();

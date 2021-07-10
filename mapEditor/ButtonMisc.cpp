@@ -2,7 +2,7 @@
 #include <iostream>
 
 ButtonMisc:: ButtonMisc(Window& window,EditorConfig& editor): 
-Button("assets/gfx/buttons/ButtonMisc.png",window,editor,
+Button("../assets/gfx/buttons/ButtonMisc.png",window,editor,
         window.getWidth()-275,window.getHeight()-82,80,32),
 window(window){}
 

@@ -2,9 +2,9 @@
 #include <iostream>
 
 MapOptionInferno:: MapOptionInferno(Window& window): 
-MenuOption("assets/gfx/buttons/ButtonInferno.png",window,250,95,239,32),
+MenuOption("../assets/gfx/buttons/ButtonInferno.png",window,250,95,239,32),
 window(window),path(""){
-    YAML::Node readerNode = YAML::LoadFile("editor/editor_config.yaml");
+    YAML::Node readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
     path = readerNode["config"]["inferno_path"].as<std::string>();
 }
 
