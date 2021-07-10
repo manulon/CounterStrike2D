@@ -269,7 +269,7 @@ void EditorConfig::getAtributes(std::string atributeName,const std::string& size
                                 std::vector<Tile*>& options,std::vector<Tile*>& obstacleOptionsTiles,
                                 const Image& image,const Image& obsImage){
 
-    readerNode = YAML::LoadFile("editor_config.yaml");
+    readerNode = YAML::LoadFile("editor/editor_config.yaml");
 
     for(size_t i=0; i<readerNode[mapName][sizeName][atributeName].size(); i++){
         options.push_back(new Tile(readerNode[mapName][sizeName][atributeName][i][0].as<int>(),

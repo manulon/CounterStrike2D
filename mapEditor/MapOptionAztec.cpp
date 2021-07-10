@@ -6,7 +6,7 @@
 MapOptionAztec:: MapOptionAztec(Window& window): 
 MenuOption("assets/gfx/buttons/ButtonAztec.png",window,250,60,239,32),
 window(window),path(""){
-    YAML::Node readerNode = YAML::LoadFile("editor_config.yaml");
+    YAML::Node readerNode = YAML::LoadFile("editor/editor_config.yaml");
     path = readerNode["config"]["aztec_path"].as<std::string>();
 }
 
