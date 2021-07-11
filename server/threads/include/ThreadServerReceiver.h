@@ -14,7 +14,7 @@ private:
     bool isRunning;
 public:
     ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::unique_ptr<Event>> &queue);
-    ~ThreadServerReceiver();
+    ~ThreadServerReceiver(){}
     virtual void run() override;
 };
 

@@ -25,5 +25,3 @@ int CommunicationProtocol:: receive_size(){
     this->socket.receive((char*)&size,2);
     return (int)ntohs(size);
 }
-
-CommunicationProtocol:: ~CommunicationProtocol(){}

@@ -15,7 +15,7 @@ private:
     bool isRunning;
 public:
     ThreadServerSender(Socket &skt, std::shared_ptr<BlockingQueue<std::string>> &queue, int id);
-    ~ThreadServerSender();
+    ~ThreadServerSender(){}
     virtual void run() override;
 };
 

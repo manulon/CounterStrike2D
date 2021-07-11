@@ -1,10 +1,6 @@
 #include "ThreadClient.h"
-#include "BlockingQueue.h"
-#include "ThreadServerReceiver.h"
-#include <string>
-#include <utility>
 
-ThreadClient::ThreadClient(Socket &&peer, NonBlockingQueue<std::unique_ptr<ClientEvent>> &queueReceiver, 
+ThreadClient::ThreadClient(Socket &&peer, NonBlockingQueue<std::unique_ptr<Event>> &queueReceiver, 
 		std::shared_ptr<BlockingQueue<std::string>> &queueSender, int id) : 
 		peer(std::move(peer)), isRunning(false), clientEvents(queueReceiver), queueSender(queueSender),
 		id(id) { }

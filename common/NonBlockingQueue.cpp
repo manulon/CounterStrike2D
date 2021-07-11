@@ -2,6 +2,7 @@
 #include <exception>
 
 template <class T>
+
 void NonBlockingQueue<T>::push(T t){
     std::unique_lock<std::mutex> lk(m);
     queue.push(t);

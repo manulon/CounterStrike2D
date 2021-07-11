@@ -5,12 +5,14 @@
 #include <list>
 #include <map>
 #include "BlockingQueue.h"
+#include "NonBlockingQueue.h"
+#include "../common/Event.h"
 class ThreadClient;
 
 class Clients {
 	private:
 		std::list<std::unique_ptr<ThreadClient>> clients;
-		NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue;
+		NonBlockingQueue<std::unique_ptr<Event>> &queue;
 		std::map<int,std::shared_ptr<BlockingQueue<std::string>>> senderQueues;
 		Clients(const Clients &other);
 		Clients& operator=(const Clients &other);
@@ -19,7 +21,7 @@ class Clients {
 		/*
 		 * @brief Constructor.
 		 */
-		Clients( NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue);
+		Clients( NonBlockingQueue<std::unique_ptr<Event>> &queue);
 
 		/*
 		 * @brief Constructor por movimiento.
@@ -55,7 +57,7 @@ class Clients {
 		/*
 		 * @brief Detiene ordenadamente a los clientes que controla.
 		 */
-		void stopClients() const;
+		void stopClients();
 };
 
 #endif // _CLIENTS_H_

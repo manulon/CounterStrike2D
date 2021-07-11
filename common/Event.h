@@ -9,7 +9,7 @@ class Event{
     
     public:
         Event(int id, char opcode, int arg);
-        ~Event();
+        ~Event(){}
         
         int getId();
         char getOpcode();

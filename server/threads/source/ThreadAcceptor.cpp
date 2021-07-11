@@ -5,12 +5,12 @@
 #include <utility>
 #define SERVER_FLAGS AI_PASSIVE
 
-ThreadAcceptor::ThreadAcceptor(const char *service, NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue) 
+ThreadAcceptor::ThreadAcceptor(const char *service, NonBlockingQueue<std::unique_ptr<Event>> &queue) 
 	: ThreadAcceptor("localhost", service, queue) { }
 
 ThreadAcceptor::ThreadAcceptor(const char *host, 
 				   			   const char *service,
-							   NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue) 
+							   NonBlockingQueue<std::unique_ptr<Event>> &queue) 
 	: acceptor(AI_PASSIVE), isRunning(true), queue(queue) { 
 	acceptor.bindAndListen(host, service);
 }

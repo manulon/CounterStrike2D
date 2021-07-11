@@ -10,7 +10,7 @@ class ThreadAcceptor : public Thread {
 	private:
 		Socket acceptor;
 		bool isRunning;
-		NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue;
+		NonBlockingQueue<std::unique_ptr<Event>> &queue;
 		ThreadAcceptor(const ThreadAcceptor &other) = delete;
 		ThreadAcceptor& operator=(const ThreadAcceptor &other) = delete;
 
@@ -25,14 +25,14 @@ class ThreadAcceptor : public Thread {
 		 * @param service: Puerto en el que se creara
 		 * el hilo aceptador.
 		 */
-		explicit ThreadAcceptor(const char *service, NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue);
+		explicit ThreadAcceptor(const char *service, NonBlockingQueue<std::unique_ptr<Event>> &queue);
 
 		/*
 		 * Constructor con parametros.
 		 * @param host: Dominio en donde escuchara el socket.
 		 * @param service: Puerto en donde enlazara el socket.
 		 */
-		ThreadAcceptor(const char *host, const char *service, NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue);
+		ThreadAcceptor(const char *host, const char *service, NonBlockingQueue<std::unique_ptr<Event>> &queue);
 
 		/*
 		 * Constructor por movimiento.
