@@ -2,13 +2,16 @@
 #define _CLIENT_H_
 
 #include "Thread.h"
+#include "ThreadServerSender.h"
 #include <atomic>
 
 class ThreadClient : public Thread {
 	private:
 		Socket peer;
 		bool isRunning;
-
+		NonBlockingQueue <std::unique_ptr<ClientEvent>> &clientEvents;
+		std::shared_ptr<BlockingQueue<std::string>> &queueSender;
+		int id;	
 		ThreadClient(const ThreadClient &other) = delete;
 		ThreadClient& operator=(const ThreadClient &other) = delete;
 		ThreadClient& operator=(ThreadClient &&other) = delete;
@@ -26,7 +29,8 @@ class ThreadClient : public Thread {
 		 * @param gamesMonitor: Coleccion que almacena la informacion
 		 * sobre las partidas que se estan ejecutando.
 		 */
-		ThreadClient(Socket &&peer);
+		ThreadClient(Socket &&peer, NonBlockingQueue<std::unique_ptr<ClientEvent>> &queueReceiver, 
+		std::shared_ptr<BlockingQueue<std::string>> &queueSender, int id);
 
 		/*
 		 * @brief Constructor por movimiento.

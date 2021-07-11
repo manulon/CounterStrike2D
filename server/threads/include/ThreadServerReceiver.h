@@ -5,6 +5,7 @@
 #include "NonBlockingQueue.h"
 #include "ClientEvent.h"
 #include "CommunicationProtocol.h"
+#include "ProtocolConstants.h"
 
 class ThreadServerReceiver : public Thread {
 private:

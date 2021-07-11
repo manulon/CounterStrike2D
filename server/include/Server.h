@@ -1,9 +1,9 @@
 #ifndef _SERVER_H_
 #define _SERVER_H_
-#include "Thread.h"
+#include "ThreadAcceptor.h"
 class Server {
 private:
-    Socket sktServer;
+    NonBlockingQueue<std::unique_ptr<ClientEvent>> clientEvents;
 public:
     Server(/* args */);
     ~Server();

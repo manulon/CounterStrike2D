@@ -1,11 +1,13 @@
 #include "Clients.h"
 #include "ThreadClient.h"
 #include <list>
+#include "NonBlockingQueue.h"
+#include "ClientEvent.h"
 #include <utility>
 
-Clients::Clients() { }
+Clients::Clients( NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue) : queue(queue) { }
 
-Clients::Clients(Clients &&other) : clients(std::move(other.clients)) { }
+Clients::Clients(Clients &&other) : clients(std::move(other.clients)), queue(other.queue) { }
 
 Clients::~Clients() { }
 
@@ -15,8 +17,10 @@ Clients& Clients::operator=(Clients &&other) {
 	return *this;
 }
 
-void Clients::add(Socket &&peer) {
-	std::unique_ptr<ThreadClient> client(new ThreadClient(std::move(peer)));//, &nonBlockingQueue;
+void Clients::add(Socket &&peer, int id) {
+	std::unique_ptr<BlockingQueue<std::string>> newQueue(new BlockingQueue<std::string>());
+	senderQueues[id] = std::move(newQueue);
+	std::unique_ptr<ThreadClient> client(new ThreadClient(std::move(peer),queue,senderQueues[id], id));
 	client->run();
 	clients.push_back(std::move(client));
 }

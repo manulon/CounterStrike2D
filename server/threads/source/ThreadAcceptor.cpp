@@ -1,22 +1,23 @@
 #include "ThreadAcceptor.h"
-#include "Clients.h"
+
 
 #include <iostream>
 #include <utility>
 #define SERVER_FLAGS AI_PASSIVE
 
-ThreadAcceptor::ThreadAcceptor(const char *service) 
-	: ThreadAcceptor("localhost", service) { }
+ThreadAcceptor::ThreadAcceptor(const char *service, NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue) 
+	: ThreadAcceptor("localhost", service, queue) { }
 
 ThreadAcceptor::ThreadAcceptor(const char *host, 
-				   			   const char *service) 
-	: acceptor(AI_PASSIVE), isRunning(true) { 
+				   			   const char *service,
+							   NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue) 
+	: acceptor(AI_PASSIVE), isRunning(true), queue(queue) { 
 	acceptor.bindAndListen(host, service);
 }
 
 ThreadAcceptor::ThreadAcceptor(ThreadAcceptor &&other) : 
 	acceptor(std::move(other.acceptor)), 
-	isRunning(other.isRunning) { }
+	isRunning(other.isRunning), queue(other.queue) { }
 
 ThreadAcceptor::~ThreadAcceptor() { }
 
@@ -28,13 +29,14 @@ ThreadAcceptor& ThreadAcceptor::operator=(ThreadAcceptor &&other) {
 }
 
 void ThreadAcceptor::run() {
-	Clients clients;
-
+	Clients clients(queue);
+	int newId = 0;
 	while (isRunning) {
 		try { 
 			Socket peer = acceptor.accept();
-			clients.add(std::move(peer));
+			clients.add(std::move(peer),newId);
 			clients.cleanDeadClients();
+			newId++;
 		} catch(const std::exception &exception) {
 			break;
 		}

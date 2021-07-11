@@ -10,6 +10,6 @@
 #define KEYWORD_KEYUP_UP        6
 #define KEYWORD_KEYUP_DOWN      7
 #define QUIT                    8
-#define MOUSE_DOWN              9
+#define SHOOT              9
 
 #endif

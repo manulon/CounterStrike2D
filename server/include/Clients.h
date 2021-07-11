@@ -3,12 +3,15 @@
 
 #include "Socket.h"
 #include <list>
+#include <map>
+#include "BlockingQueue.h"
 class ThreadClient;
 
 class Clients {
 	private:
 		std::list<std::unique_ptr<ThreadClient>> clients;
-
+		NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue;
+		std::map<int,std::shared_ptr<BlockingQueue<std::string>>> senderQueues;
 		Clients(const Clients &other);
 		Clients& operator=(const Clients &other);
 
@@ -16,7 +19,7 @@ class Clients {
 		/*
 		 * @brief Constructor.
 		 */
-		Clients();
+		Clients( NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue);
 
 		/*
 		 * @brief Constructor por movimiento.
@@ -42,7 +45,7 @@ class Clients {
 		 * @param peer: recibe el peer del cliente a agregar. Esta
 		 * operacion mueve el objeto Peer como miembro de la clase.
 		 */
-		void add(Socket &&peer);
+		void add(Socket &&peer, int id);
 
 		/*
 		 * @brief Libera a los clientes que dejaron de ejecutarse.
