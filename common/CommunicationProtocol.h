@@ -7,12 +7,11 @@
 #include <stdint.h>
 
 class CommunicationProtocol{
-    Socket* socket;
+    Socket& socket;
 
 public:
-    CommunicationProtocol();
-    ~CommunicationProtocol();
-    explicit CommunicationProtocol(Socket* socket);   
+    ~CommunicationProtocol(){}
+    explicit CommunicationProtocol(Socket&socket);   
     
     //Delega el envio del mensaje recibido por parametro al socket.
     void send_message(const char* msg,int length);
