@@ -9,7 +9,7 @@ class ClientProtocol{
         ClientProtocol(const ClientProtocol& other) = delete;
         ClientProtocol& operator=(const ClientProtocol& other) = delete;
 
-        CommunicationProtocol protocol;
+        //CommunicationProtocol protocol;
 
     public:
         ClientProtocol();

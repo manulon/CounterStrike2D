@@ -3,17 +3,17 @@
 #include "Thread.h"
 #include "Socket.h"
 #include "NonBlockingQueue.h"
-#include "ClientEvent.h"
+#include "../common/Event.h"
 #include "CommunicationProtocol.h"
 #include "ProtocolConstants.h"
 
 class ThreadServerReceiver : public Thread {
 private:
     Socket &skt;
-    NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue;
+    NonBlockingQueue<std::unique_ptr<Event>> &queue;
     bool isRunning;
 public:
-    ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::unique_ptr<ClientEvent>> &queue);
+    ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::unique_ptr<Event>> &queue);
     ~ThreadServerReceiver();
     virtual void run() override;
 };
