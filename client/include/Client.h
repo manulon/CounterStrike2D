@@ -4,6 +4,7 @@
 #include "Event.h"
 #include "NonBlockingQueue.h"
 #include <memory>
+#include "Socket.h"
 
 class Client {
     private:
@@ -12,6 +13,7 @@ class Client {
     public:
         Client():events(){}
         ~Client(){}
+        void run(const char * host, const char *service);
 };
 
 #endif

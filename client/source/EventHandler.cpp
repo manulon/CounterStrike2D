@@ -10,19 +10,19 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                 const Uint8 *state = SDL_GetKeyboardState(NULL);
                 if (state[SDL_SCANCODE_LEFT]){
                     soldier.move();
-                    player.moveLeft();
+                    //player.moveLeft();
                 }
                 if (state[SDL_SCANCODE_RIGHT]){
                     soldier.move();
-                    player.moveRight();
+                    //player.moveRight();
                 }
                 if (state[SDL_SCANCODE_DOWN]){
                     soldier.move();
-                    player.moveDown();
+                    //player.moveDown();
                 }
                 if (state[SDL_SCANCODE_UP]){
                     soldier.move();
-                    player.moveUp();
+                    //player.moveUp();
                 }
             }
                 break;
@@ -31,19 +31,19 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                 switch (keyEvent.keysym.sym) {
                     case SDLK_LEFT:
                         soldier.stopMoving();
-                        player.stopMoveLeft();
+                        //player.stopMoveLeft();
                         break;
                     case SDLK_RIGHT:
                         soldier.stopMoving();
-                        player.stopMoveRight();
+                        //player.stopMoveRight();
                         break;
                     case SDLK_UP:
                         soldier.stopMoving();
-                        player.stopMoveUp();
+                        //player.stopMoveUp();
                         break;
                     case SDLK_DOWN:
                         soldier.stopMoving();
-                        player.stopMoveDown();
+                        //player.stopMoveDown();
                         break;
                     } 
                 }
@@ -53,8 +53,9 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                 std::cout << "Quit :(" << std::endl;
                 return false;
             case SDL_MOUSEBUTTONDOWN:
+                std::cout << "ELIMINAR ESTE COUT\n";
                 //protocol.attack()
-                player.attack(angle - 90);
+                //player.attack(angle - 90);
         }
     }
     return true;

@@ -10,7 +10,7 @@ class EventHandler {
 private:
     ClientProtocol prot;
 public:
-    EventHandler(/* args */){}
+    EventHandler(Socket &skt) : prot(skt){}
     ~EventHandler(){}
     bool handleEvents(Soldier &soldier, Player &player, float angle);
 };
