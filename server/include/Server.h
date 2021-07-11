@@ -3,19 +3,13 @@
 #include "ThreadAcceptor.h"
 class Server {
 private:
-    NonBlockingQueue<std::unique_ptr<ClientEvent>> clientEvents;
+    NonBlockingQueue<std::shared_ptr<Event>> clientEvents;
 public:
-    Server(/* args */);
-    ~Server();
+    Server(){}
+    ~Server(){}
+    void run(const char* host, const char* service);
 };
 
-Server::Server(/* args */)
-{
-}
-
-Server::~Server()
-{
-}
 
 
 #endif
