@@ -27,7 +27,6 @@ class Editor{
         Editor& operator=(Editor &&other) = delete;
     
         Window window;
-        Image grid;
         Image image;
         Image selectedTile;
         Image obsImage;
