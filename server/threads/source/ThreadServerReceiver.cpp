@@ -1,6 +1,6 @@
 #include "ThreadServerReceiver.h"
 
-ThreadServerReceiver::ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::unique_ptr<Event>> &queue):
+ThreadServerReceiver::ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::shared_ptr<Event>> &queue):
  skt(skt), queue(queue), isRunning(false){}
 
 void ThreadServerReceiver::run(){
@@ -15,8 +15,8 @@ void ThreadServerReceiver::run(){
             if (buffer == SHOOT){
                 arg = protocol.receive_size();
             }
-            std::unique_ptr<Event> event(new Event(id, buffer,arg));
-            queue.push(std::move(event));
+            std::shared_ptr<Event> event(new Event(id, buffer,arg));
+            queue.push(event);
         } catch (const std::exception& e){
             isRunning = false;
             break;

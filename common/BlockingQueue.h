@@ -4,6 +4,7 @@
 #include <mutex>
 #include <queue>
 #include <condition_variable>
+#include "ClosedQueueException.h"
 
 
 
@@ -19,9 +20,28 @@ class BlockingQueue{
     public:
 
         BlockingQueue() : is_closed(false){}
-        void push(T t);
-        T pop();
-        void close();
+        void push(T t){
+            std::unique_lock<std::mutex> lk(m);
+            queue.push(t);
+            cv.notify_all();
+        }
+        T pop(){
+            std::unique_lock<std::mutex> lk(m);
+            while(queue.empty()){
+                if (is_closed)
+                    throw ClosedQueueException(); 
+                cv.wait(lk);
+            }
+            T t = queue.front();
+            queue.pop();
+            return t;
+        }
+        void close(){
+            std::unique_lock<std::mutex> lk(m);
+            is_closed = true;
+            cv.notify_all();
+
+        }
         ~BlockingQueue(){}
 };
 

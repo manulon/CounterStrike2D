@@ -7,7 +7,7 @@
 
 class Client {
     private:
-        NonBlockingQueue<std::unique_ptr<Event>> events;
+        NonBlockingQueue<std::shared_ptr<Event>> events;
     
     public:
         Client():events(){}

@@ -22,16 +22,18 @@ include_directories(mapEditor)
 
 FILE(GLOB_RECURSE source "client/source/*.cpp")
 FILE(GLOB_RECURSE server "server/*.cpp")
+FILE(GLOB_RECURSE serverThreads "server/threads/source/*.cpp")
 FILE(GLOB_RECURSE common "common/*.cpp")
 FILE(GLOB_RECURSE mapEditor "mapEditor/*.cpp")
+FILE(GLOB_RECURSE nbq "common/NonBlockingQueue.cpp")
 
-add_executable(editor test/editor.cpp ${mapEditor} ${server} ${source} ${common})
+add_executable(editor test/editor.cpp ${mapEditor} ${server} ${source} ${common} ${serverThreads})
 target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-add_executable(counterStrike2D test/counterStrike2D.cpp ${server} ${source} ${common})
+add_executable(counterStrike2D test/counterStrike2D.cpp ${server} ${source} ${common} ${serverThreads})
 target_link_libraries(counterStrike2D SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-add_executable(serverTest test/serverTest.cpp ${common} ${server})
+add_executable(serverTest test/serverTest.cpp ${common} ${server} ${serverThreads} ${nbq})
 target_link_libraries(serverTest Box2D yaml-cpp)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

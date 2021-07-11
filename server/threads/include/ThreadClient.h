@@ -16,7 +16,7 @@ class ThreadClient : public Thread {
 	private:
 		Socket peer;
 		bool isRunning;
-		NonBlockingQueue <std::unique_ptr<Event>> &clientEvents;
+		NonBlockingQueue <std::shared_ptr<Event>> &clientEvents;
 		std::shared_ptr<BlockingQueue<std::string>> &queueSender;
 		int id;	
 		ThreadClient(const ThreadClient &other) = delete;
@@ -36,7 +36,7 @@ class ThreadClient : public Thread {
 		 * @param gamesMonitor: Coleccion que almacena la informacion
 		 * sobre las partidas que se estan ejecutando.
 		 */
-		ThreadClient(Socket &&peer, NonBlockingQueue<std::unique_ptr<Event>> &queueReceiver, 
+		ThreadClient(Socket &&peer, NonBlockingQueue<std::shared_ptr<Event>> &queueReceiver, 
 		std::shared_ptr<BlockingQueue<std::string>> &queueSender, int id);
 
 		/*

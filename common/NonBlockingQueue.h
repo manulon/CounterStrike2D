@@ -13,8 +13,21 @@ class NonBlockingQueue{
     public:
 
         NonBlockingQueue(){}
-        void push(T t);
-        T pop();
+        void push(T t){
+            std::unique_lock<std::mutex> lk(m);
+            queue.push(t);
+        }
+
+        T pop(){
+            std::unique_lock<std::mutex> lk(m);
+            if (queue.empty()){
+                return NULL;
+            }
+            T t = queue.front();
+            queue.pop();
+            return t;
+        }
+
         ~NonBlockingQueue(){}
 };
 

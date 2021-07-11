@@ -5,7 +5,7 @@
 #include "Event.h"
 #include <utility>
 
-Clients::Clients( NonBlockingQueue<std::unique_ptr<Event>> &queue) : queue(queue) { }
+Clients::Clients( NonBlockingQueue<std::shared_ptr<Event>> &queue) : queue(queue) { }
 
 Clients::Clients(Clients &&other) : clients(std::move(other.clients)), queue(other.queue) { }
 

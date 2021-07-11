@@ -12,7 +12,7 @@ class ThreadClient;
 class Clients {
 	private:
 		std::list<std::unique_ptr<ThreadClient>> clients;
-		NonBlockingQueue<std::unique_ptr<Event>> &queue;
+		NonBlockingQueue<std::shared_ptr<Event>> &queue;
 		std::map<int,std::shared_ptr<BlockingQueue<std::string>>> senderQueues;
 		Clients(const Clients &other);
 		Clients& operator=(const Clients &other);
@@ -21,7 +21,7 @@ class Clients {
 		/*
 		 * @brief Constructor.
 		 */
-		Clients( NonBlockingQueue<std::unique_ptr<Event>> &queue);
+		Clients( NonBlockingQueue<std::shared_ptr<Event>> &queue);
 
 		/*
 		 * @brief Constructor por movimiento.

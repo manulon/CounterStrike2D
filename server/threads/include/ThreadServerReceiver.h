@@ -10,10 +10,10 @@
 class ThreadServerReceiver : public Thread {
 private:
     Socket &skt;
-    NonBlockingQueue<std::unique_ptr<Event>> &queue;
+    NonBlockingQueue<std::shared_ptr<Event>> &queue;
     bool isRunning;
 public:
-    ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::unique_ptr<Event>> &queue);
+    ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::shared_ptr<Event>> &queue);
     ~ThreadServerReceiver(){}
     virtual void run() override;
 };

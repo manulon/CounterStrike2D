@@ -11,11 +11,11 @@
 class ThreadClientReceiver : public Thread {
     private:
         Socket& skt;
-        NonBlockingQueue<std::unique_ptr<Event>>& queue;
+        NonBlockingQueue<std::shared_ptr<Event>>& queue;
         bool isRunning;
         
     public:
-        ThreadClientReceiver(Socket &skt, NonBlockingQueue<std::unique_ptr<Event>> &queue);
+        ThreadClientReceiver(Socket &skt, NonBlockingQueue<std::shared_ptr<Event>> &queue);
         ~ThreadClientReceiver();
         virtual void run() override;
 };
