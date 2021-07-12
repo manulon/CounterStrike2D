@@ -16,7 +16,7 @@ void ThreadServerReceiver::run(){
             std::cout<<" la accion de "<<(int)buffer;
             if (buffer == SHOOT){     /*aca va a tener que ser otra cosa ¿enviar -1?*/
                 arg = protocol.receive_size();
-                std::cout<<" con argumento"<<arg;
+                std::cout<<" con argumento "<<arg;
             }
             std::shared_ptr<Event> event(new Event(id, buffer,arg));
             queue.push(event);
