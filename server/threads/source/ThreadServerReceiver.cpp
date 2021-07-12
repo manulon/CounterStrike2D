@@ -8,9 +8,10 @@ void ThreadServerReceiver::run(){
     CommunicationProtocol protocol(skt);
     while(isRunning){
         try{
+            std::cout<<std::endl<<"-----------------------"<<std::endl;
             int arg = 0;
             int id = protocol.receive_size();
-            std::cout<<"Recibi la del jugador de id "<<id;
+            std::cout<<"Del jugador de "<<id<<" recibi";
             char buffer;
             protocol.receive_message(1, &buffer);
             std::cout<<" la accion de "<<(int)buffer;
@@ -20,8 +21,6 @@ void ThreadServerReceiver::run(){
             }
             std::shared_ptr<Event> event(new Event(id, buffer,arg));
             queue.push(event);
-            std::cout<<std::endl<<"-----------------------"<<std::endl;
-
         } catch (const std::exception& e){
             isRunning = false;
             break;

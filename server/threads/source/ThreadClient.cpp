@@ -1,4 +1,5 @@
 #include "ThreadClient.h"
+#include <unistd.h>
 
 ThreadClient::ThreadClient(Socket &&peer, NonBlockingQueue<std::shared_ptr<Event>> &queueReceiver, 
 		std::shared_ptr<BlockingQueue<std::string>> &queueSender, int id) : 

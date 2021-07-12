@@ -35,6 +35,7 @@ void ThreadAcceptor::run() {
 		try { 
 			Socket peer = acceptor.accept();
 			clients.add(std::move(peer),newId);
+			std::cout<<"Conexion establecida..."<<std::endl;
 			clients.cleanDeadClients();
 			newId++;
 		} catch(const std::exception &exception) {

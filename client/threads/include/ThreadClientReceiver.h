@@ -28,11 +28,8 @@ class ThreadClientReceiver : public Thread {
                     int length(protocol.receive_size());
                     std::vector<char> buffer(length,0);
                     protocol.receive_message(length, buffer.data());
-                    
-                    std::cout<<"Recibi: "<<buffer.data()<<std::endl;
 
                     queue.push(std::move(buffer.data()));
-
                 } catch (const std::exception& e){
                     isRunning = false;
                     break;

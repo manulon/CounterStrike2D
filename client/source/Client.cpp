@@ -14,6 +14,7 @@ void Client::run(const char * host, const char *service){
 
     EventHandler eh(skt,blockingQueue);
     bool isRunning(true);
+    std::cout<<"Voy a ejecutar el loop...."<<std::endl;
     while (isRunning){
         isRunning = eh.handleEvents();
     }
