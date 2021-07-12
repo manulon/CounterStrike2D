@@ -15,11 +15,11 @@ ThreadClient::~ThreadClient() { }
 void ThreadClient::run() {
 	isRunning = true;
 	ThreadServerReceiver receiver(peer, clientEvents);
-	ThreadServerSender sender(peer, queueSender, id);
+	//ThreadServerSender sender(peer, queueSender, id);
 	receiver.spawn();
-	sender.spawn();
+	//sender.spawn();
 	receiver.join();
-	sender.join();
+	//sender.join();
 	isRunning = false;
 }
 

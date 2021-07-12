@@ -66,6 +66,7 @@ void ClientProtocol::quit(){
 
     std::shared_ptr<Event> newEvent(new Event(1,key,-1));
     queue.push(newEvent);
+    std::cout<<"Envio el quit "<<std::endl;
 }
 
 void ClientProtocol::attack(){

@@ -59,15 +59,16 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
                 //player.attack(angle - 90);
         }
     }*/
-    protocol.attack();
-    protocol.moveRight();
+    
     protocol.moveLeft();
+    protocol.moveRight();
     protocol.moveUp();
     protocol.moveDown();
     protocol.stopMoveRight();
     protocol.stopMoveLeft();
     protocol.stopMoveUp();
     protocol.stopMoveDown();
+    protocol.attack();
     protocol.quit();
     return false;
 }

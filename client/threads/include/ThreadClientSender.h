@@ -27,25 +27,24 @@ class ThreadClientSender : public Thread {
             CommunicationProtocol protocol(skt);
             while(isRunning){
                 try{
-                    std::shared_ptr<Event> newEvent = queue.pop(); //se bloquea aca
-                    protocol.send_int16(newEvent->getId()); //envio el id del player
+                    std::shared_ptr<Event> newEvent = queue.pop();
+                    protocol.send_int16(newEvent->getId());
 
                     char opcode(newEvent->getOpcode());
-                    protocol.send_message(&opcode,1); //envio el opcode del player
-                    
-                    //if ( newEvent->getArg() != NULL )
-                    //    protocol.send_int16(newEvent->getArg()); //envio el arg del player
+                    protocol.send_message(&opcode,1);                
 
                     if ( opcode == SHOOT )
-                        protocol.send_int16(newEvent->getArg()); //envio el arg del player
+                        protocol.send_int16(newEvent->getArg());  //envio el arg del player
 
+                    if ( opcode == QUIT )                         // esto deberia quedarse asi???
+                        isRunning = false;
 
                 } catch (const std::exception &){
                     isRunning = false;
                     break;
                 }
-            }
-        }
+            }  
+        }      
 };
 
 #endif

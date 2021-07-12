@@ -6,21 +6,18 @@ void Client::run(const char * host, const char *service){
     
     skt.connect(host,service);
 
-    ThreadClientReceiver receiver(skt, nonBlockingQueue);
+    //ThreadClientReceiver receiver(skt, nonBlockingQueue);
     ThreadClientSender sender(skt, blockingQueue, 1);
 
-    receiver.spawn();
+    //receiver.spawn();
     sender.spawn();
 
     EventHandler eh(skt,blockingQueue);
     bool isRunning(true);
-    std::cout<<"Voy a ejecutar el loop...."<<std::endl;
     while (isRunning){
         isRunning = eh.handleEvents();
     }
 
-    std::cout<<"Sali del loop"<<std::endl;
-
-    receiver.join();
+    //receiver.join();
     sender.join();
 }

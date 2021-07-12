@@ -4,7 +4,7 @@ Thread::Thread() {}
 
 Thread::Thread(Thread &&other) : thread {std::move(other.thread)} { }
 
-Thread::~Thread() {}
+Thread::~Thread() { }
 
 Thread& Thread::operator=(Thread &&other) {
     if (this == &other) return *this;

@@ -60,7 +60,7 @@ int main(int argc, const char *argv[]) {
 
     Server server;
     server.run("localhost","8080");
-
+    
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
         return 1;

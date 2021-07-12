@@ -41,4 +41,5 @@ add_executable(clientTest test/clientTest.cpp ${common} ${source} ${server}) #EL
 target_link_libraries(clientTest SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
 
+
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
