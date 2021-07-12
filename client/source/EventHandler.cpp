@@ -2,7 +2,7 @@
 
 
 bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*/){
-    /*SDL_Event event;
+    SDL_Event event;
     
     while (SDL_PollEvent(&event)){
         switch (event.type) {
@@ -53,14 +53,14 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
                 std::cout << "Quit :(" << std::endl;
                 return false;
             case SDL_MOUSEBUTTONDOWN:
-                std::cout << "ELIMINAR ESTE COUT\n";
+                std::cout << "ENtre a  buton down" << std::endl;
                 protocol.attack();
-                return false;
                 //player.attack(angle - 90);
+                return false;
         }
-    }*/
+    }
     
-    protocol.moveLeft();
+    /*protocol.moveLeft();
     protocol.moveRight();
     protocol.moveUp();
     protocol.moveDown();
@@ -69,6 +69,6 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
     protocol.stopMoveUp();
     protocol.stopMoveDown();
     protocol.attack();
-    protocol.quit();
+    protocol.quit();*/
     return false;
 }
