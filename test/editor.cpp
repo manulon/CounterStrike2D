@@ -9,6 +9,7 @@
 
 int main(int argc, const char *argv[]){   
     EditorMenu menu;
+    std::cout << "Hola prueba" << std::endl;
     
     bool runningMenu(true);
     while (runningMenu) {
