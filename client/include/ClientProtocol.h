@@ -3,6 +3,8 @@
 
 #include "../common/CommunicationProtocol.h"
 #include "../common/ProtocolConstants.h"
+#include "BlockingQueue.h"
+#include "Event.h"
 
 class ClientProtocol{
     private:
@@ -10,8 +12,11 @@ class ClientProtocol{
         ClientProtocol& operator=(const ClientProtocol& other) = delete;
         CommunicationProtocol protocol;
 
+        BlockingQueue<std::shared_ptr<Event>>& queue;
+        
+
     public:
-        ClientProtocol(Socket &skt);
+        ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<Event>>& queue);
         ~ClientProtocol();
 
         void moveLeft();
@@ -23,7 +28,7 @@ class ClientProtocol{
         void stopMoveDown();
         void stopMoveUp();
         void quit();
-        void mouseDown();
+        void attack();
 };
 
 #endif

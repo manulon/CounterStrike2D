@@ -1,15 +1,15 @@
 #ifndef _PROTOCOL_CONSTANTS_H_
 #define _PROTOCOL_CONSTANTS_H_
 
-#define KEYWORD_SCANDODE_LEFT   0
-#define KEYWORD_SCANDODE_RIGHT  1 
-#define KEYWORD_SCANDODE_DOWN   2 
-#define KEYWORD_SCANDODE_UP     3 
-#define KEYWORD_KEYUP_LEFT      4
-#define KEYWORD_KEYUP_RIGHT     5
-#define KEYWORD_KEYUP_UP        6
-#define KEYWORD_KEYUP_DOWN      7
-#define QUIT                    8
-#define SHOOT              9
+#define MOVE_LEFT   0
+#define MOVE_RIGHT  1 
+#define MOVE_DOWN   2 
+#define MOVE_UP     3 
+#define STOP_LEFT   4
+#define STOP_RIGHT  5
+#define STOP_UP     6
+#define STOP_DOWN   7
+#define QUIT        8
+#define SHOOT       9
 
 #endif

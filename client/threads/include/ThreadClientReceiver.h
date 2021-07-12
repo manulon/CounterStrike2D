@@ -11,13 +11,35 @@
 class ThreadClientReceiver : public Thread {
     private:
         Socket& skt;
-        NonBlockingQueue<std::shared_ptr<Event>>& queue;
+        NonBlockingQueue<std::string>& queue;
         bool isRunning;
         
     public:
-        ThreadClientReceiver(Socket &skt, NonBlockingQueue<std::shared_ptr<Event>> &queue);
-        ~ThreadClientReceiver();
-        virtual void run() override;
+        ThreadClientReceiver(Socket &skt, NonBlockingQueue<std::string>& queue):
+        skt(skt), queue(queue), isRunning(false){}
+
+        ~ThreadClientReceiver(){}
+
+        virtual void run(){
+            isRunning = true;
+            CommunicationProtocol protocol(skt);
+            while(isRunning){
+                try{
+                    int length(protocol.receive_size());
+                    std::vector<char> buffer(length,0);
+                    protocol.receive_message(length, buffer.data());
+                    
+                    std::cout<<"Recibi: "<<buffer.data()<<std::endl;
+
+                    queue.push(std::move(buffer.data()));
+
+                } catch (const std::exception& e){
+                    isRunning = false;
+                    break;
+                }
+                
+            }
+        }
 };
 
 #endif

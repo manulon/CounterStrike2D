@@ -1,27 +1,27 @@
 #include "EventHandler.h"
 
 
-bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
-    SDL_Event event;
+bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*/){
+    /*SDL_Event event;
     
     while (SDL_PollEvent(&event)){
         switch (event.type) {
             case SDL_KEYDOWN: {// todas las llamadas al player son al protocol en realidad
                 const Uint8 *state = SDL_GetKeyboardState(NULL);
                 if (state[SDL_SCANCODE_LEFT]){
-                    soldier.move();
+                    //soldier.move();
                     //player.moveLeft();
                 }
                 if (state[SDL_SCANCODE_RIGHT]){
-                    soldier.move();
+                    //soldier.move();
                     //player.moveRight();
                 }
                 if (state[SDL_SCANCODE_DOWN]){
-                    soldier.move();
+                    //soldier.move();
                     //player.moveDown();
                 }
                 if (state[SDL_SCANCODE_UP]){
-                    soldier.move();
+                    //soldier.move();
                     //player.moveUp();
                 }
             }
@@ -30,19 +30,19 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                 SDL_KeyboardEvent& keyEvent = (SDL_KeyboardEvent&) event;
                 switch (keyEvent.keysym.sym) {
                     case SDLK_LEFT:
-                        soldier.stopMoving();
+                        //soldier.stopMoving();
                         //player.stopMoveLeft();
                         break;
                     case SDLK_RIGHT:
-                        soldier.stopMoving();
+                        //soldier.stopMoving();
                         //player.stopMoveRight();
                         break;
                     case SDLK_UP:
-                        soldier.stopMoving();
+                        //soldier.stopMoving();
                         //player.stopMoveUp();
                         break;
                     case SDLK_DOWN:
-                        soldier.stopMoving();
+                        //soldier.stopMoving();
                         //player.stopMoveDown();
                         break;
                     } 
@@ -54,9 +54,20 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                 return false;
             case SDL_MOUSEBUTTONDOWN:
                 std::cout << "ELIMINAR ESTE COUT\n";
-                //protocol.attack()
+                protocol.attack();
+                return false;
                 //player.attack(angle - 90);
         }
-    }
-    return true;
+    }*/
+    protocol.attack();
+    protocol.moveRight();
+    protocol.moveLeft();
+    protocol.moveUp();
+    protocol.moveDown();
+    protocol.stopMoveRight();
+    protocol.stopMoveLeft();
+    protocol.stopMoveUp();
+    protocol.stopMoveDown();
+    protocol.quit();
+    return false;
 }

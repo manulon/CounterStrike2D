@@ -15,6 +15,7 @@ include_directories(client/include
 					client/include/SDL/Texture
 					client/include/SDL/Window
 					)
+include_directories(client/threads/include)					
 include_directories(common)
 include_directories(server/include
 					server/threads/include)
@@ -27,8 +28,8 @@ FILE(GLOB_RECURSE common "common/*.cpp")
 FILE(GLOB_RECURSE mapEditor "mapEditor/*.cpp")
 FILE(GLOB_RECURSE nbq "common/NonBlockingQueue.cpp")
 
-add_executable(editor test/editor.cpp ${mapEditor} ${server} ${source} ${common} ${serverThreads})
-target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
+# add_executable(editor test/editor.cpp ${mapEditor} ${server} ${source} ${common} ${serverThreads})
+# target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
 # add_executable(counterStrike2D test/counterStrike2D.cpp ${server} ${source} ${common} ${serverThreads})
 # target_link_libraries(counterStrike2D SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)

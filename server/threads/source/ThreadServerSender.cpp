@@ -11,6 +11,7 @@ void ThreadServerSender::run(){
             std::string msg = queue->pop(); //se bloquea aca
             protocol.send_int16(msg.length());
             protocol.send_message(msg.c_str(), msg.length());
+
         } catch (const std::exception &){
             isRunning = false;
             break;

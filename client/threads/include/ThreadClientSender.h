@@ -11,16 +11,41 @@
 class ThreadClientSender : public Thread {
     private:
         Socket &skt;
-        std::shared_ptr<BlockingQueue<Event>> &queue;
+        BlockingQueue<std::shared_ptr<Event>> &queue;
         int id;
         bool isRunning;
 
     public:
         ThreadClientSender
-        (Socket &skt, std::shared_ptr<BlockingQueue<Event>> &queue, int id);
-        ~ThreadClientSender();
+        (Socket &skt, BlockingQueue<std::shared_ptr<Event>> &queue, int id):
+        skt(skt), queue(queue), id(id), isRunning(false){}
         
-        virtual void run() override;
+        ~ThreadClientSender(){}
+        
+        virtual void run(){
+            isRunning = true;
+            CommunicationProtocol protocol(skt);
+            while(isRunning){
+                try{
+                    std::shared_ptr<Event> newEvent = queue.pop(); //se bloquea aca
+                    protocol.send_int16(newEvent->getId()); //envio el id del player
+
+                    char opcode(newEvent->getOpcode());
+                    protocol.send_message(&opcode,1); //envio el opcode del player
+                    
+                    //if ( newEvent->getArg() != NULL )
+                    //    protocol.send_int16(newEvent->getArg()); //envio el arg del player
+
+                    if ( opcode == SHOOT )
+                        protocol.send_int16(newEvent->getArg()); //envio el arg del player
+
+
+                } catch (const std::exception &){
+                    isRunning = false;
+                    break;
+                }
+            }
+        }
 };
 
 #endif

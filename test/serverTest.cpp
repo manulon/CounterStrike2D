@@ -7,13 +7,13 @@
 #include "SWeapon.h"
 #include "Border.h"
 #include "Knife.h"
-
+#include "Server.h"
 #include "Ak47.h"
 #include "SWeapon.h"
 
 int main(int argc, const char *argv[]) {
     try {
-    	World world;
+    	/*World world;
         Border border(world, 0.0f, 0.0f, 100.0f, 100.0f);
         //Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
         Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
@@ -32,9 +32,9 @@ int main(int argc, const char *argv[]) {
         //Obstacle obstacle(world, 5.0f, 8.0f, 0.5f, 0.5f);
         
         // CUCHILLO
-        /*std::unique_ptr<Knife> knife(new Knife(0.2f, 0.2f));
+        std::unique_ptr<Knife> knife(new Knife(0.2f, 0.2f));
         std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
-        player.setWeapon(std::move(weapon));*/
+        player.setWeapon(std::move(weapon));
         //knife.attack(0, 2.0f, 8.0f);
 
         std::cout << world;
@@ -56,7 +56,10 @@ int main(int argc, const char *argv[]) {
             }
             std::cout << "-----Disparo-----" << std::endl;
             std::cout << world;
-        }
+        }*/
+
+    Server server;
+    server.run("localhost","8080");
 
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;

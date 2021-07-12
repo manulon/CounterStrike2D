@@ -1,79 +1,78 @@
 #include "ClientProtocol.h"
 
-ClientProtocol::ClientProtocol(Socket &skt):
-protocol(skt){}
+ClientProtocol::ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<Event>>& queue):
+protocol(skt), queue(queue){}
 
 ClientProtocol::~ClientProtocol(){}
 
 void ClientProtocol::moveLeft(){
-    char key(KEYWORD_SCANDODE_LEFT);
+    char key(MOVE_LEFT);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
 void ClientProtocol::moveRight(){
-    char key(KEYWORD_SCANDODE_RIGHT);
+    char key(MOVE_RIGHT);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
 void ClientProtocol::moveDown(){
-    char key(KEYWORD_SCANDODE_DOWN);
+    char key(MOVE_DOWN);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
 void ClientProtocol::moveUp(){
-    char key(KEYWORD_SCANDODE_UP);
+    char key(MOVE_UP);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
 void ClientProtocol::stopMoveLeft(){
-    char key(KEYWORD_KEYUP_LEFT);
+    char key(STOP_LEFT);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
 void ClientProtocol::stopMoveRight(){
-    char key(KEYWORD_KEYUP_RIGHT);
+    char key(STOP_RIGHT);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
 void ClientProtocol::stopMoveDown(){
-    char key(KEYWORD_KEYUP_DOWN);
+    char key(STOP_DOWN);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
 void ClientProtocol::stopMoveUp(){
-    char key(KEYWORD_KEYUP_UP);
+    char key(STOP_UP);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
 void ClientProtocol::quit(){
     char key(QUIT);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
 }
 
-void ClientProtocol::mouseDown(){
+void ClientProtocol::attack(){
     char key(SHOOT);
 
-    //this->protocol.sendPlayerId(id);
-    this->protocol.send_message(&key,1);
-    //send angulo
+    std::shared_ptr<Event> newEvent(new Event(1,key,50));
+    queue.push(newEvent);
 }
 
 /*
@@ -153,4 +152,3 @@ for ( cliente in clientes){
 }
 
 */
-
