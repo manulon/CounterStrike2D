@@ -27,6 +27,7 @@ class InitialMenu{
         bool handleEvents();
         std::string& getMapPath();
         std::string& getTilesPath();
+        bool startGame();
 };
 
 #endif

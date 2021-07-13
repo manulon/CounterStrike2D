@@ -41,3 +41,9 @@ std::string& InitialMenu::getMapPath(){
 std::string& InitialMenu::getTilesPath(){
     return handler.getTilesPath();
 }
+
+bool InitialMenu::startGame(){
+    if (handler.getMapPath() == "")
+        return false;
+    return true;
+}

@@ -8,7 +8,7 @@ GameOptionDust::~GameOptionDust(){}
 
 void GameOptionDust::setPath(std::string& path,std::string& tiles){
     path = "../assets/maps/SmallDust.yaml";
-    tiles = "../assets/gfx/tiles/default_aztec.png";
+    tiles = "../assets/gfx/tiles/default_dust.png";
 }
 
 bool GameOptionDust::clicked(std::vector<GameOption*>& options){
