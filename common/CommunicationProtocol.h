@@ -24,6 +24,8 @@ public:
     
     //Delega la recepcion del tamaño de un mensaje al socket.
     int receive_size();
+
+    void send_float(float value);
 };
 
 #endif

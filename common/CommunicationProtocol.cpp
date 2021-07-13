@@ -15,6 +15,12 @@ void CommunicationProtocol:: send_int16(uint16_t size){
     this->socket.send((char*)&size,sizeof(size));
 }
 
+
+void CommunicationProtocol::send_float(float value){
+    value = htonl(value);
+    this->socket.send((char*)&value, sizeof(value));
+}
+
 ssize_t CommunicationProtocol:: receive_message
 (int length, char* buffer){
     return this->socket.receive(buffer,length);
