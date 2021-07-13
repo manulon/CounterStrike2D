@@ -21,6 +21,7 @@ void Clients::add(Socket &&peer, int id) {
 	std::unique_ptr<BlockingQueue<std::string>> newQueue(new BlockingQueue<std::string>());
 	senderQueues[id] = std::move(newQueue);
 	std::unique_ptr<ThreadClient> client(new ThreadClient(std::move(peer),queue,senderQueues[id], id));
+	std::cout << "Spawneo un cliente" << std::endl;
 	client->spawn();
 	clients.push_back(std::move(client));
 }
@@ -38,13 +39,10 @@ void Clients::cleanDeadClients() {
 }
 
 void Clients::stopClients(){
-	//for (ThreadClient &client : clients) {
-	//	client->stop();
-	//	client->join();
-	//}
 	std::list<std::unique_ptr<ThreadClient>>::iterator it = clients.begin();
 	while(it != clients.end()) {
 		(*it)->stop();
 		(*it)->join();
+		++it;
 	}
 }

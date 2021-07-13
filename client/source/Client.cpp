@@ -12,12 +12,11 @@ void Client::run(const char * host, const char *service){
     //receiver.spawn();
     sender.spawn();
 
-    EventHandler eh(skt,blockingQueue);
+    EventHandler eh(skt, blockingQueue);
     bool isRunning(true);
     while (isRunning){
         isRunning = eh.handleEvents();
     }
-
     //receiver.join();
     sender.join();
 }

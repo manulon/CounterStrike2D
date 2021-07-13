@@ -3,7 +3,7 @@
 
 ThreadClient::ThreadClient(Socket &&peer, NonBlockingQueue<std::shared_ptr<Event>> &queueReceiver, 
 		std::shared_ptr<BlockingQueue<std::string>> &queueSender, int id) : 
-		peer(std::move(peer)), isRunning(false), clientEvents(queueReceiver), queueSender(queueSender),
+		peer(std::move(peer)), isRunning(true), clientEvents(queueReceiver), queueSender(queueSender),
 		id(id) { }
 
 ThreadClient::ThreadClient(ThreadClient &&other) : 
@@ -13,9 +13,11 @@ ThreadClient::ThreadClient(ThreadClient &&other) :
 ThreadClient::~ThreadClient() { }
 
 void ThreadClient::run() {
+	//std::atomic<bool>
 	isRunning = true;
 	ThreadServerReceiver receiver(peer, clientEvents);
 	//ThreadServerSender sender(peer, queueSender, id);
+
 	receiver.spawn();
 	//sender.spawn();
 	receiver.join();

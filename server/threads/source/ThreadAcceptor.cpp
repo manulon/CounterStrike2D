@@ -38,9 +38,7 @@ void ThreadAcceptor::run() {
 			std::cout<<std::endl<<"Conexion establecida..."<<std::endl;
 			clients.cleanDeadClients();
 			newId++;
-		} catch(const std::exception &exception) {
-			break;
-		}
+		} catch(const std::exception &exception) { }
 	}
 	clients.stopClients();
 }
