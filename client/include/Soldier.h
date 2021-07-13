@@ -1,8 +1,10 @@
 #ifndef _SOLDIER_H_
 #define _SOLDIER_H_
+
 #include "Directions.h"
 #include "Animation.h"
 #include "DynamicObject.h"
+#include "Weapon.h"
 
 class Soldier : public Animation , public DynamicObject{        
     private:
@@ -13,9 +15,13 @@ class Soldier : public Animation , public DynamicObject{
         int width;
         int height;
         int angle;
+        Weapon currentWeapon;
+
         Soldier(const Soldier &other) = delete;
         Soldier& operator=(const Soldier &other) = delete;
         Soldier& operator=(Soldier &&other) = delete;
+
+        void renderWeapon(int x, int y);
 
     public:
         Soldier(std::string imgPath, Window &window);
@@ -30,6 +36,7 @@ class Soldier : public Animation , public DynamicObject{
         int getY();
         int getAngle();
         void setAngle(int angle);
+        void setCurrentWeapon();
 };
 
 #endif // _SOLDIER_H_

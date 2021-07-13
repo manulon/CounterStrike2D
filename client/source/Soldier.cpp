@@ -14,7 +14,8 @@
 
 Soldier::Soldier(std::string imgPath , Window &window) : 
     Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
-    , width(PPM), height(PPM), angle(90) { }
+    , width(PPM), height(PPM), angle(90), 
+    currentWeapon("../assets/gfx/weapons/ak47.bmp",window,16,32) { }
 
 // Soldier::Soldier(Soldier &&other) : 
 //     Animation(std::move(other)), direction(other.direction),
@@ -45,9 +46,20 @@ void Soldier::render() {
 }
 
 void Soldier::render(int otherX, int otherY){
+    std::cout<<"Estoy renderizando un soldado" << std::endl;
     Area dest = DynamicObject::getDest(otherX, otherY);
     Area src(0,0,width,height);
     image.render(src,dest);
+
+    renderWeapon(dest.getX(), dest.getY());
+}
+
+void Soldier::renderWeapon(int x, int y){
+    std::cout<<"Renderizo el arma"<< std::endl;
+    Area src(0, 0, 32, 32);
+    Area dst(x-8, y-14, 45, 45);
+
+    currentWeapon.render(src, dst, -45);
 }
 
 void Soldier::stopMoving() {
@@ -73,4 +85,8 @@ int Soldier:: getAngle(){
 
 void Soldier::setAngle(int angle){
     this->angle = angle;
+}
+
+void Soldier::setCurrentWeapon(){
+    
 }

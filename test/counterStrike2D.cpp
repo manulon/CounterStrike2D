@@ -52,7 +52,7 @@ int main(int argc, const char *argv[]){
         std::unique_ptr<Ak47> a(new Ak47(world, 0.2f, 0.2f));
         //std::unique_ptr<SWeapon> weap(new SWeapon(world, std::move(a)));
         player2.setPrimaryWeapon(std::move(a));
-
+    
         Window window("Counter Strike 2D", 800, 600, 
                       SDL_WINDOW_RESIZABLE, 
                       SDL_INIT_VIDEO | SDL_INIT_AUDIO);

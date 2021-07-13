@@ -11,6 +11,7 @@ bool RenderizableFactory::createRenderizable(short id, std::map<short,std::uniqu
     if (isPresent(id,objects)) return true;
     if (isSoldier(id)){
         std::unique_ptr<DynamicObject> ptr(new Soldier("../assets/gfx/player/t1.bmp",window));
+        std::cout<<"Cree un soldado"<< std::endl;
         objects[id] = std::move(ptr);
         return true;
     } else if (isAk47(id)){    

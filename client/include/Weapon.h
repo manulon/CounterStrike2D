@@ -14,6 +14,8 @@ class Weapon : public DynamicObject{
         Weapon(std::string imgPath,Window &window,int width,int height);
         Weapon(Weapon &&other);
         virtual void render(int x, int y) override;
+        void render(const Area& dest);
+        void render(const Area& source,const Area& dest,int angle);
         // void setPos(int xx, int yy);
         ~Weapon();
 };
