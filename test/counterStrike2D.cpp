@@ -24,6 +24,7 @@
 #include "Ak47.h"
 #include "Knife.h"
 #include "EventHandler.h"
+#include "InitialMenu.h"
 #define PPM 32
 
 
@@ -35,6 +36,16 @@ static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) 
 }
 
 int main(int argc, const char *argv[]){
+
+    InitialMenu menu;
+    bool isRunning(true);
+    while (isRunning){
+        menu.clear();
+        isRunning = menu.handleEvents();
+        menu.render();
+    }
+    menu.close();
+
     try {
         World world;
         Player player(world, 
@@ -60,9 +71,9 @@ int main(int argc, const char *argv[]){
         //Image de_dust("../assets/gfx/tiles/default_dust.png", window);
         //Image obsimg("../assets/gfx/tiles/obstacles.png", window);
         // TileMap mapTest(window,"../assets/maps/SmallDust.yaml", de_dust, obsimg);
-        TileMap mapTest(window, "../mapaGiganteDust.yaml", "../assets/gfx/tiles/default_dust.png", "../assets/gfx/tiles/obstacles.png");
+        TileMap mapTest(window, menu.getMapPath().c_str(), menu.getTilesPath(), "../assets/gfx/tiles/obstacles.png");
         // PhysicalMapFactory g(world,"../assets/maps/SmallDust.yaml");
-        PhysicalMapFactory g(world,"../mapaGiganteDust.yaml");
+        PhysicalMapFactory g(world,menu.getMapPath().c_str());
         Color key = {0xFF, 0, 0xFF};
         Image pointImg("../assets/gfx/pointer.bmp", window, key);
         Pointer pointer(pointImg);
