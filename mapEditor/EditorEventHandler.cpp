@@ -4,12 +4,13 @@
 #include <iostream>
 
 EditorEventHandler::EditorEventHandler(Window& window,Image& image,
-                                       Image& obsImage,const char* mapName): 
+                                       Image& obsImage,const char* mapName,
+                                       std::map<std::pair<int,int>,int>& finalMapTiles): 
 leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
 actualType(-1),selectedZoneX(windowWidth/2+4),selectedZoneY(windowHeight-86),
 image(image),obsImage(obsImage),actualImage(""),window(window),
-finalMapTiles(),finalMapObstacles(),mapName(mapName),
+finalMapTiles(finalMapTiles),finalMapObstacles(),mapName(mapName),
 tileBoxHeight(0),tileWidth(0),tileHeight(0){
    YAML::Node readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
    tileBoxHeight = readerNode["config"]["tile_box_height"].as<int>();
@@ -43,13 +44,13 @@ const std::string& sizeName){
             MapEditor map;
             std::cout<<"Ingrese el nombre del mapa: "<<std::endl;
             std::string input("");
-            while (input != "") {
+            while (input == "") {
               std::cin >> input;
             }
             std::cout<<"Se ha creado un mapa con el nombre "<<input<<std::endl;
             map.addSize(sizeName);
             map.createMap(input,mapName);
-            for (auto& e : finalMapTiles){
+            for (auto& e : finalMapTiles){  
                map.addField(e.first.first,e.first.second,e.second);
             }
             for (auto& e : finalMapObstacles){

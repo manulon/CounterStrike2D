@@ -34,13 +34,14 @@ class Editor{
         std::vector<Tile*> optionTiles;
         std::vector<Tile*> obstaclesOptionTiles;
         std::vector<Button*> tileOptionButton;
+        std::map<std::pair<int,int>,int> finalMapTiles;
         EditorEventHandler eventHandler;
         EditorConfig editor;
         std::string sizeName;
         int tileBoxHeight;
         int tileWidth;
         int tileHeight;
-        
+
         
 
    public:
