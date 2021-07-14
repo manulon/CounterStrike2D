@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-#define IMPULSE 1000.0f // NO IMPORTA SI AUMENTAMOS MAS HAY UN MAXIMO
+#define IMPULSE 1.0f
 #define RADIUS 0.1f
 #define RESTITUTION 0.0f
 #define DENSITY 0.1f
@@ -39,6 +39,8 @@ void Bullet::setFixtureParams(const b2CircleShape &circleShape,
     fixtureDef.shape = &circleShape;
     fixtureDef.restitution = RESTITUTION;
     fixtureDef.density = DENSITY;
+    fixtureDef.filter.categoryBits = BULLET;
+    fixtureDef.filter.maskBits = PLAYER | OBSTACLE | BORDER;
 }
 
 void Bullet::shoot(float angle, float x, float y) {

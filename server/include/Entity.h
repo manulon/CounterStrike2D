@@ -10,6 +10,14 @@ class SWeapon;
 class Player;
 class Border;
 
+enum EntityID {
+	BORDER = 0x0001,
+	BULLET = 0x0002,
+	OBSTACLE = 0x0004,
+	PLAYER = 0x0008,
+	SWEAPON = 0x0010
+};
+
 class Entity {
 	private:
 		b2Body *body;
