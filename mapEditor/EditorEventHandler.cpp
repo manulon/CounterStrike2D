@@ -1,6 +1,7 @@
 #include "EditorEventHandler.h"
 #include "Image.h"
 #include "MapEditor.h"
+#include <iostream>
 
 EditorEventHandler::EditorEventHandler(Window& window,Image& image,
                                        Image& obsImage,const char* mapName): 
@@ -40,8 +41,14 @@ const std::string& sizeName){
 
          case SDL_QUIT:
             MapEditor map;
+            std::cout<<"Ingrese el nombre del mapa: "<<std::endl;
+            std::string input("");
+            while (input != "") {
+              std::cin >> input;
+            }
+            std::cout<<"Se ha creado un mapa con el nombre "<<input<<std::endl;
             map.addSize(sizeName);
-            map.createMap("MapaDePruebaEditor",mapName);
+            map.createMap(input,mapName);
             for (auto& e : finalMapTiles){
                map.addField(e.first.first,e.first.second,e.second);
             }
