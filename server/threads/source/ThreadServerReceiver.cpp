@@ -17,13 +17,14 @@ void ThreadServerReceiver::run(){
             char buffer;
             protocol.receive_message(1, &buffer);
             std::cout<<" la accion "<<(int)buffer<<std::endl;
-            if (buffer == SHOOT){     /*aca va a tener que ser otra cosa ¿enviar -1?*/
+            if (buffer == SHOOT) {     /*aca va a tener que ser otra cosa ¿enviar -1?*/
                 arg = protocol.receive_size();
                 std::cout<<" con argumento "<<arg<<std::endl;
             }
 
-            if (buffer == QUIT)
+            if (buffer == QUIT) {
                 isRunning = false;
+            }
 
             std::shared_ptr<Event> event(new Event(id, buffer,arg));
             queue.push(event);

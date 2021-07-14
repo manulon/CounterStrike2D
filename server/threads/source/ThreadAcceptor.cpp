@@ -57,9 +57,7 @@ void ThreadAcceptor::run() {
 
 			cleanDeadClients();
 			newId++;
-		} catch(const std::exception &exception) {
-			break;
-		}
+		} catch(const std::exception &exception) { }
 	}
 	// clients.stopClients();
 }
