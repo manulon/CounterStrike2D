@@ -2,6 +2,7 @@
 #define _GAME_OPTION_PLAYER_H_
 
 #include "GameOption.h"
+#include "yaml-cpp/yaml.h"
 
 class GameOptionPlayer: public GameOption{
     private:

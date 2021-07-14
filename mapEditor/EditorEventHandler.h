@@ -32,7 +32,7 @@ class EditorEventHandler {
       Image& obsImage;
       std::string actualImage;
       Window& window;
-      std::map<std::pair<int,int>,int> finalMapTiles;
+      std::map<std::pair<int,int>,int>& finalMapTiles;
       std::map<std::pair<int,int>,int> finalMapObstacles;
       const char* mapName;
       int tileBoxHeight;
@@ -55,7 +55,8 @@ class EditorEventHandler {
       void changeActualImage(const std::string& newImage);
 
    public:
-      EditorEventHandler(Window &window,Image& image,Image& obsImage,const char* mapName);
+      EditorEventHandler(Window &window, Image& image, Image& obsImage, const char* mapName, 
+                         std::map<std::pair<int,int>,int>& finalMapTiles);
       ~EditorEventHandler();
 
       bool handleEvents

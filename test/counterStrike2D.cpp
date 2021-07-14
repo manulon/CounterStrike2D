@@ -27,7 +27,6 @@
 #include "InitialMenu.h"
 #define PPM 32
 
-
 static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) {
     soldier.update(dt);
     mm.update();    // ESTO CREO QUE NO DEBERIA IR ACA.
@@ -36,7 +35,6 @@ static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) 
 }
 
 int main(int argc, const char *argv[]){
-
     InitialMenu menu;
     bool isRunning(true);
     while (isRunning){
