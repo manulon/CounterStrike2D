@@ -8,7 +8,7 @@
 void Server::run(const char* host, const char* service){
     GamesMonitor games;
     // Clients clients(games);
-    std::map<short,BlockingQueue<ServerMessage*>*>  senderQueues;
+    std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>>  senderQueues;
     ThreadAcceptor acceptor(host, service,clientEvents,senderQueues);
     std::cout<<"Spawnee el aceptor "<< std::endl;
     acceptor.spawn();

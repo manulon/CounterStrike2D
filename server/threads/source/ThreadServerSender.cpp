@@ -1,6 +1,6 @@
 #include "ThreadServerSender.h"
 
-ThreadServerSender::ThreadServerSender(Socket &skt, BlockingQueue<ServerMessage*>* queue) : 
+ThreadServerSender::ThreadServerSender(Socket &skt, std::shared_ptr<BlockingQueue<ServerMessage*>> queue) : 
                     skt(skt), queue(queue), isRunning(true){}
 
 void ThreadServerSender::run(){
@@ -10,9 +10,8 @@ void ThreadServerSender::run(){
             ServerMessage* msg = queue->pop(); //se bloquea aca
             msg->send(protocol);
             delete msg;
-        } catch (const std::exception &){
+        } catch (const std::exception &e){
             isRunning = false;
-            break;
         }
     }
 }
@@ -21,3 +20,6 @@ bool ThreadServerSender::isDead(){
     return !isRunning;
 }
 
+void ThreadServerSender::stop(){
+    queue->close();
+}

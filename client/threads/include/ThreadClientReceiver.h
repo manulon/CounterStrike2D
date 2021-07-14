@@ -26,15 +26,21 @@ class ThreadClientReceiver : public Thread {
                 try{
                     char messageType;
                     std::cout <<"antes de recibir el primer mensaje\n";
-                    protocol.receive_message(1,&messageType);
+                    ssize_t received = protocol.receive_message(1,&messageType);
+                    if (received == 0){
+                        isRunning = false;
+                        queue.push("exit");
+                        break;
+                    }
                     std::cout <<"despues de recibir el primer mensaje\n";
                     // if es tal tipo de mesnaje bla bla
                     int length(protocol.receive_size());
-                    std::vector<char> buffer(length,0);
-                    protocol.receive_message(length, buffer.data());
-
+                    std::vector<char> buffer(length);
+                    received = protocol.receive_message(length, buffer.data());
+                    std::cout <<"se recibioeron"<< received<<std::endl;
                     queue.push(buffer.data());
                 } catch (const std::exception& e){
+                    queue.push("exit");
                     isRunning = false;
                     break;
                 }

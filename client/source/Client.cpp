@@ -12,18 +12,22 @@ void Client::run(const char * host, const char *service){
     receiver.spawn();
     sender.spawn();
 
-    // EventHandler eh(skt,blockingQueue);
+    EventHandler eh(skt,blockingQueue);
     bool isRunning(true);
     const char * message;
     while (isRunning){
         do{
             message = nonBlockingQueue.pop();
-            if (message != NULL) 
-                std::cout <<"MENSAJE RECIBIDO: "<<message << std::endl;
+            if (message != nullptr) {
+                std::string pepe(message);
+                std::cout <<"MENSAJE RECIBIDO:"<<pepe <<"y"<< std::endl;
+            }
         } while (message != NULL);
-        // isRunning = eh.handleEvents();
+        isRunning = eh.handleEvents();
     }
-
+    std::cout<<"SALE DEL LOOP\n";
     receiver.join();
+    std::cout<<"SE JOINEA EL RECIBIDOR\n";
     sender.join();
+    std::cout<<"SE JOINEA EL ENVIADOR\n";
 }

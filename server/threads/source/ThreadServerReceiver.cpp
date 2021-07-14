@@ -24,6 +24,7 @@ void ThreadServerReceiver::run(){
 
             if (buffer == QUIT) {
                 isRunning = false;
+                skt.close();
             }
 
             std::shared_ptr<Event> event(new Event(id, buffer,arg));

@@ -11,14 +11,15 @@
 class ThreadServerSender : public Thread {
 private:
     Socket &skt;
-    BlockingQueue<ServerMessage*> *queue;
+    std::shared_ptr<BlockingQueue<ServerMessage*>> queue;
     // int id;
     bool isRunning;
 public:
-    ThreadServerSender(Socket &skt, BlockingQueue<ServerMessage*> *queue);
+    ThreadServerSender(Socket &skt, std::shared_ptr<BlockingQueue<ServerMessage*>> queue);
     ~ThreadServerSender(){}
     virtual void run() override;
     bool isDead();
+    void stop();
 };
 
 

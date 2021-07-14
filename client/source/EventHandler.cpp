@@ -63,11 +63,13 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
                 protocol.quit();
                 std::cout << "Quit :(" << std::endl;
                 keepRunning = false;
+                break;
             case SDL_MOUSEBUTTONDOWN:
                 std::cout << "ENtre a buton down" << std::endl;
                 protocol.attack();
                 //player.attack(angle - 90);
                 //keepRunning = false;
+                break;
         }
     }
     return keepRunning;

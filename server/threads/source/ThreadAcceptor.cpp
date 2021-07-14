@@ -11,7 +11,7 @@
 ThreadAcceptor::ThreadAcceptor(const char *host, 
 				   			   const char *service,
 							    NonBlockingQueue<std::shared_ptr<Event>> &queue,
-								std::map<short,BlockingQueue<ServerMessage*>*> & senderQueues) 
+								std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> & senderQueues) 
 	: acceptor(AI_PASSIVE), isRunning(true), queue(queue) ,senderQueues(senderQueues){ 
 	acceptor.bindAndListen(host, service);
 }
@@ -24,6 +24,7 @@ ThreadAcceptor::~ThreadAcceptor() {
 	for (auto& client : clients){
 		std::get<1>(client.second)->join();
 		delete std::get<1>(client.second);
+		std::get<2>(client.second)->stop();
 		std::get<2>(client.second)->join();
 		delete std::get<2>(client.second);
 	}
@@ -42,7 +43,8 @@ void ThreadAcceptor::run() {
 	while (isRunning) {
 		try { 
 			Socket peer = acceptor.accept();
-			BlockingQueue<ServerMessage*> *senderQueue = new BlockingQueue<ServerMessage*>;
+			// BlockingQueue<ServerMessage*> *senderQueue = new BlockingQueue<ServerMessage*>;
+			std::shared_ptr<BlockingQueue<ServerMessage*>> senderQueue (new BlockingQueue<ServerMessage*>);
 			senderQueues.insert(std::make_pair(newId,senderQueue));
 
 			clients.insert(std::make_pair(newId,std::make_tuple(std::move(peer),nullptr,nullptr)));
@@ -57,7 +59,9 @@ void ThreadAcceptor::run() {
 
 			cleanDeadClients();
 			newId++;
-		} catch(const std::exception &exception) { }
+		} catch(const std::exception &exception) { 
+			std::cout<<"se cierra el aceptador\n";
+		}
 	}
 	// clients.stopClients();
 }

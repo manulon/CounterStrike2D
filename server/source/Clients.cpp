@@ -40,7 +40,6 @@
 // 	}
 // }
 
-<<<<<<< HEAD
 // void Clients::stopClients(){
 // 	//for (ThreadClient &client : clients) {
 // 	//	client->stop();
@@ -52,13 +51,3 @@
 // 		(*it)->join();
 // 	}
 // }
-=======
-void Clients::stopClients(){
-	std::list<std::unique_ptr<ThreadClient>>::iterator it = clients.begin();
-	while(it != clients.end()) {
-		(*it)->stop();
-		(*it)->join();
-		++it;
-	}
-}
->>>>>>> 332b9f6ec7529c79bfeec574a2c70fbdbb1aed93

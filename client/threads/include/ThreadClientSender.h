@@ -29,7 +29,7 @@ class ThreadClientSender : public Thread {
                 try{
                     std::shared_ptr<Event> newEvent = queue.pop();
                     protocol.send_int16(newEvent->getId());
-
+                    
                     char opcode(newEvent->getOpcode());
                     protocol.send_message(&opcode,1);                
 
