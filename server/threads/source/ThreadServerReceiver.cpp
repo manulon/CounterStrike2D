@@ -1,8 +1,8 @@
 #include "ThreadServerReceiver.h"
 #include <unistd.h>
 
-ThreadServerReceiver::ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::shared_ptr<Event>> &queue):
-skt(skt), queue(queue), isRunning(false){}
+ThreadServerReceiver::ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::shared_ptr<Event>>& queue):
+skt(skt), queue(queue), isRunning(true){}
 
 void ThreadServerReceiver::run(){
     isRunning = true;
@@ -32,4 +32,8 @@ void ThreadServerReceiver::run(){
             break;
         }
     }
+}
+
+bool ThreadServerReceiver::isDead(){
+    return !isRunning;
 }

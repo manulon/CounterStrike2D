@@ -13,6 +13,7 @@ class NonBlockingQueue{
     public:
 
         NonBlockingQueue(){}
+        NonBlockingQueue(NonBlockingQueue &&other) : m(other.m), queue(other.queue) {}
         void push(T t){
             std::unique_lock<std::mutex> lk(m);
             queue.push(t);

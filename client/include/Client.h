@@ -10,7 +10,7 @@
 
 class Client {
     private:
-        NonBlockingQueue<std::string> nonBlockingQueue;
+        NonBlockingQueue<const char*> nonBlockingQueue;
         BlockingQueue<std::shared_ptr<Event>> blockingQueue;
             
     public:

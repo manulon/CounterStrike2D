@@ -1,20 +1,23 @@
 #include "ThreadServerSender.h"
 
-ThreadServerSender::ThreadServerSender(Socket &skt, std::shared_ptr<BlockingQueue<std::string>> &queue, int id) : 
-                    skt(skt), queue(queue), id(id), isRunning(false){}
+ThreadServerSender::ThreadServerSender(Socket &skt, BlockingQueue<ServerMessage*>* queue) : 
+                    skt(skt), queue(queue), isRunning(true){}
 
 void ThreadServerSender::run(){
-    isRunning = true;
     CommunicationProtocol protocol(skt);
     while(isRunning){
         try{
-            std::string msg = queue->pop(); //se bloquea aca
-            protocol.send_int16(msg.length());
-            protocol.send_message(msg.c_str(), msg.length());
-
+            ServerMessage* msg = queue->pop(); //se bloquea aca
+            msg->send(protocol);
+            delete msg;
         } catch (const std::exception &){
             isRunning = false;
             break;
         }
     }
 }
+
+bool ThreadServerSender::isDead(){
+    return !isRunning;
+}
+

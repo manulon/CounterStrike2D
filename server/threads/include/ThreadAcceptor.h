@@ -4,6 +4,8 @@
 #include "Socket.h"
 #include "Thread.h"
 #include "ThreadServerReceiver.h"
+#include "ThreadServerSender.h"
+#include <map>
 //#include <atomic>
 
 class ThreadAcceptor : public Thread {
@@ -11,8 +13,12 @@ class ThreadAcceptor : public Thread {
 		Socket acceptor;
 		bool isRunning;
 		NonBlockingQueue<std::shared_ptr<Event>> &queue;
+		std::map<short,BlockingQueue<ServerMessage*>*> & senderQueues;
+		// Clients &clients;
+		std::map<short,std::tuple<Socket,ThreadServerReceiver*,ThreadServerSender*>> clients;
 		ThreadAcceptor(const ThreadAcceptor &other) = delete;
 		ThreadAcceptor& operator=(const ThreadAcceptor &other) = delete;
+		void cleanDeadClients();
 
 		/*
 		 * @brief Ejecuta y crea el nuevo thread.
@@ -25,14 +31,16 @@ class ThreadAcceptor : public Thread {
 		 * @param service: Puerto en el que se creara
 		 * el hilo aceptador.
 		 */
-		explicit ThreadAcceptor(const char *service, NonBlockingQueue<std::shared_ptr<Event>> &queue);
+		// explicit ThreadAcceptor(const char *service, NonBlockingQueue<std::shared_ptr<Event>> &queue);
 
 		/*
 		 * Constructor con parametros.
 		 * @param host: Dominio en donde escuchara el socket.
 		 * @param service: Puerto en donde enlazara el socket.
 		 */
-		ThreadAcceptor(const char *host, const char *service, NonBlockingQueue<std::shared_ptr<Event>> &queue);
+		ThreadAcceptor(const char *host, const char *service,
+					   NonBlockingQueue<std::shared_ptr<Event>> &queue, 
+					   std::map<short,BlockingQueue<ServerMessage*>*> & senderQueues);
 
 		/*
 		 * Constructor por movimiento.

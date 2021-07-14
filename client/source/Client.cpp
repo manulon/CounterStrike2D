@@ -6,18 +6,24 @@ void Client::run(const char * host, const char *service){
     
     skt.connect(host,service);
 
-    //ThreadClientReceiver receiver(skt, nonBlockingQueue);
+    ThreadClientReceiver receiver(skt, nonBlockingQueue);
     ThreadClientSender sender(skt, blockingQueue, 1);
 
-    //receiver.spawn();
+    receiver.spawn();
     sender.spawn();
 
-    EventHandler eh(skt,blockingQueue);
+    // EventHandler eh(skt,blockingQueue);
     bool isRunning(true);
+    const char * message;
     while (isRunning){
-        isRunning = eh.handleEvents();
+        do{
+            message = nonBlockingQueue.pop();
+            if (message != NULL) 
+                std::cout <<"MENSAJE RECIBIDO: "<<message << std::endl;
+        } while (message != NULL);
+        // isRunning = eh.handleEvents();
     }
 
-    //receiver.join();
+    receiver.join();
     sender.join();
 }

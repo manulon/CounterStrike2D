@@ -11,25 +11,29 @@
 class ThreadClientReceiver : public Thread {
     private:
         Socket& skt;
-        NonBlockingQueue<std::string>& queue;
+        NonBlockingQueue<const char*>& queue;
         bool isRunning;
         
     public:
-        ThreadClientReceiver(Socket &skt, NonBlockingQueue<std::string>& queue):
-        skt(skt), queue(queue), isRunning(false){}
+        ThreadClientReceiver(Socket &skt, NonBlockingQueue<const char*>& queue):
+        skt(skt), queue(queue), isRunning(true){}
 
         ~ThreadClientReceiver(){}
 
         virtual void run(){
-            isRunning = true;
             CommunicationProtocol protocol(skt);
             while(isRunning){
                 try{
+                    char messageType;
+                    std::cout <<"antes de recibir el primer mensaje\n";
+                    protocol.receive_message(1,&messageType);
+                    std::cout <<"despues de recibir el primer mensaje\n";
+                    // if es tal tipo de mesnaje bla bla
                     int length(protocol.receive_size());
                     std::vector<char> buffer(length,0);
                     protocol.receive_message(length, buffer.data());
 
-                    queue.push(std::move(buffer.data()));
+                    queue.push(buffer.data());
                 } catch (const std::exception& e){
                     isRunning = false;
                     break;

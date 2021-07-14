@@ -6,6 +6,7 @@ class PlayerInfoMessage : public ServerMessage {
     public:
         PlayerInfoMessage(short id, float x, float y,
                           short weaponId);
+        virtual ~PlayerInfoMessage(){}
         virtual void send(CommunicationProtocol &protocol) override;
     private:
         short id;

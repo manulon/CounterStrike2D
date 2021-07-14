@@ -16,6 +16,7 @@ public:
     ThreadServerReceiver(Socket &skt, NonBlockingQueue<std::shared_ptr<Event>> &queue);
     ~ThreadServerReceiver(){}
     virtual void run() override;
+    bool isDead();
 };
 
 

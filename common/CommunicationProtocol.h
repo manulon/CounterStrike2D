@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdint.h>
+#include "ProtocolConstants.h"
 
 class CommunicationProtocol{
     Socket& socket;

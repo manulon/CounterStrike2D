@@ -20,17 +20,21 @@ class BlockingQueue{
     public:
 
         BlockingQueue() : is_closed(false){}
+        BlockingQueue(BlockingQueue&& other) : is_closed(other.is_closed),m(), queue(std::move(other.queue)) , cv(){}
         void push(T t){
             std::unique_lock<std::mutex> lk(m);
             queue.push(t);
+            std::cout<<"NOTIFICANDO\n";
             cv.notify_all();
         }
         T pop(){
             std::unique_lock<std::mutex> lk(m);
             while(queue.empty()){
                 if (is_closed)
-                    throw ClosedQueueException(); 
+                    throw ClosedQueueException();
+                std::cout<<"ESPERANDO\n"; 
                 cv.wait(lk);
+                std::cout<<"TERMINOLA ESPERA\n";
             }
             T t = queue.front();
             queue.pop();

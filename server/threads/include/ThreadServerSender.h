@@ -6,17 +6,19 @@
 #include "BlockingQueue.h"
 #include "CommunicationProtocol.h"
 #include "ProtocolConstants.h"
+#include "ServerMessage.h"
 
 class ThreadServerSender : public Thread {
 private:
     Socket &skt;
-    std::shared_ptr<BlockingQueue<std::string>> &queue;
-    int id;
+    BlockingQueue<ServerMessage*> *queue;
+    // int id;
     bool isRunning;
 public:
-    ThreadServerSender(Socket &skt, std::shared_ptr<BlockingQueue<std::string>> &queue, int id);
+    ThreadServerSender(Socket &skt, BlockingQueue<ServerMessage*> *queue);
     ~ThreadServerSender(){}
     virtual void run() override;
+    bool isDead();
 };
 
 

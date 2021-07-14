@@ -18,7 +18,7 @@ class ThreadClientSender : public Thread {
     public:
         ThreadClientSender
         (Socket &skt, BlockingQueue<std::shared_ptr<Event>> &queue, int id):
-        skt(skt), queue(queue), id(id), isRunning(false){}
+        skt(skt), queue(queue), id(id), isRunning(true){}
         
         ~ThreadClientSender(){}
         
