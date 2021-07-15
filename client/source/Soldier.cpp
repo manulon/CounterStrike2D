@@ -48,18 +48,15 @@ void Soldier::render() {
 }
 
 void Soldier::render(int otherX, int otherY){
-    std::cout<<"Estoy renderizando un soldado" << std::endl;
     Area dest = DynamicObject::getDest(otherX, otherY);
     Area src(0,0,width,height);
     image.render(src,dest);
 
     renderWeapon(dest.getX(), dest.getY());
-    std::cout<<"Voy a renderizar su vida" << std::endl;
     renderLife();
 }
 
 void Soldier::renderWeapon(int x, int y){
-    std::cout<<"Renderizo el arma"<< std::endl;
     Area src(0, 0, 32, 32);
     Area dst(x-8, y-14, 45, 45);
 
@@ -96,7 +93,7 @@ void Soldier::setCurrentWeapon(){
 }
 
 void Soldier::renderLife(){
-    Color key = {255, 255, 231};
+    Color key = {0, 0, 0};
 
     if (life == 100){
         Image first("../assets/gfx/fonts/lifeNumbers/1.png", window, key);
@@ -104,8 +101,8 @@ void Soldier::renderLife(){
         Image third("../assets/gfx/fonts/lifeNumbers/0.png", window, key);
 
         Area lifeAreaFirst(0, window.getHeight()-PPM, 32, 40);
-        Area lifeAreaSecond(40, window.getHeight()-PPM, 32, 40);
-        Area lifeAreaThird(88, window.getHeight()-PPM, 32, 40);
+        Area lifeAreaSecond(20, window.getHeight()-PPM, 32, 40);
+        Area lifeAreaThird(45, window.getHeight()-PPM, 32, 40);
 
         first.render(lifeAreaFirst);
         second.render(lifeAreaSecond);
@@ -121,7 +118,7 @@ void Soldier::renderLife(){
         Image second(secondDigitPath.c_str(), window, key);
 
         Area lifeAreaFirst(0, window.getHeight()-PPM, 32, 40);
-        Area lifeAreaSecond(40, window.getHeight()-PPM, 32, 40);
+        Area lifeAreaSecond(22, window.getHeight()-PPM, 32, 40);
 
         first.render(lifeAreaFirst);
         second.render(lifeAreaSecond);
