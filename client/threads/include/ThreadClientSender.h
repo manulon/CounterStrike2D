@@ -4,7 +4,7 @@
 #include "Thread.h"
 #include "Socket.h"
 #include "BlockingQueue.h"
-#include "../common/Event.h"
+#include "Event.h"
 #include "CommunicationProtocol.h"
 #include "ProtocolConstants.h"
 

@@ -7,7 +7,7 @@ class ShootEvent : public ServerEvent{
         int angle;
     public:
 		ShootEvent(short id, int angle); //Para multipartida llega el nombre de la partida tambien 
-		~ShootEvent();
+		~ShootEvent(){}
 		virtual void handle(Game &game) override;
 };
 

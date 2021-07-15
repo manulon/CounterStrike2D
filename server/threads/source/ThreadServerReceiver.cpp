@@ -1,5 +1,9 @@
 #include "ThreadServerReceiver.h"
 #include <unistd.h>
+#include "PlayerMovementEvent.h"
+#include "QuitEvent.h"
+#include "ShootEvent.h"
+
 
 ThreadServerReceiver::ThreadServerReceiver(Socket &skt, 
     NonBlockingQueue<std::shared_ptr<ServerEvent>>& queue, 
@@ -11,60 +15,59 @@ void ThreadServerReceiver::run(){
     while (isRunning) {
         try{
             char buffer;
-            int opcode {protocol.receive_size()};
             protocol.receive_message(1, &buffer);
             std::shared_ptr<ServerEvent> event(nullptr);
 
             if (buffer == MOVE_LEFT) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
             }
 
             if (buffer == MOVE_RIGHT) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
             }
 
             if (buffer == MOVE_DOWN) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
             }
 
             if (buffer == MOVE_UP) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
             }
 
             if (buffer == STOP_LEFT) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
             }
 
             if (buffer == STOP_RIGHT) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
             }
 
             if (buffer == STOP_UP) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
             }
 
             if (buffer == STOP_DOWN) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
             }
 
             if (buffer == SHOOT) { 
                 int arg = protocol.receive_size();
-                std::shared_ptr<ServerEvent> aux(new ShootEvent(id, arg));
+                std::shared_ptr<ServerEvent> aux(new ShootEvent(clientID, arg));
                 event = aux;
             }
 
             if (buffer == QUIT) {
                 isRunning = false;
                 skt.close();
-                std::shared_ptr<ServerEvent> aux(new QuitEvent(id, buffer));
+                std::shared_ptr<ServerEvent> aux(new QuitEvent(clientID));
                 event = aux;
 
             }
@@ -81,22 +84,23 @@ bool ThreadServerReceiver::isDead(){
     return !isRunning;
 }
 
-/*
-*std::cout<<std::endl<<"-----------------------"<<std::endl;
-            int arg = 0;
-            std::cout<<"Waiting for receive size "<<std::endl;
-            int id(protocol.receive_size());
-            std::cout<<"Del jugador de "<<id<<" recibi"<<std::endl;
-            char buffer;
-            protocol.receive_message(1, &buffer);
-            std::cout<<" la accion "<<(int)buffer<<std::endl;
-            if (buffer == SHOOT) {     aca va a tener que ser otra cosa ¿enviar -1?
-                arg = protocol.receive_size();
-                std::cout<<" con argumento "<<arg<<std::endl;
-            }
 
-            if (buffer == QUIT) {
-                isRunning = false;
-                skt.close();
-            }
-*/
+// std::cout<<std::endl<<"-----------------------"<<std::endl;
+            // int arg = 0;
+            // std::cout<<"Waiting for receive size "<<std::endl;
+            // int id(protocol.receive_size());
+            // std::cout<<"Del jugador de "<<id<<" recibi"<<std::endl;
+            // char buffer;
+            // protocol.receive_message(1, &buffer);
+            // std::cout<<" la accion "<<(int)buffer<<std::endl;
+            // if (buffer == SHOOT) {     aca va a tener que ser otra cosa ¿enviar -1?
+                // arg = protocol.receive_size();
+                // std::cout<<" con argumento "<<arg<<std::endl;
+            // }
+// 
+            // if (buffer == QUIT) {
+                // isRunning = false;
+                // skt.close();
+            // }
+// 
+// 

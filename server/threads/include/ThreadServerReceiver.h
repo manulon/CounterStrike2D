@@ -5,17 +5,17 @@
 #include "NonBlockingQueue.h"
 #include "BlockingQueue.h"
 #include "ServerMessage.h"
-#include "../common/Event.h"
 #include "CommunicationProtocol.h"
 #include "ProtocolConstants.h"
 #include <map>
+#include "ServerEvent.h"
 
 class ThreadServerReceiver : public Thread {
 private:
     Socket &skt;
     NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
     bool isRunning;
-    short clientID
+    short clientID;
 public:
     ThreadServerReceiver(Socket &skt, 
                          NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,

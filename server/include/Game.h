@@ -6,10 +6,11 @@
 #include "BlockingQueue.h"
 #include "NonBlockingQueue.h"
 #include "ServerMessage.h"
-#include "ServerEvent.h"
+// #include "ServerEvent.h"
 #include <map>
 #include <mutex>
 
+class ServerEvent;
 enum MaxPlayers {
 	TWO = 2,
 	FOUR = 4,
@@ -46,6 +47,8 @@ class Game {
 		bool isReadyToStart();
 		bool isGameOver();
 		void start();
+		void shoot(short id, char angle);
+		void playerMovement(short id, char opcode);
 };
 
 #endif 

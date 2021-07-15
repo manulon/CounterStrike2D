@@ -1,8 +1,8 @@
 #ifndef _CLIENT_PROTOCOL_H_
 #define _CLIENT_PROTOCOL_H_
 
-#include "../common/CommunicationProtocol.h"
-#include "../common/ProtocolConstants.h"
+#include "CommunicationProtocol.h"
+#include "ProtocolConstants.h"
 #include "BlockingQueue.h"
 #include "Event.h"
 #include "LoginMessage.h"

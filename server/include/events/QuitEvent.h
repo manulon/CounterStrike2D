@@ -5,7 +5,7 @@
 class QuitEvent : public ServerEvent{
     public:
 		QuitEvent(short id); //Para multipartida llega el nombre de la partida tambien 
-		~QuitEvent();
+		~QuitEvent(){}
 		virtual void handle(Game &game) override;
 };
 

@@ -6,7 +6,7 @@ class PlayerMovementEvent : public ServerEvent{
 		char opcode;		
 	public:
 		PlayerMovementEvent(short id, char opcode); 
-		~PlayerMovementEvent();
+		~PlayerMovementEvent(){}
 		virtual void handle(Game &game) override;
 };
 

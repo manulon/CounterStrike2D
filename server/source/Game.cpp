@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "ProtocolConstants.h"
+#include "ServerEvent.h"
 #include <iostream>
 
 Game::Game(MaxPlayers maxPlayers, 
@@ -27,26 +28,34 @@ void Game::start() {
 }
 
 void Game::shoot(short id, char angle) {
-    players[id].shoot(angle);
+    std::map<short, Player>::iterator it = terrorist.find(id);
+    if (it == terrorist.end()) {
+        it = counterTerrorist.find(id);
+    }
+    it->second.attack(angle);
 }
 
 void Game::playerMovement(short id, char opcode) {
-    if (opcode = MOVE_LEFT) {
-        players[id].moveLeft();
-    } else if (opcode = MOVE_RIGHT) {
-        players[id].moveRight();
-    } else if (opcode = MOVE_DOWN) {
-        players[id].moveDown();
-    } else if (opcode = MOVE_UP) {
-        players[id].moveUp();
-    } else if (opcode = STOP_LEFT) {
-        players[id].stopMoveLeft();
-    } else if (opcode = STOP_RIGHT) {
-        players[id].stopMoveRight();
-    } else if (opcode = STOP_UP) {
-        players[id].stopMoveUp();
-    } else (opcode = STOP_DOWN) {
-        players[id].stopMoveDown();
+    std::map<short, Player>::iterator it = terrorist.find(id);
+    if (it == terrorist.end()) {
+        it = counterTerrorist.find(id);
+    }
+    if (opcode == MOVE_LEFT) {
+        it->second.moveLeft();
+    } else if (opcode == MOVE_RIGHT) {
+        it->second.moveRight();
+    } else if (opcode == MOVE_DOWN) {
+        it->second.moveDown();
+    } else if (opcode == MOVE_UP) {
+        it->second.moveUp();
+    } else if (opcode == STOP_LEFT) {
+        it->second.stopMoveLeft();
+    } else if (opcode == STOP_RIGHT) {
+        it->second.stopMoveRight();
+    } else if (opcode == STOP_UP) {
+        it->second.stopMoveUp();
+    } else if (opcode == STOP_DOWN) {
+        it->second.stopMoveDown();
     }
 }
 
@@ -55,11 +64,11 @@ void Game::joinPlayer(short playerID) {
     
     std::lock_guard<std::mutex> lock(mutex);
     Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);  
-    std::pair<std::map<uint8_t, Player>::iterator, bool> insertRet;
+    std::pair<std::map<short, Player>::iterator, bool> insertRet;
     if (playersInGame % 2 == 0) {
-        insertRet = counterTerrorist.insert(std::pair<uint8_t, Player>(playerID, std::move(player)));
+        insertRet = counterTerrorist.insert(std::pair<short, Player>(playerID, std::move(player)));
     } else {
-        insertRet = terrorist.insert(std::pair<uint8_t, Player>(playerID, std::move(player)));
+        insertRet = terrorist.insert(std::pair<short, Player>(playerID, std::move(player)));
     }
     if (insertRet.second == false) throw ("Ya existe un jugador con ese ID");
     ++playersInGame;
