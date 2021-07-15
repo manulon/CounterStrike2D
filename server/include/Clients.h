@@ -14,7 +14,7 @@
 // 	private:
 // 		GamesMonitor &games;
 // 		std::list<std::unique_ptr<ThreadClient>> clients;
-// 		// NonBlockingQueue<std::shared_ptr<Event>> &queue;
+// 		// NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
 // 		// std::map<int,std::shared_ptr<BlockingQueue<std::string>>> senderQueues;
 // 		Clients(const Clients &other);
 // 		Clients& operator=(const Clients &other);

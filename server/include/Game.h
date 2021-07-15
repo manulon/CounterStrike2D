@@ -1,44 +1,51 @@
 #ifndef _GAME_
 #define _GAME_
-#include "Thread.h"
-#include <map>
-#include <mutex>
-#include <string>
+
+#include "Player.h"
+#include "World.h"
 #include "BlockingQueue.h"
 #include "NonBlockingQueue.h"
-#include "Event.h"
 #include "ServerMessage.h"
-#include <condition_variable>
+#include "ServerEvent.h"
+#include <map>
+#include <mutex>
 
+enum MaxPlayers {
+	TWO = 2,
+	FOUR = 4,
+	SIX = 6,
+	EIGHT = 8,
+	TEN = 10
+};
 
-class Game : public Thread {
+class Game {
 	private:
-		std::mutex mutex;
-        std::condition_variable cv;
-        std::map<short,BlockingQueue<ServerMessage>*> clientsQueues;
-        NonBlockingQueue<std::shared_ptr<Event>> *clientEvents;
-        // int numPlayers;
-        // World world
+        std::mutex mutex;
+       	
+       	World world;
+        MaxPlayers maxPlayers;
+        short playersInGame;
+
+        NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
+        std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues;
+
+        std::map<short, Player> counterTerrorist;
+        std::map<short, Player> terrorist;
+        
 		Game(const Game &other) = delete;
 		Game(Game &&other) = delete;
 		Game& operator=(const Game &other) = delete;
-		Game& operator=(Game &&other);
-        bool isReadyToStart();
+		Game& operator=(Game &&other) = delete;
 
 	public:
-		/*
-		 * @brief Constructor.
-		 */
-		Game();
-        virtual void run() override;
-        //void addPlayer 
-		/*
-		 * @brief Destructor.
-		 */
+		Game(MaxPlayers maxPlayers, 
+			 NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
+			 std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues);
 		~Game();
-
-        NonBlockingQueue<std::shared_ptr<Event>>* addPlayer(BlockingQueue<ServerMessage>* bq);
-        void createGame();
+		void joinPlayer(short playerID);
+		bool isReadyToStart();
+		bool isGameOver();
+		void start();
 };
 
 #endif 

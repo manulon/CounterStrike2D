@@ -11,6 +11,8 @@
 #include "Ak47.h"
 #include "SWeapon.h"
 
+#include "Game.h"
+
 int main(int argc, const char *argv[]) {
     try {
     	/*World world;
@@ -58,8 +60,12 @@ int main(int argc, const char *argv[]) {
             std::cout << world;
         }*/
 
-    Server server;
-    server.run("localhost","8080");
+    NonBlockingQueue<std::shared_ptr<ServerEvent>> queue;
+    std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> senderQueues;
+    Game game(MaxPlayers::FOUR, queue, senderQueues);
+
+    //Server server;
+    //server.run("localhost","8080");
     
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;

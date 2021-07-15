@@ -5,7 +5,7 @@
 #include <queue>
 
 template <class T>
-class NonBlockingQueue{
+class NonBlockingQueue {
     private:
         std::mutex m;
         std::queue<T> queue;
@@ -22,7 +22,7 @@ class NonBlockingQueue{
         T pop(){
             std::unique_lock<std::mutex> lk(m);
             if (queue.empty()){
-                return NULL;
+                return nullptr;
             }
             T t = queue.front();
             queue.pop();

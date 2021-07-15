@@ -18,7 +18,8 @@ include_directories(client/include
 include_directories(client/threads/include)					
 include_directories(common)
 include_directories(server/include
-					server/threads/include)
+					server/threads/include
+					server/include/events)
 include_directories(mapEditor)
 
 FILE(GLOB_RECURSE source "client/source/*.cpp")

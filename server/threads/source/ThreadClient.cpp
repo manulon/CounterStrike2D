@@ -2,7 +2,7 @@
 // #include <unistd.h>
 // #include "ServerMessage.h"
 
-// // ThreadClient::ThreadClient(Socket &&peer, NonBlockingQueue<std::shared_ptr<Event>> &queueReceiver, 
+// // ThreadClient::ThreadClient(Socket &&peer, NonBlockingQueue<std::shared_ptr<ServerEvent>> &queueReceiver, 
 // // 		std::shared_ptr<BlockingQueue<std::string>> &queueSender, int id) : 
 // // 		peer(std::move(peer)), isRunning(false), clientEvents(queueReceiver), queueSender(queueSender),
 // // 		id(id) { }
@@ -22,8 +22,8 @@
 
 // 	BlockingQueue<ServerMessage> bq;
 // 	// Login login(games);
-// 	// NonBlockingQueue<std::shared_ptr<Event>> * nbq = login.registerUser(peer, bq);
-// 		NonBlockingQueue<std::shared_ptr<Event>> * nbq = nullptr;
+// 	// NonBlockingQueue<std::shared_ptr<ServerEvent>> * nbq = login.registerUser(peer, bq);
+// 		NonBlockingQueue<std::shared_ptr<ServerEvent>> * nbq = nullptr;
 // 	{
 // 		nbq = games.joinOrCreate("partida1", &bq);
 // 	}

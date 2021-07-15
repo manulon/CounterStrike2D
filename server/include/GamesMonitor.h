@@ -9,8 +9,8 @@
 
 class GamesMonitor {
 	private:
-		std::map<std::string, std::unique_ptr<Game>> games;
-		std::mutex mutex;
+		//std::map<std::string, std::unique_ptr<Game>> games;
+		//std::mutex mutex;
 		GamesMonitor(const GamesMonitor &other) = delete;
 		GamesMonitor(GamesMonitor &&other) = delete;
 		GamesMonitor& operator=(const GamesMonitor &other) = delete;
@@ -27,8 +27,8 @@ class GamesMonitor {
 		 */
 		~GamesMonitor();
 
-		NonBlockingQueue<std::shared_ptr<Event>>* joinOrCreate
-			(const std::string &key, BlockingQueue<ServerMessage> *bq);
+		//NonBlockingQueue<std::shared_ptr<ServerEvent>>* joinOrCreate
+		//	(const std::string &key, BlockingQueue<ServerMessage> *bq);
 };
 
 #endif // _GAMES_MONITOR_H_

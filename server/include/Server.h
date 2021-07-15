@@ -3,7 +3,7 @@
 #include "ThreadAcceptor.h"
 class Server {
 private:
-    NonBlockingQueue<std::shared_ptr<Event>> clientEvents;
+    NonBlockingQueue<std::shared_ptr<ServerEvent>> clientEvents;
     std::map<short,ServerMessage*> clientQueues;
 
 public:
