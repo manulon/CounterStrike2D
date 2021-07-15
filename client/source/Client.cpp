@@ -14,13 +14,16 @@ void Client::run(const char * host, const char *service){
 
     EventHandler eh(skt,blockingQueue);
     bool isRunning(true);
-    const char * message;
+    std::shared_ptr<std::string> message;
+
+
+
     while (isRunning){
         do{
             message = nonBlockingQueue.pop();
             if (message != nullptr) {
-                std::string pepe(message);
-                std::cout <<"MENSAJE RECIBIDO:"<<pepe <<"y"<< std::endl;
+                // std::string pepe(message);
+                std::cout <<"MENSAJE RECIBIDO:"<<*message <<"y"<< std::endl;
             }
         } while (message != NULL);
         isRunning = eh.handleEvents();

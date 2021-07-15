@@ -11,11 +11,11 @@
 class ThreadClientReceiver : public Thread {
     private:
         Socket& skt;
-        NonBlockingQueue<const char*>& queue;
+        NonBlockingQueue<std::shared_ptr<std::string>>& queue;
         bool isRunning;
         
     public:
-        ThreadClientReceiver(Socket &skt, NonBlockingQueue<const char*>& queue):
+        ThreadClientReceiver(Socket &skt, NonBlockingQueue<std::shared_ptr<std::string>>& queue):
         skt(skt), queue(queue), isRunning(true){}
 
         ~ThreadClientReceiver(){}
@@ -29,7 +29,7 @@ class ThreadClientReceiver : public Thread {
                     ssize_t received = protocol.receive_message(1,&messageType);
                     if (received == 0){
                         isRunning = false;
-                        queue.push("exit");
+                        // queue.push("exit");
                         break;
                     }
                     std::cout <<"despues de recibir el primer mensaje\n";
@@ -38,9 +38,10 @@ class ThreadClientReceiver : public Thread {
                     std::vector<char> buffer(length);
                     received = protocol.receive_message(length, buffer.data());
                     std::cout <<"se recibioeron"<< received<<std::endl;
-                    queue.push(buffer.data());
+                    std::shared_ptr<std::string> mes(new std::string(buffer.data()));
+                    queue.push(mes);
                 } catch (const std::exception& e){
-                    queue.push("exit");
+                    // queue.push("exit");
                     isRunning = false;
                     break;
                 }
