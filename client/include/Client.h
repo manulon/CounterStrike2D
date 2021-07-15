@@ -11,7 +11,7 @@
 class Client {
     private:
         NonBlockingQueue<std::shared_ptr<std::string>> nonBlockingQueue;
-        BlockingQueue<std::shared_ptr<Event>> blockingQueue;
+        BlockingQueue<std::shared_ptr<ClientMessage>> blockingQueue;
             
     public:
         Client():nonBlockingQueue(),blockingQueue(){}

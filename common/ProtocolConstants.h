@@ -11,5 +11,7 @@
 #define STOP_DOWN   7
 #define QUIT        8
 #define SHOOT       9
-#define TEXT_MESSAGE 1
+#define LIST        10
+#define JOIN        11
+#define TEXT_MESSAGE 12
 #endif

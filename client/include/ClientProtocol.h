@@ -5,6 +5,7 @@
 #include "../common/ProtocolConstants.h"
 #include "BlockingQueue.h"
 #include "Event.h"
+#include "LoginMessage.h"
 
 class ClientProtocol{
     private:
@@ -12,11 +13,11 @@ class ClientProtocol{
         ClientProtocol& operator=(const ClientProtocol& other) = delete;
         CommunicationProtocol protocol;
 
-        BlockingQueue<std::shared_ptr<Event>>& queue;
+        BlockingQueue<std::shared_ptr<ClientMessage>>& queue;
         
 
     public:
-        ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<Event>>& queue);
+        ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<ClientMessage>>& queue);
         ~ClientProtocol();
 
         void moveLeft();
@@ -29,6 +30,7 @@ class ClientProtocol{
         void stopMoveUp();
         void quit();
         void attack();
+        void list();
 };
 
 #endif

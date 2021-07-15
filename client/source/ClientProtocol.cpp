@@ -1,6 +1,6 @@
 #include "ClientProtocol.h"
 
-ClientProtocol::ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<Event>>& queue):
+ClientProtocol::ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<ClientMessage>>& queue):
 protocol(skt), queue(queue){}
 
 ClientProtocol::~ClientProtocol(){}
@@ -75,6 +75,7 @@ void ClientProtocol::attack(){
     std::shared_ptr<Event> newEvent(new Event(1,key,50));
     queue.push(newEvent);
 }
+
 
 /*
 ClienteEvento

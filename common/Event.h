@@ -1,7 +1,7 @@
 #ifndef _EVENT_
 #define _EVENT_
-
-class Event{
+#include "ClientMessage.h"
+class Event : public ClientMessage {
     private:
         int id;
         char opcode;
@@ -14,6 +14,7 @@ class Event{
         int getId();
         char getOpcode();
         int getArg();
+        virtual bool send(CommunicationProtocol &protocol) override;
 };
 
 #endif

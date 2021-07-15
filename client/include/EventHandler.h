@@ -12,7 +12,7 @@ private:
     ClientProtocol protocol;
     
 public:
-    EventHandler(Socket &skt,BlockingQueue<std::shared_ptr<Event>>& queue): 
+    EventHandler(Socket &skt,BlockingQueue<std::shared_ptr<ClientMessage>>& queue): 
                  protocol(skt,queue) {}
     ~EventHandler(){}
     bool handleEvents();

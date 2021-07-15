@@ -14,3 +14,13 @@ char Event:: getOpcode(){
 int Event::getArg(){
     return arg;
 }
+ 
+bool Event::send(CommunicationProtocol &protocol){
+    protocol.send_int16((uint16_t)id);                
+    protocol.send_message(&opcode,1);                
+    if ( opcode == SHOOT ){
+        protocol.send_int16((uint16_t)arg);
+        return false;
+    } 
+    return true;
+}
