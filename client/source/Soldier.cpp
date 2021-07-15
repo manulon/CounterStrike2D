@@ -2,6 +2,8 @@
 #include "Area.h"
 #include <utility>
 #include <iostream>
+#include "SdlColor.h"
+
 #define PPM 32
 
 // TODO Tal vez agregar un enum que sea
@@ -14,7 +16,7 @@
 
 Soldier::Soldier(std::string imgPath , Window &window) : 
     Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
-    , width(PPM), height(PPM), angle(90), 
+    , width(PPM), height(PPM), angle(90), life(100), window(window),
     currentWeapon("../assets/gfx/weapons/ak47.bmp",window,16,32) { }
 
 // Soldier::Soldier(Soldier &&other) : 
@@ -52,6 +54,8 @@ void Soldier::render(int otherX, int otherY){
     image.render(src,dest);
 
     renderWeapon(dest.getX(), dest.getY());
+    std::cout<<"Voy a renderizar su vida" << std::endl;
+    renderLife();
 }
 
 void Soldier::renderWeapon(int x, int y){
@@ -89,4 +93,41 @@ void Soldier::setAngle(int angle){
 
 void Soldier::setCurrentWeapon(){
     
+}
+
+void Soldier::renderLife(){
+    Color key = {255, 255, 231};
+
+    if (life == 100){
+        Image first("../assets/gfx/fonts/lifeNumbers/1.png", window, key);
+        Image second("../assets/gfx/fonts/lifeNumbers/0.png", window, key);
+        Image third("../assets/gfx/fonts/lifeNumbers/0.png", window, key);
+
+        Area lifeAreaFirst(0, window.getHeight()-PPM, 32, 40);
+        Area lifeAreaSecond(40, window.getHeight()-PPM, 32, 40);
+        Area lifeAreaThird(88, window.getHeight()-PPM, 32, 40);
+
+        first.render(lifeAreaFirst);
+        second.render(lifeAreaSecond);
+        third.render(lifeAreaThird);
+    }else{
+        int firstDigit(life/10);
+        int secondDigit(life-(firstDigit*10));
+
+        std::string firstDigitPath("../assets/gfx/fonts/lifeNumbers/"+std::to_string(firstDigit)+".png");
+        std::string secondDigitPath("../assets/gfx/fonts/lifeNumbers/"+std::to_string(secondDigit)+".png");
+
+        Image first(firstDigitPath.c_str(), window, key);
+        Image second(secondDigitPath.c_str(), window, key);
+
+        Area lifeAreaFirst(0, window.getHeight()-PPM, 32, 40);
+        Area lifeAreaSecond(40, window.getHeight()-PPM, 32, 40);
+
+        first.render(lifeAreaFirst);
+        second.render(lifeAreaSecond);
+    }
+}
+
+void Soldier::namePathFactory(){
+
 }

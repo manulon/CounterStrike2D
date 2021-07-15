@@ -15,6 +15,8 @@ class Soldier : public Animation , public DynamicObject{
         int width;
         int height;
         int angle;
+        short int life;
+        Window& window;
         Weapon currentWeapon;
 
         Soldier(const Soldier &other) = delete;
@@ -22,6 +24,8 @@ class Soldier : public Animation , public DynamicObject{
         Soldier& operator=(Soldier &&other) = delete;
 
         void renderWeapon(int x, int y);
+        void renderLife();
+        void namePathFactory();
 
     public:
         Soldier(std::string imgPath, Window &window);
