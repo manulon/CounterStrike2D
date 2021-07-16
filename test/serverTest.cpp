@@ -60,12 +60,12 @@ int main(int argc, const char *argv[]) {
             std::cout << world;
         }*/
 
-    NonBlockingQueue<std::shared_ptr<ServerEvent>> queue;
-    std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> senderQueues;
-    Game game(MaxPlayers::FOUR, queue, senderQueues);
+    //NonBlockingQueue<std::shared_ptr<ServerEvent>> queue;
+    //std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> senderQueues;
+    //Game game(MaxPlayers::FOUR, queue, senderQueues);
 
-    //Server server;
-    //server.run("localhost","8080");
+    Server server;
+    server.run("localhost","8080");
     
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;

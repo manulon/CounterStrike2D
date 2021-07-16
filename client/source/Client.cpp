@@ -16,8 +16,8 @@ void Client::run(const char * host, const char *service){
 
     EventHandler eh(skt,blockingQueue);
     std::shared_ptr<std::string> message;
-    bool gameStarted = false;
-    std::string command; 
+    //bool gameStarted = false;
+    /*std::string command; 
     while(!gameStarted){
         std::cin >> command;
         if (command == "unirse"){
@@ -31,7 +31,7 @@ void Client::run(const char * host, const char *service){
             }
         } while( message != nullptr);
     }
-
+*/
     bool isRunning(true);
 
     while (isRunning){
