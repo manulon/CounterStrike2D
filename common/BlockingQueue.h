@@ -24,7 +24,6 @@ class BlockingQueue{
         void push(T t){
             std::unique_lock<std::mutex> lk(m);
             queue.push(t);
-            std::cout<<"NOTIFICANDO\n";
             cv.notify_all();
         }
         T pop(){
@@ -32,9 +31,7 @@ class BlockingQueue{
             while(queue.empty()){
                 if (is_closed)
                     throw ClosedQueueException();
-                std::cout<<"ESPERANDO\n"; 
                 cv.wait(lk);
-                std::cout<<"TERMINOLA ESPERA\n";
             }
             T t = queue.front();
             queue.pop();

@@ -1,7 +1,11 @@
 #include "Game.h"
 #include "ProtocolConstants.h"
 #include "ServerEvent.h"
+#include "SWeapon.h"
+#include "Ak47.h"
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 Game::Game(MaxPlayers maxPlayers, 
            NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
@@ -15,13 +19,16 @@ Game::Game(MaxPlayers maxPlayers,
 Game::~Game() { }
 
 void Game::start() {
-    while (!isGameOver()) {
+    while (true) {
         std::shared_ptr<ServerEvent> event = queue.pop();
         while (event.get() != nullptr) {
-            event = queue.pop();
+            std::cout << "No paso\n";
             event->handle(*this);
+            event = queue.pop();
+            std::cout << "Paso\n";
         }
         world.step();
+
         //iterar sobre todos los elementos de la cola
         //senderQueues.push(map);
     }
@@ -63,7 +70,10 @@ void Game::joinPlayer(short playerID) {
     if (isReadyToStart()) throw ("Maximo numero de jugadores alcanzados, intente en otra partida");
     
     std::lock_guard<std::mutex> lock(mutex);
-    Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);  
+    Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
+    std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
+    player.setPrimaryWeapon(std::move(ak47));
+
     std::pair<std::map<short, Player>::iterator, bool> insertRet;
     if (playersInGame % 2 == 0) {
         insertRet = counterTerrorist.insert(std::pair<short, Player>(playerID, std::move(player)));
@@ -80,7 +90,7 @@ bool Game::isReadyToStart() {
 
 bool Game::isGameOver() {
     bool gameOver = false;
-    if (terrorist.size() == 0) {
+    if (terrorist.size() == 10) {
         // para cada elemento de la cola enviadora
         // con clave impar
         // senderQueue.push("Derrota")
@@ -91,7 +101,7 @@ bool Game::isGameOver() {
 
         gameOver = true;
     }
-    if (counterTerrorist.size() == 0) {
+    if (counterTerrorist.size() == 10) {
         // para cada elemento de la cola enviadora
         // con clave impar
         // senderQueue.push("Victoria")

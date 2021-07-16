@@ -30,7 +30,7 @@ Player::Player(Player &&other) :
     secondaryWeapon(std::move(other.secondaryWeapon)),
     tertiaryWeapon(std::move(other.tertiaryWeapon)),
     width(other.width), height(other.height) {
-    currentWeapon = nullptr;
+    other.currentWeapon = nullptr;
     other.width = 0;
     other.height = 0;
 }
@@ -121,6 +121,7 @@ void Player::attack(float angle) {
     float xShoot = getPositionX() + shootRadius*cos(angle*b2_pi/180.0f);
     float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
     currentWeapon->attack(angle, xShoot, yShoot);
+    std::cout << "ataco con angulo" << angle << std::endl; // REMOVER
 }
 
 void Player::reload(size_t &ammunition) {
