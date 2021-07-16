@@ -30,8 +30,8 @@ class Game {
         NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
         std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues;
 
-        std::map<short, Player> counterTerrorist;
-        std::map<short, Player> terrorist;
+        std::map<short, std::unique_ptr<Player>> counterTerrorist;
+        std::map<short, std::unique_ptr<Player>> terrorist;
         
 		Game(const Game &other) = delete;
 		Game(Game &&other) = delete;
