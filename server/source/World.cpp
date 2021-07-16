@@ -146,3 +146,7 @@ std::ostream& operator<<(std::ostream &os, const World &world) {
     }
     return os;
 }
+
+std::list<std::unique_ptr<SWeapon>>& World::getWeapons(){
+	return weapons;
+}

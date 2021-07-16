@@ -25,7 +25,6 @@ class Soldier : public Animation , public DynamicObject{
 
         void renderWeapon(int x, int y);
         void renderLife();
-        void namePathFactory();
 
     public:
         Soldier(std::string imgPath, Window &window);

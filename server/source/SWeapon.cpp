@@ -95,3 +95,13 @@ void SWeapon::setBody(b2Body &body) {
     Entity::setBody(body);
     Entity::bindFixture(fixtureDef);
 }
+
+bool SWeapon::playerIsInWeapon(int x, int y){
+    if ( (x > (getPositionX() - weaponType->getWidth()) && 
+          x < (getPositionX() + weaponType->getWidth()) &&
+         (y > (getPositionY() - weaponType->getHeight())&&
+          y < (getPositionY() + weaponType->getHeight()) ))) {
+         return true;
+    }
+    return false;
+}

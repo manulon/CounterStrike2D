@@ -23,6 +23,7 @@ class World {
 		const b2Body* getBodyList() const;
 
 	public: 
+		/*CAMBIAR A PRIVATE*/
 		b2Vec2 gravity;
 		b2World world;
 		CollisionManager collisionManager;
@@ -34,6 +35,7 @@ class World {
 
 		std::list<std::unique_ptr<SWeapon>> weapons;
 		std::list<std::unique_ptr<Bullet>> bullets;
+
 		World();
 		~World();
 		void step();
@@ -46,6 +48,7 @@ class World {
 
 		void createBody(const b2BodyDef &bodyDef, Entity &context);
 		void getServerObjects(std::list<Entity*> &serverObjects);
+		std::list<std::unique_ptr<SWeapon>>& getWeapons();
 };
 
 #endif // _WORLD_H_

@@ -124,7 +124,3 @@ void Soldier::renderLife(){
         second.render(lifeAreaSecond);
     }
 }
-
-void Soldier::namePathFactory(){
-
-}

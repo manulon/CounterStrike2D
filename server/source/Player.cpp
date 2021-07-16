@@ -216,3 +216,13 @@ void Player::setSecondaryWeapon(SecondaryWeapon &other) {
     secondaryWeapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
     secondaryWeapon->detachFromWorld();
 }
+
+void Player::pickUpWeapon(){
+    /*std::list<std::unique_ptr<SWeapon>>& weapons = getWorld().getWeapons();
+    for (auto& weapon: weapons){
+        if (weapon.playerIsInWeapon(getPositionX(),getPositionY())){
+            //swapAndDropPrimaryWeapon(weapon);
+            std::cout<<"El arma sera recogida"<< std::endl;
+        }
+    }*/
+}

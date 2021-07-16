@@ -24,6 +24,9 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                     soldier.move();
                     player.moveUp();
                 }
+                if (state[SDL_SCANCODE_Q]){
+                    player.pickUpWeapon();
+                }
             }
                 break;
             case SDL_KEYUP: {
