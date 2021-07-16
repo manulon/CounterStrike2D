@@ -14,4 +14,5 @@
 #define LIST        10
 #define JOIN        11
 #define TEXT_MESSAGE 12
+#define PLAYER_INFO 13
 #endif
