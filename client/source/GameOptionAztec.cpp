@@ -7,7 +7,6 @@ GameOption("../assets/gfx/buttons/InitialMenuAztec.png",window,
 GameOptionAztec::~GameOptionAztec(){}
 
 bool GameOptionAztec::clicked(std::vector<GameOption*>& options){
-    std::cout<<"Clickee aztec"<< std::endl;
     return false;
 }
 

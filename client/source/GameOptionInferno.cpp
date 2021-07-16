@@ -7,7 +7,6 @@ GameOption("../assets/gfx/buttons/InitialMenuInferno.png",window,
 GameOptionInferno::~GameOptionInferno(){}
 
 bool GameOptionInferno::clicked(std::vector<GameOption*>& options){
-    std::cout<<"Clickee inferno"<< std::endl;
     return false;
 }
 

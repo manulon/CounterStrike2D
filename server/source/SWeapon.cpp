@@ -79,8 +79,8 @@ void SWeapon::collideWithObstacle(Obstacle &obstacle) {
 }
 
 void SWeapon::collideWithPlayer(Player &player) {
-    std::cout << "SWeapon choco con player" << std::endl;
-    weaponType->collideWithPlayer(player);
+    if (player.isPickingUpWeapon())
+        weaponType->collideWithPlayer(player);    
 }
 
 void SWeapon::collideWithBorder(Border &border) {

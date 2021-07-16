@@ -12,6 +12,5 @@ void GameOptionDust::setPath(std::string& path,std::string& tiles){
 }
 
 bool GameOptionDust::clicked(std::vector<GameOption*>& options){
-    std::cout<<"Clickee dust"<< std::endl;
     return false;
 }

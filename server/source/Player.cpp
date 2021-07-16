@@ -16,7 +16,8 @@ Player::Player(World &world,
                float x, float y,
                float width, float height, short id) :
     Entity(world, id), force(0,0), life(), 
-    currentWeapon(nullptr), width(width), height(height) { 
+    currentWeapon(nullptr), width(width), height(height),
+    pickingUpWeapon(false){ 
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
@@ -191,7 +192,7 @@ void Player::decreaseLife(int valueToDecrease){
 void Player::dropPrimaryWeapon(){
     if (primaryWeapon.get() != nullptr){
         std::cout<<"Voy a dropear el arma"<<std::endl;
-        primaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
+        primaryWeapon->lateAttachToWorld(getPositionX(), getPositionY());
         primaryWeapon->setId(15);
         std::cout<<"dropee con id"<<primaryWeapon->getId()<<std::endl;
         Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
@@ -218,11 +219,14 @@ void Player::setSecondaryWeapon(SecondaryWeapon &other) {
 }
 
 void Player::pickUpWeapon(){
-    /*std::list<std::unique_ptr<SWeapon>>& weapons = getWorld().getWeapons();
-    for (auto& weapon: weapons){
-        if (weapon.playerIsInWeapon(getPositionX(),getPositionY())){
-            //swapAndDropPrimaryWeapon(weapon);
-            std::cout<<"El arma sera recogida"<< std::endl;
-        }
-    }*/
+    pickingUpWeapon = true;
 }
+
+void Player::stopPickingUpWeapon(){
+    pickingUpWeapon = false;
+}
+
+bool Player::isPickingUpWeapon(){
+    return pickingUpWeapon;
+}
+

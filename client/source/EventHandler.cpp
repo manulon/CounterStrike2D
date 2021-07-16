@@ -48,6 +48,9 @@ bool EventHandler::handleEvents(Soldier &soldier, Player &player, float angle){
                         soldier.stopMoving();
                         player.stopMoveDown();
                         break;
+                    case SDLK_q:
+                        player.stopPickingUpWeapon();
+                        break;
                     } 
                 }
                 break;

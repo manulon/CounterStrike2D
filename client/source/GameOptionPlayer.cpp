@@ -7,7 +7,6 @@ GameOption("../assets/gfx/buttons/InitialMenuPlayer.png",window,
 GameOptionPlayer::~GameOptionPlayer(){}
 
 bool GameOptionPlayer::clicked(std::vector<GameOption*>& options){
-    std::cout<<"Clickee player"<< std::endl;
     return false;
 }
 

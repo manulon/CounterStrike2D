@@ -23,6 +23,7 @@ class Player : public Entity {
 		std::unique_ptr<SWeapon> tertiaryWeapon;
 		float width;
 		float height;
+		bool pickingUpWeapon;
 
 		Player(const Player &other) = delete;
 		Player& operator=(const Player &other) = delete;
@@ -71,6 +72,8 @@ class Player : public Entity {
 		void decreaseLife(int valueToDecrease);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		void pickUpWeapon();
+		void stopPickingUpWeapon();
+		bool isPickingUpWeapon();
 };
 
 #endif // _PLAYER_H_

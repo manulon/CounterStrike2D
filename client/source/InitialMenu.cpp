@@ -1,6 +1,6 @@
 #include "InitialMenu.h"
 #include "GameOptionExit.h"
-#include "GameOptionSelectMode.h"
+#include "GameOptionJoinMode.h"
 
 InitialMenu::InitialMenu():
 window("Menu Inicial", 500, 200, SDL_WINDOW_RESIZABLE, 
@@ -20,7 +20,7 @@ void InitialMenu::clear(){
 
 void InitialMenu::setInitialButtons(){
     buttons.push_back(new GameOptionExit(window));
-    buttons.push_back(new GameOptionSelectMode(window));
+    buttons.push_back(new GameOptionJoinMode(window));
 }
 
 void InitialMenu::render(){
