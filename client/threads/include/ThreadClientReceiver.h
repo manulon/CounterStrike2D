@@ -27,7 +27,6 @@ class ThreadClientReceiver : public Thread {
             while(isRunning){
                 try{
                     char messageType;
-                    std::cout <<"antes de recibir el primer mensaje\n";
                     ssize_t received = protocol.receive_message(1,&messageType);
                     if (received == 0){
                         isRunning = false;
@@ -39,7 +38,14 @@ class ThreadClientReceiver : public Thread {
                         std::shared_ptr<Info> aux(new LifeInfo(protocol.receive_size()));
                         info = aux;
                     } else if (messageType == PLAYER_INFO){
-                        std::shared_ptr<Info> aux(new PlayerInfo(protocol.receive_size(), protocol.receive_float()))
+                        std::cout<<"PLAYERINFO\n";
+                        std::shared_ptr<Info> aux(
+                            new PlayerInfo(
+                                protocol.receive_size(), protocol.receive_float(),
+                                protocol.receive_float(),protocol.receive_size()
+                            )
+                        );
+                        info = aux;
                     }
 
                     queue.push(info);

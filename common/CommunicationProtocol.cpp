@@ -17,14 +17,16 @@ void CommunicationProtocol:: send_int16(uint16_t size){
 
 
 void CommunicationProtocol::send_float(float value){
-    value = htonl(value);
-    this->socket.send((char*)&value, sizeof(value));
+    int enlarged_float = htonl(value*1000);
+    this->socket.send((char*)&enlarged_float,sizeof(enlarged_float));
 }
 
 float CommunicationProtocol::receive_float(){
-    float num(0);
+    int num(0);
     this->socket.receive((char*)&num,sizeof(num));
-    return (float)ntohl(num);
+    num = ntohl(num);
+    float aux = ((float)num)/1000.0f;
+    return aux;
 }
 
 ssize_t CommunicationProtocol:: receive_message

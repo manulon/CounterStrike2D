@@ -11,5 +11,5 @@ void PlayerInfoMessage::send(CommunicationProtocol &protocol){
     protocol.send_int16(id);
     protocol.send_float(x);
     protocol.send_float(y);
-    protocol.send_float(weaponId);    
+    protocol.send_int16(weaponId);    
 }

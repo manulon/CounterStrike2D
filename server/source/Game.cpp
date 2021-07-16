@@ -108,7 +108,7 @@ void Game::joinPlayer(short playerID) {
     if (isReadyToStart()) throw ("Maximo numero de jugadores alcanzados, intente en otra partida");
     
     std::lock_guard<std::mutex> lock(mutex);
-    Player player(world, 2.0f, 8.0f, 2.0f, 2.0f, 1);
+    Player player(world, 2.1f, 8.2f, 2.0f, 2.0f, 1);
     std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
     player.setPrimaryWeapon(std::move(ak47));
 
