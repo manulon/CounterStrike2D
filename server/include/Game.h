@@ -40,6 +40,8 @@ class Game {
 		void sendInfoToClients();
 		void sendLifeInfo();
 		void sendPositions();
+		void sendBullets();
+		void sendWeapons();
 
 	public:
 		Game(MaxPlayers maxPlayers, 

@@ -8,6 +8,8 @@
 #include <thread>
 #include "LifeMessage.h"
 #include "PlayerInfoMessage.h"
+#include "BulletMessage.h"
+#include "WeaponMessage.h"
 
 Game::Game(MaxPlayers maxPlayers, 
            NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
@@ -40,8 +42,8 @@ void Game::start() {
 void Game::sendInfoToClients(){
     sendLifeInfo();
     sendPositions();
-    // sendBullets();
-    // sendWeapons();
+    sendBullets();
+    sendWeapons();
 }
 
 void Game::sendLifeInfo(){
@@ -71,6 +73,43 @@ void Game::sendPositions(){
     }
 }
 
+void Game::sendBullets(){
+    std::list<std::shared_ptr<Bullet>> actualBullets;
+    world.getBulletsList(actualBullets);
+
+    for (auto& pairPlayer : terrorist){
+        for (auto& bullet: actualBullets){
+            BulletMessage *msg = new BulletMessage(bullet->getPositionX(),bullet->getPositionY());
+            senderQueues[pairPlayer.first]->push(msg);
+        }   
+    }
+    for (auto& pairPlayer : counterTerrorist){
+        for (auto& bullet: actualBullets){
+            BulletMessage *msg = new BulletMessage(bullet->getPositionX(),bullet->getPositionY());
+            senderQueues[pairPlayer.first]->push(msg);
+        }
+    }
+}
+
+void Game::sendWeapons(){
+    std::list<std::shared_ptr<SWeapon>> actualWeapons;
+    world.getWeaponList(actualWeapons);
+
+    for (auto& pairPlayer : terrorist){
+        for (auto& weapon: actualWeapons){
+            WeaponMessage *msg = new WeaponMessage
+                                    (weapon->getId(),weapon->getPositionX(),weapon->getPositionY());
+            senderQueues[pairPlayer.first]->push(msg);
+        }   
+    }
+    for (auto& pairPlayer : counterTerrorist){
+        for (auto& weapon: actualWeapons){
+            WeaponMessage *msg = new WeaponMessage
+                                    (weapon->getId(),weapon->getPositionX(),weapon->getPositionY());
+            senderQueues[pairPlayer.first]->push(msg);
+        }
+    }
+}
 
 void Game::shoot(short id, char angle) {
     std::map<short, Player>::iterator it = terrorist.find(id);

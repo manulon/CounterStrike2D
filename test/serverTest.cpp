@@ -22,20 +22,20 @@ int main(int argc, const char *argv[]) {
 
         // CREACION ARMA Y SETEO A PLAYER
         std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
-        //std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
+        //std::shared_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
         //player.setWeapon(std::move(weapon));
         player.setPrimaryWeapon(std::move(ak47));
 
         //SPAWN DE ARMA
         std::unique_ptr<Ak47> ak(new Ak47(world, 0.2f, 0.2f));
-        std::unique_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
+        std::shared_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
         w->earlyAttachToWorld(5.0f, 8.0f);
         world.spawnWeapon(std::move(w));
         //Obstacle obstacle(world, 5.0f, 8.0f, 0.5f, 0.5f);
         
         // CUCHILLO
         std::unique_ptr<Knife> knife(new Knife(0.2f, 0.2f));
-        std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
+        std::shared_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
         player.setWeapon(std::move(weapon));
         //knife.attack(0, 2.0f, 8.0f);
 

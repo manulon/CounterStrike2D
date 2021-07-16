@@ -36,19 +36,19 @@ Player::Player(Player &&other) :
 }
 
 void Player::setPrimaryWeapon(std::unique_ptr<PrimaryWeapon> &&other) {
-    std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
+    std::shared_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     primaryWeapon = std::move(weapon);
     setIfNullCurrentWeapon(primaryWeapon.get());
 }
 
 void Player::setSecondaryWeapon(std::unique_ptr<SecondaryWeapon> &&other) {
-    std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
+    std::shared_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     secondaryWeapon = std::move(weapon);
     setIfNullCurrentWeapon(secondaryWeapon.get());
 }
 
 void Player::setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other) {
-    std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
+    std::shared_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     tertiaryWeapon = std::move(weapon);
     setIfNullCurrentWeapon(tertiaryWeapon.get());
 }

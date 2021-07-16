@@ -18,9 +18,9 @@ class Player : public Entity {
 		b2Vec2 force;
 		Life life;
 		SWeapon *currentWeapon;
-		std::unique_ptr<SWeapon> primaryWeapon;
-		std::unique_ptr<SWeapon> secondaryWeapon;
-		std::unique_ptr<SWeapon> tertiaryWeapon;
+		std::shared_ptr<SWeapon> primaryWeapon;
+		std::shared_ptr<SWeapon> secondaryWeapon;
+		std::shared_ptr<SWeapon> tertiaryWeapon;
 		float width;
 		float height;
 

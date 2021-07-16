@@ -13,7 +13,7 @@ Ak47::~Ak47() { }
 void Ak47::attack(float angle, float x, float y) {
     // TODO CORREGIR EXCEPCION DE EMPTY LOADER
     try {
-        std::unique_ptr<Bullet> bullet(new Bullet(loader.releaseBullet()));
+        std::shared_ptr<Bullet> bullet(new Bullet(loader.releaseBullet()));
         bullet->shoot(angle, x, y);
         bullet->setDamage(15);
         world.spawnBullet(std::move(bullet));
