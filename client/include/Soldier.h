@@ -24,6 +24,8 @@ class Soldier : public Animation , public DynamicObject{
         Soldier& operator=(Soldier &&other) = delete;
 
         void renderWeapon(int x, int y);
+        void renderActualLife();
+        void renderFullLife();
         void renderLife();
 
     public:

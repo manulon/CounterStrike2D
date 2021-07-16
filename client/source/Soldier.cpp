@@ -53,7 +53,7 @@ void Soldier::render(int otherX, int otherY){
     image.render(src,dest);
 
     renderWeapon(dest.getX(), dest.getY());
-    renderLife();
+    renderActualLife();
 }
 
 void Soldier::renderWeapon(int x, int y){
@@ -92,35 +92,45 @@ void Soldier::setCurrentWeapon(){
     
 }
 
+void Soldier::renderActualLife(){
+    if (life == 100)
+        renderFullLife();
+    else
+        renderLife();
+    
+}
+
+void Soldier::renderFullLife(){
+    Color key = {0, 0, 0};
+
+    Image first("../assets/gfx/fonts/lifeNumbers/1.png", window, key);
+    Image second("../assets/gfx/fonts/lifeNumbers/0.png", window, key);
+    Image third("../assets/gfx/fonts/lifeNumbers/0.png", window, key);
+
+    Area lifeAreaFirst(0, window.getHeight()-PPM, 32, 40);
+    Area lifeAreaSecond(20, window.getHeight()-PPM, 32, 40);
+    Area lifeAreaThird(45, window.getHeight()-PPM, 32, 40);
+
+    first.render(lifeAreaFirst);
+    second.render(lifeAreaSecond);
+    third.render(lifeAreaThird);
+}
+
 void Soldier::renderLife(){
     Color key = {0, 0, 0};
 
-    if (life == 100){
-        Image first("../assets/gfx/fonts/lifeNumbers/1.png", window, key);
-        Image second("../assets/gfx/fonts/lifeNumbers/0.png", window, key);
-        Image third("../assets/gfx/fonts/lifeNumbers/0.png", window, key);
+    int firstDigit(life/10);
+    int secondDigit(life-(firstDigit*10));
 
-        Area lifeAreaFirst(0, window.getHeight()-PPM, 32, 40);
-        Area lifeAreaSecond(20, window.getHeight()-PPM, 32, 40);
-        Area lifeAreaThird(45, window.getHeight()-PPM, 32, 40);
+    std::string firstDigitPath("../assets/gfx/fonts/lifeNumbers/"+std::to_string(firstDigit)+".png");
+    std::string secondDigitPath("../assets/gfx/fonts/lifeNumbers/"+std::to_string(secondDigit)+".png");
 
-        first.render(lifeAreaFirst);
-        second.render(lifeAreaSecond);
-        third.render(lifeAreaThird);
-    }else{
-        int firstDigit(life/10);
-        int secondDigit(life-(firstDigit*10));
+    Image first(firstDigitPath.c_str(), window, key);
+    Image second(secondDigitPath.c_str(), window, key);
 
-        std::string firstDigitPath("../assets/gfx/fonts/lifeNumbers/"+std::to_string(firstDigit)+".png");
-        std::string secondDigitPath("../assets/gfx/fonts/lifeNumbers/"+std::to_string(secondDigit)+".png");
+    Area lifeAreaFirst(0, window.getHeight()-PPM, 32, 40);
+    Area lifeAreaSecond(22, window.getHeight()-PPM, 32, 40);
 
-        Image first(firstDigitPath.c_str(), window, key);
-        Image second(secondDigitPath.c_str(), window, key);
-
-        Area lifeAreaFirst(0, window.getHeight()-PPM, 32, 40);
-        Area lifeAreaSecond(22, window.getHeight()-PPM, 32, 40);
-
-        first.render(lifeAreaFirst);
-        second.render(lifeAreaSecond);
-    }
+    first.render(lifeAreaFirst);
+    second.render(lifeAreaSecond);
 }
