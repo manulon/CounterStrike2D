@@ -37,6 +37,9 @@ class Game {
 		Game(Game &&other) = delete;
 		Game& operator=(const Game &other) = delete;
 		Game& operator=(Game &&other) = delete;
+		void sendInfoToClients();
+		void sendLifeInfo();
+		void sendPositions();
 
 	public:
 		Game(MaxPlayers maxPlayers, 

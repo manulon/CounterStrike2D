@@ -216,3 +216,7 @@ void Player::setSecondaryWeapon(SecondaryWeapon &other) {
     secondaryWeapon = std::move(Entity::getWorld().retrieveSpawnedWeapon(*otherWeapon));
     secondaryWeapon->detachFromWorld();
 }
+
+short Player::getLife(){
+    return (short)life.getLife();
+}

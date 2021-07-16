@@ -10,7 +10,7 @@
 
 class Client {
     private:
-        NonBlockingQueue<std::shared_ptr<std::string>> nonBlockingQueue;
+        NonBlockingQueue<std::shared_ptr<Info>> nonBlockingQueue;
         BlockingQueue<std::shared_ptr<ClientMessage>> blockingQueue;
             
     public:

@@ -6,6 +6,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include "LifeMessage.h"
+#include "PlayerInfoMessage.h"
 
 Game::Game(MaxPlayers maxPlayers, 
            NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
@@ -28,11 +30,47 @@ void Game::start() {
             std::cout << "Paso\n";
         }
         world.step();
-
+        sendInfoToClients();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
         //iterar sobre todos los elementos de la cola
         //senderQueues.push(map);
     }
 }
+
+void Game::sendInfoToClients(){
+    sendLifeInfo();
+    sendPositions();
+    // sendBullets();
+    // sendWeapons();
+}
+
+void Game::sendLifeInfo(){
+    for (auto& pair : terrorist){
+        LifeMessage * msg = new LifeMessage(pair.second.getLife());
+        senderQueues[pair.first]->push(msg);
+    }
+    for (auto& pair : counterTerrorist){
+        LifeMessage * msg = new LifeMessage(pair.second.getLife());
+        senderQueues[pair.first]->push(msg);
+    }
+}
+void Game::sendPositions(){
+    for (auto& pairPlayer : terrorist){
+        for (auto& pair :senderQueues){
+            PlayerInfoMessage *msg = new PlayerInfoMessage
+                            (pairPlayer.first,pairPlayer.second.getPositionX(),pairPlayer.second.getPositionY(),11);
+            pair.second->push(msg);
+        }
+    }
+    for (auto& pairPlayer : counterTerrorist){
+        for (auto& pair :senderQueues){
+            PlayerInfoMessage *msg = new PlayerInfoMessage
+                            (pairPlayer.first,pairPlayer.second.getPositionX(),pairPlayer.second.getPositionY(),11);
+            pair.second->push(msg);
+        }
+    }
+}
+
 
 void Game::shoot(short id, char angle) {
     std::map<short, Player>::iterator it = terrorist.find(id);

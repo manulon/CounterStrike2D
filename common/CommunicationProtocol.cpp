@@ -21,6 +21,12 @@ void CommunicationProtocol::send_float(float value){
     this->socket.send((char*)&value, sizeof(value));
 }
 
+float CommunicationProtocol::receive_float(){
+    float num(0);
+    this->socket.receive((char*)&num,sizeof(num));
+    return (float)ntohl(num);
+}
+
 ssize_t CommunicationProtocol:: receive_message
 (int length, char* buffer){
     return this->socket.receive(buffer,length);

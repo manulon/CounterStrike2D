@@ -27,6 +27,8 @@ public:
     int receive_size();
 
     void send_float(float value);
+
+    float receive_float();
 };
 
 #endif

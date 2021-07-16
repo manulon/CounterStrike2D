@@ -15,4 +15,5 @@
 #define JOIN        11
 #define TEXT_MESSAGE 12
 #define PLAYER_INFO 13
+#define LIFE_MESSAGE 14
 #endif

@@ -70,6 +70,7 @@ class Player : public Entity {
 		void setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other);
 		void decreaseLife(int valueToDecrease);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
+		short getLife();
 };
 
 #endif // _PLAYER_H_

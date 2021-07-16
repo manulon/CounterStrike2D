@@ -1,6 +1,7 @@
 #include "Client.h"
 #include "EventHandler.h"
 #include "Window.h"
+#include "Info.h"
 void Client::run(const char * host, const char *service){
     Socket skt;
     
@@ -15,7 +16,7 @@ void Client::run(const char * host, const char *service){
     sender.spawn();
 
     EventHandler eh(skt,blockingQueue);
-    std::shared_ptr<std::string> message;
+    std::shared_ptr<Info> info;
     bool gameStarted = false;
     std::string command; 
     std::cout<<"----------------------------------------------------------------\n";
@@ -39,13 +40,13 @@ void Client::run(const char * host, const char *service){
 
     while (isRunning){
         do{
-            message = nonBlockingQueue.pop();
-            if (message != nullptr) {
+            info = nonBlockingQueue.pop();
+            if (info != nullptr) {
                 // std::string pepe(message);
-
-                std::cout <<"MENSAJE RECIBIDO:"<<*message <<"y"<< std::endl;
+                info->update();
+                
             }
-        } while (message != NULL);
+        } while (info != NULL);
         isRunning = eh.handleEvents();
     }
     std::cout<<"SALE DEL LOOP\n";
