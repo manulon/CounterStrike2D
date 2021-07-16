@@ -4,7 +4,7 @@
 class LoginEvent : public ServerEvent{
 	public:
 		LoginEvent(short id); //Para multipartida llega el nombre de la partida tambien 
-		~LoginEvent();
+		~LoginEvent(){}
 		virtual void handle(Game &game) override;
 };
 

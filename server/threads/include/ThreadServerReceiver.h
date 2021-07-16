@@ -16,6 +16,7 @@ private:
     NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
     bool isRunning;
     short clientID;
+    bool isMovementMessage(char opcode);
 public:
     ThreadServerReceiver(Socket &skt, 
                          NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,

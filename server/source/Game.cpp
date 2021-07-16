@@ -76,8 +76,10 @@ void Game::joinPlayer(short playerID) {
 
     std::pair<std::map<short, Player>::iterator, bool> insertRet;
     if (playersInGame % 2 == 0) {
+        std::cout<<"agregadi a counter terrorist\n";
         insertRet = counterTerrorist.insert(std::pair<short, Player>(playerID, std::move(player)));
     } else {
+        std::cout<<"agregado a terroist\n";
         insertRet = terrorist.insert(std::pair<short, Player>(playerID, std::move(player)));
     }
     if (insertRet.second == false) throw ("Ya existe un jugador con ese ID");

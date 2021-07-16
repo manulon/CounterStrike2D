@@ -3,6 +3,7 @@
 #include "PlayerMovementEvent.h"
 #include "QuitEvent.h"
 #include "ShootEvent.h"
+#include "LoginEvent.h"
 
 
 ThreadServerReceiver::ThreadServerReceiver(Socket &skt, 
@@ -20,61 +21,23 @@ void ThreadServerReceiver::run(){
             std::cout << "Despues del receive\n";
             std::shared_ptr<ServerEvent> event(nullptr);
 
-            if (buffer == MOVE_LEFT) {
+            if (isMovementMessage(buffer)){
                 std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
-            }
-
-            else if (buffer == MOVE_RIGHT) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
-                event = aux;
-            }
-
-            else if (buffer == MOVE_DOWN) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
-                event = aux;
-            }
-
-            else if (buffer == MOVE_UP) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
-                event = aux;
-            }
-
-            else if (buffer == STOP_LEFT) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
-                event = aux;
-            }
-
-            else if (buffer == STOP_RIGHT) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
-                event = aux;
-            }
-
-            else if (buffer == STOP_UP) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
-                event = aux;
-            }
-
-            else if (buffer == STOP_DOWN) {
-                std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
-                event = aux;
-            }
-
-            else if (buffer == SHOOT) { 
-                std::cout << "No paso en shoot\n";
+            } else if (buffer == SHOOT) { 
                 int arg = protocol.receive_size();
-                std::cout << "Paso el receive shoot con arg" << arg << std::endl;
                 std::shared_ptr<ServerEvent> aux(new ShootEvent(clientID, arg));
                 event = aux;
-            }
-
-            else if (buffer == QUIT) {
+            } else if (buffer == JOIN){
+                std::shared_ptr<ServerEvent> aux(new LoginEvent(clientID));
+                event = aux;
+            } else if (buffer == QUIT) {
                 isRunning = false;
                 skt.close();
                 std::shared_ptr<ServerEvent> aux(new QuitEvent(clientID));
                 event = aux;
 
-            }
+            } 
             queue.push(event);
 
         } catch (const std::exception& e){
@@ -108,3 +71,6 @@ bool ThreadServerReceiver::isDead(){
             // }
 // 
 // 
+bool ThreadServerReceiver::isMovementMessage(char opcode){
+    return (opcode >= MOVE_LEFT && opcode <= STOP_DOWN);
+}

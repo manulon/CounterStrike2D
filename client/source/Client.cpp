@@ -16,22 +16,25 @@ void Client::run(const char * host, const char *service){
 
     EventHandler eh(skt,blockingQueue);
     std::shared_ptr<std::string> message;
-    //bool gameStarted = false;
-    /*std::string command; 
+    bool gameStarted = false;
+    std::string command; 
+    std::cout<<"----------------------------------------------------------------\n";
+    std::cout<<"Ingrsar 'unirse' para unirse a la partida\n";
     while(!gameStarted){
         std::cin >> command;
         if (command == "unirse"){
             std::shared_ptr<ClientMessage> msg (new LoginMessage(JOIN,"-"));
             blockingQueue.push(msg);
+            break;
         } 
-        do{
-            message = nonBlockingQueue.pop();
-            if (message != nullptr){
-                std::cout<<*message<<std::endl;
-            }
-        } while( message != nullptr);
+        // do{
+        //     message = nonBlockingQueue.pop();
+        //     if (message != nullptr){
+        //         std::cout<<*message<<std::endl;
+        //     }
+        // } while( message != nullptr);
     }
-*/
+
     bool isRunning(true);
 
     while (isRunning){

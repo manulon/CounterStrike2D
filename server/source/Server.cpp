@@ -10,8 +10,8 @@ void Server::run(const char* host, const char* service) {
     Game game(MaxPlayers::FOUR, clientEvents, senderQueues);
     ThreadAcceptor acceptor(host, service, clientEvents, senderQueues);
     acceptor.spawn();
-    game.joinPlayer(0);
-    //game.joinPlayer(1);
+    // game.joinPlayer(0);
+    // game.joinPlayer(1);
     game.start();
 
     /*while (game.isReadyToStart()) {
