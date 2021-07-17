@@ -6,7 +6,7 @@
 
 Animation::Animation(std::string imgPath, Window &window, int rows, int columns,
                      int width, int height, bool inverseOrder) :
-    image(imgPath.c_str(), window), rows(rows), columns(columns), 
+    image(imgPath.c_str(), window), window(window), rows(rows), columns(columns), 
     currentRow(0), currentColumn(0), inverseOrder(inverseOrder), 
     width(width), height(height), elapsed(0) { }
 

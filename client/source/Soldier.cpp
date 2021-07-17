@@ -17,7 +17,7 @@
 Soldier::Soldier(std::string imgPath , Window &window) : 
     Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), 
     direction(RIGHT), moving(false),x(0),y(0), 
-    width(PPM), height(PPM), angle(90), weaponId(-1) { }
+    width(PPM), height(PPM), angle(90), weaponId(-1), life(100), currentWeapon("../assets/gfx/weapons/ak47.bmp",window,16,32) { }
 
 //    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
 //    , width(PPM), height(PPM), angle(90), life(100), window(window),

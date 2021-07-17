@@ -31,7 +31,7 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
                     //player.moveUp();
                 }
                 if (state[SDL_SCANCODE_Q]){
-                    player.pickUpWeapon();
+                    //player.pickUpWeapon();
                 }
             }
                 break;
@@ -60,7 +60,7 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
                         //player.stopMoveDown();
                         break;
                     case SDLK_q:
-                        player.stopPickingUpWeapon();
+                        //player.stopPickingUpWeapon();
                         break;
                     } 
                 }

@@ -18,7 +18,7 @@ class Soldier : public Animation , public DynamicObject{
         short weaponId;
         short int life;
         //Window& window;
-        //Weapon currentWeapon;
+        Weapon currentWeapon;
 
         Soldier(const Soldier &other) = delete;
         Soldier& operator=(const Soldier &other) = delete;

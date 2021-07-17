@@ -11,6 +11,7 @@ class Area;
 class Animation {
    protected:
       const Image image;
+      Window &window;
    private:
       int rows;
       int columns;
