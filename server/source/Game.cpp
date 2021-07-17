@@ -159,18 +159,26 @@ void Game::joinPlayer(short playerID) {
 
     std::pair<std::map<short, std::shared_ptr<Player>>::iterator, bool> insertRet;
     if (playersInGame % 2 == 0) {
-        std::cout<<"agregadi a counter terrorist\n";
         insertRet = counterTerrorist.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
     } else {
-        std::cout<<"agregado a terroist\n";
         insertRet = terrorist.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
     }
     allPlayers.insert(std::pair<short, std::shared_ptr<Player>>(playerID,player));
     ServerMessage * idMessage = new JoinMessage(playerID);
     senderQueues[playerID]->push(idMessage);
+    joinOtherPlayers(playerID);
     notifyRestOfPlayers(playerID);
     if (insertRet.second == false) throw ("Ya existe un jugador con ese ID");
     ++playersInGame;
+}
+
+//Cuando un jugador se une se le comunica el resto de los jugadores que estan en la partida
+void Game::joinOtherPlayers(short newPlayerId){
+    for (auto& pair : allPlayers){
+        if (pair.first != newPlayerId){
+            senderQueues[newPlayerId]->push(new OtherPlayerJoinedMessage(pair.first));
+        }
+    }
 }
 
 void Game::notifyRestOfPlayers(short playerID){

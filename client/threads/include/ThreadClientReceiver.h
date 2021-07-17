@@ -37,11 +37,9 @@ class ThreadClientReceiver : public Thread {
                     }
                     std::shared_ptr<Info> info = nullptr;
                     if (messageType == LIFE_MESSAGE){
-                        std::cout<<"LIFEMESSAGE\n";
                         std::shared_ptr<Info> aux(new LifeInfo(protocol.receive_size()));
                         info = aux;
                     } else if (messageType == PLAYER_INFO){
-                        std::cout<<"PLAYERINFO\n";
                         std::shared_ptr<Info> aux(
                             new PlayerInfo(
                                 protocol.receive_size(), protocol.receive_float(),
@@ -50,11 +48,9 @@ class ThreadClientReceiver : public Thread {
                         );
                         info = aux;
                     } else if (messageType == OTHER_PLAYER_JOIN){
-                        std::cout<<"OTHERplAYERjOINED\n";
                         std::shared_ptr<Info> aux(new JoinOtherPlayerInfo((short)protocol.receive_size()));
                         info = aux;
                     } else if (messageType == JOIN){
-                        std::cout << "JOIN\n";
                         std::shared_ptr<Info> aux(new JoinInfo((short)protocol.receive_size()));
                         info = aux;
                     }

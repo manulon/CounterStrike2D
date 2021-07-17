@@ -46,6 +46,7 @@ class Game {
 		void sendBullets();
 		void sendWeapons();
 		void notifyRestOfPlayers(short id);
+		void joinOtherPlayers(short newPlayerId);
 	public:
 		Game(MaxPlayers maxPlayers, 
 			 NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,

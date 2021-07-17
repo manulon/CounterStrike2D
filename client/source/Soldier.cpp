@@ -77,7 +77,12 @@ void Soldier::setAngle(int angle){
 }
 
 void Soldier::updateInfo(float xx, float yy, short weaponIdd){
+    // DynamicObject::setPos(xx,yy);
     x = xx;
     y = yy;
     weaponId = weaponIdd;
+}
+
+void Soldier::updateInfoo(float xx, float yy, short weaponIdd){
+    DynamicObject::setPos(xx,yy);
 }
