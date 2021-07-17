@@ -42,6 +42,7 @@ void Game::start() {
             break;
         }
         world.step();
+        // cleanDeadPlayers();
         sendInfoToClients();
         std::this_thread::sleep_for(std::chrono::milliseconds(40));
         //iterar sobre todos los elementos de la cola

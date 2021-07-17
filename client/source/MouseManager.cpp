@@ -20,7 +20,6 @@ void MouseManager::update(){
 
 int MouseManager::getAngle(){
     SDL_GetMouseState(&x, &y);
-    std::cout<<"mouse x: "<<x<<" y: "<<y<<std::endl;
     int xAux = x-(windowWidth/2);
     int yAux = (windowHeight/2)-y;
     if (yAux != 0){

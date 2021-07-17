@@ -11,7 +11,7 @@ Animation::Animation(std::string imgPath, Window &window, int rows, int columns,
     width(width), height(height), elapsed(0) { }
 
 Animation::Animation(Animation &&other) : 
-    image(std::move(other.image)), rows(other.rows), columns(other.columns), 
+    image(std::move(other.image)),window(other.window), rows(other.rows), columns(other.columns), 
     currentRow(other.currentRow), currentColumn(other.currentColumn),
     inverseOrder(other.inverseOrder), 
     width(other.width), height(other.height), elapsed(other.elapsed) { 
