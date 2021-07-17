@@ -11,7 +11,8 @@ class PlayerInfo : public Info {
 	public:
 		PlayerInfo( short id, float x, float y, short weaponId) : Info(), id(id), x(x),y(y), weaponId(weaponId){}
 		~PlayerInfo(){}
-		virtual void update(/*TileMap &map*/){
+		virtual void update(TileMap &map){
+            map.updateSoldierInfo(id, x, y, weaponId);
             std::cout<< "mensaje de jugador en X: "<< x<<" Y en y: "<<y<<std::endl;
         }
 };

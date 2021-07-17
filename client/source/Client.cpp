@@ -2,15 +2,23 @@
 #include "EventHandler.h"
 #include "Window.h"
 #include "Info.h"
+#include "TileMap.h"
+#include <chrono>
+#include <thread>
+#include "Stencil.h"
+#include "Camera.h"
 void Client::run(const char * host, const char *service){
     Socket skt;
-    
     skt.connect(host,service);
-     Window window("Counter Strike 2D", 800, 600, 
+    Window window("Counter Strike 2D", 800, 600, 
                   SDL_WINDOW_RESIZABLE, 
                   SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+    TileMap map(window, "../mapaGiganteDust.yaml", "../assets/gfx/tiles/default_dust.png", "../assets/gfx/tiles/obstacles.png");
     ThreadClientReceiver receiver(skt, nonBlockingQueue);
     ThreadClientSender sender(skt, blockingQueue, 1);
+    Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
+    Stencil stencil(1000, 1000, 25, 90, 150, window);
+    Area cameraArea(0, 0, 800, 600);
 
     receiver.spawn();
     sender.spawn();
@@ -28,12 +36,12 @@ void Client::run(const char * host, const char *service){
             blockingQueue.push(msg);
             break;
         } 
-        // do{
-        //     message = nonBlockingQueue.pop();
-        //     if (message != nullptr){
-        //         std::cout<<*message<<std::endl;
-        //     }
-        // } while( message != nullptr);
+        do{
+            info = nonBlockingQueue.pop();
+            if (info != nullptr){
+                info->update(map);
+            }
+        } while( info != nullptr);
     }
 
     bool isRunning(true);
@@ -43,11 +51,14 @@ void Client::run(const char * host, const char *service){
             info = nonBlockingQueue.pop();
             if (info != nullptr) {
                 // std::string pepe(message);
-                info->update();
+                info->update(map);
                 
             }
         } while (info != NULL);
         isRunning = eh.handleEvents();
+        map.renderAll();
+        std::this_thread::sleep_for(std::chrono::milliseconds(40));
+
     }
     std::cout<<"SALE DEL LOOP\n";
     receiver.join();

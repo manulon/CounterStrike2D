@@ -9,6 +9,8 @@
 #include "ProtocolConstants.h"
 #include "LifeInfo.h"
 #include "PlayerInfo.h"
+#include "JoinOtherPlayerInfo.h"
+#include "JoinInfo.h"
 
 class ThreadClientReceiver : public Thread {
     private:
@@ -28,13 +30,14 @@ class ThreadClientReceiver : public Thread {
                 try{
                     char messageType;
                     ssize_t received = protocol.receive_message(1,&messageType);
-                    if (received == 0){
+                    if (received == 0 ){
                         isRunning = false;
                         // queue.push("exit");
                         break;
                     }
                     std::shared_ptr<Info> info = nullptr;
                     if (messageType == LIFE_MESSAGE){
+                        std::cout<<"LIFEMESSAGE\n";
                         std::shared_ptr<Info> aux(new LifeInfo(protocol.receive_size()));
                         info = aux;
                     } else if (messageType == PLAYER_INFO){
@@ -45,6 +48,14 @@ class ThreadClientReceiver : public Thread {
                                 protocol.receive_float(),protocol.receive_size()
                             )
                         );
+                        info = aux;
+                    } else if (messageType == OTHER_PLAYER_JOIN){
+                        std::cout<<"OTHERplAYERjOINED\n";
+                        std::shared_ptr<Info> aux(new JoinOtherPlayerInfo((short)protocol.receive_size()));
+                        info = aux;
+                    } else if (messageType == JOIN){
+                        std::cout << "JOIN\n";
+                        std::shared_ptr<Info> aux(new JoinInfo((short)protocol.receive_size()));
                         info = aux;
                     }
 

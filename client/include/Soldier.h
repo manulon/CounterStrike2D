@@ -8,11 +8,12 @@ class Soldier : public Animation , public DynamicObject{
     private:
         int direction;
         bool moving;
-        // int x;
-        // int y;
+        float x;
+        float y;
         int width;
         int height;
         int angle;
+        short weaponId;
         Soldier(const Soldier &other) = delete;
         Soldier& operator=(const Soldier &other) = delete;
         Soldier& operator=(Soldier &&other) = delete;
@@ -26,10 +27,11 @@ class Soldier : public Animation , public DynamicObject{
         virtual void render(int x, int y) override;
         void stopMoving();
         void move();
-        int getX();
-        int getY();
+        float getX();
+        float getY();
         int getAngle();
         void setAngle(int angle);
+        void updateInfo(float x , float y, short weaponId);
 };
 
 #endif // _SOLDIER_H_

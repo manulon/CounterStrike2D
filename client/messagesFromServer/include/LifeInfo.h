@@ -8,7 +8,7 @@ class LifeInfo : public Info {
 	public:
 		LifeInfo(short value) : Info(), value(value){}
 		~LifeInfo(){}
-		virtual void update(/*TileMap &map*/){
+		virtual void update(TileMap &map){
             std::cout<<"mensaje con vida "<< value<<std::endl;
         }
 };

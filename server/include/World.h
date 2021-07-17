@@ -32,20 +32,23 @@ class World {
 		int32 velocityIterations;
 		int32 positionIterations;
 
-		std::list<std::unique_ptr<SWeapon>> weapons;
-		std::list<std::unique_ptr<Bullet>> bullets;
+		std::list<std::shared_ptr<SWeapon>> weapons;
+		std::list<std::shared_ptr<Bullet>> bullets;
+
 		World();
 		~World();
 		void step();
 		b2Body* createBody(const b2BodyDef *bodyDef);
 		void destroyBody(b2Body **body);
-		void spawnBullet(std::unique_ptr<Bullet> &&bullet);
-		void spawnWeapon(std::unique_ptr<SWeapon> &&weapon);
-		std::unique_ptr<SWeapon> retrieveSpawnedWeapon(SWeapon &weapon);
+		void spawnBullet(std::shared_ptr<Bullet> &&bullet);
+		void spawnWeapon(std::shared_ptr<SWeapon> &&weapon);
+		std::shared_ptr<SWeapon> retrieveSpawnedWeapon(SWeapon &weapon);
 		friend std::ostream& operator<<(std::ostream &os, const World &world);
 
 		void createBody(const b2BodyDef &bodyDef, Entity &context);
 		void getServerObjects(std::list<Entity*> &serverObjects);
+		void getBulletsList(std::list<std::shared_ptr<Bullet>>& bullets);
+		void getWeaponList(std::list<std::shared_ptr<SWeapon>>& weapons);
 };
 
 #endif // _WORLD_H_

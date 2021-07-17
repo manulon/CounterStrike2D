@@ -6,9 +6,9 @@
 #include "BlockingQueue.h"
 #include "NonBlockingQueue.h"
 #include "ServerMessage.h"
-// #include "ServerEvent.h"
 #include <map>
 #include <mutex>
+#include "PhysicalMapFactory.h"
 
 class ServerEvent;
 enum MaxPlayers {
@@ -30,8 +30,11 @@ class Game {
         NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
         std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues;
 
-        std::map<short, Player> counterTerrorist;
-        std::map<short, Player> terrorist;
+        std::map<short, std::shared_ptr<Player>> counterTerrorist;
+        std::map<short, std::shared_ptr<Player>> terrorist;
+        std::map<short, std::shared_ptr<Player>> allPlayers;
+		PhysicalMapFactory physicalMap;
+
         
 		Game(const Game &other) = delete;
 		Game(Game &&other) = delete;
@@ -40,7 +43,9 @@ class Game {
 		void sendInfoToClients();
 		void sendLifeInfo();
 		void sendPositions();
-
+		void sendBullets();
+		void sendWeapons();
+		void notifyRestOfPlayers(short id);
 	public:
 		Game(MaxPlayers maxPlayers, 
 			 NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,

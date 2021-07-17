@@ -6,7 +6,8 @@
 
 TileMap::TileMap(Window & window,const char *pathText, const std::string &pathTiles, const std::string &pathObs) :
 window(window),image(pathTiles.c_str(),window),mapName(pathText),
-imgObstacles(pathObs.c_str(),window),tiles(), obstacles(), xOffset(0), yOffset(0){
+imgObstacles(pathObs.c_str(),window),tiles(), obstacles(), xOffset(0), yOffset(0), 
+principalSoldier("../assets/gfx/player/t4.bmp", window),principalSoldierId(-1){
 
     loadMedia();
 }
@@ -108,7 +109,7 @@ bool TileMap::setTiles(){
     return true;
 }
 
-void TileMap::render(int x, int y, const Area &dst){
+void TileMap::renderTiles(int x, int y, const Area &dst){
     for (auto& tile: tiles){
         int xOffset(tile->getX());
         int yOffset(tile->getY());
@@ -138,18 +139,46 @@ void TileMap::render(int x, int y, const Area &dst){
 }
 
 void TileMap::renderObjects(int x,int y){
-    for (auto& object : objects){
-        object.second->render(x,y);
+    principalSoldier.render();
+    // for (auto& object : objects){
+    //     object.second->render(x,y);
+    // }
+    for (auto& soldier: soldiers){
+        soldier.second->render(x,y);
     }
 }
 
-void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects){
-    RenderizableFactory fac(window);
-    for (auto &object : serverObjects){
-        short id = object->getId();
-        if(fac.createRenderizable(id, objects))
-            objects[id]->setPos((object->getPositionX()+xOffset)*PPM,(object->getPositionY()+yOffset)*PPM);
-    }
-    renderObjects(x,y);
-    objects.clear();
+// void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects){
+//     RenderizableFactory fac(window);
+//     for (auto &object : serverObjects){
+//         short id = object->getId();
+//         if(fac.createRenderizable(id, objects))
+//             objects[id]->setPos((object->getPositionX()+xOffset)*PPM,(object->getPositionY()+yOffset)*PPM);
+//     }
+//     renderObjects(x,y);
+//     objects.clear();
+// }
+
+void TileMap::setPrincipalPlayerId(short id){
+    principalSoldierId = id;
+}
+
+void TileMap::updateSoldierInfo(short id, float x, float y, short weaponId){
+    if (id == principalSoldierId){
+        principalSoldier.updateInfo(x,y,weaponId);
+    } else {
+        soldiers[id]->updateInfo(x,y,weaponId);
+    } 
+}
+void TileMap::renderAll(){
+    window.clear();
+    Area cameraArea(0, 0, 800, 600);
+    renderTiles(-(principalSoldier.getX() + xOffset)*PPM,-(principalSoldier.getY() + yOffset)*PPM,cameraArea);
+    renderObjects(-(principalSoldier.getX() + xOffset)*PPM,-(principalSoldier.getY() + yOffset)*PPM);
+    window.render();
+}
+
+void TileMap::addNewSoldier(short id){
+    std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/t4.bmp", window));
+    soldiers[id] = std::move(soldier);
 }

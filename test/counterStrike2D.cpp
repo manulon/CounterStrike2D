@@ -46,11 +46,11 @@ int main(int argc, const char *argv[]){
 
         // CREACION ARMA Y SETEO A PLAYER
         std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
-        //std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
+        //std::shared_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
         player.setPrimaryWeapon(std::move(ak47));
 
         std::unique_ptr<Ak47> a(new Ak47(world, 0.2f, 0.2f));
-        //std::unique_ptr<SWeapon> weap(new SWeapon(world, std::move(a)));
+        //std::shared_ptr<SWeapon> weap(new SWeapon(world, std::move(a)));
         player2.setPrimaryWeapon(std::move(a));
 
         Window window("Counter Strike 2D", 800, 600, 
@@ -75,13 +75,13 @@ int main(int argc, const char *argv[]){
         world.spawnFireArm(std::move(fa));*/
 
         std::unique_ptr<Ak47> ak(new Ak47(world, 0.2f, 0.2f));
-        std::unique_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
+        std::shared_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
         w->earlyAttachToWorld(2.0f, 3.0f);
         world.spawnWeapon(std::move(w));
 
         // CUCHILLO
         /*std::unique_ptr<Knife> knife(new Knife(0.1f, 0.1f));
-        std::unique_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
+        std::shared_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
         player.setWeapon(std::move(weapon));*/
 
 

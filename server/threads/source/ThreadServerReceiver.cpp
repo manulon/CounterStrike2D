@@ -17,7 +17,11 @@ void ThreadServerReceiver::run(){
         try{
             char buffer;
             std::cout << "Antes del receive\n";
-            protocol.receive_message(1, &buffer);
+            ssize_t received = protocol.receive_message(1, &buffer);
+            if (received == 0) {
+                isRunning = false;
+                break; 
+            }
             std::cout << "Despues del receive\n";
             std::shared_ptr<ServerEvent> event(nullptr);
 
@@ -29,6 +33,7 @@ void ThreadServerReceiver::run(){
                 std::shared_ptr<ServerEvent> aux(new ShootEvent(clientID, arg));
                 event = aux;
             } else if (buffer == JOIN){
+                std::cout<<"JOIN EVENT\n";
                 std::shared_ptr<ServerEvent> aux(new LoginEvent(clientID));
                 event = aux;
             } else if (buffer == QUIT) {

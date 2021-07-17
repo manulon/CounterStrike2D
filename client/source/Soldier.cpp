@@ -13,8 +13,9 @@
 // imagen solicitada para renderizar.
 
 Soldier::Soldier(std::string imgPath , Window &window) : 
-    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
-    , width(PPM), height(PPM), angle(90) { }
+    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), 
+    direction(RIGHT), moving(false),x(0),y(0), 
+    width(PPM), height(PPM), angle(90), weaponId(-1) { }
 
 // Soldier::Soldier(Soldier &&other) : 
 //     Animation(std::move(other)), direction(other.direction),
@@ -59,11 +60,11 @@ void Soldier:: move(){
 }
 
 
-int Soldier:: getX(){
+float Soldier:: getX(){
     return x;
 }
 
-int Soldier:: getY(){
+float Soldier:: getY(){
     return y;
 }
 
@@ -73,4 +74,10 @@ int Soldier:: getAngle(){
 
 void Soldier::setAngle(int angle){
     this->angle = angle;
+}
+
+void Soldier::updateInfo(float xx, float yy, short weaponIdd){
+    x = xx;
+    y = yy;
+    weaponId = weaponIdd;
 }
