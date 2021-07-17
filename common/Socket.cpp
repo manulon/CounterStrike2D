@@ -3,6 +3,7 @@
 #include "ErrnoException.h"
 #include <cerrno>
 #include <unistd.h>
+#include <iostream>
 
 #define CLIENT_SOCKET 0
 #define MAX_PENDING_CONNECTIONS 10

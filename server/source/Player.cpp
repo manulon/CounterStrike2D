@@ -31,25 +31,25 @@ Player::Player(Player &&other) :
     secondaryWeapon(std::move(other.secondaryWeapon)),
     tertiaryWeapon(std::move(other.tertiaryWeapon)),
     width(other.width), height(other.height) {
-    currentWeapon = nullptr;
+    other.currentWeapon = nullptr;
     other.width = 0;
     other.height = 0;
 }
 
 void Player::setPrimaryWeapon(std::unique_ptr<PrimaryWeapon> &&other) {
-    std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
+    std::shared_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     primaryWeapon = std::move(weapon);
     setIfNullCurrentWeapon(primaryWeapon.get());
 }
 
 void Player::setSecondaryWeapon(std::unique_ptr<SecondaryWeapon> &&other) {
-    std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
+    std::shared_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     secondaryWeapon = std::move(weapon);
     setIfNullCurrentWeapon(secondaryWeapon.get());
 }
 
 void Player::setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other) {
-    std::unique_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
+    std::shared_ptr<SWeapon> weapon(new SWeapon(Entity::getWorld(), std::move(other)));
     tertiaryWeapon = std::move(weapon);
     setIfNullCurrentWeapon(tertiaryWeapon.get());
 }
@@ -123,6 +123,7 @@ void Player::attack(float angle) {
     float xShoot = getPositionX() + shootRadius*cos(angle*b2_pi/180.0f);
     float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
     currentWeapon->attack(angle, xShoot, yShoot);
+    std::cout << "ataco con angulo" << angle << std::endl; // REMOVER
 }
 
 void Player::reload(size_t &ammunition) {
@@ -218,6 +219,10 @@ void Player::setSecondaryWeapon(SecondaryWeapon &other) {
     secondaryWeapon->detachFromWorld();
 }
 
+short Player::getLife(){
+    return (short)life.getLife();
+}
+
 void Player::pickUpWeapon(){
     pickingUpWeapon = true;
 }
@@ -229,4 +234,3 @@ void Player::stopPickingUpWeapon(){
 bool Player::isPickingUpWeapon(){
     return pickingUpWeapon;
 }
-

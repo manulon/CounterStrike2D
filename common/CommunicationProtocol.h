@@ -5,14 +5,14 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdint.h>
+#include "ProtocolConstants.h"
 
 class CommunicationProtocol{
-    Socket* socket;
+    Socket& socket;
 
 public:
-    CommunicationProtocol();
-    ~CommunicationProtocol();
-    explicit CommunicationProtocol(Socket* socket);   
+    ~CommunicationProtocol(){}
+    explicit CommunicationProtocol(Socket&socket);   
     
     //Delega el envio del mensaje recibido por parametro al socket.
     void send_message(const char* msg,int length);
@@ -25,6 +25,10 @@ public:
     
     //Delega la recepcion del tamaño de un mensaje al socket.
     int receive_size();
+
+    void send_float(float value);
+
+    float receive_float();
 };
 
 #endif

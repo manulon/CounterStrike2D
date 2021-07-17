@@ -7,8 +7,7 @@
 #include "Area.h"
 #include <list>
 #include "Soldier.h"
-#include "DynamicObject.h"
-#include "Entity.h"// esto tiene que volar
+#include <memory>
 // #include "yaml-cpp/yaml"
 
 /* Esto no deberia estar en un archivo aparte? Preguntar al profe */
@@ -31,8 +30,11 @@ private:
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
 	std::map<short,std::unique_ptr<DynamicObject>> objects;
+	std::map<short,std::unique_ptr<Soldier>> soldiers;
 	int xOffset;
 	int yOffset;
+	Soldier principalSoldier;
+	short principalSoldierId;
 	// std::list<std::unique_ptr<DynamicObject>> renderizables;
 
 	TileMap(const TileMap &other) = delete;
@@ -47,9 +49,13 @@ public:
 	void addDynamicObject(short id, DynamicObject *object);
 	bool loadMedia();
 	bool setTiles();
-	void render(int x, int y, const Area &dest);
+	void renderTiles(int x, int y, const Area &dest);
 	void renderObjects(int x,int y);
-	void updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects);// este metodo emula el mensaje que llega del server
+	// void updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects);// este metodo emula el mensaje que llega del server
+	void setPrincipalPlayerId(short id);
+	void updateSoldierInfo(short id, float x, float y, short weaponId);
+	void renderAll();
+	void addNewSoldier(short id);
 	
 };
 

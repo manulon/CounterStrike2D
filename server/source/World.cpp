@@ -68,7 +68,7 @@ void World::cleanBodiesToDestroy() {
 }
 
 void World::cleanWeapons() {
-	std::list<std::unique_ptr<SWeapon>>::iterator it = weapons.begin();
+	std::list<std::shared_ptr<SWeapon>>::iterator it = weapons.begin();
 	while(it != weapons.end()) {
 		if ((*it)->isDetached()) {
 			it = weapons.erase(it);
@@ -79,7 +79,7 @@ void World::cleanWeapons() {
 }
 
 void World::cleanBullets() {
-	std::list<std::unique_ptr<Bullet>>::iterator it = bullets.begin();
+	std::list<std::shared_ptr<Bullet>>::iterator it = bullets.begin();
 	while(it != bullets.end()) {
 		if ((*it)->isDetached()) { // agregar condicion || (*it)->outOfRange() 
 			it = bullets.erase(it);
@@ -89,19 +89,19 @@ void World::cleanBullets() {
 	}
 }
 
-void World::spawnBullet(std::unique_ptr<Bullet> &&bullet) {
+void World::spawnBullet(std::shared_ptr<Bullet> &&bullet) {
 	bullets.push_back(std::move(bullet));
 }
 
-void World::spawnWeapon(std::unique_ptr<SWeapon> &&weapon) {
+void World::spawnWeapon(std::shared_ptr<SWeapon> &&weapon) {
 	weapons.push_back(std::move(weapon));
 }
 
-std::unique_ptr<SWeapon> World::retrieveSpawnedWeapon(SWeapon &weapon) {
+std::shared_ptr<SWeapon> World::retrieveSpawnedWeapon(SWeapon &weapon) {
 	// SI NO FUE SPAWNEADO EL OBJETO AL MUNDO HABRA UN ERROR
 	// PORQUE NO LO ENCONTRARA NUNCA	
-	std::list<std::unique_ptr<SWeapon>>::iterator it = weapons.begin();
-	std::unique_ptr<SWeapon> spawnedEntity;
+	std::list<std::shared_ptr<SWeapon>>::iterator it = weapons.begin();
+	std::shared_ptr<SWeapon> spawnedEntity;
 	bool found = false;
 
 	while(it != weapons.end() && found == false) {
@@ -147,6 +147,14 @@ std::ostream& operator<<(std::ostream &os, const World &world) {
     return os;
 }
 
-std::list<std::unique_ptr<SWeapon>>& World::getWeapons(){
-	return weapons;
+void World::getBulletsList(std::list<std::shared_ptr<Bullet>>& newBullets){
+	for(auto& bullet: bullets){
+		newBullets.push_back(bullet);
+	}
+}
+
+void World::getWeaponList(std::list<std::shared_ptr<SWeapon>>& newWeapons){
+	for(auto& weapon: weapons){
+		newWeapons.push_back(weapon);
+	}
 }

@@ -4,15 +4,18 @@
 #include "Soldier.h"
 #include "Player.h"
 #include "ClientProtocol.h"
-
+#include "NonBlockingQueue.h"
+#include <string>
 
 class EventHandler {
 private:
-    ClientProtocol prot;
+    ClientProtocol protocol;
+    
 public:
-    EventHandler(/* args */){}
+    EventHandler(Socket &skt,BlockingQueue<std::shared_ptr<ClientMessage>>& queue): 
+                 protocol(skt,queue) {}
     ~EventHandler(){}
-    bool handleEvents(Soldier &soldier, Player &player, float angle);
+    bool handleEvents();
 };
 
 

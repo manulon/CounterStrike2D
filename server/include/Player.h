@@ -18,9 +18,9 @@ class Player : public Entity {
 		b2Vec2 force;
 		Life life;
 		SWeapon *currentWeapon;
-		std::unique_ptr<SWeapon> primaryWeapon;
-		std::unique_ptr<SWeapon> secondaryWeapon;
-		std::unique_ptr<SWeapon> tertiaryWeapon;
+		std::shared_ptr<SWeapon> primaryWeapon;
+		std::shared_ptr<SWeapon> secondaryWeapon;
+		std::shared_ptr<SWeapon> tertiaryWeapon;
 		float width;
 		float height;
 		bool pickingUpWeapon;
@@ -71,9 +71,12 @@ class Player : public Entity {
 		void setTertiaryWeapon(std::unique_ptr<TertiaryWeapon> &&other);
 		void decreaseLife(int valueToDecrease);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
+		short getLife();
+
 		void pickUpWeapon();
 		void stopPickingUpWeapon();
 		bool isPickingUpWeapon();
+
 };
 
 #endif // _PLAYER_H_

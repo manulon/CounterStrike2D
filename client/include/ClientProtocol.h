@@ -1,18 +1,23 @@
 #ifndef _CLIENT_PROTOCOL_H_
 #define _CLIENT_PROTOCOL_H_
 
-#include "../common/CommunicationProtocol.h"
-#include "../common/ProtocolConstants.h"
+#include "CommunicationProtocol.h"
+#include "ProtocolConstants.h"
+#include "BlockingQueue.h"
+#include "Event.h"
+#include "LoginMessage.h"
 
 class ClientProtocol{
     private:
         ClientProtocol(const ClientProtocol& other) = delete;
         ClientProtocol& operator=(const ClientProtocol& other) = delete;
-
         CommunicationProtocol protocol;
 
+        BlockingQueue<std::shared_ptr<ClientMessage>>& queue;
+        
+
     public:
-        ClientProtocol();
+        ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<ClientMessage>>& queue);
         ~ClientProtocol();
 
         void moveLeft();
@@ -24,7 +29,8 @@ class ClientProtocol{
         void stopMoveDown();
         void stopMoveUp();
         void quit();
-        void mouseDown();
+        void attack();
+        void list();
 };
 
 #endif

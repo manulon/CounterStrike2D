@@ -22,7 +22,7 @@ SWeapon::~SWeapon() { }
 
 void SWeapon::setBodyParams(b2BodyDef &bodyDef, float x, float y) {
     bodyDef.userData = static_cast<void*>(this);
-    bodyDef.position.Set(x, y);  
+    bodyDef.position.Set(x, y);
 }
 
 void SWeapon::setShapeParams(b2PolygonShape &polygonShape,

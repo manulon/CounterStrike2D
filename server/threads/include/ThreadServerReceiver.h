@@ -3,14 +3,27 @@
 #include "Thread.h"
 #include "Socket.h"
 #include "NonBlockingQueue.h"
-class ThreadServerReceiver : public Thread{
+#include "BlockingQueue.h"
+#include "ServerMessage.h"
+#include "CommunicationProtocol.h"
+#include "ProtocolConstants.h"
+#include <map>
+#include "ServerEvent.h"
+
+class ThreadServerReceiver : public Thread {
 private:
     Socket &skt;
-    NonBlockingQueue<std::string> &queue;
+    NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
+    bool isRunning;
+    short clientID;
+    bool isMovementMessage(char opcode);
 public:
-    ThreadServerReceiver(Socket &skt, NonBlockingQueue<> &queue);
-    ~ThreadServerReceiver();
+    ThreadServerReceiver(Socket &skt, 
+                         NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
+                         short clientID);
+    ~ThreadServerReceiver(){}
     virtual void run() override;
+    bool isDead();
 };
 
 

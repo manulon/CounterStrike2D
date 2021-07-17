@@ -1,21 +1,17 @@
 #ifndef _SERVER_H_
 #define _SERVER_H_
-#include "Thread.h"
+#include "ThreadAcceptor.h"
 class Server {
 private:
-    Socket sktServer;
+    NonBlockingQueue<std::shared_ptr<ServerEvent>> clientEvents;
+    std::map<short,ServerMessage*> clientQueues;
+
 public:
-    Server(/* args */);
-    ~Server();
+    Server(){}
+    ~Server(){}
+    void run(const char* host, const char* service);
 };
 
-Server::Server(/* args */)
-{
-}
-
-Server::~Server()
-{
-}
 
 
 #endif

@@ -35,6 +35,24 @@ static void update(Soldier &soldier,Player &player, float dt, MouseManager &mm) 
 }
 
 int main(int argc, const char *argv[]){
+    try {
+        World world;
+        Player player(world, 
+                      3.0f, 0.0f, 
+                      0.45f, 0.45f,100);
+        Player player2(world, 
+                      1.0f, 0.0f, 
+                      0.45f, 0.45f,0);
+
+        // CREACION ARMA Y SETEO A PLAYER
+        std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
+        //std::shared_ptr<SWeapon> weapon(new SWeapon(world, std::move(ak47)));
+        player.setPrimaryWeapon(std::move(ak47));
+
+        std::unique_ptr<Ak47> a(new Ak47(world, 0.2f, 0.2f));
+        //std::shared_ptr<SWeapon> weap(new SWeapon(world, std::move(a)));
+        player2.setPrimaryWeapon(std::move(a));
+      
     InitialMenu menu;
     bool isRunning(true);
     while (isRunning){
@@ -85,6 +103,17 @@ int main(int argc, const char *argv[]){
             fa->earlyAttachToWorld(2.0f, 3.0f);
             world.spawnFireArm(std::move(fa));*/
 
+       // DAN_FEDE RAMA
+        std::unique_ptr<Ak47> ak(new Ak47(world, 0.2f, 0.2f));
+        std::shared_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
+        w->earlyAttachToWorld(2.0f, 3.0f);
+        world.spawnWeapon(std::move(w));
+
+        // CUCHILLO
+        /*std::unique_ptr<Knife> knife(new Knife(0.1f, 0.1f));
+        std::shared_ptr<SWeapon> weapon(new SWeapon(world, std::move(knife)));
+        player.setWeapon(std::move(weapon));*/
+          
             std::unique_ptr<Ak47> ak(new Ak47(world, 0.2f, 0.2f));
             std::unique_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
             w->earlyAttachToWorld(2.0f, 3.0f);
