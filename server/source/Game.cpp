@@ -21,7 +21,8 @@ Game::Game(MaxPlayers maxPlayers,
     playersInGame {0},
     queue {queue},
     senderQueues {senderQueues},
-    physicalMap{world,"../mapaGiganteDust.yaml"} { }
+    physicalMap{world,"../mapaGiganteDust.yaml"},
+    gameStarted{false} { }
 
 Game::~Game() { }
 
@@ -36,6 +37,9 @@ void Game::start() {
         }
         for (auto& pair : allPlayers){
             pair.second->update();
+        }
+        if (allPlayers.size() == 0 && gameStarted == true){
+            break;
         }
         world.step();
         sendInfoToClients();
@@ -151,7 +155,7 @@ void Game::playerMovement(short id, char opcode) {
 
 void Game::joinPlayer(short playerID) {
     if (isReadyToStart()) throw ("Maximo numero de jugadores alcanzados, intente en otra partida");
-    
+    gameStarted = true;
     std::lock_guard<std::mutex> lock(mutex);
     std::shared_ptr<Player> player(new Player(world, 1.0f, 0.0f, 0.45f, 0.45f, 1));
     std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
@@ -170,6 +174,20 @@ void Game::joinPlayer(short playerID) {
     notifyRestOfPlayers(playerID);
     if (insertRet.second == false) throw ("Ya existe un jugador con ese ID");
     ++playersInGame;
+}
+
+void Game::removePlayer(short id){
+    allPlayers.erase(id);
+    if (id % 2 == 0) {
+        counterTerrorist.erase(id);
+    } else {
+        terrorist.erase(id);
+    }
+    std::cout<<"--------------------------------\n";
+    std::cout<<"--------------------------------\n";
+    std::cout<<"JUGADOR ELIMINADO EL MAPA TIENE TAMANIO "<<allPlayers.size()<<std::endl;
+    std::cout<<"--------------------------------\n";
+    std::cout<<"--------------------------------\n";
 }
 
 //Cuando un jugador se une se le comunica el resto de los jugadores que estan en la partida

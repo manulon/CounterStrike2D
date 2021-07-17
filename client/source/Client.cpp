@@ -16,14 +16,13 @@ void Client::run(const char * host, const char *service){
     TileMap map(window, "../mapaGiganteDust.yaml", "../assets/gfx/tiles/default_dust.png", "../assets/gfx/tiles/obstacles.png");
     ThreadClientReceiver receiver(skt, nonBlockingQueue);
     ThreadClientSender sender(skt, blockingQueue, 1);
-    Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
-    Stencil stencil(1000, 1000, 25, 90, 150, window);
+    
     Area cameraArea(0, 0, 800, 600);
 
     receiver.spawn();
     sender.spawn();
 
-    EventHandler eh(skt,blockingQueue);
+    EventHandler eh(blockingQueue,map);
     std::shared_ptr<Info> info;
     bool gameStarted = false;
     std::string command; 

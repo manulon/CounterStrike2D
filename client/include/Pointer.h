@@ -7,12 +7,14 @@
 
 class Pointer{
     private:
-        const Image &image;
+        Image image;
+        int x ,y;
 
     public:
-        Pointer(const Image &img);
+        Pointer(const char *pathImg, Window &window, Color key);
         ~Pointer(){}
-        void render(float x, float y);
+        void render();
+        void set(int xx, int yy);
 };
 
 

@@ -34,7 +34,7 @@ class Game {
         std::map<short, std::shared_ptr<Player>> terrorist;
         std::map<short, std::shared_ptr<Player>> allPlayers;
 		PhysicalMapFactory physicalMap;
-
+		bool gameStarted;
         
 		Game(const Game &other) = delete;
 		Game(Game &&other) = delete;
@@ -58,6 +58,7 @@ class Game {
 		void start();
 		void shoot(short id, char angle);
 		void playerMovement(short id, char opcode);
+		void removePlayer(short id);
 };
 
 #endif 

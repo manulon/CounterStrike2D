@@ -10,11 +10,35 @@ Animation::Animation(std::string imgPath, Window &window, int rows, int columns,
     currentRow(0), currentColumn(0), inverseOrder(inverseOrder), 
     width(width), height(height), elapsed(0) { }
 
-// Animation::Animation(Animation &&other) : 
-//     image(other.image), rows(other.rows), columns(other.columns), 
-//     currentRow(other.currentRow), currentColumn(other.currentColumn),
-//     inverseOrder(other.inverseOrder), 
-//     width(other.width), height(other.height), elapsed(other.elapsed) { 
+Animation::Animation(Animation &&other) : 
+    image(std::move(other.image)), rows(other.rows), columns(other.columns), 
+    currentRow(other.currentRow), currentColumn(other.currentColumn),
+    inverseOrder(other.inverseOrder), 
+    width(other.width), height(other.height), elapsed(other.elapsed) { 
+    other.rows = 0;
+    other.columns = 0;
+    other.currentRow = 0;
+    other.currentColumn = 0;
+    other.inverseOrder = 0;
+    other.width = 0;
+    other.height = 0;
+    other.elapsed = 0;
+}
+
+// Animation& Animation::operator=(Animation &&other){
+//     if (this ==  &other){
+//         return *this;
+//     }
+//     image = std::move(other.image);
+//     rows = other.rows;
+//     columns = other.columns ;
+//     currentRow = other.currentRow ;
+//     currentColumn = other.currentColumn; 
+//     inverseOrder = other.inverseOrder ;
+//     width = other.width ;
+//     height = other.height ;
+//     elapsed = other.elapsed ;
+    
 //     other.rows = 0;
 //     other.columns = 0;
 //     other.currentRow = 0;
@@ -23,6 +47,8 @@ Animation::Animation(std::string imgPath, Window &window, int rows, int columns,
 //     other.width = 0;
 //     other.height = 0;
 //     other.elapsed = 0;
+
+//     return *this;
 // }
 
 Animation::~Animation() { }
