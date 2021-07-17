@@ -4,6 +4,7 @@
 #define FRAME_RATE 1000000/25
 
 #include "Image.h"
+#include "Window.h"
 #include <iostream>
 class Area;
 

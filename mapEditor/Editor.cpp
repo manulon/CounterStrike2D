@@ -7,10 +7,9 @@ Editor::Editor(const char* path,const char* mapName,
                std::pair<int,int>& size): 
 window("Counter Strike 2D", size.first, size.second, 
         SDL_WINDOW_RESIZABLE,SDL_INIT_VIDEO | SDL_INIT_AUDIO),
-grid("../assets/gfx/emptySpace.png", window),
 image(path,window),selectedTile("../assets/gfx/selectedTile.png",window),
-obsImage("../assets/gfx/tiles/obstacles.png",window),               
-eventHandler(window,image,obsImage,mapName),editor(mapName),sizeName(""),
+obsImage("../assets/gfx/tiles/obstacles.png",window),finalMapTiles()               ,
+eventHandler(window,image,obsImage,mapName,finalMapTiles),editor(mapName),sizeName(""),
 tileBoxHeight(0),tileWidth(0),tileHeight(0){
     YAML::Node readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
     tileBoxHeight = readerNode["config"]["tile_box_height"].as<int>();
@@ -18,11 +17,15 @@ tileBoxHeight(0),tileWidth(0),tileHeight(0){
     tileHeight    = readerNode["config"]["tile_height"].as<int>();
 }                                     
 
-void Editor::showGrid(){    
+void Editor::showGrid(){
+    Area gridSourceArea(32,0,32,32);
     Area gridArea(0, 0, 32, 32);
     Area selectedArea(window.getWidth()/2,window.getHeight()-90,40,40);
+
     while ( gridArea.getY() < (window.getHeight() - tileBoxHeight) ){
-        grid.render(gridArea);
+        finalMapTiles[std::make_pair(gridArea.getX()/PPM,
+                                     gridArea.getY()/PPM)] = 2;
+        image.render(gridSourceArea,gridArea);
     
         gridArea.setX( gridArea.getX() + tileWidth); 
 

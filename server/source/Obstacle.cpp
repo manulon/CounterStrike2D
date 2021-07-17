@@ -32,6 +32,7 @@ void Obstacle::setFixtureParams(const b2PolygonShape &polygonShape,
                               b2FixtureDef &fixtureDef) {
     fixtureDef.shape = &polygonShape;
     fixtureDef.density = DENSITY;
+    fixtureDef.filter.categoryBits = OBSTACLE;
 }
 
 void Obstacle::collideWith(Entity &entity) {

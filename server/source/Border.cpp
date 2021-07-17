@@ -37,6 +37,7 @@ void Border::setFixtureParams(const b2PolygonShape &polygonShape,
     fixtureDef.shape = &polygonShape;
     fixtureDef.density = DENSITY;
     fixtureDef.friction = 1.0f;
+    fixtureDef.filter.categoryBits = BORDER;
 }
 
 void Border::collideWith(Entity &entity) {

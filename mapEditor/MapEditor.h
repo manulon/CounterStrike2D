@@ -9,6 +9,10 @@ private:
     /* data */
     YAML::Node map;
     std::string mapName;
+    std::ofstream mapNameFile;
+
+    void addMap();
+
 public:
     MapEditor();
     ~MapEditor();
@@ -17,6 +21,7 @@ public:
     void addObstacle(int x , int y, int sprite);
     void generateMap();
     void addSize(std::string name);
+
 };
 
 
