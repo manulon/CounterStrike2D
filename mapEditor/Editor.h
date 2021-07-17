@@ -27,7 +27,6 @@ class Editor{
         Editor& operator=(Editor &&other) = delete;
     
         Window window;
-        Image grid;
         Image image;
         Image selectedTile;
         Image obsImage;
@@ -35,13 +34,14 @@ class Editor{
         std::vector<Tile*> optionTiles;
         std::vector<Tile*> obstaclesOptionTiles;
         std::vector<Button*> tileOptionButton;
+        std::map<std::pair<int,int>,int> finalMapTiles;
         EditorEventHandler eventHandler;
         EditorConfig editor;
         std::string sizeName;
         int tileBoxHeight;
         int tileWidth;
         int tileHeight;
-        
+
         
 
    public:

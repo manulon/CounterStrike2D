@@ -35,6 +35,7 @@ void SWeapon::setFixtureParams(const b2PolygonShape &polygonShape,
                                b2FixtureDef &fixtureDef) {
     fixtureDef.shape = &polygonShape;
     fixtureDef.density = DENSITY;
+    fixtureDef.filter.categoryBits = SWEAPON;
 }
 
 void SWeapon::earlyAttachToWorld(float x, float y) {
@@ -78,8 +79,8 @@ void SWeapon::collideWithObstacle(Obstacle &obstacle) {
 }
 
 void SWeapon::collideWithPlayer(Player &player) {
-    std::cout << "SWeapon choco con player" << std::endl;
-    weaponType->collideWithPlayer(player);
+    if (player.isPickingUpWeapon())
+        weaponType->collideWithPlayer(player);    
 }
 
 void SWeapon::collideWithBorder(Border &border) {
@@ -93,4 +94,14 @@ void SWeapon::collideWithWeapon(SWeapon &Weapon) {
 void SWeapon::setBody(b2Body &body) {
     Entity::setBody(body);
     Entity::bindFixture(fixtureDef);
+}
+
+bool SWeapon::playerIsInWeapon(int x, int y){
+    if ( (x > (getPositionX() - weaponType->getWidth()) && 
+          x < (getPositionX() + weaponType->getWidth()) &&
+         (y > (getPositionY() - weaponType->getHeight())&&
+          y < (getPositionY() + weaponType->getHeight()) ))) {
+         return true;
+    }
+    return false;
 }

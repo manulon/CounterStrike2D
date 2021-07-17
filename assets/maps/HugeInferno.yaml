@@ -1,4 +1,5 @@
 style: inferno
+size: huge
 fields:
   - [0, 0, 39]
   - [0, 1, 39]

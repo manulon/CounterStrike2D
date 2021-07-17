@@ -4,12 +4,16 @@
 #define FRAME_RATE 1000000/25
 
 #include "Image.h"
+#include "Window.h"
 #include <iostream>
 class Area;
 
 class Animation {
    protected:
+
       Image image;
+      Window &window;
+
    private:
       int rows;
       int columns;

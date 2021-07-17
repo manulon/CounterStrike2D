@@ -23,6 +23,7 @@ class World {
 		const b2Body* getBodyList() const;
 
 	public: 
+		/*CAMBIAR A PRIVATE*/
 		b2Vec2 gravity;
 		b2World world;
 		CollisionManager collisionManager;

@@ -16,7 +16,8 @@ Player::Player(World &world,
                float x, float y,
                float width, float height, short id) :
     Entity(world, id), force(0,0), life(), 
-    currentWeapon(nullptr), width(width), height(height) { 
+    currentWeapon(nullptr), width(width), height(height),
+    pickingUpWeapon(false){ 
     setBodyParams(bodyDef, x, y);
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
@@ -77,6 +78,7 @@ void Player::setFixtureParams(const b2PolygonShape &polygonShape,
 						      b2FixtureDef &fixtureDef) {
     fixtureDef.shape = &polygonShape;
     fixtureDef.density = DENSITY;
+    fixtureDef.filter.categoryBits = PLAYER;
 }
 
 void Player::moveRight() {
@@ -191,7 +193,7 @@ void Player::decreaseLife(int valueToDecrease){
 void Player::dropPrimaryWeapon(){
     if (primaryWeapon.get() != nullptr){
         std::cout<<"Voy a dropear el arma"<<std::endl;
-        primaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
+        primaryWeapon->lateAttachToWorld(getPositionX(), getPositionY());
         primaryWeapon->setId(15);
         std::cout<<"dropee con id"<<primaryWeapon->getId()<<std::endl;
         Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
@@ -219,4 +221,16 @@ void Player::setSecondaryWeapon(SecondaryWeapon &other) {
 
 short Player::getLife(){
     return (short)life.getLife();
+}
+
+void Player::pickUpWeapon(){
+    pickingUpWeapon = true;
+}
+
+void Player::stopPickingUpWeapon(){
+    pickingUpWeapon = false;
+}
+
+bool Player::isPickingUpWeapon(){
+    return pickingUpWeapon;
 }

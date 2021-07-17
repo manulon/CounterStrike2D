@@ -1,12 +1,10 @@
 #include "MapEditor.h"
 
-MapEditor::MapEditor(/* args */)
-{
-}
+MapEditor::MapEditor(/* args */):
+mapNameFile("../assets/maps/map_names.yaml"){}
 
-MapEditor::~MapEditor()
-{
-}
+MapEditor::~MapEditor(){}
+
 void MapEditor::createMap(std::string name, std::string style) {
     mapName = name;
     map["style"] = style;
@@ -20,9 +18,25 @@ void MapEditor::addObstacle(int x, int y, int sprite){
     map["obstacles"].push_back(obstacle);
 }
 void MapEditor::generateMap(){
-    std::ofstream file(mapName+".yaml");
+    std::ofstream file("../assets/maps/"+mapName+".yaml");
     file<<map;
     file.close();
+
+    addMap();
+}
+
+void MapEditor::addMap(){ 
+    YAML::Node readerNodeDataBase = YAML::LoadFile("../assets/maps/mapsDataBase.yaml");
+    
+    readerNodeDataBase["mapName"][readerNodeDataBase["mapName"].size()] = "../assets/maps/"+mapName+".yaml";
+    
+    mapNameFile << readerNodeDataBase;
+    
+    std::ofstream mapNameDatabase("../assets/maps/mapsDataBase.yaml");
+    mapNameDatabase << readerNodeDataBase;
+    
+    mapNameDatabase.close();
+    mapNameFile.close();
 }
 
 void MapEditor::addSize(std::string size){

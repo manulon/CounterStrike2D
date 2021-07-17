@@ -31,6 +31,9 @@ bool EventHandler::handleEvents(){
                     //soldier.move();
                     //player.moveUp();
                 }
+                if (state[SDL_SCANCODE_Q]){
+                    //player.pickUpWeapon();
+                }
             }
                 break;
             case SDL_KEYUP: {
@@ -55,6 +58,9 @@ bool EventHandler::handleEvents(){
                         //soldier.stopMoving();
                         protocol.stopMoveDown();
                         //player.stopMoveDown();
+                        break;
+                    case SDLK_q:
+                        //player.stopPickingUpWeapon();
                         break;
                     } 
                 }

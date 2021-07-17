@@ -40,6 +40,7 @@ class SWeapon : public Entity {
 		void attack(float angle, float x, float y);
 		void reload(size_t &ammunition);
 		void setBody(b2Body &body);
+		bool playerIsInWeapon(int x, int y);
 };
 
 #endif // _SWEAPON_H_
