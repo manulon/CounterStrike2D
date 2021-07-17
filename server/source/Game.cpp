@@ -21,7 +21,7 @@ Game::Game(MaxPlayers maxPlayers,
     playersInGame {0},
     queue {queue},
     senderQueues {senderQueues},
-    physicalMap{world,"../mapaGiganteDust.yaml"} { }
+    physicalMap{world,"../mapaGiganteDust.yaml", *this} { } //OJO CON MOVER UN GAME, y el this
 
 Game::~Game() { }
 
@@ -62,6 +62,7 @@ void Game::sendLifeInfo(){
         senderQueues[pair.first]->push(msg);
     }
 }
+
 void Game::sendPositions(){
     for (auto& pairPlayer : terrorist){
         for (auto& pair : allPlayers){
@@ -152,24 +153,48 @@ void Game::playerMovement(short id, char opcode) {
 void Game::joinPlayer(short playerID) {
     if (isReadyToStart()) throw ("Maximo numero de jugadores alcanzados, intente en otra partida");
     
-    std::lock_guard<std::mutex> lock(mutex);
-    std::shared_ptr<Player> player(new Player(world, 1.0f, 0.0f, 0.45f, 0.45f, 1));
-    std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
-    player->setPrimaryWeapon(std::move(ak47));
-
-    std::pair<std::map<short, std::shared_ptr<Player>>::iterator, bool> insertRet;
-    if (playersInGame % 2 == 0) {
-        insertRet = counterTerrorist.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
-    } else {
-        insertRet = terrorist.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
+    { 
+        std::lock_guard<std::mutex> lock(mutex);
+        if (playersInGame % 2 == 0) {
+            createCounterTerrorist(playerID, playersInGame/2);
+        } else {
+            createTerrorist(playerID, playersInGame/2);
+        }
+        ++playersInGame;
     }
-    allPlayers.insert(std::pair<short, std::shared_ptr<Player>>(playerID,player));
-    ServerMessage * idMessage = new JoinMessage(playerID);
+
+    ServerMessage *idMessage = new JoinMessage(playerID);
     senderQueues[playerID]->push(idMessage);
     joinOtherPlayers(playerID);
     notifyRestOfPlayers(playerID);
+}
+
+void Game::createTerrorist(short playerID, int position) {
+    std::pair<std::map<short, std::shared_ptr<Player>>::iterator, bool> insertRet;
+    float x = terroristsPositions[position].first;
+    float y = terroristsPositions[position].second;
+
+    std::shared_ptr<Player> player(new Player(world, x, y, 0.45f, 0.45f, 1));
+    std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
+    player->setPrimaryWeapon(std::move(ak47));
+    insertRet = terrorist.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
+
     if (insertRet.second == false) throw ("Ya existe un jugador con ese ID");
-    ++playersInGame;
+    allPlayers.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
+}
+
+void Game::createCounterTerrorist(short playerID, int position) {
+    std::pair<std::map<short, std::shared_ptr<Player>>::iterator, bool> insertRet;
+    float x = counterTerroristsPositions[position].first;
+    float y = counterTerroristsPositions[position].second;
+
+    std::shared_ptr<Player> player(new Player(world, x, y, 0.45f, 0.45f, 1));
+    std::unique_ptr<Ak47> ak47(new Ak47(world, 0.2f, 0.2f));
+    player->setPrimaryWeapon(std::move(ak47));
+    insertRet = counterTerrorist.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
+
+    if (insertRet.second == false) throw ("Ya existe un jugador con ese ID");
+    allPlayers.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
 }
 
 //Cuando un jugador se une se le comunica el resto de los jugadores que estan en la partida
@@ -217,4 +242,16 @@ bool Game::isGameOver() {
         gameOver = true;
     }
     return gameOver;
+}
+
+void Game::addTerroristPosition(float x, float y) {
+    std::vector<std::pair<float, float>>::iterator it = terroristsPositions.end();
+    std::pair<float, float> position(x,y);
+    terroristsPositions.insert(it, std::move(position));
+}
+
+void Game::addCounterTerroristPosition(float x, float y) {
+    std::vector<std::pair<float, float>>::iterator it = counterTerroristsPositions.end();
+    std::pair<float, float> position(x,y);
+    counterTerroristsPositions.insert(it, std::move(position));
 }

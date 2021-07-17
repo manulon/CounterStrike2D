@@ -33,8 +33,11 @@ class Game {
         std::map<short, std::shared_ptr<Player>> counterTerrorist;
         std::map<short, std::shared_ptr<Player>> terrorist;
         std::map<short, std::shared_ptr<Player>> allPlayers;
-		PhysicalMapFactory physicalMap;
 
+		std::vector<std::pair<float, float>> terroristsPositions;
+		std::vector<std::pair<float, float>> counterTerroristsPositions;
+
+		PhysicalMapFactory physicalMap;
         
 		Game(const Game &other) = delete;
 		Game(Game &&other) = delete;
@@ -47,6 +50,9 @@ class Game {
 		void sendWeapons();
 		void notifyRestOfPlayers(short id);
 		void joinOtherPlayers(short newPlayerId);
+		void createTerrorist(short playerID, int position);
+		void createCounterTerrorist(short playerID, int position);
+		
 	public:
 		Game(MaxPlayers maxPlayers, 
 			 NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
@@ -58,6 +64,9 @@ class Game {
 		void start();
 		void shoot(short id, char angle);
 		void playerMovement(short id, char opcode);
+
+		void addTerroristPosition(float x, float y);
+		void addCounterTerroristPosition(float x, float y);
 };
 
 #endif 

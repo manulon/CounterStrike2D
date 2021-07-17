@@ -49,6 +49,7 @@ void Soldier::render() {
     // Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
+    renderWeapon(dest.getX(), dest.getY());
 }
 
 void Soldier::render(int otherX, int otherY){
@@ -62,9 +63,10 @@ void Soldier::render(int otherX, int otherY){
 
 void Soldier::renderWeapon(int x, int y){
     Area src(0, 0, 32, 32);
-    Area dst(x-8, y-14, 45, 45);
+    Area dst(x+13, y-15, 50, 50);
 
-    currentWeapon.render(src, dst, -45);
+    //currentWeapon.render(src, dst, -45);
+    currentWeapon.render(src, dst, getAngle());
 }
 
 void Soldier::stopMoving() {
