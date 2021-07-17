@@ -9,7 +9,6 @@ class JoinInfo : public Info {
 		JoinInfo(short value) : Info(), value(value){}
 		~JoinInfo(){}
 		virtual void update(TileMap &map){
-            std::cout<<"el principal player tiene id "<<value<<std::endl;
             map.setPrincipalPlayerId(value);
         }
 };
