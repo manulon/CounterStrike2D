@@ -1,13 +1,15 @@
 #include "EventHandler.h"
+#include "MouseManager.h"
 
-
-bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*/){
+bool EventHandler::handleEvents(){
     SDL_Event event;
     bool keepRunning = true; 
-    
+    MouseManager mm(800,600);
+    map.setSoldierDirection(mm.getAngle());
+    map.setPointerPosition(mm.getPositionX(),mm.getPositionY());
     while (SDL_PollEvent(&event)){
         switch (event.type) {
-            case SDL_KEYDOWN: {// todas las llamadas al player son al protocol en realidad
+            case SDL_KEYDOWN: {
                 const Uint8 *state = SDL_GetKeyboardState(NULL);
                 if (state[SDL_SCANCODE_LEFT]){
                     protocol.moveLeft();
@@ -20,7 +22,6 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
                     //player.moveRight();
                 }
                 if (state[SDL_SCANCODE_DOWN]){
-                    std::cout << "Tecla abajo" << std::endl;
                     protocol.moveDown();
                     //soldier.move();
                     //player.moveDown();
@@ -54,7 +55,6 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
                         //player.stopMoveUp();
                         break;
                     case SDLK_DOWN:
-                        std::cout << "Tecla arriba" << std::endl;
                         //soldier.stopMoving();
                         protocol.stopMoveDown();
                         //player.stopMoveDown();
@@ -71,10 +71,8 @@ bool EventHandler::handleEvents(/*Soldier &soldier, Player &player, float angle*
                 keepRunning = false;
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                std::cout << "ENtre a buton down" << std::endl;
-                protocol.attack();
+                protocol.attack(mm.getAngle());
                 //player.attack(angle - 90);
-                //keepRunning = false;
                 break;
         }
     }

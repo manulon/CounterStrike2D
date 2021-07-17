@@ -8,6 +8,7 @@
 #include <list>
 #include "Soldier.h"
 #include <memory>
+#include "Pointer.h"
 // #include "yaml-cpp/yaml"
 
 /* Esto no deberia estar en un archivo aparte? Preguntar al profe */
@@ -35,6 +36,8 @@ private:
 	int yOffset;
 	Soldier principalSoldier;
 	short principalSoldierId;
+	short principalSoldierAngle;
+	Pointer pointer;
 	// std::list<std::unique_ptr<DynamicObject>> renderizables;
 
 	TileMap(const TileMap &other) = delete;
@@ -51,11 +54,12 @@ public:
 	bool setTiles();
 	void renderTiles(int x, int y, const Area &dest);
 	void renderObjects(int x,int y);
-	// void updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects);// este metodo emula el mensaje que llega del server
 	void setPrincipalPlayerId(short id);
 	void updateSoldierInfo(short id, float x, float y, short weaponId);
 	void renderAll();
 	void addNewSoldier(short id);
+	void setSoldierDirection(short angle);
+	void setPointerPosition(int x, int y);
 	
 };
 

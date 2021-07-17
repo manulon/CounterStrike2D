@@ -22,7 +22,6 @@ class Soldier : public Animation , public DynamicObject{
 
         Soldier(const Soldier &other) = delete;
         Soldier& operator=(const Soldier &other) = delete;
-        Soldier& operator=(Soldier &&other) = delete;
 
         void renderWeapon(int x, int y);
         void renderActualLife();
@@ -31,7 +30,8 @@ class Soldier : public Animation , public DynamicObject{
 
     public:
         Soldier(std::string imgPath, Window &window);
-        // Soldier(Soldier &&other);
+        Soldier(Soldier &&other); 
+        Soldier& operator=(Soldier &&other);
         ~Soldier();
         void update(float dt);
         void render();
@@ -44,7 +44,9 @@ class Soldier : public Animation , public DynamicObject{
         void setAngle(int angle);
         void updateInfo(float x , float y, short weaponId);
         void updateInfoo(float x , float y, short weaponId);
+        void setAsTerrorist();
         void setCurrentWeapon();
+
 };
 
 #endif // _SOLDIER_H_
