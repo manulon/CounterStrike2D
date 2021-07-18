@@ -164,6 +164,7 @@ void TileMap::renderObjects(int x,int y){
 
 void TileMap::setPrincipalPlayerId(short id){
     principalSoldierId = id;
+    std::cout<<"EL PRINCIPAL SOLDIER ID ES "<<principalSoldierId<<std::endl;
     if (id% 2 != 0){
         principalSoldier.setAsTerrorist();
     }
