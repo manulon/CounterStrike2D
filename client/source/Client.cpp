@@ -49,9 +49,7 @@ void Client::run(const char * host, const char *service){
                 info = nonBlockingQueue.pop();
                 if (info != nullptr) {
                     // std::string pepe(message);
-                    std::cout<<"im here"<<std::endl;
                     info->update(map);
-                    std::cout<<"LLegue aca"<<std::endl;
                 }
             } while (info != NULL);
             isRunning = eh.handleEvents();

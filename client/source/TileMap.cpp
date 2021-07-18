@@ -5,6 +5,7 @@
 #include "RenderizableFactory.h"
 #include "Stencil.h"
 #include "Pointer.h"
+#include "Bullett.h"
 
 TileMap::TileMap(Window & window,const char *pathText, const std::string &pathTiles, const std::string &pathObs) :
 window(window),image(pathTiles.c_str(),window),mapName(pathText),
@@ -142,13 +143,25 @@ void TileMap::renderTiles(int x, int y, const Area &dst){
 }
 
 void TileMap::renderObjects(int x,int y){
+    objects.clear();
     principalSoldier.render();
+
     // for (auto& object : objects){
     //     object.second->render(x,y);
     // }
     for (auto& soldier: soldiers){
         soldier.second->render(x,y);
     }
+    for (auto & pair : bulletsToRender){
+        std::unique_ptr<Bullett> bul(new Bullett("../assets/gfx/bullet.png",window));
+        bul->setPos(pair.first,pair.second);
+        objects.push_back(std::move(bul));
+
+    }
+    for (auto &object : objects){
+        object->render(x,y);
+    }
+    bulletsToRender.clear();
 }
 
 // void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects){
@@ -212,5 +225,9 @@ void TileMap::setPointerPosition(int x, int y){
 
 void TileMap::setPrincipalPlayerLife(short life){
     principalSoldier.setLife(life);
+}
+
+void TileMap::addNewBullet(float x, float y){
+    bulletsToRender.push_back(std::make_pair((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM));
 }
 

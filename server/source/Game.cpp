@@ -88,7 +88,6 @@ void Game::sendPositions(){
 void Game::sendBullets(){
     std::list<std::shared_ptr<Bullet>> actualBullets;
     world.getBulletsList(actualBullets);
-
     for (auto & bullet : actualBullets){
         std::shared_ptr<ServerMessage> msg(new BulletMessage(bullet->getPositionX(),bullet->getPositionY()));
         for (auto& pair : allPlayers){

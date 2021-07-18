@@ -11,6 +11,7 @@
 #include "PlayerInfo.h"
 #include "JoinOtherPlayerInfo.h"
 #include "JoinInfo.h"
+#include "BulletInfo.h"
 
 class ThreadClientReceiver : public Thread {
     private:
@@ -54,10 +55,11 @@ class ThreadClientReceiver : public Thread {
                         std::shared_ptr<Info> aux(new JoinInfo((short)protocol.receive_size()));
                         info = aux;
                     } else if (messageType == BULLET_MESSAGE){
-                        protocol.receive_float();
-                        protocol.receive_float();//pushear info bullet
-                    } else if (messageType == LIFE_MESSAGE){
-                        std::shared_ptr<Info> aux(new LifeInfo((short)protocol.receive_size()));
+                        std::cout<<"llega una bala\n";
+                        float x = protocol.receive_float();
+                        float y = protocol.receive_float();//pushear info bullet
+                        std::shared_ptr<Info> aux(new BulletInfo(x,y));
+                        info = aux;
                     }
 
                     queue.push(info);
