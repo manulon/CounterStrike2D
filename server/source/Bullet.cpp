@@ -44,6 +44,7 @@ void Bullet::setFixtureParams(const b2CircleShape &circleShape,
 }
 
 void Bullet::shoot(float angle, float x, float y) {
+    std::cout << "El angulo es "<<angle<<std::endl;
     float radians = angleToRadians(angle);
     attachToWorld(x + RADIUS*cos(radians)*2, 
                   y + RADIUS*sin(radians)*2);
@@ -60,26 +61,25 @@ void Bullet::collideWith(Entity &entity) {
 }
 
 void Bullet::collideWithBullet(Bullet &bullet) {
-    std::cout << "bullet chocado por bala\n";
+    // std::cout << "bullet chocado por bala\n";
 }
 
 void Bullet::collideWithObstacle(Obstacle &obstacle) {
-    std::cout << "bullet chocado por obstaculo y destruido\n";
+    // std::cout << "bullet chocado por obstaculo y destruido\n";
     Entity::detachFromWorld();
 }
 
 void Bullet::collideWithWeapon(SWeapon &weapon) {
-    std::cout << "bullet chocado por weapon\n";
+    // std::cout << "bullet chocado por weapon\n";
 }
 
 void Bullet::collideWithPlayer(Player &player) {
-    std::cout << "bullet chocado por player\n";
+    // std::cout << "bullet chocado por player\n";
     Entity::detachFromWorld();
 }
 
 void Bullet::collideWithBorder(Border &border) {
-    std::cout << "Bullet chocado por border\n";
-    std::cout <<"x: "<<getPositionX()<<" y: "<<getPositionY()<<std::endl;
+    // std::cout << "Bullet chocado por border\n";
     Entity::detachFromWorld();
 }
 

@@ -32,7 +32,6 @@ private:
 	std::list<Tile*> obstacles;
 	std::list<std::unique_ptr<DynamicObject>> objects;
 	std::map<short,std::unique_ptr<Soldier>> soldiers;
-	std::list<std::pair<int,int>> bulletsToRender;
 	int xOffset;
 	int yOffset;
 	Soldier principalSoldier;

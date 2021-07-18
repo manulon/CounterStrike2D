@@ -30,10 +30,8 @@ void Game::start() {
     while (true) {
         std::shared_ptr<ServerEvent> event = queue.pop();
         while (event.get() != nullptr) {
-            std::cout << "No paso\n";
             event->handle(*this);
             event = queue.pop();
-            std::cout << "Paso\n";
         }
         for (auto& pair : allPlayers){
             pair.second->update();
@@ -121,22 +119,8 @@ void Game::sendWeapons(){
     }
 
 }
-    // for (auto& pairPlayer : terrorist){
-    //     for (auto& weapon: actualWeapons){
-    //         WeaponMessage *msg = new WeaponMessage
-    //                                 (weapon->getId(),weapon->getPositionX(),weapon->getPositionY());
-    //         senderQueues[pairPlayer.first]->push(msg);
-    //     }   
-    // }
-    // for (auto& pairPlayer : counterTerrorist){
-    //     for (auto& weapon: actualWeapons){
-    //         WeaponMessage *msg = new WeaponMessage
-    //                                 (weapon->getId(),weapon->getPositionX(),weapon->getPositionY());
-    //         senderQueues[pairPlayer.first]->push(msg);
-    //     }
-    // }
 
-void Game::shoot(short id, char angle) {
+void Game::shoot(short id, short angle) {
     std::map<short, std::shared_ptr<Player>>::iterator it = terrorist.find(id);
     if (it == terrorist.end()) {
         it = counterTerrorist.find(id);

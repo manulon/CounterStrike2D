@@ -16,13 +16,11 @@ void ThreadServerReceiver::run(){
     while (isRunning) {
         try{
             char buffer;
-            std::cout << "Antes del receive\n";
             ssize_t received = protocol.receive_message(1, &buffer);
             if (received == 0) {
                 isRunning = false;
                 break; 
             }
-            std::cout << "Despues del receive\n";
             std::shared_ptr<ServerEvent> event(nullptr);
 
             if (isMovementMessage(buffer)){

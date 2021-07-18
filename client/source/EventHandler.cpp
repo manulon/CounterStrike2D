@@ -72,6 +72,7 @@ bool EventHandler::handleEvents(){
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 protocol.attack(mm.getAngle());
+                std::cout<<"angulo del mouseMAnager"<<mm.getAngle()-90<<std::endl;
                 //player.attack(angle - 90);
                 break;
         }

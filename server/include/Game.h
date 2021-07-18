@@ -56,7 +56,7 @@ class Game {
 		bool isReadyToStart();
 		bool isGameOver();
 		void start();
-		void shoot(short id, char angle);
+		void shoot(short id, short angle);
 		void playerMovement(short id, char opcode);
 		void removePlayer(short id);
 };

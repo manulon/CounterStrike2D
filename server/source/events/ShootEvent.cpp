@@ -1,8 +1,8 @@
 #include "ShootEvent.h"
 
-ShootEvent::ShootEvent(short id, int angle) : ServerEvent(id), angle(angle){}
+ShootEvent::ShootEvent(short id, short angle) : ServerEvent(id), angle(angle){}
 
 void ShootEvent::handle(Game &game) {
     game.shoot(id, angle);
-    std::cout << "ocurrio algo en ShootEvent\n";
+    std::cout << "Se recibio el angulo "<< angle << std::endl;
 }
