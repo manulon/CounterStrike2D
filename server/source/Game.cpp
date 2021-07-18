@@ -42,12 +42,49 @@ void Game::start() {
             break;
         }
         world.step();
-        // cleanDeadPlayers();
+        cleanDeadPlayers();
         sendInfoToClients();
         std::this_thread::sleep_for(std::chrono::milliseconds(40));
-        //iterar sobre todos los elementos de la cola
-        //senderQueues.push(map);
     }
+}
+
+void Game::cleanDeadPlayers() {
+    cleanDeadTerrorists();
+    cleandDeadCounterTerrorists();
+    cleanAllPlayers();
+}
+
+void Game::cleanDeadTerrorists() {
+    std::map<short, std::shared_ptr<Player>>::iterator it = terrorist.begin();
+    while(it != terrorist.end()) {
+        if (it->second->isDead()) {
+            it = terrorist.erase(it);
+        } else {
+            ++it;
+        }
+    }
+}
+
+void Game::cleandDeadCounterTerrorists() {
+    std::map<short, std::shared_ptr<Player>>::iterator it = counterTerrorist.begin();
+    while(it != counterTerrorist.end()) {
+        if (it->second->isDead()) {
+            it = counterTerrorist.erase(it);
+        } else {
+            ++it;
+        }
+    }    
+}
+
+void Game::cleanAllPlayers() {
+    std::map<short, std::shared_ptr<Player>>::iterator it = allPlayers.begin();
+    while(it != allPlayers.end()) {
+        if (it->second->isDead()) {
+            it = allPlayers.erase(it);
+        } else {
+            ++it;
+        }
+    }    
 }
 
 void Game::sendInfoToClients(){

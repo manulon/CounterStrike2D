@@ -33,7 +33,6 @@ class Game {
         std::map<short, std::shared_ptr<Player>> counterTerrorist;
         std::map<short, std::shared_ptr<Player>> terrorist;
         std::map<short, std::shared_ptr<Player>> allPlayers;
-
 		std::vector<std::pair<float, float>> terroristsPositions;
 		std::vector<std::pair<float, float>> counterTerroristsPositions;
 
@@ -53,6 +52,10 @@ class Game {
 		void joinOtherPlayers(short newPlayerId);
 		void createTerrorist(short playerID, int position);
 		void createCounterTerrorist(short playerID, int position);
+		void cleanDeadPlayers();
+		void cleanDeadTerrorists();
+		void cleandDeadCounterTerrorists();
+		void cleanAllPlayers();
 		
 	public:
 		Game(MaxPlayers maxPlayers, 

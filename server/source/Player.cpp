@@ -234,3 +234,7 @@ void Player::stopPickingUpWeapon(){
 bool Player::isPickingUpWeapon(){
     return pickingUpWeapon;
 }
+
+bool Player::isDead() {
+    return life.getLife() == 0 ? true : false;
+}
