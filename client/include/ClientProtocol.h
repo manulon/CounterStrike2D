@@ -11,13 +11,12 @@ class ClientProtocol{
     private:
         ClientProtocol(const ClientProtocol& other) = delete;
         ClientProtocol& operator=(const ClientProtocol& other) = delete;
-        CommunicationProtocol protocol;
 
         BlockingQueue<std::shared_ptr<ClientMessage>>& queue;
         
 
     public:
-        ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<ClientMessage>>& queue);
+        ClientProtocol(BlockingQueue<std::shared_ptr<ClientMessage>>& queue);
         ~ClientProtocol();
 
         void moveLeft();
@@ -29,7 +28,7 @@ class ClientProtocol{
         void stopMoveDown();
         void stopMoveUp();
         void quit();
-        void attack();
+        void attack(short angle);
         void list();
 };
 

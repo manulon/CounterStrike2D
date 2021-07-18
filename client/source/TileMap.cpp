@@ -3,11 +3,14 @@
 #include <utility>
 #include "yaml-cpp/yaml.h"
 #include "RenderizableFactory.h"
+#include "Stencil.h"
+#include "Pointer.h"
 
 TileMap::TileMap(Window & window,const char *pathText, const std::string &pathTiles, const std::string &pathObs) :
 window(window),image(pathTiles.c_str(),window),mapName(pathText),
 imgObstacles(pathObs.c_str(),window),tiles(), obstacles(), xOffset(0), yOffset(0), 
-principalSoldier("../assets/gfx/player/t4.bmp", window),principalSoldierId(-1){
+principalSoldier("../assets/gfx/player/t4.bmp", window),principalSoldierId(-1),
+pointer("../assets/gfx/pointer.bmp", window, {0xFF, 0, 0xFF}){
 
     loadMedia();
 }
@@ -161,6 +164,10 @@ void TileMap::renderObjects(int x,int y){
 
 void TileMap::setPrincipalPlayerId(short id){
     principalSoldierId = id;
+    std::cout<<"EL PRINCIPAL SOLDIER ID ES "<<principalSoldierId<<std::endl;
+    if (id% 2 != 0){
+        principalSoldier.setAsTerrorist();
+    }
 }
 
 void TileMap::updateSoldierInfo(short id, float x, float y, short weaponId){
@@ -177,10 +184,33 @@ void TileMap::renderAll(){
     Area cameraArea(0, 0, 800, 600);
     renderTiles(-(principalSoldier.getX() + xOffset)*PPM,-(principalSoldier.getY() + yOffset)*PPM,cameraArea);
     renderObjects(-(principalSoldier.getX() + xOffset)*PPM,-(principalSoldier.getY() + yOffset)*PPM);
+    Area stencilArea((800/2)-(1000/2), (600/2)-(1000/2), 1000, 1000);
+    Stencil stencil(1000, 1000, 25, 90, 150, window);
+    stencil.render(stencilArea,principalSoldierAngle);
+    pointer.render();
     window.render();
 }
 
 void TileMap::addNewSoldier(short id){
-    std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/t4.bmp", window));
-    soldiers[id] = std::move(soldier);
+    if (id % 2 == 0){
+        std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/t4.bmp", window));
+        soldiers[id] = std::move(soldier);
+    } else { 
+        std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/t3.bmp", window));
+        soldiers[id] = std::move(soldier);
+    }
 }
+
+void TileMap::setSoldierDirection(short angle){
+    principalSoldierAngle = angle;
+    principalSoldier.setAngle(angle);
+}
+
+void TileMap::setPointerPosition(int x, int y){
+    pointer.set(x,y);
+}
+
+void TileMap::setPrincipalPlayerLife(short life){
+    principalSoldier.setLife(life);
+}
+

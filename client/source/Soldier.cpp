@@ -27,7 +27,7 @@ Soldier::Soldier(std::string imgPath , Window &window) :
 //     Animation(std::move(other)), direction(other.direction),
 //     moving(other.moving), x(other.x), y(other.y), 
 //     width(other.width), height(other.height),
-//     angle(other.angle) {
+//     angle(other.angle), weaponId(other.weaponId) {
 //     // ACA NO SERIA OTHER.direction etc etc....
 //     direction = 0;
 //     x = 0;
@@ -36,6 +36,8 @@ Soldier::Soldier(std::string imgPath , Window &window) :
 //     height = 0;
 //     angle = 0;
 // }
+
+
 
 Soldier::~Soldier() { }
 
@@ -49,7 +51,9 @@ void Soldier::render() {
     // Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
-    renderWeapon(dest.getX(), dest.getY());
+    
+    //renderWeapon(dest.getX(), dest.getY()); //No se porque lo sacaron
+    renderActualLife();
 }
 
 void Soldier::render(int otherX, int otherY){
@@ -58,7 +62,7 @@ void Soldier::render(int otherX, int otherY){
     image.render(src,dest);
 
     renderWeapon(dest.getX(), dest.getY());
-    renderActualLife();
+    
 }
 
 void Soldier::renderWeapon(int x, int y){
@@ -101,9 +105,14 @@ void Soldier::updateInfo(float xx, float yy, short weaponIdd){
     weaponId = weaponIdd;
 }
 
+void Soldier::setAsTerrorist(){
+    Image img("../assets/gfx/player/t3.bmp", image.getWindow());
+    image = std::move(img);
+}
 void Soldier::updateInfoo(float xx, float yy, short weaponIdd){
     DynamicObject::setPos(xx,yy);
 }
+
 
 void Soldier::setCurrentWeapon(){
     
@@ -151,3 +160,8 @@ void Soldier::renderLife(){
     first.render(lifeAreaFirst);
     second.render(lifeAreaSecond);
 }
+
+void Soldier::setLife(short lifeNum){
+    life = lifeNum;
+}
+

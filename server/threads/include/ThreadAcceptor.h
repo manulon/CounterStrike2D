@@ -12,7 +12,7 @@ class ThreadAcceptor : public Thread {
 		Socket acceptor;
 		bool isRunning;
 		NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
-		std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues;
+		std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> &senderQueues;
 		std::map<short,std::tuple<Socket,ThreadServerReceiver*,ThreadServerSender*>> clients;
 
 		ThreadAcceptor(const ThreadAcceptor &other) = delete;
@@ -23,7 +23,7 @@ class ThreadAcceptor : public Thread {
 	public:
 		ThreadAcceptor(const char *host, const char *service,
 					   NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue, 
-					   std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> & senderQueues);
+					   std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> & senderQueues);
 		ThreadAcceptor(ThreadAcceptor &&other);
 		~ThreadAcceptor();
 		ThreadAcceptor& operator=(ThreadAcceptor &&other);

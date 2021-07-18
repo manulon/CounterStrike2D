@@ -10,8 +10,10 @@ class Area;
 
 class Animation {
    protected:
-      const Image image;
+
+      Image image;
       Window &window;
+
    private:
       int rows;
       int columns;

@@ -43,7 +43,7 @@ void Editor::showGrid(){
 bool Editor::handleEvents(){
     setSizeName();
     return eventHandler.handleEvents(tiles,optionTiles,obstaclesOptionTiles,
-                                     tileOptionButton,sizeName);
+                                     tileOptionButton,soldierOptionTiles,sizeName);
 }
 
 void Editor::fillTileOptionList(){

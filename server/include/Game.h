@@ -28,7 +28,7 @@ class Game {
         short playersInGame;
 
         NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
-        std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues;
+        std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> &senderQueues;
 
         std::map<short, std::shared_ptr<Player>> counterTerrorist;
         std::map<short, std::shared_ptr<Player>> terrorist;
@@ -38,6 +38,7 @@ class Game {
 		std::vector<std::pair<float, float>> counterTerroristsPositions;
 
 		PhysicalMapFactory physicalMap;
+		bool gameStarted;
         
 		Game(const Game &other) = delete;
 		Game(Game &&other) = delete;
@@ -56,7 +57,7 @@ class Game {
 	public:
 		Game(MaxPlayers maxPlayers, 
 			 NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
-			 std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues);
+			 std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> &senderQueues);
 		~Game();
 		void joinPlayer(short playerID);
 		bool isReadyToStart();
@@ -67,6 +68,7 @@ class Game {
 
 		void addTerroristPosition(float x, float y);
 		void addCounterTerroristPosition(float x, float y);
+		void removePlayer(short id);
 };
 
 #endif 

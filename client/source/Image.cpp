@@ -10,15 +10,16 @@
 Image::Image(const char *pathImg, Window &window) 
 	: sdlTexture(pathImg, window.getRenderer()), 
 	  sdlRenderer(window.getRenderer()),
-      path(pathImg) { }
+      path(pathImg), window(window){ }
 
 Image::Image(const char *pathImg, Window &window, Color key) : 
     sdlTexture(pathImg, window.getRenderer(), key),
     sdlRenderer(window.getRenderer()), 
-    path(pathImg) { }
+    path(pathImg), window(window) { }
 
 Image::Image(Image &&other) 
-    : sdlTexture(std::move(other.sdlTexture)), sdlRenderer(other.sdlRenderer) { }
+    : sdlTexture(std::move(other.sdlTexture)), sdlRenderer(other.sdlRenderer), 
+      window(other.window) { }
 
 Image::~Image() { }
 
@@ -28,6 +29,10 @@ Image& Image::operator=(Image &&other) {
     sdlTexture = std::move(other.sdlTexture);
     sdlRenderer = std::move(other.sdlRenderer);
     return *this;
+}
+
+Window& Image::getWindow(){
+    return window;
 }
 
 /*Image& Image::operator=(const Image &other){

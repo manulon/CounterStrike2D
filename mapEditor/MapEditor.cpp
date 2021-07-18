@@ -42,3 +42,14 @@ void MapEditor::addMap(){
 void MapEditor::addSize(std::string size){
     map["size"] = size;
 }
+
+void MapEditor::addTerrorist(int x , int y){
+    YAML::Node field = YAML::Load("["+std::to_string(x)+","+std::to_string(y)+"]");
+    map["terrorist"].push_back(field); 
+}
+
+void MapEditor::addCounterTerrorist(int x , int y){
+    YAML::Node field = YAML::Load("["+std::to_string(x)+","+std::to_string(y)+"]");
+    map["counter-terrorist"].push_back(field);
+}
+

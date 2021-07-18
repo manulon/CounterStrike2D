@@ -17,3 +17,19 @@ Area DynamicObject::getDest(int otherX, int otherY){
 void DynamicObject::setPos(int xx, int yy){
     x = -xx; y = -yy;
 }
+
+// DynamicObject& DynamicObject::operator=(DynamicObject &&other){
+//     if(this == &other){
+//         return *this;
+//     }
+//     x = other.x;
+//     y = other.y ;
+//     width = other.width ;
+//     height = other.height ;
+
+//     other.x = 0;
+//     other.y = 0;
+//     other.width = 0;
+//     other.height = 0;
+//     return *this;
+// }

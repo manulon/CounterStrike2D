@@ -1,7 +1,7 @@
 #include "ClientProtocol.h"
 
-ClientProtocol::ClientProtocol(Socket &skt, BlockingQueue<std::shared_ptr<ClientMessage>>& queue):
-protocol(skt), queue(queue){}
+ClientProtocol::ClientProtocol( BlockingQueue<std::shared_ptr<ClientMessage>>& queue):
+ queue(queue){}
 
 ClientProtocol::~ClientProtocol(){}
 
@@ -69,10 +69,10 @@ void ClientProtocol::quit(){
     std::cout<<"Envio el quit "<<std::endl;
 }
 
-void ClientProtocol::attack(){
+void ClientProtocol::attack(short angle){
     char key(SHOOT);
 
-    std::shared_ptr<Event> newEvent(new Event(1,key,50));
+    std::shared_ptr<Event> newEvent(new Event(1,key,angle - 90));
     queue.push(newEvent);
 }
 
