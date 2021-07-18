@@ -55,7 +55,9 @@ class ThreadClientReceiver : public Thread {
                         info = aux;
                     } else if (messageType == BULLET_MESSAGE){
                         protocol.receive_float();
-                        protocol.receive_float();
+                        protocol.receive_float();//pushear info bullet
+                    } else if (messageType == LIFE_MESSAGE){
+                        std::shared_ptr<Info> aux(new LifeInfo((short)protocol.receive_size()));
                     }
 
                     queue.push(info);

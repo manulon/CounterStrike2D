@@ -16,7 +16,7 @@ class Soldier : public Animation , public DynamicObject{
         int height;
         int angle;
         short weaponId;
-        short int life;
+        short life;
         //Window& window;
         Weapon currentWeapon;
 
@@ -46,6 +46,7 @@ class Soldier : public Animation , public DynamicObject{
         void updateInfoo(float x , float y, short weaponId);
         void setAsTerrorist();
         void setCurrentWeapon();
+        void setLife(short life);
 
 };
 

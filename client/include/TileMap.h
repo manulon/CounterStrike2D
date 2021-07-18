@@ -60,7 +60,7 @@ public:
 	void addNewSoldier(short id);
 	void setSoldierDirection(short angle);
 	void setPointerPosition(int x, int y);
-	
+	void setPrincipalPlayerLife(short life);
 };
 
 #endif
