@@ -6,7 +6,7 @@
 ThreadAcceptor::ThreadAcceptor(const char *host, 
 				   			   const char *service,
 							    NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
-								std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> & senderQueues) 
+								std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> & senderQueues) 
 	: acceptor(AI_PASSIVE), isRunning(true), queue(queue) ,senderQueues(senderQueues){ 
 	acceptor.bindAndListen(host, service);
 }
@@ -41,7 +41,7 @@ void ThreadAcceptor::run() {
 			clients.insert(std::make_pair(clientID, std::make_tuple(std::move(peer),nullptr,nullptr)));
 			std::map<short,std::tuple<Socket,ThreadServerReceiver*,ThreadServerSender*>>::iterator it = clients.find(clientID);
 
-			std::shared_ptr<BlockingQueue<ServerMessage*>> senderQueue(new BlockingQueue<ServerMessage*>);
+			std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>> senderQueue(new BlockingQueue<std::shared_ptr<ServerMessage>>);
 			std::get<2>(it->second) = new ThreadServerSender(std::get<0>(it->second), senderQueue);
 			std::get<2>(it->second)->spawn();
 			

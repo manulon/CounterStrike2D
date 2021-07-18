@@ -15,7 +15,7 @@
 
 Game::Game(MaxPlayers maxPlayers, 
            NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
-           std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues) :
+           std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> &senderQueues) :
     world { },
     maxPlayers {maxPlayers},
     playersInGame {0},
@@ -59,26 +59,27 @@ void Game::sendInfoToClients(){
 
 void Game::sendLifeInfo(){
     for (auto& pair : terrorist){
-        LifeMessage * msg = new LifeMessage(pair.second->getLife());
+        // LifeMessage * msg = new LifeMessage(pair.second->getLife());
+        std::shared_ptr<ServerMessage> msg(new LifeMessage(pair.second->getLife()));
         senderQueues[pair.first]->push(msg);
     }
     for (auto& pair : counterTerrorist){
-        LifeMessage * msg = new LifeMessage(pair.second->getLife());
+        std::shared_ptr<ServerMessage> msg(new LifeMessage(pair.second->getLife()));
         senderQueues[pair.first]->push(msg);
     }
 }
 void Game::sendPositions(){
     for (auto& pairPlayer : terrorist){
+        std::shared_ptr<ServerMessage> msg(new PlayerInfoMessage
+                            (pairPlayer.first,pairPlayer.second->getPositionX(),pairPlayer.second->getPositionY(),11));
         for (auto& pair : allPlayers){
-            PlayerInfoMessage *msg = new PlayerInfoMessage
-                            (pairPlayer.first,pairPlayer.second->getPositionX(),pairPlayer.second->getPositionY(),11);
             senderQueues[pair.first]->push(msg);
         }
     }
     for (auto& pairPlayer : counterTerrorist){
+        std::shared_ptr<ServerMessage> msg(new PlayerInfoMessage
+                            (pairPlayer.first,pairPlayer.second->getPositionX(),pairPlayer.second->getPositionY(),11));
         for (auto& pair : allPlayers){
-            PlayerInfoMessage *msg = new PlayerInfoMessage
-                            (pairPlayer.first,pairPlayer.second->getPositionX(),pairPlayer.second->getPositionY(),11);
             senderQueues[pair.first]->push(msg);
         }
     }
@@ -88,39 +89,53 @@ void Game::sendBullets(){
     std::list<std::shared_ptr<Bullet>> actualBullets;
     world.getBulletsList(actualBullets);
 
-    for (auto& pairPlayer : terrorist){
-        for (auto& bullet: actualBullets){
-            BulletMessage *msg = new BulletMessage(bullet->getPositionX(),bullet->getPositionY());
-            senderQueues[pairPlayer.first]->push(msg);
-        }   
-    }
-    for (auto& pairPlayer : counterTerrorist){
-        for (auto& bullet: actualBullets){
-            BulletMessage *msg = new BulletMessage(bullet->getPositionX(),bullet->getPositionY());
-            senderQueues[pairPlayer.first]->push(msg);
+    for (auto & bullet : actualBullets){
+        std::shared_ptr<ServerMessage> msg(new BulletMessage(bullet->getPositionX(),bullet->getPositionY()));
+        for (auto& pair : allPlayers){
+            senderQueues[pair.first]->push(msg);
         }
     }
+
 }
+    // for (auto& pairPlayer : terrorist){
+    //     for (auto& bullet: actualBullets){
+    //         BulletMessage *msg = new BulletMessage(bullet->getPositionX(),bullet->getPositionY());
+    //         senderQueues[pairPlayer.first]->push(msg);
+    //     }   
+    // }
+    // for (auto& pairPlayer : counterTerrorist){
+    //     for (auto& bullet: actualBullets){
+    //         BulletMessage *msg = new BulletMessage(bullet->getPositionX(),bullet->getPositionY());
+    //         senderQueues[pairPlayer.first]->push(msg);
+    //     }
+    // }
 
 void Game::sendWeapons(){
     std::list<std::shared_ptr<SWeapon>> actualWeapons;
     world.getWeaponList(actualWeapons);
-
-    for (auto& pairPlayer : terrorist){
-        for (auto& weapon: actualWeapons){
-            WeaponMessage *msg = new WeaponMessage
-                                    (weapon->getId(),weapon->getPositionX(),weapon->getPositionY());
-            senderQueues[pairPlayer.first]->push(msg);
-        }   
-    }
-    for (auto& pairPlayer : counterTerrorist){
-        for (auto& weapon: actualWeapons){
-            WeaponMessage *msg = new WeaponMessage
-                                    (weapon->getId(),weapon->getPositionX(),weapon->getPositionY());
-            senderQueues[pairPlayer.first]->push(msg);
+    for (auto & weapon : actualWeapons){
+        std::shared_ptr<ServerMessage> msg
+            (new WeaponMessage(weapon->getId(),weapon->getPositionX(),weapon->getPositionY()));
+        for (auto& pair : allPlayers){
+            senderQueues[pair.first]->push(msg);
         }
     }
+
 }
+    // for (auto& pairPlayer : terrorist){
+    //     for (auto& weapon: actualWeapons){
+    //         WeaponMessage *msg = new WeaponMessage
+    //                                 (weapon->getId(),weapon->getPositionX(),weapon->getPositionY());
+    //         senderQueues[pairPlayer.first]->push(msg);
+    //     }   
+    // }
+    // for (auto& pairPlayer : counterTerrorist){
+    //     for (auto& weapon: actualWeapons){
+    //         WeaponMessage *msg = new WeaponMessage
+    //                                 (weapon->getId(),weapon->getPositionX(),weapon->getPositionY());
+    //         senderQueues[pairPlayer.first]->push(msg);
+    //     }
+    // }
 
 void Game::shoot(short id, char angle) {
     std::map<short, std::shared_ptr<Player>>::iterator it = terrorist.find(id);
@@ -169,7 +184,7 @@ void Game::joinPlayer(short playerID) {
         insertRet = terrorist.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
     }
     allPlayers.insert(std::pair<short, std::shared_ptr<Player>>(playerID,player));
-    ServerMessage * idMessage = new JoinMessage(playerID);
+    std::shared_ptr<ServerMessage> idMessage(new JoinMessage(playerID));
     senderQueues[playerID]->push(idMessage);
     joinOtherPlayers(playerID);
     notifyRestOfPlayers(playerID);
@@ -195,15 +210,18 @@ void Game::removePlayer(short id){
 void Game::joinOtherPlayers(short newPlayerId){
     for (auto& pair : allPlayers){
         if (pair.first != newPlayerId){
-            senderQueues[newPlayerId]->push(new OtherPlayerJoinedMessage(pair.first));
+            std::shared_ptr<OtherPlayerJoinedMessage> msg(new OtherPlayerJoinedMessage(pair.first));
+            senderQueues[newPlayerId]->push(msg);
         }
     }
 }
 
 void Game::notifyRestOfPlayers(short playerID){
     for (auto & pair : allPlayers){
-        if (pair.first != playerID)
-            senderQueues[pair.first]->push(new OtherPlayerJoinedMessage(playerID));
+        if (pair.first != playerID){
+            std::shared_ptr<OtherPlayerJoinedMessage> msg(new OtherPlayerJoinedMessage(playerID));
+            senderQueues[pair.first]->push(msg);
+        }
     }
 }
 
