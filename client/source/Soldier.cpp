@@ -51,6 +51,8 @@ void Soldier::render() {
     // Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
+    
+    //renderWeapon(dest.getX(), dest.getY()); //No se porque lo sacaron
     renderActualLife();
     renderWeapon(dest.getX(), dest.getY());
 }
@@ -69,16 +71,17 @@ void Soldier::renderWeapon(int x, int y){
     // Area dst(x-8, y-14, 45, 45);
 
     // currentWeapon.render(src, dst, -45);
-    Area src(0, 0, 32, 32);
-    float shootRadius = width/2;
-    float xx = ((float)x + width/2) + shootRadius*cos(angle*M_PI/180.0f);
-    float yy = ((float)y + height/2) + shootRadius*sin(angle*M_PI/180.0f);
+    // Area src(0, 0, 32, 32);
+    // float shootRadius = width/2;
+    // float xx = ((float)x + width/2) + shootRadius*cos(angle*M_PI/180.0f);
+    // float yy = ((float)y + height/2) + shootRadius*sin(angle*M_PI/180.0f);
 
-    //Area dst(xx + 13, yy - 15, 50, 50);
-    Area dst(xx-25, yy-35, 50, 50);
+    // //Area dst(xx + 13, yy - 15, 50, 50);
+    // Area dst(xx-25, yy-35, 50, 50);
+    // Area dst(x+13, y-15, 50, 50);
 
     //currentWeapon.render(src, dst, -45);
-    currentWeapon.render(src, dst, getAngle());
+    // currentWeapon.render(src, dst, getAngle());
 }
 
 void Soldier::stopMoving() {
@@ -172,4 +175,3 @@ void Soldier::renderLife(){
 void Soldier::setLife(short lifeNum){
     life = lifeNum;
 }
-

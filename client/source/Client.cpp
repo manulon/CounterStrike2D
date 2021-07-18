@@ -55,7 +55,6 @@ void Client::run(const char * host, const char *service){
             isRunning = eh.handleEvents();
             map.renderAll();
             std::this_thread::sleep_for(std::chrono::milliseconds(40));
-
         }
         std::cout<<"SALE DEL LOOP\n";
         receiver.join();

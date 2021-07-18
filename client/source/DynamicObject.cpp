@@ -15,6 +15,7 @@ Area DynamicObject::getDest(int otherX, int otherY){
 }
 
 void DynamicObject::setPos(int xx, int yy){
+    std::cout << this << std::endl;
     x = -xx; y = -yy;
 }
 

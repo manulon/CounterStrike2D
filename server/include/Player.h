@@ -76,7 +76,7 @@ class Player : public Entity {
 		void pickUpWeapon();
 		void stopPickingUpWeapon();
 		bool isPickingUpWeapon();
-
+		bool isDead();
 };
 
 #endif // _PLAYER_H_

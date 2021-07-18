@@ -69,12 +69,8 @@ void ClientProtocol::quit(){
     std::cout<<"Envio el quit "<<std::endl;
 }
 
-void ClientProtocol::attack(short angle){
+void ClientProtocol::attack(short angle) {
     char key(SHOOT);
-    // std::cout<<"angulo: "<<angle<<std::endl;
-    // if (angle <= -40 && angle >=-90) angle = -angle + 180;
-    // else angle = angle - 90;
-    std::cout<<"se envia sngulo "<<angle-90<<std::endl;
     std::shared_ptr<Event> newEvent(new Event(1,key,angle-90));
     queue.push(newEvent);
 }

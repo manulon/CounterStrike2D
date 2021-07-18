@@ -8,6 +8,7 @@
 void Server::run(const char* host, const char* service) {
     std::map<short, std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> senderQueues;
     Game game(MaxPlayers::FOUR, clientEvents, senderQueues);
+
     ThreadAcceptor acceptor(host, service, clientEvents, senderQueues);
     acceptor.spawn();
     // game.joinPlayer(0);

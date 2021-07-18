@@ -1,8 +1,13 @@
 #include "PhysicalMapFactory.h"
+#include "Game.h"
 
-PhysicalMapFactory::PhysicalMapFactory(World &w,std::string mapName) : world(w),map(YAML::LoadFile(mapName)), border(createBorders()) {
+PhysicalMapFactory::PhysicalMapFactory(World &w, std::string mapName, Game &g) : 
+    world(w),
+    map(YAML::LoadFile(mapName)), 
+    border(createBorders()),
+    game(g) {
     YAML::Node obstaclesyaml = map["obstacles"];
-    YAML::Node  fields = map["fields"];
+    
     for (unsigned int i = 0; i < obstaclesyaml.size();i++){
         YAML::Node obstacle = obstaclesyaml[i];
         std::unique_ptr<Obstacle> ptr(new Obstacle(world,
@@ -10,14 +15,16 @@ PhysicalMapFactory::PhysicalMapFactory(World &w,std::string mapName) : world(w),
                                      ,0.45f,0.45f));
         obstacles.push_back(std::move(ptr));
     }
-    
+    setTerroristsPositions();
+    setCounterTerroristsPositions();
 }
+
 Border* PhysicalMapFactory::createBorders(){
     YAML::Node obstacles = map["obstacles"];
     YAML::Node  fields = map["fields"];
     width = 0;
     height = 0;
-    for (unsigned int i = 0; i <fields.size(); i++){
+    for (unsigned int i = 0; i <fields.size(); i++) {
         if (fields[i][0].as<int>() > width) width = fields[i][0].as<int>();
         if (fields[i][1].as<int>() > height) height = fields[i][1].as<int>();
     }
@@ -27,6 +34,32 @@ Border* PhysicalMapFactory::createBorders(){
     }
     return (new Border(world, 0,0, width + 1, height + 1));    
 }
+
+// NUEVO OJO
+void PhysicalMapFactory::setTerroristsPositions() {
+    YAML::Node terrorists = map["terrorist"];
+    float x = 0;
+    float y = 0;
+
+    for (unsigned int i = 0; i < terrorists.size(); i++) {
+        x = terrorists[i][0].as<float>();
+        y = terrorists[i][1].as<float>();
+        game.addTerroristPosition(x, y);
+    }
+}
+
+void PhysicalMapFactory::setCounterTerroristsPositions() {
+    YAML::Node counterTerrorists = map["counter-terrorist"];
+    float x = 0;
+    float y = 0;
+
+    for (unsigned int i = 0; i < counterTerrorists.size(); i++) {
+        x = counterTerrorists[i][0].as<float>();
+        y = counterTerrorists[i][1].as<float>();
+        game.addCounterTerroristPosition(x,y);
+    }
+}
+//
 
 int PhysicalMapFactory::getHeight(){
     return height + 1;
