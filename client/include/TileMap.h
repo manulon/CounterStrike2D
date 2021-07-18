@@ -30,8 +30,9 @@ private:
 	SDL_Rect obsClips[80];
 	std::list<Tile*> tiles;
 	std::list<Tile*> obstacles;
-	std::map<short,std::unique_ptr<DynamicObject>> objects;
+	std::list<std::unique_ptr<DynamicObject>> objects;
 	std::map<short,std::unique_ptr<Soldier>> soldiers;
+	std::list<std::pair<int,int>> bulletsToRender;
 	int xOffset;
 	int yOffset;
 	Soldier principalSoldier;
@@ -61,6 +62,7 @@ public:
 	void setSoldierDirection(short angle);
 	void setPointerPosition(int x, int y);
 	void setPrincipalPlayerLife(short life);
+	void addNewBullet(float x, float y);
 };
 
 #endif

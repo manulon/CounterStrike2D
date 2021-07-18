@@ -13,7 +13,6 @@ class PlayerInfo : public Info {
 		~PlayerInfo(){}
 		virtual void update(TileMap &map){
             map.updateSoldierInfo(id, x, y, weaponId);
-            std::cout<< "mensaje de jugador en X: "<< x<<" Y en y: "<<y<<std::endl;
         }
 };
 

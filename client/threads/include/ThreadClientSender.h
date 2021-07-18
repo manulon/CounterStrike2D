@@ -26,11 +26,8 @@ class ThreadClientSender : public Thread {
             CommunicationProtocol protocol(skt);
             while(isRunning){
                 try{
-                    std::cout << "Antes del pop\n";
                     std::shared_ptr<ClientMessage> event = queue.pop();
-                    std::cout << "Despues del pop\n";
                     isRunning = event->send(protocol); 
-                    std::cout << "Despues del send\n";
 
                 } catch (const std::exception &){
                     isRunning = false;
