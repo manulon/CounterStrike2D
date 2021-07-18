@@ -13,7 +13,9 @@ void ButtonBox::render(){
 }
 
 bool ButtonBox::clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,
-                        const Image& image,const Image& obsImage,const std::string& sizeName){
+                        std::vector<Tile*>& soldierOptionsTiles, const Image& image, 
+                        const Image& obsImage,const std::string& sizeName,
+                        const Image& tImage,const Image& ctImage){
     for (auto& option: options){
         delete option;
         options.pop_back();
@@ -24,7 +26,13 @@ bool ButtonBox::clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstacle
         obstaclesOptionTiles.pop_back();
     }
 
-    editor.getAtributes("box",sizeName,options,obstaclesOptionTiles,image,obsImage);
+    for (auto& option: soldierOptionsTiles){
+        delete option;
+        soldierOptionsTiles.pop_back();
+    }
+
+    editor.getAtributes("box",sizeName,options,obstaclesOptionTiles,soldierOptionsTiles,
+                        image,obsImage,tImage,ctImage);
     
     return false;
 }

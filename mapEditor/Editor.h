@@ -33,6 +33,7 @@ class Editor{
         std::vector<Tile*> tiles;
         std::vector<Tile*> optionTiles;
         std::vector<Tile*> obstaclesOptionTiles;
+        std::vector<Tile*> soldierOptionTiles;
         std::vector<Button*> tileOptionButton;
         std::map<std::pair<int,int>,int> finalMapTiles;
         EditorEventHandler eventHandler;

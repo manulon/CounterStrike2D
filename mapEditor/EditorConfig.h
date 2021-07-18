@@ -26,7 +26,9 @@ class EditorConfig{
 
         void getAtributes(std::string atributeName,const std::string& sizeName, 
                           std::vector<Tile*>& options,std::vector<Tile*>& obstacleOptionsTiles,
-                          const Image& image, const Image& obsImage);
+                          std::vector<Tile*>& soldierOptionsTiles,
+                          const Image& image, const Image& obsImage,
+                          const Image& tImage, const Image& ctImage);
 };
 
 #endif

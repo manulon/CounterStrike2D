@@ -26,7 +26,9 @@ class Button{
         bool mouseInText(int x, int y);
         virtual void render() = 0;
         virtual bool clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,
-                            const Image& image,const Image& obsImage,const std::string& sizeName) = 0;
+                             std::vector<Tile*>& soldierOptionsTiles, const Image& image, 
+                             const Image& obsImage, const std::string& sizeName,
+                             const Image& tImage,const Image& ctImage) = 0;
 
 };
 

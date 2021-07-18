@@ -30,10 +30,14 @@ class EditorEventHandler {
       SDL_Rect tileClips[ 75 ];
       Image& image;
       Image& obsImage;
+      Image tImage;
+      Image ctImage;
       std::string actualImage;
       Window& window;
       std::map<std::pair<int,int>,int>& finalMapTiles;
       std::map<std::pair<int,int>,int> finalMapObstacles;
+      std::map<std::pair<int,int>,int> terroristMap;
+      std::map<std::pair<int,int>,int> counterTerroristMap;
       const char* mapName;
       int tileBoxHeight;
       int tileWidth;
@@ -41,7 +45,8 @@ class EditorEventHandler {
 
       bool mouseInTile(int x, int y,Tile* tile);
       void renderTiles(std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
-                       std::vector<Tile*>& obstaclesOptionTiles);
+                       std::vector<Tile*>& obstaclesOptionTiles,
+                       std::vector<Tile*>& soldierOptionTiles);
       void buildTileClips();
       bool mouseInGrid(int mousePositionX,int mousePositionY);
       void putTileInCorrectPosition(Tile* tile);
@@ -50,7 +55,7 @@ class EditorEventHandler {
       void mouseMotionDown
       (SDL_Event& event, std::vector<Tile*>& tiles,std::vector<Tile*>& optionTiles,
       std::vector<Tile*>& obstaclesOptionTiles,std::vector<Button*>& buttons, 
-      const std::string& sizeName);
+      std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName);
       Image& getActualImage();
       void changeActualImage(const std::string& newImage);
 
@@ -62,7 +67,7 @@ class EditorEventHandler {
       bool handleEvents
       (std::vector<Tile*>& tiles, std::vector<Tile*>& optionTiles,
       std::vector<Tile*>& obstaclesOptionTiles,std::vector<Button*>& buttons, 
-      const std::string& sizeName);
+      std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName);
 };
 
 #endif  // _EDITOR_EVENT_HANDLER_H_

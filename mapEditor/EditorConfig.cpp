@@ -265,9 +265,11 @@ void EditorConfig::createFile(){
     file.close();*/
 }
 
-void EditorConfig::getAtributes(std::string atributeName,const std::string& sizeName,
+void EditorConfig::getAtributes(std::string atributeName,const std::string& sizeName, 
                                 std::vector<Tile*>& options,std::vector<Tile*>& obstacleOptionsTiles,
-                                const Image& image,const Image& obsImage){
+                                std::vector<Tile*>& soldierOptionsTiles,
+                                const Image& image, const Image& obsImage,
+                                const Image& tImage, const Image& ctImage){
 
     readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
 
@@ -276,15 +278,30 @@ void EditorConfig::getAtributes(std::string atributeName,const std::string& size
                                    readerNode[mapName][sizeName][atributeName][i][1].as<int>(),
                                    readerNode[mapName][sizeName][atributeName][i][2].as<int>(),
                                    image));
-
     }
+    
     for(size_t i=0; i<readerNode[sizeName][atributeName].size(); i++){
-
         obstacleOptionsTiles.push_back(new Tile(readerNode[sizeName][atributeName][i][0].as<int>(),
                                                 readerNode[sizeName][atributeName][i][1].as<int>(),
                                                 readerNode[sizeName][atributeName][i][2].as<int>(),
                                                 obsImage));
     }
+
+    
+    if (atributeName == "characters"){
+        std::cout<<sizeName<<"-"<<atributeName<<std::endl;
+        std::cout<<readerNode[sizeName][atributeName][0][0]<<std::endl;
+        soldierOptionsTiles.push_back(new Tile(readerNode[sizeName]["terrorist"][0][0].as<int>(),
+                                               readerNode[sizeName]["terrorist"][0][1].as<int>(),
+                                               readerNode[sizeName]["terrorist"][0][2].as<int>(),
+                                               tImage));
+
+        soldierOptionsTiles.push_back(new Tile(readerNode[sizeName]["counter-terrorist"][0][0].as<int>(),
+                                               readerNode[sizeName]["counter-terrorist"][0][1].as<int>(),
+                                               readerNode[sizeName]["counter-terrorist"][0][2].as<int>(),
+                                               ctImage));                                                
+    }
+
 }
 
 EditorConfig::~EditorConfig(){}

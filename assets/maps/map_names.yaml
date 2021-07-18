@@ -1,5 +1,4 @@
 mapName:
-  - ../assets/maps/HugeInferno.yaml
-  - ../assets/maps/SmallDust.yaml
-  - ../assets/maps/BigAztec.yaml
-  - ../assets/maps/DustEnormeFede.yaml
+  - ../assets/maps/DustSmall.yaml
+  - ../assets/maps/AztecBig.yaml
+  - ../assets/maps/InfernoHuge.yaml

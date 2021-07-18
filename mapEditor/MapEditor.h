@@ -19,6 +19,8 @@ public:
     void createMap(std::string name, std::string style);
     void addField(int x , int y, int sprite);
     void addObstacle(int x , int y, int sprite);
+    void addTerrorist(int x , int y);
+    void addCounterTerrorist(int x , int y);
     void generateMap();
     void addSize(std::string name);
 
