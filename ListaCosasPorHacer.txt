@@ -1,6 +1,6 @@
 Lista:
 
-	1. Integrar menu al juego.
+	LISTO: 1. Integrar menu al juego.
 	2. Renderizar bien las armas.
 	3. Agregar al protocolo agregar arma con q.
 	4. Renderizar en el cliente disparos, animacion, armas en el piso, balas.
