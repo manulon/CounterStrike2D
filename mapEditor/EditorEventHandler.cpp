@@ -10,7 +10,7 @@ leftMouseButtonDown(false),mousePositionX(0),mousePositionY(0),
 windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
 actualType(-1),selectedZoneX(windowWidth/2+4),selectedZoneY(windowHeight-86),
 image(image),obsImage(obsImage),
-tImage("../assets/gfx/player/ct1.bmp",window),ctImage("../assets/gfx/player/t4.bmp",window),
+tImage("../assets/gfx/player/ct4.bmp",window),ctImage("../assets/gfx/player/t4.bmp",window),
 actualImage(""),window(window),finalMapTiles(finalMapTiles),finalMapObstacles(),
 mapName(mapName),tileBoxHeight(0),tileWidth(0),tileHeight(0){
    YAML::Node readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
