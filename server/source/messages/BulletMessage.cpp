@@ -1,12 +1,12 @@
 #include "BulletMessage.h"
 
 
-BulletMessage::BulletMessage(short int posX, short int posY): 
+BulletMessage::BulletMessage(float posX, float posY): 
 posX(posX),posY(posY){}
 
 void BulletMessage::send(CommunicationProtocol &protocol){
     char command(BULLET_MESSAGE);
     protocol.send_message(&command, 1);
-    protocol.send_int16(posX);
-    protocol.send_int16(posY);
+    protocol.send_float(posX);
+    protocol.send_float(posY);
 }

@@ -5,12 +5,12 @@
 
 class BulletMessage : public ServerMessage {    
     public:
-        BulletMessage(short int posX, short int posY);
+        BulletMessage(float posX, float posY);
         virtual ~BulletMessage(){}
         virtual void send(CommunicationProtocol &protocol) override;
     private:
-        short int posX;
-        short int posY;
+        float posX;
+        float posY;
 };
 
 #endif

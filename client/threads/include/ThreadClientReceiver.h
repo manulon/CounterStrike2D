@@ -53,6 +53,9 @@ class ThreadClientReceiver : public Thread {
                     } else if (messageType == JOIN){
                         std::shared_ptr<Info> aux(new JoinInfo((short)protocol.receive_size()));
                         info = aux;
+                    } else if (messageType == BULLET_MESSAGE){
+                        protocol.receive_float();
+                        protocol.receive_float();
                     }
 
                     queue.push(info);

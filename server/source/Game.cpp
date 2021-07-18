@@ -53,7 +53,7 @@ void Game::sendInfoToClients(){
     sendLifeInfo();
     sendPositions();
     sendBullets();
-    sendWeapons();
+    // sendWeapons();
 }
 
 void Game::sendLifeInfo(){
@@ -169,6 +169,7 @@ void Game::joinPlayer(short playerID) {
     }
     allPlayers.insert(std::pair<short, std::shared_ptr<Player>>(playerID,player));
     ServerMessage * idMessage = new JoinMessage(playerID);
+    std::cout<<"PUSHEANDO UN MENSAJE JOIN\n";
     senderQueues[playerID]->push(idMessage);
     joinOtherPlayers(playerID);
     notifyRestOfPlayers(playerID);
