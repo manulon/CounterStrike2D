@@ -164,7 +164,7 @@ void TileMap::renderObjects(int x,int y){
 
 void TileMap::setPrincipalPlayerId(short id){
     principalSoldierId = id;
-    std::cout<<"EL PRINCIPAL SOLDIER ID ES "<<principalSoldierId<<std::endl;
+
     if (id% 2 != 0){
         principalSoldier.setAsTerrorist();
     }
@@ -175,7 +175,7 @@ void TileMap::updateSoldierInfo(short id, float x, float y, short weaponId){
         // principalSoldier.updateInfo((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM, weaponId);
         principalSoldier.updateInfo(x,y, weaponId);
     } else {
-        
+        std::cout << "Antes de la cagada el id del jugador es " << id << std::endl;
         soldiers[id]->updateInfoo((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM,weaponId);
     } 
 }
@@ -213,4 +213,3 @@ void TileMap::setPointerPosition(int x, int y){
 void TileMap::setPrincipalPlayerLife(short life){
     principalSoldier.setLife(life);
 }
-

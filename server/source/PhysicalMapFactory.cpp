@@ -37,7 +37,7 @@ Border* PhysicalMapFactory::createBorders(){
 
 // NUEVO OJO
 void PhysicalMapFactory::setTerroristsPositions() {
-    YAML::Node terrorists = map["terrorists"];
+    YAML::Node terrorists = map["terrorist"];
     float x = 0;
     float y = 0;
 
@@ -49,7 +49,7 @@ void PhysicalMapFactory::setTerroristsPositions() {
 }
 
 void PhysicalMapFactory::setCounterTerroristsPositions() {
-    YAML::Node counterTerrorists = map["counterTerrorists"];
+    YAML::Node counterTerrorists = map["counter-terrorist"];
     float x = 0;
     float y = 0;
 

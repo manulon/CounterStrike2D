@@ -182,8 +182,7 @@ void Game::joinPlayer(short playerID) {
         }
         ++playersInGame;
     }
-
-    ServerMessage *idMessage = new JoinMessage(playerID);
+    std::shared_ptr<ServerMessage> idMessage(new JoinMessage(playerID));
     senderQueues[playerID]->push(idMessage);
     joinOtherPlayers(playerID);
     notifyRestOfPlayers(playerID);

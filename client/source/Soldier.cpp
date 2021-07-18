@@ -164,4 +164,3 @@ void Soldier::renderLife(){
 void Soldier::setLife(short lifeNum){
     life = lifeNum;
 }
-
