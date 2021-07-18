@@ -53,6 +53,9 @@ class ThreadClientReceiver : public Thread {
                     } else if (messageType == JOIN){
                         std::shared_ptr<Info> aux(new JoinInfo((short)protocol.receive_size()));
                         info = aux;
+                    } else if (messageType == LIFE_MESSAGE){
+                        
+                        std::shared_ptr<Info> aux(new LifeInfo((short)protocol.receive_size()));
                     }
 
                     queue.push(info);

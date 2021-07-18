@@ -9,7 +9,8 @@ class LifeInfo : public Info {
 		LifeInfo(short value) : Info(), value(value){}
 		~LifeInfo(){}
 		virtual void update(TileMap &map){
-            //map.setprincipalplayerVida
+            map.setPrincipalPlayerLife(value);
+            std::cout<<"Vida nueva "<<value<<std::endl;
         }
 };
 

@@ -51,6 +51,7 @@ void Soldier::render() {
     // Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
+    renderActualLife();
 }
 
 void Soldier::render(int otherX, int otherY){
@@ -59,7 +60,7 @@ void Soldier::render(int otherX, int otherY){
     image.render(src,dest);
 
     renderWeapon(dest.getX(), dest.getY());
-    renderActualLife();
+    
 }
 
 void Soldier::renderWeapon(int x, int y){
@@ -155,5 +156,9 @@ void Soldier::renderLife(){
 
     first.render(lifeAreaFirst);
     second.render(lifeAreaSecond);
+}
+
+void Soldier::setLife(short lifeNum){
+    life = lifeNum;
 }
 

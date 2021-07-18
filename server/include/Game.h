@@ -28,7 +28,7 @@ class Game {
         short playersInGame;
 
         NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue;
-        std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues;
+        std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> &senderQueues;
 
         std::map<short, std::shared_ptr<Player>> counterTerrorist;
         std::map<short, std::shared_ptr<Player>> terrorist;
@@ -50,7 +50,7 @@ class Game {
 	public:
 		Game(MaxPlayers maxPlayers, 
 			 NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
-			 std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> &senderQueues);
+			 std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> &senderQueues);
 		~Game();
 		void joinPlayer(short playerID);
 		bool isReadyToStart();

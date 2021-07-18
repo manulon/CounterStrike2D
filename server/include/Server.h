@@ -4,7 +4,7 @@
 class Server {
 private:
     NonBlockingQueue<std::shared_ptr<ServerEvent>> clientEvents;
-    std::map<short,ServerMessage*> clientQueues;
+    std::map<short,std::shared_ptr<ServerMessage>> clientQueues;
 
 public:
     Server(){}

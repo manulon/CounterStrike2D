@@ -210,3 +210,7 @@ void TileMap::setPointerPosition(int x, int y){
     pointer.set(x,y);
 }
 
+void TileMap::setPrincipalPlayerLife(short life){
+    principalSoldier.setLife(life);
+}
+

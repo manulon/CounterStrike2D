@@ -61,7 +61,7 @@ int main(int argc, const char *argv[]) {
         }*/
 
     //NonBlockingQueue<std::shared_ptr<ServerEvent>> queue;
-    //std::map<short,std::shared_ptr<BlockingQueue<ServerMessage*>>> senderQueues;
+    //std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> senderQueues;
     //Game game(MaxPlayers::FOUR, queue, senderQueues);
 
     Server server;
