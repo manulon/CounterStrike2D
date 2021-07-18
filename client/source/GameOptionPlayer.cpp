@@ -35,8 +35,10 @@ void GameOptionPlayer::setPath(std::string& path, std::string& tiles){
     }
 
     path = reader["mapName"][stoi(input)+2].as<std::string>();
-
+    std::cout<<"1"<<path<<std::endl;
     YAML::Node reader2= YAML::LoadFile(path);
+    std::cout<<"2"<<std::endl;
     std::string mapName(reader2["style"].as<std::string>());
+    std::cout<<"3"<<std::endl;
     tiles = "../assets/gfx/tiles/default_"+mapName+".png";
 }

@@ -21,7 +21,7 @@ Game::Game(MaxPlayers maxPlayers,
     playersInGame {0},
     queue {queue},
     senderQueues {senderQueues},
-    physicalMap{world,"../mapaGiganteDust.yaml"},
+    physicalMap{world,"../assets/maps/mapaGiganteDust.yaml"},
     gameStarted{false} { }
 
 Game::~Game() { }
