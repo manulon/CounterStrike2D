@@ -231,3 +231,11 @@ void TileMap::updateWeaponInfo(short weaponId, float x, float y){
     wea->setPos((x + (float)xOffset)*PPM,(y + (float)yOffset)*PPM);
     objects.push_back(std::move(wea));
 }
+
+void TileMap::removePlayer(short id){
+    if (id == principalSoldierId){ 
+        //matar al jugador
+    } else {
+        soldiers.erase(id);
+    }
+}

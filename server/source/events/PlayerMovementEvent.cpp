@@ -4,5 +4,4 @@ PlayerMovementEvent::PlayerMovementEvent(short id, char opcode) : ServerEvent(id
 
 void PlayerMovementEvent::handle(Game &game){
     game.playerMovement(id, opcode);
-    std::cout << "ocurrio algo en PlayerMovementEvent\n";
 }

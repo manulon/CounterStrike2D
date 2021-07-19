@@ -63,6 +63,7 @@ public:
 	void setPrincipalPlayerLife(short life);
 	void addNewBullet(float x, float y);
 	void updateWeaponInfo(short weaponId, float x, float y);
+	void removePlayer(short id);
 };
 
 #endif
