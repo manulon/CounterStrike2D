@@ -6,6 +6,7 @@
 #include "LoginEvent.h"
 #include "PickUpWeaponEvent.h"
 #include "StopPickingUpWeaponEvent.h"
+#include "UpdateAngleEvent.h"
 
 ThreadServerReceiver::ThreadServerReceiver(Socket &skt, 
     NonBlockingQueue<std::shared_ptr<ServerEvent>>& queue, 
@@ -23,7 +24,7 @@ void ThreadServerReceiver::run(){
                 break; 
             }
             std::shared_ptr<ServerEvent> event(nullptr);
-
+            
             if (isMovementMessage(buffer)){
                 std::shared_ptr<ServerEvent> aux(new PlayerMovementEvent(clientID, buffer));
                 event = aux;
@@ -50,6 +51,10 @@ void ThreadServerReceiver::run(){
                 event = aux;
             } else if (buffer == STOP_PICKING_UP_WEAPON){
                 std::shared_ptr<ServerEvent> aux(new StopPickingUpWeaponEvent(clientID));
+                event = aux;
+            } else if (buffer == ANGLE){
+                short arg(protocol.receive_size());
+                std::shared_ptr<ServerEvent> aux(new UpdateAngleEvent(clientID,arg));
                 event = aux;
             }
             queue.push(event);

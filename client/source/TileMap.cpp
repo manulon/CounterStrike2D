@@ -176,11 +176,11 @@ void TileMap::setPrincipalPlayerId(short id){
     }
 }
 
-void TileMap::updateSoldierInfo(short id, float x, float y, short weaponId){
+void TileMap::updateSoldierInfo(short id, float x, float y, short weaponId, short angle){
     if (id == principalSoldierId){
         principalSoldier.updateInfo(x,y, weaponId);
     } else {
-        soldiers[id]->updateInfoo((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM,weaponId);
+        soldiers[id]->updateInfoo((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM,weaponId,angle);
     } 
 }
 void TileMap::renderAll(){

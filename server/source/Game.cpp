@@ -114,14 +114,18 @@ void Game::sendLifeInfo(){
 void Game::sendPositions(){
     for (auto& pairPlayer : terrorist){
         std::shared_ptr<ServerMessage> msg(new PlayerInfoMessage
-                            (pairPlayer.first,pairPlayer.second->getPositionX(),pairPlayer.second->getPositionY(),11));
+                            (pairPlayer.first,pairPlayer.second->getPositionX(),
+                            pairPlayer.second->getPositionY(),11,
+                            pairPlayer.second->getAngle()));
         for (auto& pair : allPlayers){
             senderQueues[pair.first]->push(msg);
         }
     }
     for (auto& pairPlayer : counterTerrorist){
         std::shared_ptr<ServerMessage> msg(new PlayerInfoMessage
-                            (pairPlayer.first,pairPlayer.second->getPositionX(),pairPlayer.second->getPositionY(),11));
+                            (pairPlayer.first,pairPlayer.second->getPositionX(),
+                            pairPlayer.second->getPositionY(),11,
+                            pairPlayer.second->getAngle()));
         for (auto& pair : allPlayers){
             senderQueues[pair.first]->push(msg);
         }
@@ -320,4 +324,12 @@ void Game::stopPickingUpWeapon(short id){
         it = counterTerrorist.find(id);
     }
     it->second->stopPickingUpWeapon();
+}
+
+void Game::setPlayerAngle(short id, short angle){
+    std::map<short, std::shared_ptr<Player>>::iterator it = terrorist.find(id);
+    if (it == terrorist.end()) {
+        it = counterTerrorist.find(id);
+    }
+    it->second->setAngle(angle);
 }

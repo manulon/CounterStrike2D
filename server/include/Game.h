@@ -74,6 +74,7 @@ class Game {
 		void removePlayer(short id);
 		void pickUpWeapon(short id);
 		void stopPickingUpWeapon(short id);
+		void setPlayerAngle(short id, short angle);
 };
 
 #endif 

@@ -41,7 +41,7 @@ class Soldier : public Animation , public DynamicObject{
         int getAngle();
         void setAngle(int angle);
         void updateInfo(float x , float y, short weaponId);
-        void updateInfoo(float x , float y, short weaponId);
+        void updateInfoo(float x , float y, short weaponId, short angle);
         void setAsTerrorist();
         void changeCurrentWeapon();
         void setLife(short life);

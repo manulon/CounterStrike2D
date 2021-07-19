@@ -32,6 +32,7 @@ class ClientProtocol{
         void list();
         void pickUpWeapon();
         void stopPickingUpWeapon();
+        void sendAngle(short angle);
 };
 
 #endif

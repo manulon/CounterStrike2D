@@ -8,11 +8,13 @@ class PlayerInfo : public Info {
         float x;
         float y;
         short weaponId;
+        short angle;
 	public:
-		PlayerInfo( short id, float x, float y, short weaponId) : Info(), id(id), x(x),y(y), weaponId(weaponId){}
+		PlayerInfo( short id, float x, float y, short weaponId,short angle) : 
+        Info(), id(id), x(x),y(y), weaponId(weaponId), angle(angle){}
 		~PlayerInfo(){}
 		virtual void update(TileMap &map){
-            map.updateSoldierInfo(id, x, y, weaponId);
+            map.updateSoldierInfo(id, x, y, weaponId,angle);
         }
 };
 
