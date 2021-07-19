@@ -13,8 +13,10 @@ PhysicalMapFactory::PhysicalMapFactory(World &w, std::string mapName, Game &g) :
         std::unique_ptr<Obstacle> ptr(new Obstacle(world,
                                       obstacle[0].as<int>()-(width/2),obstacle[1].as<int>()-(height/2)
                                      ,0.45f,0.45f));
+        
         obstacles.push_back(std::move(ptr));
     }
+    std::cout<<" el width es "<<width<<" Heght  "<< height<<std::endl;
     setTerroristsPositions();
     setCounterTerroristsPositions();
 }
@@ -42,8 +44,8 @@ void PhysicalMapFactory::setTerroristsPositions() {
     float y = 0;
 
     for (unsigned int i = 0; i < terrorists.size(); i++) {
-        x = terrorists[i][0].as<float>();
-        y = terrorists[i][1].as<float>();
+        x = terrorists[i][0].as<float>() - width/2;
+        y = terrorists[i][1].as<float>() - height/2;
         game.addTerroristPosition(x, y);
     }
 }
@@ -54,8 +56,8 @@ void PhysicalMapFactory::setCounterTerroristsPositions() {
     float y = 0;
 
     for (unsigned int i = 0; i < counterTerrorists.size(); i++) {
-        x = counterTerrorists[i][0].as<float>();
-        y = counterTerrorists[i][1].as<float>();
+        x = counterTerrorists[i][0].as<float>()- width/2;
+        y = counterTerrorists[i][1].as<float>()- height/2;
         game.addCounterTerroristPosition(x,y);
     }
 }
