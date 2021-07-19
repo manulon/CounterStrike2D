@@ -36,7 +36,7 @@ class Game {
 		std::vector<std::pair<float, float>> terroristsPositions;
 		std::vector<std::pair<float, float>> counterTerroristsPositions;
 
-		PhysicalMapFactory physicalMap;
+		std::unique_ptr<PhysicalMapFactory> physicalMap;
 		bool gameStarted;
         
 		Game(const Game &other) = delete;
@@ -75,6 +75,8 @@ class Game {
 		void pickUpWeapon(short id);
 		void stopPickingUpWeapon(short id);
 		void setPlayerAngle(short id, short angle);
+		bool hasStarted();
+		void setMap(std::string name);
 };
 
 #endif 

@@ -22,7 +22,8 @@ Game::Game(MaxPlayers maxPlayers,
     playersInGame {0},
     queue {queue},
     senderQueues {senderQueues},
-    physicalMap{world,"../assets/maps/mapaGiganteDust.yaml", *this},
+    physicalMap{nullptr},
+    // physicalMap{world,"../assets/maps/mapaGiganteDust.yaml", *this},
     gameStarted{false} { } //OJO CON MOVER UN GAME, y el this
 
 Game::~Game() { }
@@ -332,4 +333,13 @@ void Game::setPlayerAngle(short id, short angle){
         it = counterTerrorist.find(id);
     }
     it->second->setAngle(angle);
+}
+
+bool Game::hasStarted(){
+    return gameStarted;
+}
+
+void Game::setMap(std::string mapName){
+    std::unique_ptr<PhysicalMapFactory> map(new PhysicalMapFactory(world, mapName,*this));
+    physicalMap = std::move(map);
 }

@@ -35,7 +35,7 @@ void ThreadServerReceiver::run(){
             } else if (buffer == JOIN){
                 std::cout<<"JOIN EVENT\n";
                 short len  = protocol.receive_size();
-                std::vector<char> buffer(len);
+                std::vector<char> buffer(len + 1,'\0');
                 protocol.receive_message(len,buffer.data());
                 std::string mapName(buffer.data());
                 std::shared_ptr<ServerEvent> aux(new LoginEvent(clientID,std::move(mapName)));
