@@ -1,5 +1,4 @@
 Lista:
-	3.  Agregar al protocolo agregar arma con q.
 	4.  Renderizar en el cliente disparos, animacion, armas en el piso, balas.
 	8.  Definir condicion de fin de partida.
 	9.  Modificar a la clase game para que sea un hilo propio.
@@ -11,6 +10,7 @@ Lista:
 LISTO:
 	1. Integrar menu al juego.
 	2. Renderizar bien las armas.
+	3.  Agregar al protocolo agregar arma con q.
 	5. Editor debe agregar lugares para colocar a los jugadores en el mapa.
 	6. Actualizar physicalMapFactory para que lea del yaml, terroristas, antiterroristas
 	y los guarde en el world.
