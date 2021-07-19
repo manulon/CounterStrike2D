@@ -238,3 +238,11 @@ bool Player::isPickingUpWeapon(){
 bool Player::isDead() {
     return life.getLife() == 0 ? true : false;
 }
+
+void Player::setAngle(short newAngle){
+    angle = newAngle;
+}
+
+short Player::getAngle(){
+    return angle;
+}

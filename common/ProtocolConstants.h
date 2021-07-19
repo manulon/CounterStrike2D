@@ -21,4 +21,6 @@
 #define OTHER_PLAYER_JOIN         17
 #define PICK_UP_WEAPON            18
 #define STOP_PICKING_UP_WEAPON    19
+#define ANGLE                     20
+
 #endif

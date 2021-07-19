@@ -17,7 +17,7 @@ int Event::getArg(){
  
 bool Event::send(CommunicationProtocol &protocol){
     protocol.send_message(&opcode,1);                
-    if ( opcode == SHOOT ){
+    if ( opcode == SHOOT || opcode == ANGLE){
         protocol.send_int16((uint16_t)arg);
         return true;
     } else if (opcode == QUIT) {

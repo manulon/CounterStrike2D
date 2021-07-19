@@ -90,6 +90,13 @@ void ClientProtocol::stopPickingUpWeapon(){
     queue.push(newEvent);
 }
 
+void ClientProtocol::sendAngle(short angle){
+    char key(ANGLE);
+
+    std::shared_ptr<Event> newEvent(new Event(1,key,angle));
+    queue.push(newEvent);
+}
+
 /*
 ClienteEvento
 evento simple      evento shoot      evento bala

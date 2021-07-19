@@ -61,7 +61,7 @@ void Soldier::render(int otherX, int otherY){
     dest.setWidth(width);
     dest.setHeight(height);
 
-    image.render(src,dest);    
+    image.render(src,dest,angle,SDL_FLIP_HORIZONTAL);    
 }
 
 void Soldier::stopMoving() {
@@ -100,7 +100,9 @@ void Soldier::setAsTerrorist(){
     Image img("../assets/gfx/player/t4Ak47.png", image.getWindow());
     image = std::move(img);
 }
-void Soldier::updateInfoo(float xx, float yy, short weaponIdd){
+void Soldier::updateInfoo(float xx, float yy, short weaponIdd, short angle){
+    this->angle = angle;
+    this->weaponId = weaponId;
     DynamicObject::setPos(xx,yy);
 }
 

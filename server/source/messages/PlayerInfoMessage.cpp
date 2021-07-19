@@ -2,8 +2,9 @@
 
 
 PlayerInfoMessage::PlayerInfoMessage(short id, float x, float y,
-                                     short weaponId) : ServerMessage(), id(id), x(x),y(y),
-                                     weaponId(weaponId){}
+                                     short weaponId, short angle) : 
+                                     ServerMessage(), id(id), x(x),y(y),
+                                     weaponId(weaponId), angle(angle){}
 
 void PlayerInfoMessage::send(CommunicationProtocol &protocol){
     char command(PLAYER_INFO);
@@ -11,5 +12,6 @@ void PlayerInfoMessage::send(CommunicationProtocol &protocol){
     protocol.send_int16(id);
     protocol.send_float(x);
     protocol.send_float(y);
-    protocol.send_int16(weaponId);    
+    protocol.send_int16(weaponId);
+    protocol.send_int16(angle);    
 }

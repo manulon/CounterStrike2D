@@ -43,8 +43,8 @@ class ThreadClientReceiver : public Thread {
                         std::shared_ptr<Info> aux(
                             new PlayerInfo(
                                 protocol.receive_size(), protocol.receive_float(),
-                                protocol.receive_float(),protocol.receive_size()
-                            )
+                                protocol.receive_float(),protocol.receive_size(),
+                                protocol.receive_size())
                         );
                         info = aux;
                     } else if (messageType == OTHER_PLAYER_JOIN){

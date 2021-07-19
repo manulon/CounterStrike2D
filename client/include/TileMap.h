@@ -55,7 +55,7 @@ public:
 	void renderTiles(int x, int y, const Area &dest);
 	void renderObjects(int x,int y);
 	void setPrincipalPlayerId(short id);
-	void updateSoldierInfo(short id, float x, float y, short weaponId);
+	void updateSoldierInfo(short id, float x, float y, short weaponId, short angle);
 	void renderAll();
 	void addNewSoldier(short id);
 	void setSoldierDirection(short angle);

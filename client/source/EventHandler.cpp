@@ -5,7 +5,9 @@ bool EventHandler::handleEvents(){
     SDL_Event event;
     bool keepRunning = true; 
     MouseManager mm(800,600);
-    map.setSoldierDirection(mm.getAngle());
+    short angle(mm.getAngle());
+    map.setSoldierDirection(angle);
+    protocol.sendAngle(angle);
     map.setPointerPosition(mm.getPositionX(),mm.getPositionY());
     while (SDL_PollEvent(&event)){
         switch (event.type) {

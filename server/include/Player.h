@@ -24,6 +24,7 @@ class Player : public Entity {
 		float width;
 		float height;
 		bool pickingUpWeapon;
+		short angle;
 
 		Player(const Player &other) = delete;
 		Player& operator=(const Player &other) = delete;
@@ -72,6 +73,8 @@ class Player : public Entity {
 		void decreaseLife(int valueToDecrease);
 		friend std::ostream& operator<<(std::ostream &os, const Entity &entity);
 		short getLife();
+		void setAngle(short newAngle);
+		short getAngle();
 
 		void pickUpWeapon();
 		void stopPickingUpWeapon();
