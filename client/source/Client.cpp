@@ -36,7 +36,7 @@ void Client::run(const char * host, const char *service){
 
         std::shared_ptr<ClientMessage> msg (new LoginMessage(JOIN,menu.getMapPath().c_str()));
         blockingQueue.push(msg);
-        try{
+        try {
             gameLoop(map);
         } catch (...){
             std::cout<<"PERDISTE\n";
@@ -52,17 +52,36 @@ void Client::run(const char * host, const char *service){
 void Client::gameLoop(TileMap &map){
     bool isRunning = true;
     EventHandler eh(blockingQueue,map);
-        std::shared_ptr<Info> info;
-    while (isRunning){
-        do{
+    std::shared_ptr<Info> info;
+    int rest = 0; 
+    int behind = 0;
+    int lost = 0;
+    int rate = 1000/60;
+    auto t1 = std::chrono::steady_clock::now();
+    auto t2 = t1;
+    std::chrono::duration<double, std::milli> diff;
+
+    while (isRunning) {
+        //executeFrame();
+        do {
             info = nonBlockingQueue.pop();
             if (info != nullptr) {
-                // std::string pepe(message);
                 info->update(map);
             }
         } while (info != NULL);
         isRunning = eh.handleEvents();
         map.renderAll();
-        std::this_thread::sleep_for(std::chrono::milliseconds(40));
+
+        t2 = std::chrono::steady_clock::now();
+        diff = t2 - t1;
+        rest = rate - std::ceil(diff.count());
+
+        if (rest < 0) {
+            behind = -rest;
+            rest = rate - (behind % rate);
+            lost = behind + rate;
+            t1 += std::chrono::milliseconds(lost);
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(rest));
     }
 }

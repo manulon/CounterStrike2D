@@ -21,8 +21,6 @@ enum MaxPlayers {
 
 class Game {
 	private:
-        std::mutex mutex;
-       	
        	World world;
         MaxPlayers maxPlayers;
         short playersInGame;
@@ -56,6 +54,7 @@ class Game {
 		void cleanDeadTerrorists();
 		void cleandDeadCounterTerrorists();
 		void cleanAllPlayers();
+		void executeFrame(int rate) ;
 		
 	public:
 		Game(MaxPlayers maxPlayers, 
