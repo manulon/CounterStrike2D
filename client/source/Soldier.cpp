@@ -15,9 +15,9 @@
 // imagen solicitada para renderizar.
 
 Soldier::Soldier(std::string imgPath , Window &window) : 
-    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), 
+    Animation(imgPath, window, 3, 2, PPM, 45, true),DynamicObject(PPM,PPM), 
     direction(RIGHT), moving(false),x(0),y(0), 
-    width(PPM), height(PPM), angle(90), weaponId(-1), life(100), currentWeapon("../assets/gfx/weapons/ak47.bmp",window,16,32) { }
+    width(PPM), height(45), angle(90), weaponId(-1), life(100){ }
 
 //    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
 //    , width(PPM), height(PPM), angle(90), life(100), window(window),
@@ -41,47 +41,18 @@ Soldier::Soldier(std::string imgPath , Window &window) :
 
 Soldier::~Soldier() { }
 
-void Soldier::update(float dt) {
-    if (moving) {
-        Animation::update(dt);
-    }
-}
 
 void Soldier::render() {
-    // Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
-    Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), height, width);
+    Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), width, height);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
     
-    //renderWeapon(dest.getX(), dest.getY()); //No se porque lo sacaron
     renderActualLife();
-    renderWeapon(dest.getX(), dest.getY());
 }
 
 void Soldier::render(int otherX, int otherY){
     Area dest = DynamicObject::getDest(otherX, otherY);
     Area src(0,0,width,height);
-    image.render(src,dest);
-
-    renderWeapon(dest.getX(), dest.getY());
-    
-}
-
-void Soldier::renderWeapon(int x, int y){
-    // Area src(0, 0, 32, 32);
-    // Area dst(x-8, y-14, 45, 45);
-
-    // currentWeapon.render(src, dst, -45);
-    // Area src(0, 0, 32, 32);
-    // float shootRadius = width/2;
-    // float xx = ((float)x + width/2) + shootRadius*cos(angle*M_PI/180.0f);
-    // float yy = ((float)y + height/2) + shootRadius*sin(angle*M_PI/180.0f);
-
-    // //Area dst(xx + 13, yy - 15, 50, 50);
-    // Area dst(xx-25, yy-35, 50, 50);
-    // Area dst(x+13, y-15, 50, 50);
-
-    //currentWeapon.render(src, dst, -45);
-    // currentWeapon.render(src, dst, getAngle());
+    image.render(src,dest);    
 }
 
 void Soldier::stopMoving() {
@@ -117,16 +88,18 @@ void Soldier::updateInfo(float xx, float yy, short weaponIdd){
 }
 
 void Soldier::setAsTerrorist(){
-    Image img("../assets/gfx/player/t3.bmp", image.getWindow());
+    Image img("../assets/gfx/player/t4Ak47.png", image.getWindow());
     image = std::move(img);
 }
 void Soldier::updateInfoo(float xx, float yy, short weaponIdd){
     DynamicObject::setPos(xx,yy);
 }
 
-
 void Soldier::setCurrentWeapon(){
-    
+    /*Esto es cuando cambia a arma, ver bien como poner el codigo.*/
+    Image img("../assets/gfx/player/t4Knife.png", image.getWindow());
+    image = std::move(img);
+    height = 45;
 }
 
 void Soldier::renderActualLife(){

@@ -10,7 +10,7 @@
 TileMap::TileMap(Window & window,const char *pathText, const std::string &pathTiles, const std::string &pathObs) :
 window(window),image(pathTiles.c_str(),window),mapName(pathText),
 imgObstacles(pathObs.c_str(),window),tiles(), obstacles(), xOffset(0), yOffset(0), 
-principalSoldier("../assets/gfx/player/t4.bmp", window),principalSoldierId(-1),
+principalSoldier("../assets/gfx/player/t4Ak47.png", window),principalSoldierId(-1),
 pointer("../assets/gfx/pointer.bmp", window, {0xFF, 0, 0xFF}){
 
     loadMedia();
@@ -200,10 +200,10 @@ void TileMap::renderAll(){
 
 void TileMap::addNewSoldier(short id){
     if (id % 2 == 0){
-        std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/t4.bmp", window));
+        std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/ct4Ak47.png", window));
         soldiers[id] = std::move(soldier);
     } else { 
-        std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/t3.bmp", window));
+        std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/t4Ak47.png", window));
         soldiers[id] = std::move(soldier);
     }
 }

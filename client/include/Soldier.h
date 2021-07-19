@@ -18,12 +18,10 @@ class Soldier : public Animation , public DynamicObject{
         short weaponId;
         short life;
         //Window& window;
-        Weapon currentWeapon;
 
         Soldier(const Soldier &other) = delete;
         Soldier& operator=(const Soldier &other) = delete;
 
-        void renderWeapon(int x, int y);
         void renderActualLife();
         void renderFullLife();
         void renderLife();
@@ -33,7 +31,6 @@ class Soldier : public Animation , public DynamicObject{
         Soldier(Soldier &&other); 
         Soldier& operator=(Soldier &&other);
         ~Soldier();
-        void update(float dt);
         void render();
         virtual void render(int x, int y) override;
         void stopMoving();

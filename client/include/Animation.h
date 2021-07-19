@@ -27,15 +27,12 @@ class Animation {
       Animation(const Animation &other) = delete;
       Animation& operator=(const Animation &other) = delete;
       Animation& operator=(Animation &&other) = delete;
-      void advanceDefaultOrder();
-      void advanceInverseOrder();
-      void advanceFrame();
+   
    public:
       Animation(std::string imgPath,Window &window, int rows, int columns,
                 int width, int height, bool inverseOrder);
       Animation(Animation &&other);
       virtual ~Animation();
-      virtual void update(float dt);
       virtual void render(const Area &dst, int angle, const SDL_RendererFlip &flipType);
       
 };

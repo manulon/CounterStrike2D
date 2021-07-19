@@ -54,41 +54,7 @@ Animation::Animation(Animation &&other) :
 
 Animation::~Animation() { }
 
-void Animation::update(float dt) {
-    elapsed += dt;
-    while (elapsed > FRAME_RATE) {
-        advanceFrame();
-        elapsed -= FRAME_RATE;
-    }
-}
-
 void Animation::render(const Area &dst, int angle, const SDL_RendererFlip &flipType) {
     Area src(width * currentColumn, height * currentRow, width, height);
     image.render(src, dst, angle, flipType);
-}
-
-void Animation::advanceDefaultOrder() {
-    ++currentColumn;
-    if (currentColumn == (columns - 1)) {
-        ++currentRow;
-        currentColumn = 0;
-    }
-    currentRow = currentRow % rows;
-}
-
-void Animation::advanceInverseOrder() {
-    ++currentRow;
-    if (currentRow == (rows - 1)) {
-        ++currentColumn;
-        currentRow = 0;
-    }
-    currentColumn = currentColumn % columns;  
-}
-
-void Animation::advanceFrame() {
-    if (!inverseOrder) {
-        advanceDefaultOrder();
-    } else {
-        advanceInverseOrder();      
-    }
 }
