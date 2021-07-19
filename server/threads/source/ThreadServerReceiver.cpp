@@ -32,7 +32,11 @@ void ThreadServerReceiver::run(){
                 event = aux;
             } else if (buffer == JOIN){
                 std::cout<<"JOIN EVENT\n";
-                std::shared_ptr<ServerEvent> aux(new LoginEvent(clientID));
+                short len  = protocol.receive_size();
+                std::vector<char> buffer(len);
+                protocol.receive_message(len,buffer.data());
+                std::string mapName(buffer.data());
+                std::shared_ptr<ServerEvent> aux(new LoginEvent(clientID,std::move(mapName)));
                 event = aux;
             } else if (buffer == QUIT) {
                 isRunning = false;

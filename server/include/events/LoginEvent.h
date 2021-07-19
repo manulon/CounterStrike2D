@@ -2,8 +2,10 @@
 #define _LOGIN_EVENT_H_
 #include "ServerEvent.h"
 class LoginEvent : public ServerEvent{
+	private:
+		std::string mapName;
 	public:
-		LoginEvent(short id); //Para multipartida llega el nombre de la partida tambien 
+		LoginEvent(short id,std::string &&mapName); //Para multipartida llega el nombre de la partida tambien 
 		~LoginEvent(){}
 		virtual void handle(Game &game) override;
 };
