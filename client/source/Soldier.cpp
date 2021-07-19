@@ -14,10 +14,15 @@
 // e internamente, aca que cada enum referencie al path en donde se encuentra la
 // imagen solicitada para renderizar.
 
+Soldier::Soldier(std::string imgPath , Window &window, int id) : 
+    Animation(imgPath, window, 3, 2, PPM, 45, true),DynamicObject(PPM,PPM), 
+    direction(RIGHT), moving(false),x(0),y(0), width(PPM), height(45), 
+    angle(90), weaponId(-1), life(100), id(id){ }
+
 Soldier::Soldier(std::string imgPath , Window &window) : 
     Animation(imgPath, window, 3, 2, PPM, 45, true),DynamicObject(PPM,PPM), 
-    direction(RIGHT), moving(false),x(0),y(0), 
-    width(PPM), height(45), angle(90), weaponId(-1), life(100){ }
+    direction(RIGHT), moving(false),x(0),y(0), width(PPM), height(45), 
+    angle(90), weaponId(-1), life(100), id(-1){ }    
 
 //    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
 //    , width(PPM), height(PPM), angle(90), life(100), window(window),
@@ -37,12 +42,12 @@ Soldier::Soldier(std::string imgPath , Window &window) :
 //     angle = 0;
 // }
 
-
-
 Soldier::~Soldier() { }
 
-
 void Soldier::render() {
+    /*if (tengo que cambiar de arma)
+        changeCurrentWeapon();*/
+    
     Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), width, height);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
     
@@ -52,6 +57,10 @@ void Soldier::render() {
 void Soldier::render(int otherX, int otherY){
     Area dest = DynamicObject::getDest(otherX, otherY);
     Area src(0,0,width,height);
+
+    dest.setWidth(width);
+    dest.setHeight(height);
+
     image.render(src,dest);    
 }
 
@@ -96,17 +105,23 @@ void Soldier::updateInfoo(float xx, float yy, short weaponIdd){
 }
 
 void Soldier::changeCurrentWeapon(){
-    
-    if (weaponId == 11){
-        Image img("../assets/gfx/player/t4Knife.png", image.getWindow());
-        image = std::move(img);
-        height = 42;
-    } else if (weaponId == 2 ){
-        Image img("../assets/gfx/player/t4Ak47.png", image.getWindow());
-        image = std::move(img);
-        height = 45;
+    if (weaponId % 2 == 0){
+        if (weaponId == 11){
+            image = std::move(terroristKnife);
+            height = 42;
+        } else if (weaponId == 2 ){
+            image = std::move(terroristAk47);
+            height = 45;
+        }
+    } else {
+        if (weaponId == 11){
+            image = std::move(counterTerroristKnife);
+            height = 42;
+        } else if (weaponId == 2 ){
+            image = std::move(counterTerroristAk47);
+            height = 45;
+        }
     }
-    
 }
 
 void Soldier::renderActualLife(){

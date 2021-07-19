@@ -1,21 +1,28 @@
 #include "Animation.h"
 #include "Area.h"
 
-
 //TODO Revisar la variable FRAME RATE.
 
 Animation::Animation(std::string imgPath, Window &window, int rows, int columns,
                      int width, int height, bool inverseOrder) :
-    image(imgPath.c_str(), window), window(window), rows(rows), columns(columns), 
-    currentRow(0), currentColumn(0), inverseOrder(inverseOrder), 
-    width(width), height(height), elapsed(0) { }
+    image(imgPath.c_str(), window), window(window), 
+    terroristAk47("../assets/gfx/player/t4Ak47.png", window), 
+    terroristKnife("../assets/gfx/player/t4Knife.png", window), 
+    counterTerroristAk47("../assets/gfx/player/ct4Ak47.png", window), 
+    counterTerroristKnife("../assets/gfx/player/ct4Knife.png", window),
+    rows(rows), columns(columns), currentRow(0), currentColumn(0), inverseOrder(inverseOrder), 
+    width(width), height(height), elapsed(0){}
 
 Animation::Animation(Animation &&other) : 
-    image(std::move(other.image)),window(other.window), rows(other.rows), columns(other.columns), 
-
+    image(std::move(other.image)),window(other.window), 
+    terroristAk47(std::move(other.terroristAk47)), 
+    terroristKnife(std::move(other.terroristKnife)), 
+    counterTerroristAk47(std::move(other.counterTerroristAk47)), 
+    counterTerroristKnife(std::move(other.counterTerroristKnife)),
+    rows(other.rows), columns(other.columns),
     currentRow(other.currentRow), currentColumn(other.currentColumn),
     inverseOrder(other.inverseOrder), 
-    width(other.width), height(other.height), elapsed(other.elapsed) { 
+    width(other.width), height(other.height), elapsed(other.elapsed) {
     other.rows = 0;
     other.columns = 0;
     other.currentRow = 0;

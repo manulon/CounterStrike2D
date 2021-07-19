@@ -17,7 +17,7 @@ class Soldier : public Animation , public DynamicObject{
         int angle;
         short weaponId;
         short life;
-        //Window& window;
+        int id;
 
         Soldier(const Soldier &other) = delete;
         Soldier& operator=(const Soldier &other) = delete;
@@ -28,6 +28,7 @@ class Soldier : public Animation , public DynamicObject{
 
     public:
         Soldier(std::string imgPath, Window &window);
+        Soldier(std::string imgPath, Window &window, int id);
         Soldier(Soldier &&other); 
         Soldier& operator=(Soldier &&other);
         ~Soldier();
