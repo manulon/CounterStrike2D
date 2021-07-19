@@ -95,11 +95,18 @@ void Soldier::updateInfoo(float xx, float yy, short weaponIdd){
     DynamicObject::setPos(xx,yy);
 }
 
-void Soldier::setCurrentWeapon(){
-    /*Esto es cuando cambia a arma, ver bien como poner el codigo.*/
-    Image img("../assets/gfx/player/t4Knife.png", image.getWindow());
-    image = std::move(img);
-    height = 45;
+void Soldier::changeCurrentWeapon(){
+    /*
+    if (currentWeapon == "ak47" (o el id)){
+        Image img("../assets/gfx/player/t4Knife.png", image.getWindow());
+        image = std::move(img);
+        height = 42;
+    } else if (currentWeapon == "knife" (o el id)){
+        Image img("../assets/gfx/player/t4Ak47.png", image.getWindow());
+        image = std::move(img);
+        height = 45;
+    }
+    */
 }
 
 void Soldier::renderActualLife(){

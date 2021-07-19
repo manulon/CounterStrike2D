@@ -42,7 +42,7 @@ class Soldier : public Animation , public DynamicObject{
         void updateInfo(float x , float y, short weaponId);
         void updateInfoo(float x , float y, short weaponId);
         void setAsTerrorist();
-        void setCurrentWeapon();
+        void changeCurrentWeapon();
         void setLife(short life);
 };
 
