@@ -233,7 +233,7 @@ void TileMap::updateWeaponInfo(short weaponId, float x, float y){
 
 void TileMap::removePlayer(short id){
     if (id == principalSoldierId){ 
-        //matar al jugador
+        
     } else {
         soldiers.erase(id);
     }
