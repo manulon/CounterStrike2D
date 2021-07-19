@@ -227,3 +227,9 @@ void TileMap::addNewBullet(float x, float y){
     bul->setPos((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM);
     objects.push_back(std::move(bul));
 }
+
+void TileMap::updateWeaponInfo(short weaponId, float x, float y){
+    std::unique_ptr<Weapon> wea(new Weapon("../assets/gfx/weapons/ak47_d.bmp",window,16,32));
+    wea->setPos((x + (float)xOffset)*PPM,(y + (float)yOffset)*PPM);
+    objects.push_back(std::move(wea));
+}

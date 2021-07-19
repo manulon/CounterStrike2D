@@ -89,12 +89,11 @@ void Game::sendInfoToClients(){
     sendLifeInfo();
     sendPositions();
     sendBullets();
-    // sendWeapons();
+    sendWeapons();
 }
 
 void Game::sendLifeInfo(){
     for (auto& pair : terrorist){
-        // LifeMessage * msg = new LifeMessage(pair.second->getLife());
         std::shared_ptr<ServerMessage> msg(new LifeMessage(pair.second->getLife()));
         senderQueues[pair.first]->push(msg);
     }

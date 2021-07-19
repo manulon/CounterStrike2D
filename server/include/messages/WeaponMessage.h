@@ -4,14 +4,14 @@
 #include "ServerMessage.h"
 
 class WeaponMessage : public ServerMessage {    
-    public:
-        WeaponMessage(short id, short posX, short posY);
-        virtual ~WeaponMessage(){}
-        virtual void send(CommunicationProtocol &protocol) override;
     private:
         short id;
-        short posX;
-        short posY;
+        float posX;
+        float posY;
+    public:
+        WeaponMessage(short id, float posX, float posY);
+        virtual ~WeaponMessage(){}
+        virtual void send(CommunicationProtocol &protocol) override;
 };
 
 #endif

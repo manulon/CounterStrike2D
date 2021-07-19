@@ -12,7 +12,7 @@
 #include "JoinOtherPlayerInfo.h"
 #include "JoinInfo.h"
 #include "BulletInfo.h"
-
+#include "WeaponInfo.h"
 class ThreadClientReceiver : public Thread {
     private:
         Socket& skt;
@@ -33,7 +33,6 @@ class ThreadClientReceiver : public Thread {
                     ssize_t received = protocol.receive_message(1,&messageType);
                     if (received == 0 ){
                         isRunning = false;
-                        // queue.push("exit");
                         break;
                     }
                     std::shared_ptr<Info> info = nullptr;
@@ -59,6 +58,12 @@ class ThreadClientReceiver : public Thread {
                         float x = protocol.receive_float();
                         float y = protocol.receive_float();//pushear info bullet
                         std::shared_ptr<Info> aux(new BulletInfo(x,y));
+                        info = aux;
+                    } else if (messageType == WEAPON_MESSAGE){
+                        short id = protocol.receive_size();
+                        float x = protocol.receive_float();
+                        float y = protocol.receive_float(); //pushear info bullet
+                        std::shared_ptr<Info> aux(new WeaponInfo(id,x,y));
                         info = aux;
                     }
 
