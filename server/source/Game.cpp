@@ -192,7 +192,7 @@ void Game::playerMovement(short id, char opcode) {
 
 void Game::joinPlayer(short playerID) {
     if (isReadyToStart()) throw ("Maximo numero de jugadores alcanzados, intente en otra partida");
-    
+    gameStarted = true;
     { 
         std::lock_guard<std::mutex> lock(mutex);
         if (playersInGame % 2 == 0) {
