@@ -96,17 +96,17 @@ void Soldier::updateInfoo(float xx, float yy, short weaponIdd){
 }
 
 void Soldier::changeCurrentWeapon(){
-    /*
-    if (currentWeapon == "ak47" (o el id)){
+    
+    if (weaponId == 11){
         Image img("../assets/gfx/player/t4Knife.png", image.getWindow());
         image = std::move(img);
         height = 42;
-    } else if (currentWeapon == "knife" (o el id)){
+    } else if (weaponId == 2 ){
         Image img("../assets/gfx/player/t4Ak47.png", image.getWindow());
         image = std::move(img);
         height = 45;
     }
-    */
+    
 }
 
 void Soldier::renderActualLife(){

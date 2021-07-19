@@ -10,7 +10,7 @@
 TileMap::TileMap(Window & window,const char *pathText, const std::string &pathTiles, const std::string &pathObs) :
 window(window),image(pathTiles.c_str(),window),mapName(pathText),
 imgObstacles(pathObs.c_str(),window),tiles(), obstacles(), xOffset(0), yOffset(0), 
-principalSoldier("../assets/gfx/player/t4Ak47.png", window),principalSoldierId(-1),
+principalSoldier("../assets/gfx/player/ct4Ak47.png", window),principalSoldierId(-1),
 pointer("../assets/gfx/pointer.bmp", window, {0xFF, 0, 0xFF}){
 
     loadMedia();
@@ -179,10 +179,8 @@ void TileMap::setPrincipalPlayerId(short id){
 
 void TileMap::updateSoldierInfo(short id, float x, float y, short weaponId){
     if (id == principalSoldierId){
-        // principalSoldier.updateInfo((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM, weaponId);
         principalSoldier.updateInfo(x,y, weaponId);
     } else {
-        std::cout << "Antes de la cagada el id del jugador es " << id << std::endl;
         soldiers[id]->updateInfoo((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM,weaponId);
     } 
 }

@@ -16,7 +16,6 @@ void Client::run(const char * host, const char *service){
         menu.clear();
         isRunning = menu.handleEvents();
         menu.render();
-        std::this_thread::sleep_for(std::chrono::milliseconds(40));
     }
     menu.close();
 

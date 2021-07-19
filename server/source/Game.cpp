@@ -68,6 +68,7 @@ void Game::cleandDeadCounterTerrorists() {
     while(it != counterTerrorist.end()) {
         if (it->second->isDead()) {
             it = counterTerrorist.erase(it);
+            
         } else {
             ++it;
         }
@@ -192,15 +193,14 @@ void Game::playerMovement(short id, char opcode) {
 void Game::joinPlayer(short playerID) {
     if (isReadyToStart()) throw ("Maximo numero de jugadores alcanzados, intente en otra partida");
     gameStarted = true;
-    { 
-        std::lock_guard<std::mutex> lock(mutex);
-        if (playersInGame % 2 == 0) {
-            createCounterTerrorist(playerID, playersInGame/2);
-        } else {
-            createTerrorist(playerID, playersInGame/2);
-        }
-        ++playersInGame;
+    
+    if (playerID % 2 == 0) {
+        createCounterTerrorist(playerID, playerID/2);
+    } else {
+        createTerrorist(playerID, playerID/2);
     }
+    ++playersInGame;
+
     std::shared_ptr<ServerMessage> idMessage(new JoinMessage(playerID));
     senderQueues[playerID]->push(idMessage);
     joinOtherPlayers(playerID);
