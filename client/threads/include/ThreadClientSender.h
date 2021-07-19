@@ -34,7 +34,8 @@ class ThreadClientSender : public Thread {
                     break;
                 }
             }  
-        }      
+        }
+              
 };
 
 #endif
