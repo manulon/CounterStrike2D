@@ -48,8 +48,9 @@ void TileMap::setOffset(std::string &size){
     } else if (size == "small"){
         xOffset = 0;
         yOffset = -4;
-    } else if (size == "big"){
-
+    }  else if (size == "big"){
+        xOffset = 4;
+        yOffset = -4;
     }
     
 }
