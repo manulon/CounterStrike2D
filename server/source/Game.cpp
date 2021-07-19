@@ -139,18 +139,6 @@ void Game::sendBullets(){
     }
 
 }
-    // for (auto& pairPlayer : terrorist){
-    //     for (auto& bullet: actualBullets){
-    //         BulletMessage *msg = new BulletMessage(bullet->getPositionX(),bullet->getPositionY());
-    //         senderQueues[pairPlayer.first]->push(msg);
-    //     }   
-    // }
-    // for (auto& pairPlayer : counterTerrorist){
-    //     for (auto& bullet: actualBullets){
-    //         BulletMessage *msg = new BulletMessage(bullet->getPositionX(),bullet->getPositionY());
-    //         senderQueues[pairPlayer.first]->push(msg);
-    //     }
-    // }
 
 void Game::sendWeapons(){
     std::list<std::shared_ptr<SWeapon>> actualWeapons;

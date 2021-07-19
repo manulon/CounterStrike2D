@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-#define IMPULSE 1.0f
+#define IMPULSE 0.4f
 #define RADIUS 0.1f
 #define RESTITUTION 0.0f
 #define DENSITY 0.1f
