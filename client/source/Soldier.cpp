@@ -16,12 +16,12 @@
 
 Soldier::Soldier(std::string imgPath , Window &window, int id) : 
     Animation(imgPath, window, 3, 2, PPM, 45, true),DynamicObject(PPM,PPM), 
-    direction(RIGHT), moving(false),x(0),y(0), width(PPM), height(45), 
+    direction(RIGHT), moving(false),x(0),y(0), width(PPM), height(48), 
     angle(90), weaponId(-1), life(100), id(id){ }
 
 Soldier::Soldier(std::string imgPath , Window &window) : 
     Animation(imgPath, window, 3, 2, PPM, 45, true),DynamicObject(PPM,PPM), 
-    direction(RIGHT), moving(false),x(0),y(0), width(PPM), height(45), 
+    direction(RIGHT), moving(false),x(0),y(0), width(PPM), height(48), 
     angle(90), weaponId(-1), life(100), id(-1){ }    
 
 //    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
@@ -48,7 +48,7 @@ void Soldier::render() {
     /*if (tengo que cambiar de arma)
         changeCurrentWeapon();*/
     
-    Area dest((800/2)-(PPM/2), (600/2)-(PPM/2), width, height);
+    Area dest((800/2)-(width/2), (600/2)-(height/2), width, height);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
     
     renderActualLife();
@@ -56,7 +56,7 @@ void Soldier::render() {
 
 void Soldier::render(int otherX, int otherY){
     Area dest = DynamicObject::getDest(otherX, otherY);
-    Area src(0,0,width,height);
+    Area src(0,32,width,height);
 
     dest.setWidth(width);
     dest.setHeight(height);

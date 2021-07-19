@@ -62,6 +62,6 @@ Animation::Animation(Animation &&other) :
 Animation::~Animation() { }
 
 void Animation::render(const Area &dst, int angle, const SDL_RendererFlip &flipType) {
-    Area src(width * currentColumn, height * currentRow, width, height);
+    Area src(width * currentColumn, 18, width, height);
     image.render(src, dst, angle, flipType);
 }
