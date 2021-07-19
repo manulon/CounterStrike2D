@@ -10,9 +10,13 @@ class Area;
 
 class Animation {
    protected:
-
       Image image;
       Window &window;
+
+      Image terroristAk47;
+      Image terroristKnife;
+      Image counterTerroristAk47;
+      Image counterTerroristKnife;
 
    private:
       int rows;
