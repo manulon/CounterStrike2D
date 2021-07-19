@@ -4,7 +4,8 @@
 #include "QuitEvent.h"
 #include "ShootEvent.h"
 #include "LoginEvent.h"
-
+#include "PickUpWeaponEvent.h"
+#include "StopPickingUpWeaponEvent.h"
 
 ThreadServerReceiver::ThreadServerReceiver(Socket &skt, 
     NonBlockingQueue<std::shared_ptr<ServerEvent>>& queue, 
@@ -44,7 +45,13 @@ void ThreadServerReceiver::run(){
                 std::shared_ptr<ServerEvent> aux(new QuitEvent(clientID));
                 event = aux;
 
-            } 
+            } else if (buffer == PICK_UP_WEAPON){
+                std::shared_ptr<ServerEvent> aux(new PickUpWeaponEvent(clientID));
+                event = aux;
+            } else if (buffer == STOP_PICKING_UP_WEAPON){
+                std::shared_ptr<ServerEvent> aux(new StopPickingUpWeaponEvent(clientID));
+                event = aux;
+            }
             queue.push(event);
 
         } catch (const std::exception& e){

@@ -30,6 +30,8 @@ class ClientProtocol{
         void quit();
         void attack(short angle);
         void list();
+        void pickUpWeapon();
+        void stopPickingUpWeapon();
 };
 
 #endif

@@ -310,3 +310,19 @@ void Game::addCounterTerroristPosition(float x, float y) {
     std::pair<float, float> position(x,y);
     counterTerroristsPositions.insert(it, std::move(position));
 }
+
+void Game::pickUpWeapon(short id){
+    std::map<short, std::shared_ptr<Player>>::iterator it = terrorist.find(id);
+    if (it == terrorist.end()) {
+        it = counterTerrorist.find(id);
+    }
+    it->second->pickUpWeapon();
+}
+
+void Game::stopPickingUpWeapon(short id){
+    std::map<short, std::shared_ptr<Player>>::iterator it = terrorist.find(id);
+    if (it == terrorist.end()) {
+        it = counterTerrorist.find(id);
+    }
+    it->second->stopPickingUpWeapon();
+}

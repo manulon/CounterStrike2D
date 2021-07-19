@@ -71,10 +71,24 @@ void ClientProtocol::quit(){
 
 void ClientProtocol::attack(short angle) {
     char key(SHOOT);
+    
     std::shared_ptr<Event> newEvent(new Event(1,key,angle-90));
     queue.push(newEvent);
 }
 
+void ClientProtocol::pickUpWeapon(){
+    char key(PICK_UP_WEAPON);
+
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
+}
+
+void ClientProtocol::stopPickingUpWeapon(){
+    char key(STOP_PICKING_UP_WEAPON);
+
+    std::shared_ptr<Event> newEvent(new Event(1,key,-1));
+    queue.push(newEvent);
+}
 
 /*
 ClienteEvento

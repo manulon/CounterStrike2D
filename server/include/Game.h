@@ -72,6 +72,8 @@ class Game {
 		void addTerroristPosition(float x, float y);
 		void addCounterTerroristPosition(float x, float y);
 		void removePlayer(short id);
+		void pickUpWeapon(short id);
+		void stopPickingUpWeapon(short id);
 };
 
 #endif 

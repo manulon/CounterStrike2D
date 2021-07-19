@@ -37,7 +37,7 @@ target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 # add_executable(counterStrike2D test/counterStrike2D.cpp ${server} ${source} ${common} ${serverThreads})
 # target_link_libraries(counterStrike2D SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-add_executable(serverTest test/serverTest.cpp "server/source/messages/OtherPlayerJoinedMessage.cpp" ${common} ${server} ${serverThreads} ${nbq})
+add_executable(serverTest test/serverTest.cpp ${common} ${server} ${serverThreads} ${nbq})
 target_link_libraries(serverTest Box2D yaml-cpp)
 
 add_executable(clientTest test/clientTest.cpp ${common} ${source}) #ELIMINAR EL SERVER
