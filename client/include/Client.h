@@ -12,6 +12,7 @@ class Client {
     private:
         NonBlockingQueue<std::shared_ptr<Info>> nonBlockingQueue;
         BlockingQueue<std::shared_ptr<ClientMessage>> blockingQueue;
+        void gameLoop(TileMap &map);
             
     public:
         Client():nonBlockingQueue(),blockingQueue(){}
