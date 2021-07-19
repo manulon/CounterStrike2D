@@ -12,6 +12,7 @@
 #include "WeaponMessage.h"
 #include "OtherPlayerJoinedMessage.h"
 #include "JoinMessage.h"
+#include "DeadMessage.h"
 
 Game::Game(MaxPlayers maxPlayers, 
            NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
@@ -79,6 +80,12 @@ void Game::cleanAllPlayers() {
     std::map<short, std::shared_ptr<Player>>::iterator it = allPlayers.begin();
     while(it != allPlayers.end()) {
         if (it->second->isDead()) {
+            std::shared_ptr<ServerMessage> aux(new LifeMessage(0));
+            senderQueues[it->first]->push(aux);
+            std::shared_ptr<DeadMessage> msg (new DeadMessage(it->first));
+            for (auto &pair :allPlayers){
+                senderQueues[pair.first]->push(msg);
+            }
             it = allPlayers.erase(it);
         } else {
             ++it;

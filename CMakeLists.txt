@@ -30,6 +30,7 @@ FILE(GLOB_RECURSE serverThreads "server/threads/source/*.cpp")
 FILE(GLOB_RECURSE common "common/*.cpp")
 FILE(GLOB_RECURSE mapEditor "mapEditor/*.cpp")
 FILE(GLOB_RECURSE nbq "common/NonBlockingQueue.cpp")
+FILE(GLOB_RECURSE serverMessages "server/source/messages/*.cpp")
 
 add_executable(editor test/editor.cpp ${mapEditor} ${server} ${source} ${common} ${serverThreads})
 target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
@@ -37,7 +38,7 @@ target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 # add_executable(counterStrike2D test/counterStrike2D.cpp ${server} ${source} ${common} ${serverThreads})
 # target_link_libraries(counterStrike2D SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-add_executable(serverTest test/serverTest.cpp ${common} ${server} ${serverThreads} ${nbq})
+add_executable(serverTest test/serverTest.cpp ${common} ${server} ${serverMessages} ${serverThreads} ${nbq})
 target_link_libraries(serverTest Box2D yaml-cpp)
 
 add_executable(clientTest test/clientTest.cpp ${common} ${source}) #ELIMINAR EL SERVER

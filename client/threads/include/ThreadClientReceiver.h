@@ -13,6 +13,7 @@
 #include "JoinInfo.h"
 #include "BulletInfo.h"
 #include "WeaponInfo.h"
+#include "DeadPlayerInfo.h"
 class ThreadClientReceiver : public Thread {
     private:
         Socket& skt;
@@ -54,7 +55,6 @@ class ThreadClientReceiver : public Thread {
                         std::shared_ptr<Info> aux(new JoinInfo((short)protocol.receive_size()));
                         info = aux;
                     } else if (messageType == BULLET_MESSAGE){
-                        std::cout<<"llega una bala\n";
                         float x = protocol.receive_float();
                         float y = protocol.receive_float();//pushear info bullet
                         std::shared_ptr<Info> aux(new BulletInfo(x,y));
@@ -65,11 +65,13 @@ class ThreadClientReceiver : public Thread {
                         float y = protocol.receive_float(); //pushear info bullet
                         std::shared_ptr<Info> aux(new WeaponInfo(id,x,y));
                         info = aux;
+                    } else if (messageType == DEAD_PLAYER){
+                        std::shared_ptr<DeadPlayerInfo> aux(new DeadPlayerInfo(protocol.receive_size()));
+                        info = aux;
                     }
 
                     queue.push(info);
                 } catch (const std::exception& e){
-                    // queue.push("exit");
                     isRunning = false;
                     break;
                 }
