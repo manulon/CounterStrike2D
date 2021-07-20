@@ -26,9 +26,17 @@ Game::Game(MaxPlayers maxPlayers,
     senderQueues {senderQueues},
     physicalMap{nullptr},
     gameStarted{false},
-    isRunning{false} { } //OJO CON MOVER UN GAME, y el this
+    isRunning{false} { } 
 
 Game::~Game() { }
+
+void Game::createWeapons() {
+    std::cout << "FEO\n";
+    std::cout << weaponsPositions.size() << std::endl;
+    for (size_t i = 0; i < weaponsPositions.size(); i++) {
+        createWeapon(i);
+    }
+}
 
 void Game::executeFrame() {
     std::shared_ptr<ServerEvent> event = queue.pop();
@@ -224,6 +232,10 @@ void Game::joinPlayer(short playerID) {
     if (isReadyToStart()) throw ("Maximo numero de jugadores alcanzados, intente en otra partida");
     gameStarted = true;
     
+    if (playersInGame == 0) {
+        createWeapons();
+    }
+
     if (playerID % 2 == 0) {
         createCounterTerrorist(playerID, playerID/2);
     } else {
@@ -265,6 +277,19 @@ void Game::createCounterTerrorist(short playerID, int position) {
     allPlayers.insert(std::pair<short, std::shared_ptr<Player>>(playerID, player));
 }
 
+void Game::createWeapon(int position) {
+    float x = std::get<0>(weaponsPositions[position]);
+    float y = std::get<1>(weaponsPositions[position]);
+    //float id = std::get<2>(weaponsPositions[position]);
+
+    // SI TUVIERAMOS DOS ARMAS DROPEABLES DOS VECES SE CREARIAN SEGUN ID
+    std::unique_ptr<Ak47> ak(new Ak47(world, 0.2f, 0.2f));
+    std::shared_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
+    w->earlyAttachToWorld(x, y);
+    world.spawnWeapon(std::move(w)); 
+    std::cout << "CREO EL ARMA\n";
+}
+
 void Game::removePlayer(short id){
     allPlayers.erase(id);
     if (id % 2 == 0) {
@@ -272,11 +297,6 @@ void Game::removePlayer(short id){
     } else {
         terrorist.erase(id);
     }
-    std::cout<<"--------------------------------\n";
-    std::cout<<"--------------------------------\n";
-    std::cout<<"JUGADOR ELIMINADO EL MAPA TIENE TAMANIO "<<allPlayers.size()<<std::endl;
-    std::cout<<"--------------------------------\n";
-    std::cout<<"--------------------------------\n";
 }
 
 //Cuando un jugador se une se le comunica el resto de los jugadores que estan en la partida
@@ -304,7 +324,7 @@ bool Game::isReadyToStart() {
 
 bool Game::isGameOver() {
     bool gameOver = false;
-    if (terrorist.size() == 10) {
+    if (terrorist.size() == 0) {
         // para cada elemento de la cola enviadora
         // con clave impar
         // senderQueue.push("Derrota")
@@ -315,7 +335,7 @@ bool Game::isGameOver() {
 
         gameOver = true;
     }
-    if (counterTerrorist.size() == 10) {
+    if (counterTerrorist.size() == 0) {
         // para cada elemento de la cola enviadora
         // con clave impar
         // senderQueue.push("Victoria")
@@ -339,6 +359,17 @@ void Game::addCounterTerroristPosition(float x, float y) {
     std::vector<std::pair<float, float>>::iterator it = counterTerroristsPositions.end();
     std::pair<float, float> position(x,y);
     counterTerroristsPositions.insert(it, std::move(position));
+}
+
+void Game::addWeaponPosition(float x, float y, int id) {
+    std::vector<std::tuple<float, float, int>>::iterator it = weaponsPositions.end();
+    std::tuple<float, float, int> weap(x, y, id);
+        std::cout << weaponsPositions.size() << std::endl;
+
+    weaponsPositions.insert(it, std::move(weap));
+    std::cout << "AGregue arma\n";
+        std::cout << weaponsPositions.size() << std::endl;
+
 }
 
 void Game::pickUpWeapon(short id){

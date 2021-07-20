@@ -26,7 +26,8 @@ void Client::run(const char * host, const char *service){
         Window window("Counter Strike 2D", 800, 600, 
                     SDL_WINDOW_RESIZABLE, 
                     SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-        TileMap map(window, menu.getMapPath().c_str(), menu.getTilesPath(), "../assets/gfx/tiles/obstacles.png");
+        TileMap map(window, menu.getMapPath().c_str(), menu.getTilesPath(), 
+                    "../assets/gfx/tiles/obstacles.png");
         ThreadClientReceiver receiver(skt, nonBlockingQueue);
         ThreadClientSender sender(skt, blockingQueue, 1);
         

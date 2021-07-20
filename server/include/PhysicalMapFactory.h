@@ -22,6 +22,7 @@ public:
     Border* createBorders();
     void setTerroristsPositions();
     void setCounterTerroristsPositions();
+    void setWeaponsPositions();
     int getWidth();
     int getHeight();
 };

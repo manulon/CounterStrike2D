@@ -18,6 +18,5 @@ PrimaryWeapon::PrimaryWeapon(PrimaryWeapon &&other) :
 PrimaryWeapon::~PrimaryWeapon() { }
 
 void PrimaryWeapon::collideWithPlayer(Player &player) {
-	std::cout << "PrimaryWeapon choco con player" << std::endl;
 	player.swapAndDropPrimaryWeapon(*this);
 }

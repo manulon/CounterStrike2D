@@ -146,25 +146,18 @@ void Player::collideWithBullet(Bullet &bullet) {
 }
 
 void Player::collideWithObstacle(Obstacle &obstacle) {
-    std::cout << "player chocado por obstaculo\n";
 }
 
 void Player::collideWithWeapon(SWeapon &other) {
-    std::cout << "player chocado por SWeapon\n";
 }
 
 void Player::collideWithPlayer(Player &player) {
-    std::cout << "player chocado por player\n";
 }
 
 void Player::collideWithBorder(Border &border) {
-    std::cout << "Player chocado por border\n";
 }
 
 void Player::swapAndDropPrimaryWeapon(PrimaryWeapon &other) {
-    std::cout << "player chocado por primaryWeapon\n";
-    // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
-    // SI NO EXISTE EL ARMA EN EL MUNDO 
     bool isCurrentWeapon = false;
     if (currentWeapon == primaryWeapon.get()) isCurrentWeapon = true;
     dropPrimaryWeapon();
@@ -173,9 +166,6 @@ void Player::swapAndDropPrimaryWeapon(PrimaryWeapon &other) {
 }
 
 void Player::swapAndDropSecondaryWeapon(SecondaryWeapon &other) {
-    std::cout << "player chocado por secondaryWeapon\n";
-    // SI LOS MUNDOS EN QUE VIVEN LAS ARMAS SON DIFERENTES FALLARA
-    // SI NO EXISTE EL ARMA EN EL MUNDO 
     bool isCurrentWeapon = false;
     if (currentWeapon == secondaryWeapon.get()) isCurrentWeapon = true;
     dropSecondaryWeapon();

@@ -280,6 +280,8 @@ small:
     - [1, 0, 360]
   counter-terrorist:
     - [1, 0, 408]
+  weapons:
+    - [1, 48, 360]
 big:
   obstacles:
     - [2, 0, 360]
@@ -292,6 +294,8 @@ big:
     - [1, 0, 360]
   counter-terrorist:
     - [1, 0, 408]
+  weapons:
+    - [1, 48, 360]
 huge:
   obstacles:
     - [2, 0, 552]
@@ -304,6 +308,8 @@ huge:
     - [1, 0, 504]
   counter-terrorist:
     - [1, 0, 552]
+  weapons:
+    - [1, 48, 504]
 config:
   tile_box_height: 128
   tile_width: 32

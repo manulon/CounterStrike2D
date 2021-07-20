@@ -53,3 +53,7 @@ void MapEditor::addCounterTerrorist(int x , int y){
     map["counter-terrorist"].push_back(field);
 }
 
+void MapEditor::addWeapon(int x , int y, int id){
+    YAML::Node field = YAML::Load("["+std::to_string(x)+","+std::to_string(y)+","+std::to_string(id)+"]");
+    map["weapon"].push_back(field);
+}

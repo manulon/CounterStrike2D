@@ -28,7 +28,7 @@ class Button{
         virtual bool clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,
                              std::vector<Tile*>& soldierOptionsTiles, const Image& image, 
                              const Image& obsImage, const std::string& sizeName,
-                             const Image& tImage,const Image& ctImage) = 0;
+                             const Image& tImage,const Image& ctImage, const Image& weapon) = 0;
 
 };
 

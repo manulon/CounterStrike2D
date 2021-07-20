@@ -11,7 +11,8 @@ windowWidth(window.getWidth()),windowHeight(window.getHeight()),tileNumber(-1),
 actualType(-1),selectedZoneX(windowWidth/2+4),selectedZoneY(windowHeight-86),
 image(image),obsImage(obsImage),
 tImage("../assets/gfx/player/ct4.bmp",window),ctImage("../assets/gfx/player/t4.bmp",window),
-actualImage(""),window(window),finalMapTiles(finalMapTiles),finalMapObstacles(),
+weaponImage("../assets/gfx/weapons/ak47_d_editor.png",window),actualImage(""),window(window),
+finalMapTiles(finalMapTiles),finalMapObstacles(),weaponMap(),
 mapName(mapName),tileBoxHeight(0),tileWidth(0),tileHeight(0){
    YAML::Node readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
    tileBoxHeight = readerNode["config"]["tile_box_height"].as<int>();
@@ -43,9 +44,6 @@ std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName){
             break;
 
          case SDL_QUIT:
-
-            std::cout<<"EL size del mapa es #####"<<terroristMap.size()<<std::endl;
-
             MapEditor map;
             std::cout<<"Ingrese el nombre del mapa: "<<std::endl;
             std::string input("");
@@ -66,6 +64,9 @@ std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName){
             }
             for (auto& e : counterTerroristMap){
                map.addCounterTerrorist(e.first.first,e.first.second);
+            }
+            for (auto& e : weaponMap){
+               map.addWeapon(e.first.first,e.first.second,e.second);
             }
             map.generateMap();
             return false;
@@ -96,7 +97,7 @@ std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName){
       for (auto& button: buttons){
          if (button->mouseInText(mousePositionX,mousePositionY))
             button->clicked(optionTiles,obstaclesOptionTiles,soldierOptionTiles,
-                            image,obsImage,sizeName,tImage,ctImage);
+                            image,obsImage,sizeName,tImage,ctImage,weaponImage);
       }
       for (auto& tile : optionTiles){
          if (mouseInTile(mousePositionX,mousePositionY,tile)){
@@ -123,9 +124,12 @@ std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName){
             if (i == 0){
                optionTiles.push_back(new Tile(1,selectedZoneX,selectedZoneY,tImage));
                changeActualImage("terrorist");
-            }else{
+            }else if (i == 1){
                optionTiles.push_back(new Tile(1,selectedZoneX,selectedZoneY,ctImage));
                changeActualImage("counter-terrorist");
+            }else{
+               optionTiles.push_back(new Tile(1,selectedZoneX,selectedZoneY,weaponImage));
+               changeActualImage("weapon");
             }
             break;
          }
@@ -144,13 +148,14 @@ std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName){
             finalMapTiles[std::make_pair(tiles[tileNumber]->getX()/PPM,
                                          tiles[tileNumber]->getY()/PPM)] = tiles[tileNumber]->getType();
          }else if (actualImage == "terrorist"){
-            std::cout<<"Agrego a alguien a la lista de terroristas"<< std::endl;
             terroristMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
                                         tiles[tileNumber]->getY()/PPM)] = 1;
          }else if (actualImage == "counter-terrorist"){
-            std::cout<<"Agrego a alguien a la lista de counter-terroristas"<< std::endl;
             counterTerroristMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
                                                tiles[tileNumber]->getY()/PPM)] = 1;
+         }else if (actualImage == "weapon"){
+            weaponMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
+                                     tiles[tileNumber]->getX()/PPM)] = 11;
          }
       }
    }
@@ -253,6 +258,8 @@ Image& EditorEventHandler::getActualImage(){
       return tImage;
    }else if (actualImage == "counter-terrorist"){
       return ctImage;
+   }else if (actualImage == "weapon"){
+      return weaponImage;
    }
    return image;
 }

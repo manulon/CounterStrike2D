@@ -15,7 +15,7 @@ void ButtonObstacles::render(){
 bool ButtonObstacles::clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,
                               std::vector<Tile*>& soldierOptionsTiles, const Image& image, 
                               const Image& obsImage,const std::string& sizeName,
-                              const Image& tImage,const Image& ctImage){
+                              const Image& tImage,const Image& ctImage, const Image& weapon){
 	for (auto& option: options){
         delete option;
         options.pop_back();
@@ -32,7 +32,7 @@ bool ButtonObstacles::clicked(std::vector<Tile*>& options,std::vector<Tile*>& ob
     }
 
     editor.getAtributes("obstacles",sizeName,options,obstaclesOptionTiles,soldierOptionsTiles,
-                        image,obsImage,tImage,ctImage);
+                        image,obsImage,tImage,ctImage,weapon);
 
     return false;
 }
