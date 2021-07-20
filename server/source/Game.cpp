@@ -25,8 +25,8 @@ Game::Game(MaxPlayers maxPlayers,
     queue {queue},
     senderQueues {senderQueues},
     physicalMap{nullptr},
-    // physicalMap{world,"../assets/maps/mapaGiganteDust.yaml", *this},
-    gameStarted{false} { } //OJO CON MOVER UN GAME, y el this
+    gameStarted{false},
+    isRunning{false} { } //OJO CON MOVER UN GAME, y el this
 
 Game::~Game() { }
 
@@ -45,7 +45,7 @@ void Game::executeFrame() {
     //std::this_thread::sleep_for(std::chrono::milliseconds(40));
 }
 
-void Game::start() {
+void Game::run() {
     int rest = 0; 
     int behind = 0;
     int lost = 0;
@@ -54,8 +54,8 @@ void Game::start() {
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
     std::chrono::duration<double, std::milli> diff = t2-t1;
-
-    while (true) {
+    isRunning =  true;
+    while (isRunning) {
         executeFrame();
         if (allPlayers.size() == 0 && gameStarted == true){
             break;
@@ -376,4 +376,8 @@ void Game::setMap(std::string mapName){
 
 void Game::switchWeapon(short id, char weapon){
     allPlayers[id]->switchWeapon(weapon);
+}
+
+void Game::stop(){
+    isRunning = false;
 }

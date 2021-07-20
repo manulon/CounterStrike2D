@@ -11,20 +11,18 @@ void Server::run(const char* host, const char* service) {
 
     ThreadAcceptor acceptor(host, service, clientEvents, senderQueues);
     acceptor.spawn();
-    // game.joinPlayer(0);
-    // game.joinPlayer(1);
-    game.start();
 
-    /*while (game.isReadyToStart()) {
-        Event event = clientsEvents.pop();
-        event.handleEvent(game);
-    }*/
+    game.spawn();
 
-
+     std::cout<<"SNTES DEL CIN\n";
     std::string input("");
-    while (input != "q"){
+    while (input != "q" && input != "w"){
         std::cin >> input;
     }
+    if (input == "w"){
+        game.stop();  
+    } 
     acceptor.stop();
     acceptor.join();
+    game.join();
 }

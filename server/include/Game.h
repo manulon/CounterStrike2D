@@ -9,7 +9,8 @@
 #include <map>
 #include <mutex>
 #include "PhysicalMapFactory.h"
-
+#include "Thread.h"
+#include <atomic>
 class ServerEvent;
 enum MaxPlayers {
 	TWO = 2,
@@ -19,7 +20,7 @@ enum MaxPlayers {
 	TEN = 10
 };
 
-class Game {
+class Game : public Thread {
 	private:
        	World world;
         MaxPlayers maxPlayers;
@@ -36,7 +37,7 @@ class Game {
 
 		std::unique_ptr<PhysicalMapFactory> physicalMap;
 		bool gameStarted;
-        
+        std::atomic<bool> isRunning;
 		Game(const Game &other) = delete;
 		Game(Game &&other) = delete;
 		Game& operator=(const Game &other) = delete;
@@ -64,7 +65,7 @@ class Game {
 		void joinPlayer(short playerID);
 		bool isReadyToStart();
 		bool isGameOver();
-		void start();
+		virtual void run () override;
 		void shoot(short id, short angle);
 		void playerMovement(short id, char opcode);
 
@@ -77,6 +78,7 @@ class Game {
 		bool hasStarted();
 		void setMap(std::string name);
 		void switchWeapon(short id, char weapon);
+		void stop();
 };
 
 #endif 

@@ -8,7 +8,7 @@
 
 #define DAMPING 70.0f //10.0f 
 #define DENSITY 1.0f
-#define MOVING_FORCE 1000.0f //250.0f
+#define MOVING_FORCE 500.0f //250.0f
 #define STOP_FORCE 0.0f
 #define FIXED_ROTATION true
 #define BODY_TYPE b2_dynamicBody
