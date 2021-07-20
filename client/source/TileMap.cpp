@@ -2,7 +2,6 @@
 #include <iostream>
 #include <utility>
 #include "yaml-cpp/yaml.h"
-#include "RenderizableFactory.h"
 #include "Stencil.h"
 #include "Pointer.h"
 #include "Bullett.h"
