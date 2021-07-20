@@ -35,10 +35,11 @@ class World {
 
 		std::list<std::shared_ptr<SWeapon>> weapons;
 		std::list<std::shared_ptr<Bullet>> bullets;
+		float dt;
 
 		World();
 		~World();
-		void step();
+		void step(float rate);
 		b2Body* createBody(const b2BodyDef *bodyDef);
 		void destroyBody(b2Body **body);
 		void spawnBullet(std::shared_ptr<Bullet> &&bullet);

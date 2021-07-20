@@ -14,6 +14,8 @@
 #include "JoinMessage.h"
 #include "DeadMessage.h"
 
+#define FRAME_RATE 1.0f/60.0f
+
 Game::Game(MaxPlayers maxPlayers, 
            NonBlockingQueue<std::shared_ptr<ServerEvent>> &queue,
            std::map<short,std::shared_ptr<BlockingQueue<std::shared_ptr<ServerMessage>>>> &senderQueues) :
@@ -28,23 +30,49 @@ Game::Game(MaxPlayers maxPlayers,
 
 Game::~Game() { }
 
+void Game::executeFrame() {
+    std::shared_ptr<ServerEvent> event = queue.pop();
+    while (event.get() != nullptr) {
+        event->handle(*this);
+        event = queue.pop();
+    }
+    for (auto& pair : allPlayers){
+        pair.second->update();
+    }
+    world.step(FRAME_RATE);
+    cleanDeadPlayers();
+    sendInfoToClients();
+    //std::this_thread::sleep_for(std::chrono::milliseconds(40));
+}
+
 void Game::start() {
+    int rest = 0; 
+    int behind = 0;
+    int lost = 0;
+    int rate = (int)FRAME_RATE * 1000;
+
+    auto t1 = std::chrono::steady_clock::now();
+    auto t2 = t1;
+    std::chrono::duration<double, std::milli> diff = t2-t1;
+
     while (true) {
-        std::shared_ptr<ServerEvent> event = queue.pop();
-        while (event.get() != nullptr) {
-            event->handle(*this);
-            event = queue.pop();
-        }
-        for (auto& pair : allPlayers){
-            pair.second->update();
-        }
+        executeFrame();
         if (allPlayers.size() == 0 && gameStarted == true){
             break;
         }
-        world.step();
-        cleanDeadPlayers();
-        sendInfoToClients();
-        std::this_thread::sleep_for(std::chrono::milliseconds(40));
+
+        t2 = std::chrono::steady_clock::now();
+        diff = t2 - t1;
+        rest = rate - std::ceil(diff.count());
+
+        if (rest < 0) {
+            behind = -rest;
+            rest = rate - (behind % rate);
+            lost = behind + rate;
+            t1 += std::chrono::milliseconds(lost);
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(rest));
+        t1 += std::chrono::milliseconds(rate);
     }
 }
 

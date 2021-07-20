@@ -33,8 +33,8 @@ void World::destroyBody(b2Body **body) {
 	bodiesToDestroy.push(body);
 }
 
-void World::step() {
-    world.Step(timeStep, velocityIterations, positionIterations);
+void World::step(float rate) {
+    world.Step(rate, velocityIterations, positionIterations);
     clean();
 }
 
