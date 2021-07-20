@@ -6,14 +6,6 @@
 
 #define PPM 32
 
-// TODO Tal vez agregar un enum que sea
-// enum {soldado_tipo_1, soldado_tipo_2, soldado_tipo3..., soldado_tipoN};
-// e instanciar un objeto de una clase ImageRepository para decirle,
-// imageRepository.loadImage(tipo_soldado).
-// Soldado podria recibir el enum de afuera que indique el tipo de soldadito a crear
-// e internamente, aca que cada enum referencie al path en donde se encuentra la
-// imagen solicitada para renderizar.
-
 Soldier::Soldier(std::string imgPath , Window &window, int id) : 
     Animation(imgPath, window, 3, 2, PPM, 45, true),DynamicObject(PPM,PPM), 
     direction(RIGHT), moving(false),x(0),y(0), width(PPM), height(48), 
@@ -23,11 +15,6 @@ Soldier::Soldier(std::string imgPath , Window &window) :
     Animation(imgPath, window, 3, 2, PPM, 45, true),DynamicObject(PPM,PPM), 
     direction(RIGHT), moving(false),x(0),y(0), width(PPM), height(48), 
     angle(90), weaponId(-1), life(100), id(-1){ }    
-
-//    Animation(imgPath, window, 3, 2, PPM, PPM, true),DynamicObject(PPM,PPM), direction(RIGHT), moving(false)
-//    , width(PPM), height(PPM), angle(90), life(100), window(window),
-//    currentWeapon("../assets/gfx/weapons/ak47.bmp",window,16,32) { }
-
 
 Soldier::~Soldier() { }
 
@@ -45,7 +32,6 @@ void Soldier::render(int otherX, int otherY){
     dest.setWidth(width);
     dest.setHeight(height);
     
-
     image->render(src,dest,angle,SDL_FLIP_HORIZONTAL);    
 }
 
@@ -74,28 +60,27 @@ void Soldier::setAngle(int angle){
     this->angle = angle;
 }
 
-void Soldier::updateInfo(float xx, float yy, short weaponIdd){
-    // DynamicObject::setPos(xx,yy);
+void Soldier::updateInfo(float xx, float yy, short newWeaponId){
     x = xx;
     y = yy;
-    weaponId = weaponIdd;
+    this->weaponId = newWeaponId;
     changeCurrentWeapon();
 }
 
 void Soldier::setAsTerrorist(){
-    // Image img("../assets/gfx/player/t4Ak47.png", terroristKnife.getWindow());
     image = &terroristAk47;
 }
-void Soldier::updateInfoo(float xx, float yy, short weaponIdd, short angle){
-    this->angle = angle;
-    this->weaponId = weaponId;
+void Soldier::updateInfoo(float xx, float yy, short newWeaponId, short newAngle){
+    angle = newAngle;
+    weaponId = newWeaponId;
     DynamicObject::setPos(xx,yy);
     changeCurrentWeapon();
 }
 
 void Soldier::changeCurrentWeapon(){
-    std::cout<<" el id es "<< id<<" y el weaponid es "<< weaponId<<std::endl;
-    if (id % 2 == 0){
+    std::cout<<"Id del soldier y weapon id "<<id<<" "<<weaponId<<std::endl;
+    
+    if (id % 2 == 1){
         if (weaponId == 30){
             image = &terroristKnife;
             height = 42;

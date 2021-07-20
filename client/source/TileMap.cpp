@@ -16,16 +16,13 @@ pointer("../assets/gfx/pointer.bmp", window, {0xFF, 0, 0xFF}){
 }
 
 TileMap::~TileMap(){
-    // map.close();
     for (auto& tile: tiles){
        delete tile;
     }
     for (auto& obstacle : obstacles){
         delete obstacle;
     }
-    // for (auto& object : objects){
-    //     delete object.second;
-    // }
+
 }
 
 bool TileMap::loadMedia(){
@@ -36,12 +33,10 @@ bool TileMap::loadMedia(){
     return true;
 }
 
-void TileMap::addDynamicObject(short id, DynamicObject *object){
-    // objects[id] = (object);
-}
+
 
 void TileMap::setOffset(std::string &size){
-    if (size == "huge"){// yaml
+    if (size == "huge"){
         xOffset = 8;
         yOffset = -2;
     } else if (size == "small"){
@@ -71,7 +66,6 @@ bool TileMap::setTiles(){
     }
     std::string size = map["size"].as<std::string>();
     setOffset(size);
-    // std::string style = map["style"].as<std::string>(); 
     
     int x_aux(0);
     int y_aux(0);
@@ -145,9 +139,7 @@ void TileMap::renderTiles(int x, int y, const Area &dst){
 void TileMap::renderObjects(int x,int y){
     principalSoldier.render();
 
-    // for (auto& object : objects){
-    //     object.second->render(x,y);
-    // }
+   
     for (auto& soldier: soldiers){
         soldier.second->render(x,y);
     }
@@ -156,17 +148,6 @@ void TileMap::renderObjects(int x,int y){
     }
     objects.clear();
 }
-
-// void TileMap::updateAndRenderObjects(int x , int y,std::list<Entity*> &serverObjects){
-//     RenderizableFactory fac(window);
-//     for (auto &object : serverObjects){
-//         short id = object->getId();
-//         if(fac.createRenderizable(id, objects))
-//             objects[id]->setPos((object->getPositionX()+xOffset)*PPM,(object->getPositionY()+yOffset)*PPM);
-//     }
-//     renderObjects(x,y);
-//     objects.clear();
-// }
 
 void TileMap::setPrincipalPlayerId(short id){
     principalSoldierId = id;
@@ -198,9 +179,11 @@ void TileMap::renderAll(){
 void TileMap::addNewSoldier(short id){
     if (id % 2 == 0){
         std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/ct4Ak47.png", window, id));
+        soldier->setId(id);
         soldiers[id] = std::move(soldier);
     } else { 
         std::unique_ptr<Soldier> soldier(new Soldier("../assets/gfx/player/t4Ak47.png", window, id));
+        soldier->setId(id);
         soldiers[id] = std::move(soldier);
     }
 }
@@ -219,7 +202,6 @@ void TileMap::setPrincipalPlayerLife(short life){
 }
 
 void TileMap::addNewBullet(float x, float y){
-    // bulletsToRender.push_back(std::make_pair((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM));
     std::unique_ptr<Bullett> bul(new Bullett("../assets/gfx/bullet.png",window));
     bul->setPos((x + (float)xOffset)*PPM, (y + (float)yOffset)*PPM);
     objects.push_back(std::move(bul));
