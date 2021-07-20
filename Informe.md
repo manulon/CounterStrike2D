@@ -28,16 +28,16 @@ El modelo del juego en el cliente esta en la clase TileMap. Esta clase se encarg
 Los objetos renderizables (personajes, armas, balas) heredan de la clase DynamicObject que tiene el metodo que renderiza al objeto en el lugar de la pantalla acorde a posicion del jugador del cliente.
 
 ### Server ###
-En el servidor principalmente se desarrollo toda la parte f��sica del juego, haciendo uso de la biblioteca externa Box2D. Se encuentra adem��s el protocolo de comunicaci��n del servidor con el cliente y las clases relacionadas con este. A continuaci��n se detallan las clases m��s importante en el desarrollo del juego.
+En el servidor principalmente se desarrollo toda la parte física del juego, haciendo uso de la biblioteca externa Box2D. Se encuentra además el protocolo de comunicación del servidor con el cliente y las clases relacionadas con este. A continuación se detallan las clases más importante en el desarrollo del juego.
 
 **Entity**  
-Es la clase que contiene los cuerpos reales en las colisiones de box2D. Todos los objetos f��sicos que deban participar en colisiones deberan heredar de esta clase e implementar los m��todos necesarios para controlar las colisiones (collideWith). Con esto los objetos del juego reaccionaran de manera diferente en cada colisi��n segun sea su tipo por polimorfismo, esto obligara a que por cada nueva clase heredada de Entity, sus clases hermanas debe implementar un nuevo comportamiento para esa colisi��n.
+Es la clase que contiene los cuerpos reales en las colisiones de box2D. Todos los objetos físicos que deban participar en colisiones deberan heredar de esta clase e implementar los métodos necesarios para controlar las colisiones (collideWith). Con esto los objetos del juego reaccionaran de manera diferente en cada colisión segun sea su tipo por polimorfismo, esto obligara a que por cada nueva clase heredada de Entity, sus clases hermanas debe implementar un nuevo comportamiento para esa colisión.
 
 **World**  
-El mundo fue creado para wrapear el mundo de box2D y agregar nuevas funcionalidades seg��n los nuevos requerimientos del juego. Contiene de atributos objetos que pueden perder su scope en el game, y se encarga de gestionar destrucci��n y creaci��n de nuevos objetos para evitar que sean destruidos al momento en que box2D esta haciendo calculos reales de colisiones.
+El mundo fue creado para wrapear el mundo de box2D y agregar nuevas funcionalidades según los nuevos requerimientos del juego. Contiene de atributos objetos que pueden perder su scope en el game, y se encarga de gestionar destrucción y creación de nuevos objetos para evitar que sean destruidos al momento en que box2D esta haciendo calculos reales de colisiones.
 
 **Game**
-Esta es la clase en donde se encuentra la l��gica del juego y de comunicaci��n con el cliente a traves de colas protegidas. Para esto utiliza implementa m��todos que son utilizados por los hilos enviadores y receptores para transmitirle informaci��n al cliente.
+Esta es la clase en donde se encuentra la lógica del juego y de comunicación con el cliente a traves de colas protegidas. Para esto utiliza implementa métodos que son utilizados por los hilos enviadores y receptores para transmitirle información al cliente.
 
 
 # Cosas que faltaron
