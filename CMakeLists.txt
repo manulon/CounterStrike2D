@@ -31,6 +31,7 @@ FILE(GLOB_RECURSE common "common/*.cpp")
 FILE(GLOB_RECURSE mapEditor "mapEditor/*.cpp")
 FILE(GLOB_RECURSE nbq "common/NonBlockingQueue.cpp")
 FILE(GLOB_RECURSE serverMessages "server/source/messages/*.cpp")
+FILE(GLOB_RECURSE serverEvents "server/source/events/*.cpp")
 
 add_executable(editor test/editor.cpp ${mapEditor} ${source} ${common})
 target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)

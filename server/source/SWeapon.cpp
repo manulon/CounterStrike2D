@@ -105,3 +105,7 @@ bool SWeapon::playerIsInWeapon(int x, int y){
     }
     return false;
 }
+
+short SWeapon::getId(){
+    return weaponType->getId();
+}

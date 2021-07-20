@@ -33,6 +33,7 @@ class ClientProtocol{
         void pickUpWeapon();
         void stopPickingUpWeapon();
         void sendAngle(short angle);
+        void switchWeapon(char weapon);
 };
 
 #endif

@@ -80,6 +80,8 @@ class Player : public Entity {
 		void stopPickingUpWeapon();
 		bool isPickingUpWeapon();
 		bool isDead();
+		void switchWeapon(char weapon);
+		short getCurrentWeapon();
 };
 
 #endif // _PLAYER_H_

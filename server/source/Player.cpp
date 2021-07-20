@@ -4,6 +4,7 @@
 #include "PrimaryWeapon.h"
 #include "SecondaryWeapon.h"
 #include "TertiaryWeapon.h"
+#include "Knife.h"
 
 #define DAMPING 70.0f //10.0f 
 #define DENSITY 1.0f
@@ -22,6 +23,8 @@ Player::Player(World &world,
     setShapeParams(polygonShape, width, height);
     setFixtureParams(polygonShape, fixtureDef);
     Entity::earlyAttachToWorld(bodyDef, fixtureDef);
+    std::unique_ptr<Knife> knife(new Knife(0.1f, 0.1f));
+    setTertiaryWeapon(std::move(knife));
 }
 
 Player::Player(Player &&other) : 
@@ -122,8 +125,8 @@ void Player::attack(float angle) {
     float shootRadius = width;
     float xShoot = getPositionX() + shootRadius*cos(angle*b2_pi/180.0f);
     float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
+    
     currentWeapon->attack(angle, xShoot, yShoot);
-    std::cout << "ataco con angulo" << angle << std::endl; // REMOVER
 }
 
 void Player::reload(size_t &ammunition) {
@@ -135,7 +138,6 @@ void Player::collideWith(Entity &entity) {
 }
 
 void Player::collideWithBullet(Bullet &bullet) {
-    std::cout << "player chocado por bala\n";
     life.decreaseLife(bullet.getDamage());
     if (life.getLife() <= 0){
         this->detachFromWorld();
@@ -206,7 +208,7 @@ void Player::setPrimaryWeapon(PrimaryWeapon &other) {
 
 void Player::dropSecondaryWeapon() {
     if (secondaryWeapon.get() != nullptr){
-        secondaryWeapon->lateAttachToWorld(getPositionX()+2, getPositionY());
+        secondaryWeapon->lateAttachToWorld(getPositionX()+3, getPositionY());
         Entity::getWorld().spawnWeapon(std::move(secondaryWeapon));
     }
 }
@@ -243,4 +245,19 @@ void Player::setAngle(short newAngle){
 
 short Player::getAngle(){
     return angle;
+}
+
+void Player::switchWeapon(char weapon){
+    if (weapon == 1) {
+        currentWeapon = primaryWeapon.get();
+    } else if (weapon == 2) {
+        currentWeapon = tertiaryWeapon.get();
+    } 
+    // else if (weapon == 3) {
+    //     currentWeapon = tertiaryWeapon.get();
+    // }
+}
+
+short Player::getCurrentWeapon(){
+    return currentWeapon->getId();
 }

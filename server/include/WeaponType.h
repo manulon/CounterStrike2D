@@ -11,13 +11,13 @@ class WeaponType {
 		SWeapon *context;
 		float width;
 		float height;
-
+		short id;
 		WeaponType(const WeaponType &other) = delete;
 		WeaponType& operator=(const WeaponType &other) = delete;
 		WeaponType& operator=(WeaponType &&other) = delete;
 
 	public:
-		WeaponType(float width, float height);
+		WeaponType(float width, float height, short id);
 		WeaponType(WeaponType &&weaponType);
 		virtual ~WeaponType();
 
@@ -28,6 +28,7 @@ class WeaponType {
 		float getWidth();
 		float getHeight();
 		SWeapon* getContext() const;
+		short getId();
 };
 
 #endif // _WEAPON_TYPE_H_

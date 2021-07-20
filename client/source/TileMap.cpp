@@ -170,7 +170,7 @@ void TileMap::renderObjects(int x,int y){
 
 void TileMap::setPrincipalPlayerId(short id){
     principalSoldierId = id;
-
+    principalSoldier.setId(id);
     if (id% 2 != 0){
         principalSoldier.setAsTerrorist();
     }
@@ -233,7 +233,7 @@ void TileMap::updateWeaponInfo(short weaponId, float x, float y){
 
 void TileMap::removePlayer(short id){
     if (id == principalSoldierId){ 
-        throw ("jose");
+        throw ("PERDISTE");
     } else {
         soldiers.erase(id);
     }

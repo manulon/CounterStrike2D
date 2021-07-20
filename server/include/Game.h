@@ -77,6 +77,7 @@ class Game {
 		void setPlayerAngle(short id, short angle);
 		bool hasStarted();
 		void setMap(std::string name);
+		void switchWeapon(short id, char weapon);
 };
 
 #endif 

@@ -5,8 +5,8 @@
 
 PrimaryWeapon::PrimaryWeapon(World &world, 
 							 float width, float height,
-							 float maxAmmunition) :
-	WeaponType(width, height),
+							 float maxAmmunition, short id) :
+	WeaponType(width, height,id),
 	world(world),
 	loader(world, maxAmmunition) { } 
  

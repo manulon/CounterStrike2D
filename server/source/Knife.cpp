@@ -5,7 +5,7 @@
 #include <iostream>
 
 Knife::Knife(float width, float height) : 
-	TertiaryWeapon(width, height), damage(50) { }
+	TertiaryWeapon(width, height, 30), damage(50) { }
 
 Knife::Knife(Knife &&other) : 
 	TertiaryWeapon(std::move(other)), damage(50) {

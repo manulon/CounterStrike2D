@@ -37,6 +37,15 @@ bool EventHandler::handleEvents(){
                     //player.pickUpWeapon();
                     protocol.pickUpWeapon();
                 }
+                if (state[SDL_SCANCODE_1]){
+                    protocol.switchWeapon(1);
+                }
+                if (state[SDL_SCANCODE_2]){
+                    protocol.switchWeapon(2);
+                }
+                if (state[SDL_SCANCODE_3]){
+                    protocol.switchWeapon(3);
+                }
             }
                 break;
             case SDL_KEYUP: {
@@ -75,8 +84,6 @@ bool EventHandler::handleEvents(){
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 protocol.attack(mm.getAngle());
-                std::cout<<"angulo del mouseMAnager"<<mm.getAngle()-90<<std::endl;
-                //player.attack(angle - 90);
                 break;
         }
     }

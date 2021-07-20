@@ -18,7 +18,7 @@ class PrimaryWeapon : public WeaponType {
 	public:
 		PrimaryWeapon(World &world, 
 					  float width, float height,
-					  float maxAmmunition);
+					  float maxAmmunition, short id);
 		PrimaryWeapon(PrimaryWeapon &&other);
 		virtual ~PrimaryWeapon(); 
 

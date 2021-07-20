@@ -116,7 +116,8 @@ void Game::sendPositions(){
     for (auto& pairPlayer : terrorist){
         std::shared_ptr<ServerMessage> msg(new PlayerInfoMessage
                             (pairPlayer.first,pairPlayer.second->getPositionX(),
-                            pairPlayer.second->getPositionY(),11,
+                            pairPlayer.second->getPositionY(),
+                            pairPlayer.second->getCurrentWeapon(),
                             pairPlayer.second->getAngle()));
         for (auto& pair : allPlayers){
             senderQueues[pair.first]->push(msg);
@@ -125,7 +126,8 @@ void Game::sendPositions(){
     for (auto& pairPlayer : counterTerrorist){
         std::shared_ptr<ServerMessage> msg(new PlayerInfoMessage
                             (pairPlayer.first,pairPlayer.second->getPositionX(),
-                            pairPlayer.second->getPositionY(),11,
+                            pairPlayer.second->getPositionY(),
+                            pairPlayer.second->getCurrentWeapon(),
                             pairPlayer.second->getAngle()));
         for (auto& pair : allPlayers){
             senderQueues[pair.first]->push(msg);
@@ -342,4 +344,8 @@ bool Game::hasStarted(){
 void Game::setMap(std::string mapName){
     std::unique_ptr<PhysicalMapFactory> map(new PhysicalMapFactory(world, mapName,*this));
     physicalMap = std::move(map);
+}
+
+void Game::switchWeapon(short id, char weapon){
+    allPlayers[id]->switchWeapon(weapon);
 }

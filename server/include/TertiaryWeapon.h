@@ -10,7 +10,7 @@ class TertiaryWeapon : public WeaponType {
 		TertiaryWeapon& operator=(TertiaryWeapon &&other) = delete;
 
 	public:
-		TertiaryWeapon(float width, float height);
+		TertiaryWeapon(float width, float height, short id);
 		TertiaryWeapon(TertiaryWeapon &&other);
 		virtual ~TertiaryWeapon();
 

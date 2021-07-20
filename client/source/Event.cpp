@@ -1,4 +1,5 @@
 #include "Event.h"
+#include <iostream>
 
 Event::Event(int id, char opcode, int arg):
 id(id),opcode(opcode),arg(arg){}
@@ -22,6 +23,9 @@ bool Event::send(CommunicationProtocol &protocol){
         return true;
     } else if (opcode == QUIT) {
         return false;
+    } else if (opcode == SWITCH_WEAPON){
+        char weapon = (char)arg; 
+        protocol.send_message(&weapon,1);
     }
     return true;
 }

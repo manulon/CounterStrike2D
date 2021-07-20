@@ -1,8 +1,8 @@
 #include "WeaponType.h"
 #include <iostream>
 
-WeaponType::WeaponType(float width, float height) :
-	context(nullptr), width(width), height(height) { 
+WeaponType::WeaponType(float width, float height, short id) :
+	context(nullptr), width(width), height(height), id(id) { 
 }
 
 WeaponType::WeaponType(WeaponType &&other) : 
@@ -30,4 +30,8 @@ float WeaponType::getHeight() {
 
 SWeapon* WeaponType::getContext() const {
 	return context;
+}
+
+short WeaponType::getId(){
+	return id;
 }

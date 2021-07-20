@@ -7,7 +7,7 @@
 #include "PickUpWeaponEvent.h"
 #include "StopPickingUpWeaponEvent.h"
 #include "UpdateAngleEvent.h"
-
+#include "SwitchWeaponEvent.h"
 ThreadServerReceiver::ThreadServerReceiver(Socket &skt, 
     NonBlockingQueue<std::shared_ptr<ServerEvent>>& queue, 
     short clientID) :
@@ -55,6 +55,10 @@ void ThreadServerReceiver::run(){
             } else if (buffer == ANGLE){
                 short arg(protocol.receive_size());
                 std::shared_ptr<ServerEvent> aux(new UpdateAngleEvent(clientID,arg));
+                event = aux;
+            } else if (buffer == SWITCH_WEAPON){
+                protocol.receive_message(1, &buffer);
+                std::shared_ptr<ServerEvent> aux(new SwitchWeaponEvent(clientID, buffer));
                 event = aux;
             }
             queue.push(event);

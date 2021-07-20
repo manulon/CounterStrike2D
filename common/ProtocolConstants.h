@@ -23,4 +23,5 @@
 #define STOP_PICKING_UP_WEAPON    19
 #define ANGLE                     20
 #define DEAD_PLAYER               21
+#define SWITCH_WEAPON             22
 #endif

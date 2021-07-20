@@ -38,7 +38,7 @@ void Client::run(const char * host, const char *service){
         blockingQueue.push(msg);
         try{
             gameLoop(map);
-        } catch (...){
+        } catch (std::exception &e) {
             std::cout<<"PERDISTE\n";
             blockingQueue.close();
             skt.close();

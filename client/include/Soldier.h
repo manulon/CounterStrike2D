@@ -45,6 +45,7 @@ class Soldier : public Animation , public DynamicObject{
         void setAsTerrorist();
         void changeCurrentWeapon();
         void setLife(short life);
+        void setId(short idd);
 };
 
 #endif // _SOLDIER_H_

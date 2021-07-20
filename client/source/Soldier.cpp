@@ -28,26 +28,10 @@ Soldier::Soldier(std::string imgPath , Window &window) :
 //    , width(PPM), height(PPM), angle(90), life(100), window(window),
 //    currentWeapon("../assets/gfx/weapons/ak47.bmp",window,16,32) { }
 
-// Soldier::Soldier(Soldier &&other) : 
-//     Animation(std::move(other)), direction(other.direction),
-//     moving(other.moving), x(other.x), y(other.y), 
-//     width(other.width), height(other.height),
-//     angle(other.angle), weaponId(other.weaponId) {
-//     // ACA NO SERIA OTHER.direction etc etc....
-//     direction = 0;
-//     x = 0;
-//     y = 0;
-//     width = 0;
-//     height = 0;
-//     angle = 0;
-// }
 
 Soldier::~Soldier() { }
 
-void Soldier::render() {
-    /*if (tengo que cambiar de arma)
-        changeCurrentWeapon();*/
-    
+void Soldier::render() {    
     Area dest((800/2)-(width/2), (600/2)-(height/2), width, height);
     Animation::render(dest, angle, SDL_FLIP_HORIZONTAL);
     
@@ -56,12 +40,13 @@ void Soldier::render() {
 
 void Soldier::render(int otherX, int otherY){
     Area dest = DynamicObject::getDest(otherX, otherY);
-    Area src(0,32,width,height);
+    Area src(0,18,width,height);
 
     dest.setWidth(width);
     dest.setHeight(height);
+    
 
-    image.render(src,dest,angle,SDL_FLIP_HORIZONTAL);    
+    image->render(src,dest,angle,SDL_FLIP_HORIZONTAL);    
 }
 
 void Soldier::stopMoving() {
@@ -94,33 +79,36 @@ void Soldier::updateInfo(float xx, float yy, short weaponIdd){
     x = xx;
     y = yy;
     weaponId = weaponIdd;
+    changeCurrentWeapon();
 }
 
 void Soldier::setAsTerrorist(){
-    Image img("../assets/gfx/player/t4Ak47.png", image.getWindow());
-    image = std::move(img);
+    // Image img("../assets/gfx/player/t4Ak47.png", terroristKnife.getWindow());
+    image = &terroristAk47;
 }
 void Soldier::updateInfoo(float xx, float yy, short weaponIdd, short angle){
     this->angle = angle;
     this->weaponId = weaponId;
     DynamicObject::setPos(xx,yy);
+    changeCurrentWeapon();
 }
 
 void Soldier::changeCurrentWeapon(){
-    if (weaponId % 2 == 0){
-        if (weaponId == 11){
-            image = std::move(terroristKnife);
+    std::cout<<" el id es "<< id<<" y el weaponid es "<< weaponId<<std::endl;
+    if (id % 2 == 0){
+        if (weaponId == 30){
+            image = &terroristKnife;
             height = 42;
-        } else if (weaponId == 2 ){
-            image = std::move(terroristAk47);
+        } else if (weaponId == 11){
+            image = &terroristAk47;
             height = 45;
         }
     } else {
-        if (weaponId == 11){
-            image = std::move(counterTerroristKnife);
+        if (weaponId == 30){
+            image = &counterTerroristKnife;
             height = 42;
-        } else if (weaponId == 2 ){
-            image = std::move(counterTerroristAk47);
+        } else if (weaponId == 11){
+            image = &counterTerroristAk47;
             height = 45;
         }
     }
@@ -171,4 +159,8 @@ void Soldier::renderLife(){
 
 void Soldier::setLife(short lifeNum){
     life = lifeNum;
+}
+
+void Soldier::setId(short idd){
+    id = idd;
 }

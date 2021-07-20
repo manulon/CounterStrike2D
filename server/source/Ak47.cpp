@@ -3,7 +3,7 @@
 #include <utility>
 
 Ak47::Ak47(World &world, float width, float height) :
-	PrimaryWeapon(world, width, height, 100) { }
+	PrimaryWeapon(world, width, height, 100,11) { }
 
 Ak47::Ak47(Ak47 &&other) : 
 	PrimaryWeapon(std::move(other)) { }

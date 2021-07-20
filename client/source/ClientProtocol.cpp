@@ -97,6 +97,12 @@ void ClientProtocol::sendAngle(short angle){
     queue.push(newEvent);
 }
 
+ void ClientProtocol::switchWeapon(char weapon){
+     char key(SWITCH_WEAPON);
+     std::shared_ptr<Event> newEvent(new Event(1,key,weapon));
+     queue.push(newEvent);
+ }
+
 /*
 ClienteEvento
 evento simple      evento shoot      evento bala
