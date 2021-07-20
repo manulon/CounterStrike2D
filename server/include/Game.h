@@ -54,7 +54,7 @@ class Game {
 		void cleanDeadTerrorists();
 		void cleandDeadCounterTerrorists();
 		void cleanAllPlayers();
-		void executeFrame(int rate) ;
+		void executeFrame();
 		
 	public:
 		Game(MaxPlayers maxPlayers, 
