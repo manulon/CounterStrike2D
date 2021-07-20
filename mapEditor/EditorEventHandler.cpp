@@ -155,7 +155,7 @@ std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName){
                                                tiles[tileNumber]->getY()/PPM)] = 1;
          }else if (actualImage == "weapon"){
             weaponMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
-                                     tiles[tileNumber]->getX()/PPM)] = 11;
+                                     tiles[tileNumber]->getY()/PPM)] = 11;
          }
       }
    }
