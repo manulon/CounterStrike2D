@@ -24,5 +24,7 @@ void Server::run(const char* host, const char* service) {
     } 
     acceptor.stop();
     acceptor.join();
+    std::cout<<"SE joinesa el aceptador\n";
     game.join();
+    std::cout<<"SE joinesa el juego\n";
 }

@@ -17,6 +17,7 @@ ThreadAcceptor::ThreadAcceptor(const char *host,
 
 ThreadAcceptor::~ThreadAcceptor() { 
 	for (auto& client : clients){
+		std::get<0>(client.second).close();
 		std::get<1>(client.second)->join();
 		delete std::get<1>(client.second);
 		std::get<2>(client.second)->stop();
