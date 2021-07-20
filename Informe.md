@@ -1,4 +1,3 @@
-
 # CounterStrike2D
 # Trabajo pratico Final 
 
@@ -13,22 +12,42 @@ En este trabajo se desarrollÃ³ un juego multijugador. Para el desarrollo del jue
 
 ## Estructura de Clases ## 
 
+### Cliente ###
+
+El programa del cliente cuenta con una clase ```Client``` que tiene un unico mÃ©todo pÃºblico que corre el programa, en este mÃ©todo se llama al metodo privado ```gameLoop``` lleva a cabo la actualizaciÃ³n del modelo y el renderizado del mismo.
+
+Es en ese mÃ©todo que se spawnean 2 hilos, un hilo recibidor y un hilo enviador. De esta forma, el hilo principal no se bloquea al enviar y recibir informacion y puede renderizar el modelo sin problema.
+
+Para la comunicacion entre hilos se utilizaron colas para evitar cualquier tipo de race conditions. La clase  ```Client``` tiene como atributo una cola bloqueante la cual el hilo enviador hace "pop" para enviar al servidor, y una cola no bloqueante llenada por el hilo recibidor que en cada iteracion del ```gameLoop``` se vacÃ­a. 
+
+La cola Bloqueante es una cola de ```ClientMessage```, una clase abstracta que tiene el metodo abstracto send, que hace que cada tipo de mensaje que envia el cliente hacia el servidor sepa como mandarse.
+
+La cola no bloqueante esta compuesta por objetos de la clase abstracta ```Info``` que contiene siempre informaciÃ³n que llega desde el servidor. Tiene el mÃ©todo ```handle``` abstracto que recibe como parametro una referencia del TileMap y dependiendo del tipo de informacion que llega llama a un metodo diferente del TileMap.
+
+El modelo del juego en el cliente esta en la clase TileMap. Esta clase se encarga de almacenar todos los objetos del juego con su informacion y tambien de renderizarlos.
+Los objetos renderizables (personajes, armas, balas) heredan de la clase DynamicObject que tiene el metodo que renderiza al objeto en el lugar de la pantalla acorde a posicion del jugador del cliente.
+
 ### Server ###
-En el servidor principalmente se desarrollo toda la parte f¨ªsica del juego, haciendo uso de la biblioteca externa Box2D. Se encuentra adem¨¢s el protocolo de comunicaci¨®n del servidor con el cliente y las clases relacionadas con este. A continuaci¨®n se detallan las clases m¨¢s importante en el desarrollo del juego.
+En el servidor principalmente se desarrollo toda la parte fï¿½ï¿½sica del juego, haciendo uso de la biblioteca externa Box2D. Se encuentra ademï¿½ï¿½s el protocolo de comunicaciï¿½ï¿½n del servidor con el cliente y las clases relacionadas con este. A continuaciï¿½ï¿½n se detallan las clases mï¿½ï¿½s importante en el desarrollo del juego.
 
 **Entity**  
-Es la clase que contiene los cuerpos reales en las colisiones de box2D. Todos los objetos f¨ªsicos que deban participar en colisiones deberan heredar de esta clase e implementar los m¨¦todos necesarios para controlar las colisiones (collideWith). Con esto los objetos del juego reaccionaran de manera diferente en cada colisi¨®n segun sea su tipo por polimorfismo, esto obligara a que por cada nueva clase heredada de Entity, sus clases hermanas debe implementar un nuevo comportamiento para esa colisi¨®n.
+Es la clase que contiene los cuerpos reales en las colisiones de box2D. Todos los objetos fï¿½ï¿½sicos que deban participar en colisiones deberan heredar de esta clase e implementar los mï¿½ï¿½todos necesarios para controlar las colisiones (collideWith). Con esto los objetos del juego reaccionaran de manera diferente en cada colisiï¿½ï¿½n segun sea su tipo por polimorfismo, esto obligara a que por cada nueva clase heredada de Entity, sus clases hermanas debe implementar un nuevo comportamiento para esa colisiï¿½ï¿½n.
 
 **World**  
-El mundo fue creado para wrapear el mundo de box2D y agregar nuevas funcionalidades seg¨²n los nuevos requerimientos del juego. Contiene de atributos objetos que pueden perder su scope en el game, y se encarga de gestionar destrucci¨®n y creaci¨®n de nuevos objetos para evitar que sean destruidos al momento en que box2D esta haciendo calculos reales de colisiones.
+El mundo fue creado para wrapear el mundo de box2D y agregar nuevas funcionalidades segï¿½ï¿½n los nuevos requerimientos del juego. Contiene de atributos objetos que pueden perder su scope en el game, y se encarga de gestionar destrucciï¿½ï¿½n y creaciï¿½ï¿½n de nuevos objetos para evitar que sean destruidos al momento en que box2D esta haciendo calculos reales de colisiones.
 
 **Game**
-Esta es la clase en donde se encuentra la l¨®gica del juego y de comunicaci¨®n con el cliente a traves de colas protegidas. Para esto utiliza implementa m¨¦todos que son utilizados por los hilos enviadores y receptores para transmitirle informaci¨®n al cliente.
+Esta es la clase en donde se encuentra la lï¿½ï¿½gica del juego y de comunicaciï¿½ï¿½n con el cliente a traves de colas protegidas. Para esto utiliza implementa mï¿½ï¿½todos que son utilizados por los hilos enviadores y receptores para transmitirle informaciï¿½ï¿½n al cliente.
 
 
+# Cosas que faltaron
 
-
-
-  
-
-
+El tiempo fue la principal razÃ³n por la que no pudimos desarrollar todos los puntos pedidos en el enunciado por lo que hay bastantes features que nos faltaron implementar.
+Algunos de ellos son:
+-Sonidos en el juego, mÃºsica de fondo, y sonidos acordes a los eventos(disparos, heridas,apuÃ±aladas).
+-Modo pantalla completa. La versiÃ³n actual esta hecha sobre una pantalla de 800x600.
+-Bombas.
+-Diferentes tipos de armas, con diferentes daÃ±os.
+-El renderizado de la cantidad de balas que tiene cada jugador.
+-Tienda de armas. 
+-Multiples partidas

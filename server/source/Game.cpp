@@ -210,7 +210,6 @@ void Game::sendBullets(){
             senderQueues[pair.first]->push(msg);
         }
     }
-
 }
 
 void Game::sendWeapons(){
@@ -356,25 +355,9 @@ bool Game::isReadyToStart() {
 bool Game::isGameOver() {
     bool gameOver = false;
     if (terrorist.size() == 0) {
-        // para cada elemento de la cola enviadora
-        // con clave impar
-        // senderQueue.push("Derrota")
-
-        // para cada elemento de la cola enviadora
-        // con clave par
-        // senderQueue.push("Victoria")
-
         gameOver = true;
     }
     if (counterTerrorist.size() == 0) {
-        // para cada elemento de la cola enviadora
-        // con clave impar
-        // senderQueue.push("Victoria")
-
-        // para cada elemento de la cola enviadora
-        // con clave par
-        // senderQueue.push("Derrota")
-
         gameOver = true;
     }
     return gameOver;
