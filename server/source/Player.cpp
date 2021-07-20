@@ -134,6 +134,7 @@ void Player::reload(size_t &ammunition) {
 }
 
 void Player::collideWith(Entity &entity) {
+    std::cout << "Colision de jugador con entidad\n";
     entity.collideWithPlayer(*this);
 }
 
@@ -148,8 +149,7 @@ void Player::collideWithBullet(Bullet &bullet) {
 void Player::collideWithObstacle(Obstacle &obstacle) {
 }
 
-void Player::collideWithWeapon(SWeapon &other) {
-}
+void Player::collideWithWeapon(SWeapon &other) { }
 
 void Player::collideWithPlayer(Player &player) {
 }

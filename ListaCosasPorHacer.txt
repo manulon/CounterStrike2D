@@ -1,10 +1,8 @@
 Lista:
 	(fede)  8.  Definir condicion de fin de partida.
-	(dani)  15. armas en el piso (yaml).
 	(todos) 16. instalador
 	(todos) 17. manual de usuario completo
 	(todos) 18. documento del proyecto
-	()		19. damage del cuchillo.
 	()		20. ver valgrind client servidor 
 			21. bajar la velocidad
 			22. 
@@ -27,4 +25,6 @@ LISTO:
 	12. corregir para todos los tamanios el physicalmap
 	13. renderizar las balas.
 	14. armas en el piso (editor).
+	15. armas en el piso (yaml).
+	19. damage del cuchillo.
 	21. crear los nuevos mapas con armas desperdigadas
