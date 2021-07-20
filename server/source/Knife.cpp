@@ -21,6 +21,7 @@ void Knife::attack(float angle, float x, float y) {
     context->earlyAttachToWorld(x + radius*cos(radians)*2, 
                                 y + radius*sin(radians)*2);
     context->detachFromWorld();
+    std::cout<<"Sale de cuchi attack"<<std::endl;
 }
 
 void Knife::reload(size_t &ammunition) { 

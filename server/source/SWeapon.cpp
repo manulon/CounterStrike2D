@@ -7,9 +7,6 @@ SWeapon::SWeapon(World &world,
                  std::unique_ptr<WeaponType> &&other) : 
     Entity(world, 14),
     weaponType(std::move(other)) {
-    // NO SE PORQUE PERO CONSTRUIR EL WEAPONTYPE EN LA LISTA
-    // DE INICIALIZADORES HACE QUE SE LIBERE Y QUEDA APUNTANDO
-    // A NULL LUEGO (DEJAR LA INICIALIZACION ASI)
     weaponType->setContext(this);
 }
 
@@ -77,14 +74,14 @@ void SWeapon::collideWithObstacle(Obstacle &obstacle) {
 }
 
 void SWeapon::collideWithPlayer(Player &player) {
-    if (player.isPickingUpWeapon())
-        weaponType->collideWithPlayer(player);    
+    weaponType->collideWithPlayer(player);
 }
 
 void SWeapon::collideWithBorder(Border &border) {
 }
 
 void SWeapon::collideWithWeapon(SWeapon &Weapon) {
+    std::cout << "Colision de Sweapon con player\n";
 }
 
 void SWeapon::setBody(b2Body &body) {

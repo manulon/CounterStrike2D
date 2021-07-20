@@ -41,6 +41,7 @@ class Entity {
 		virtual void collideWithPlayer(Player &player) = 0;
 		virtual void collideWithBorder(Border &border) = 0;
 		virtual void setBody(b2Body &body);
+		virtual b2Body* getBody();
 
 		void earlyAttachToWorld(b2BodyDef &bodyDef, const b2FixtureDef &fixtureDef);
 		void lateAttachToWorld(b2BodyDef &bodyDef, Entity &context);

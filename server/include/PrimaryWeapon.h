@@ -3,6 +3,7 @@
 
 #include "WeaponType.h"
 #include "Loader.h"
+
 class World;
 
 class PrimaryWeapon : public WeaponType {

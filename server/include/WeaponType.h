@@ -7,11 +7,13 @@ class SWeapon;
 
 
 class WeaponType {
-	private:
+	protected:
 		SWeapon *context;
 		float width;
 		float height;
 		short id;
+
+	private:
 		WeaponType(const WeaponType &other) = delete;
 		WeaponType& operator=(const WeaponType &other) = delete;
 		WeaponType& operator=(WeaponType &&other) = delete;

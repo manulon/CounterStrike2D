@@ -109,3 +109,6 @@ short Entity::getId() const {
     return id;
 }
 
+b2Body* Entity::getBody(){
+    return body;
+}

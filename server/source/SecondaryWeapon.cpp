@@ -18,5 +18,6 @@ SecondaryWeapon::SecondaryWeapon(SecondaryWeapon &&other) :
 SecondaryWeapon::~SecondaryWeapon() { }
 
 void SecondaryWeapon::collideWithPlayer(Player &player) {
-	player.swapAndDropSecondaryWeapon(*this);
+	if (player.isPickingUpWeapon())
+		player.swapAndDropSecondaryWeapon(*this);
 }
