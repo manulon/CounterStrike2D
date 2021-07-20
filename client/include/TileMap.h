@@ -9,7 +9,6 @@
 #include "Soldier.h"
 #include <memory>
 #include "Pointer.h"
-// #include "yaml-cpp/yaml"
 
 /* Esto no deberia estar en un archivo aparte? Preguntar al profe */
 #define LEVEL_WIDTH  		800
@@ -64,6 +63,7 @@ public:
 	void addNewBullet(float x, float y);
 	void updateWeaponInfo(short weaponId, float x, float y);
 	void removePlayer(short id);
+	void printResult(const std::string &message);
 };
 
 #endif

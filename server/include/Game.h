@@ -39,6 +39,7 @@ class Game : public Thread {
 		std::unique_ptr<PhysicalMapFactory> physicalMap;
 		bool gameStarted;
         std::atomic<bool> isRunning;
+		bool counterTerroristsWin;
 		Game(const Game &other) = delete;
 		Game(Game &&other) = delete;
 		Game& operator=(const Game &other) = delete;
@@ -83,6 +84,7 @@ class Game : public Thread {
 		void setMap(std::string name);
 		void switchWeapon(short id, char weapon);
 		void stop();
+		void notifyResults();
 };
 
 #endif 

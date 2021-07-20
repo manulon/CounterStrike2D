@@ -8,6 +8,7 @@
 #include "Stencil.h"
 #include "Camera.h"
 #include "InitialMenu.h"
+#include "GameEndedException.h"
 
 void Client::run(const char * host, const char *service){
     InitialMenu menu;
@@ -39,8 +40,7 @@ void Client::run(const char * host, const char *service){
         blockingQueue.push(msg);
         try {
             gameLoop(map);
-        } catch (std::exception &e) {
-            std::cout<<"PERDISTE\n";
+        } catch (GameEndedException &e) {
             blockingQueue.close();
             skt.close();
         }

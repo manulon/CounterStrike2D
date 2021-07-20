@@ -1,6 +1,5 @@
 Lista:
 	(fede)  8.  Definir condicion de fin de partida.
-	(fede)  9.  Modificar a la clase game para que sea un hilo propio.
 	(dani)  15. armas en el piso (yaml).
 	(todos) 16. instalador
 	(todos) 17. manual de usuario completo
@@ -23,3 +22,4 @@ LISTO:
 	12. corregir para todos los tamanios el physicalmap
 	13. renderizar las balas.
 	14. armas en el piso (editor).
+	(fede)  9.  Modificar a la clase game para que sea un hilo propio.

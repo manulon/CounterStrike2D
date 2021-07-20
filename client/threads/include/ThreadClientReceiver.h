@@ -14,6 +14,7 @@
 #include "BulletInfo.h"
 #include "WeaponInfo.h"
 #include "DeadPlayerInfo.h"
+#include "EndOfGameInfo.h"
 class ThreadClientReceiver : public Thread {
     private:
         Socket& skt;
@@ -67,6 +68,13 @@ class ThreadClientReceiver : public Thread {
                         info = aux;
                     } else if (messageType == DEAD_PLAYER){
                         std::shared_ptr<DeadPlayerInfo> aux(new DeadPlayerInfo(protocol.receive_size()));
+                        info = aux;
+                    } else if (messageType == TEXT_MESSAGE){
+                        short len = protocol.receive_size();
+                        std::vector<char> buffer(len + 1,'\0');
+                        protocol.receive_message(len,buffer.data());
+                        std::string message(buffer.data());
+                        std::shared_ptr<Info> aux(new EndOfGameInfo(std::move(message)));
                         info = aux;
                     }
 

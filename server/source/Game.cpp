@@ -13,6 +13,7 @@
 #include "OtherPlayerJoinedMessage.h"
 #include "JoinMessage.h"
 #include "DeadMessage.h"
+#include "PlaintextMessage.h"
 
 #define FRAME_RATE 1.0f/60.0f
 
@@ -26,7 +27,8 @@ Game::Game(MaxPlayers maxPlayers,
     senderQueues {senderQueues},
     physicalMap{nullptr},
     gameStarted{false},
-    isRunning{false} { } 
+    isRunning{false},
+    counterTerroristsWin{false} { } 
 
 Game::~Game() { }
 
@@ -82,6 +84,27 @@ void Game::run() {
         std::this_thread::sleep_for(std::chrono::milliseconds(rest));
         t1 += std::chrono::milliseconds(rate);
     }
+    notifyResults();
+}
+
+void Game::notifyResults() {
+    std::shared_ptr<ServerMessage> looseMsg(new PlaintextMessage("Tu equipo perdio"));
+    std::shared_ptr<ServerMessage> winMsg(new PlaintextMessage("Tu equipo gano"));
+    std::shared_ptr<ServerMessage> ctMsg = looseMsg;
+    std::shared_ptr<ServerMessage> tMsg = winMsg;
+    if (counterTerroristsWin){
+        ctMsg = winMsg;
+        tMsg = looseMsg;
+    }
+    for (auto& pair : senderQueues){
+        if (pair.first % 2 == 0){
+            pair.second->push(ctMsg);
+            std::cout<<"se pushea\n";
+        } else {
+            std::cout<<"se pushea\n";
+            pair.second->push(tMsg);
+        }
+    }
 }
 
 void Game::cleanDeadPlayers() {
@@ -127,7 +150,15 @@ void Game::cleanAllPlayers() {
         } else {
             ++it;
         }
-    }    
+    }   
+    if (isGameOver() && playersInGame > 1){
+        std::cout<<"entro al fin del juego\n";
+        isRunning = false;
+        it = allPlayers.begin();
+        if (it->first %2 == 0) {
+            counterTerroristsWin = true;
+        }
+    } 
 }
 
 void Game::sendInfoToClients(){
@@ -201,10 +232,12 @@ void Game::shoot(short id, short angle) {
     if (it == terrorist.end()) {
         it = counterTerrorist.find(id);
     }
-    it->second->attack(angle);
+    if (allPlayers.count(id) != 0)
+       it->second->attack(angle);
 }
 
 void Game::playerMovement(short id, char opcode) {
+    if (allPlayers.count(id) == 0) return;
     std::map<short, std::shared_ptr<Player>>::iterator it = terrorist.find(id);
     if (it == terrorist.end()) {
         it = counterTerrorist.find(id);
@@ -377,15 +410,18 @@ void Game::pickUpWeapon(short id){
     if (it == terrorist.end()) {
         it = counterTerrorist.find(id);
     }
-    it->second->pickUpWeapon();
+    if (allPlayers.count(id) != 0)
+        it->second->pickUpWeapon();
 }
 
 void Game::stopPickingUpWeapon(short id){
+
     std::map<short, std::shared_ptr<Player>>::iterator it = terrorist.find(id);
     if (it == terrorist.end()) {
         it = counterTerrorist.find(id);
     }
-    it->second->stopPickingUpWeapon();
+    if (allPlayers.count(id) != 0)
+        it->second->stopPickingUpWeapon();
 }
 
 void Game::setPlayerAngle(short id, short angle){
@@ -393,7 +429,8 @@ void Game::setPlayerAngle(short id, short angle){
     if (it == terrorist.end()) {
         it = counterTerrorist.find(id);
     }
-    it->second->setAngle(angle);
+    if (allPlayers.count(id) != 0)
+        it->second->setAngle(angle);
 }
 
 bool Game::hasStarted(){
