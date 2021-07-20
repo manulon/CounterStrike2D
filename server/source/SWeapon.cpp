@@ -71,11 +71,9 @@ void SWeapon::collideWith(Entity &entity) {
 }
 
 void SWeapon::collideWithBullet(Bullet &bullet) {
-    std::cout << "SWeapon choco con bullet" << std::endl;
 }
 
 void SWeapon::collideWithObstacle(Obstacle &obstacle) {
-    std::cout << "SWeapon choco con obstacle" << std::endl;
 }
 
 void SWeapon::collideWithPlayer(Player &player) {
@@ -84,11 +82,9 @@ void SWeapon::collideWithPlayer(Player &player) {
 }
 
 void SWeapon::collideWithBorder(Border &border) {
-    std::cout << "SWeapon choco con border" << std::endl; 
 }
 
 void SWeapon::collideWithWeapon(SWeapon &Weapon) {
-    std::cout << "SWeapon choco con SWeapon" << std::endl;
 }
 
 void SWeapon::setBody(b2Body &body) {

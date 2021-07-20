@@ -134,11 +134,9 @@ void World::getServerObjects(std::list<Entity*> &serverObjects){
 
 std::ostream& operator<<(std::ostream &os, const World &world) {
     const b2Body *node = world.getBodyList();
-    //std::cout << world.world.GetBodyCount() << std::endl;
 
     while(node != nullptr) {
     	Entity *entity = static_cast<Entity*>(node->GetUserData());
-    	//std::cout << entity << std::endl;
     	if(entity != nullptr) {
     		os << *entity << std::endl;
     	}

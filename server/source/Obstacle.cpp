@@ -40,23 +40,18 @@ void Obstacle::collideWith(Entity &entity) {
 }
 
 void Obstacle::collideWithBullet(Bullet &bullet) {
-    std::cout << "obstacle chocado por bala\n";
 }
 
 void Obstacle::collideWithObstacle(Obstacle &obstacle) {
-    std::cout << "obstacle chocado por obstaculo\n";
 }
 
 void Obstacle::collideWithWeapon(SWeapon &weapon) {
-    std::cout << "obstacle chocado por weapon\n";
 }
 
 void Obstacle::collideWithPlayer(Player &player) {
-    std::cout << "obstacle chocado por jugador\n";
 }
 
 void Obstacle::collideWithBorder(Border &border) {
-    std::cout << "Obstacle chocado por border\n";
 }
 
 void Obstacle::setBody(b2Body &body) {

@@ -18,6 +18,5 @@ SecondaryWeapon::SecondaryWeapon(SecondaryWeapon &&other) :
 SecondaryWeapon::~SecondaryWeapon() { }
 
 void SecondaryWeapon::collideWithPlayer(Player &player) {
-	std::cout << "SecondaryWeapon choco con player" << std::endl;
 	player.swapAndDropSecondaryWeapon(*this);
 }

@@ -79,7 +79,6 @@ bool EventHandler::handleEvents(){
                 break;
             case SDL_QUIT:
                 protocol.quit();
-                std::cout << "Quit :(" << std::endl;
                 keepRunning = false;
                 break;
             case SDL_MOUSEBUTTONDOWN:

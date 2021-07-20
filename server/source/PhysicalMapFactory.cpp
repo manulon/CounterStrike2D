@@ -16,7 +16,6 @@ PhysicalMapFactory::PhysicalMapFactory(World &w, std::string mapName, Game &g) :
         
         obstacles.push_back(std::move(ptr));
     }
-    std::cout<<" el width es "<<width<<" Heght  "<< height<<std::endl;
     setTerroristsPositions();
     setCounterTerroristsPositions();
 }

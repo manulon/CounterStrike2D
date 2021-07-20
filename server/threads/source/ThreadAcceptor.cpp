@@ -53,7 +53,6 @@ void ThreadAcceptor::run() {
 			cleanDeadClients();
 			++clientID;
 		} catch (const std::exception &exception) { 
-			std::cout<<"se cierra el aceptador\n";
 		}
 	}
 }

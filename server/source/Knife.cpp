@@ -14,7 +14,6 @@ Knife::Knife(Knife &&other) :
 Knife::~Knife() { }
 
 void Knife::attack(float angle, float x, float y) {
-    std::cout << "Entro a atacar con cuchillo" << std::endl;
     float radians = (angle * M_PI) / 180.0f;
     float radius = sqrt(pow(getWidth(), 2) + pow(getHeight(), 2));
     SWeapon *context = WeaponType::getContext();
@@ -29,6 +28,5 @@ void Knife::reload(size_t &ammunition) {
 }
 
 void Knife::collideWithPlayer(Player &player) {
-	std::cout << "TertiaryWeapon choco con player" << std::endl;
     player.decreaseLife(damage.getDamage());
 }

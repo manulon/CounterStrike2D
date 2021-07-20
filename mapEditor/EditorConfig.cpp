@@ -289,8 +289,6 @@ void EditorConfig::getAtributes(std::string atributeName,const std::string& size
 
     
     if (atributeName == "characters"){
-        std::cout<<sizeName<<"-"<<atributeName<<std::endl;
-        std::cout<<readerNode[sizeName][atributeName][0][0]<<std::endl;
         soldierOptionsTiles.push_back(new Tile(readerNode[sizeName]["terrorist"][0][0].as<int>(),
                                                readerNode[sizeName]["terrorist"][0][1].as<int>(),
                                                readerNode[sizeName]["terrorist"][0][2].as<int>(),

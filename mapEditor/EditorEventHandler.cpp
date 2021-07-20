@@ -43,9 +43,6 @@ std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName){
             break;
 
          case SDL_QUIT:
-
-            std::cout<<"EL size del mapa es #####"<<terroristMap.size()<<std::endl;
-
             MapEditor map;
             std::cout<<"Ingrese el nombre del mapa: "<<std::endl;
             std::string input("");
@@ -144,11 +141,9 @@ std::vector<Tile*>& soldierOptionTiles, const std::string& sizeName){
             finalMapTiles[std::make_pair(tiles[tileNumber]->getX()/PPM,
                                          tiles[tileNumber]->getY()/PPM)] = tiles[tileNumber]->getType();
          }else if (actualImage == "terrorist"){
-            std::cout<<"Agrego a alguien a la lista de terroristas"<< std::endl;
             terroristMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
                                         tiles[tileNumber]->getY()/PPM)] = 1;
          }else if (actualImage == "counter-terrorist"){
-            std::cout<<"Agrego a alguien a la lista de counter-terroristas"<< std::endl;
             counterTerroristMap[std::make_pair(tiles[tileNumber]->getX()/PPM,
                                                tiles[tileNumber]->getY()/PPM)] = 1;
          }

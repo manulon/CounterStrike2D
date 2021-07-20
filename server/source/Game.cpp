@@ -272,11 +272,6 @@ void Game::removePlayer(short id){
     } else {
         terrorist.erase(id);
     }
-    std::cout<<"--------------------------------\n";
-    std::cout<<"--------------------------------\n";
-    std::cout<<"JUGADOR ELIMINADO EL MAPA TIENE TAMANIO "<<allPlayers.size()<<std::endl;
-    std::cout<<"--------------------------------\n";
-    std::cout<<"--------------------------------\n";
 }
 
 //Cuando un jugador se une se le comunica el resto de los jugadores que estan en la partida

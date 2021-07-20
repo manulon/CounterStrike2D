@@ -215,7 +215,7 @@ void TileMap::updateWeaponInfo(short weaponId, float x, float y){
 
 void TileMap::removePlayer(short id){
     if (id == principalSoldierId){ 
-        throw ("PERDISTE");
+        throw std::exception();
     } else {
         soldiers.erase(id);
     }

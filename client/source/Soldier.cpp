@@ -77,9 +77,7 @@ void Soldier::updateInfoo(float xx, float yy, short newWeaponId, short newAngle)
     changeCurrentWeapon();
 }
 
-void Soldier::changeCurrentWeapon(){
-    std::cout<<"Id del soldier y weapon id "<<id<<" "<<weaponId<<std::endl;
-    
+void Soldier::changeCurrentWeapon(){    
     if (id % 2 == 1){
         if (weaponId == 30){
             image = &terroristKnife;

@@ -87,7 +87,6 @@ int main(int argc, const char *argv[]){
             //Image de_dust("../assets/gfx/tiles/default_dust.png", window);
             //Image obsimg("../assets/gfx/tiles/obstacles.png", window);
             // TileMap mapTest(window,"../assets/maps/SmallDust.yaml", de_dust, obsimg);
-            std::cout<<menu.getMapPath().c_str()<<std::endl;
             std::cout<<menu.getTilesPath()<<std::endl;
             TileMap mapTest(window, menu.getMapPath().c_str(), menu.getTilesPath(), "../assets/gfx/tiles/obstacles.png");
             // PhysicalMapFactory g(world,"../assets/maps/SmallDust.yaml");
