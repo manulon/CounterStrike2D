@@ -299,7 +299,7 @@ bool Game::isReadyToStart() {
 
 bool Game::isGameOver() {
     bool gameOver = false;
-    if (terrorist.size() == 10) {
+    if (terrorist.size() == 0) {
         // para cada elemento de la cola enviadora
         // con clave impar
         // senderQueue.push("Derrota")
@@ -310,7 +310,7 @@ bool Game::isGameOver() {
 
         gameOver = true;
     }
-    if (counterTerrorist.size() == 10) {
+    if (counterTerrorist.size() == 0) {
         // para cada elemento de la cola enviadora
         // con clave impar
         // senderQueue.push("Victoria")
