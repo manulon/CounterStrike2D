@@ -7,7 +7,6 @@ Lista:
 	(todos) 18. documento del proyecto
 	()		19. damage del cuchillo.
 	()		20. ver valgrind client servidor y editor.
-	(manu)	21. crear los nuevos mapas con armas desperdigadas
 
 LISTO:
 	1. Integrar menu al juego.
@@ -23,3 +22,4 @@ LISTO:
 	12. corregir para todos los tamanios el physicalmap
 	13. renderizar las balas.
 	14. armas en el piso (editor).
+	21. crear los nuevos mapas con armas desperdigadas
