@@ -18,5 +18,6 @@ PrimaryWeapon::PrimaryWeapon(PrimaryWeapon &&other) :
 PrimaryWeapon::~PrimaryWeapon() { }
 
 void PrimaryWeapon::collideWithPlayer(Player &player) {
-	player.swapAndDropPrimaryWeapon(*this);
+	if (player.isPickingUpWeapon())
+		player.swapAndDropPrimaryWeapon(*this);
 }
