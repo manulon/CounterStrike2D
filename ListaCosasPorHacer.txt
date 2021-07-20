@@ -1,12 +1,16 @@
 Lista:
 	(fede)  8.  Definir condicion de fin de partida.
-	(fede)  9.  Modificar a la clase game para que sea un hilo propio.
 	(dani)  15. armas en el piso (yaml).
 	(todos) 16. instalador
 	(todos) 17. manual de usuario completo
 	(todos) 18. documento del proyecto
 	()		19. damage del cuchillo.
-	()		20. ver valgrind client servidor y editor.
+	()		20. ver valgrind client servidor 
+			21. bajar la velocidad
+			22. 
+
+PARA VER:
+	1. Pierde memoria el editor, pero creo que es de sdl.
 
 LISTO:
 	1. Integrar menu al juego.
@@ -17,6 +21,7 @@ LISTO:
 	6. Actualizar physicalMapFactory para que lea del yaml, terroristas, antiterroristas
 	y los guarde en el world.
 	7. Actualizar en juego la creacion de un jugador utilizando posiciones establecidas por el yaml.
+	9.  Modificar a la clase game para que sea un hilo propio.
 	10. Definir si llegamos a poder implementar multiples partidas.
 	11  IMPORTANTE: cuando se muere un jugador arreglar el seg fault.
 	12. corregir para todos los tamanios el physicalmap
