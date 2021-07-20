@@ -37,7 +37,6 @@ private:
 	short principalSoldierId;
 	short principalSoldierAngle;
 	Pointer pointer;
-	// std::list<std::unique_ptr<DynamicObject>> renderizables;
 
 	TileMap(const TileMap &other) = delete;
     TileMap& operator=(const TileMap &other) = delete;
