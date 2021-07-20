@@ -74,7 +74,7 @@ void SWeapon::collideWithObstacle(Obstacle &obstacle) {
 }
 
 void SWeapon::collideWithPlayer(Player &player) {
-    weaponType->collideWithPlayer(player);    
+    weaponType->collideWithPlayer(player);
 }
 
 void SWeapon::collideWithBorder(Border &border) {

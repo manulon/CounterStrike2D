@@ -127,6 +127,7 @@ void Player::attack(float angle) {
     float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
     
     currentWeapon->attack(angle, xShoot, yShoot);
+    std::cout<<"sale de aca"<<std::endl;
 }
 
 void Player::reload(size_t &ammunition) {
@@ -149,7 +150,8 @@ void Player::collideWithBullet(Bullet &bullet) {
 void Player::collideWithObstacle(Obstacle &obstacle) {
 }
 
-void Player::collideWithWeapon(SWeapon &other) { }
+void Player::collideWithWeapon(SWeapon &other) {
+}
 
 void Player::collideWithPlayer(Player &player) {
 }

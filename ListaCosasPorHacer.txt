@@ -5,10 +5,6 @@ Lista:
 	(todos) 18. documento del proyecto
 	()		20. ver valgrind client servidor 
 			21. bajar la velocidad
-			22. 
-
-PARA VER:
-	1. Pierde memoria el editor, pero creo que es de sdl.
 
 LISTO:
 	1. Integrar menu al juego.
