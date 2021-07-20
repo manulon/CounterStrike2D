@@ -32,12 +32,14 @@ class EditorEventHandler {
       Image& obsImage;
       Image tImage;
       Image ctImage;
+      Image weaponImage;
       std::string actualImage;
       Window& window;
       std::map<std::pair<int,int>,int>& finalMapTiles;
       std::map<std::pair<int,int>,int> finalMapObstacles;
       std::map<std::pair<int,int>,int> terroristMap;
       std::map<std::pair<int,int>,int> counterTerroristMap;
+      std::map<std::pair<int,int>,int> weaponMap;
       const char* mapName;
       int tileBoxHeight;
       int tileWidth;

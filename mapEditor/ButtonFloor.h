@@ -19,7 +19,7 @@ class ButtonFloor: public Button{
         virtual bool clicked(std::vector<Tile*>& options,std::vector<Tile*>& obstaclesOptionTiles,
                              std::vector<Tile*>& soldierOptionsTiles, const Image& image, 
                              const Image& obsImage,const std::string& sizeName,
-                             const Image& tImage,const Image& ctImage) override;
+                             const Image& tImage,const Image& ctImage, const Image& weapon) override;
 };
 
 #endif

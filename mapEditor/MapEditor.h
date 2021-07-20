@@ -21,6 +21,7 @@ public:
     void addObstacle(int x , int y, int sprite);
     void addTerrorist(int x , int y);
     void addCounterTerrorist(int x , int y);
+    void addWeapon(int x , int y, int id);
     void generateMap();
     void addSize(std::string name);
 

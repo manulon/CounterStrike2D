@@ -269,7 +269,7 @@ void EditorConfig::getAtributes(std::string atributeName,const std::string& size
                                 std::vector<Tile*>& options,std::vector<Tile*>& obstacleOptionsTiles,
                                 std::vector<Tile*>& soldierOptionsTiles,
                                 const Image& image, const Image& obsImage,
-                                const Image& tImage, const Image& ctImage){
+                                const Image& tImage, const Image& ctImage,const Image& weapon){
 
     readerNode = YAML::LoadFile("../assets/config/editor_config.yaml");
 
@@ -297,7 +297,12 @@ void EditorConfig::getAtributes(std::string atributeName,const std::string& size
         soldierOptionsTiles.push_back(new Tile(readerNode[sizeName]["counter-terrorist"][0][0].as<int>(),
                                                readerNode[sizeName]["counter-terrorist"][0][1].as<int>(),
                                                readerNode[sizeName]["counter-terrorist"][0][2].as<int>(),
-                                               ctImage));                                                
+                                               ctImage));
+
+        soldierOptionsTiles.push_back(new Tile(readerNode[sizeName]["weapons"][0][0].as<int>(),
+                                               readerNode[sizeName]["weapons"][0][1].as<int>(),
+                                               readerNode[sizeName]["weapons"][0][2].as<int>(),
+                                               weapon));                                                
     }
 
 }

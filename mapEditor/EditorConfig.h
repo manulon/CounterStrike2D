@@ -28,7 +28,7 @@ class EditorConfig{
                           std::vector<Tile*>& options,std::vector<Tile*>& obstacleOptionsTiles,
                           std::vector<Tile*>& soldierOptionsTiles,
                           const Image& image, const Image& obsImage,
-                          const Image& tImage, const Image& ctImage);
+                          const Image& tImage, const Image& ctImage, const Image& weapon);
 };
 
 #endif
