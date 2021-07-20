@@ -33,6 +33,7 @@ class Game {
         std::map<short, std::shared_ptr<Player>> allPlayers;
 		std::vector<std::pair<float, float>> terroristsPositions;
 		std::vector<std::pair<float, float>> counterTerroristsPositions;
+		std::vector<std::tuple<float, float, int>> weaponsPositions;
 
 		std::unique_ptr<PhysicalMapFactory> physicalMap;
 		bool gameStarted;
@@ -55,6 +56,8 @@ class Game {
 		void cleandDeadCounterTerrorists();
 		void cleanAllPlayers();
 		void executeFrame();
+		void createWeapons();
+		void createWeapon(int position);
 		
 	public:
 		Game(MaxPlayers maxPlayers, 
@@ -70,6 +73,7 @@ class Game {
 
 		void addTerroristPosition(float x, float y);
 		void addCounterTerroristPosition(float x, float y);
+		void addWeaponPosition(float x, float y, int id);
 		void removePlayer(short id);
 		void pickUpWeapon(short id);
 		void stopPickingUpWeapon(short id);

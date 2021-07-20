@@ -35,7 +35,6 @@ class World {
 
 		std::list<std::shared_ptr<SWeapon>> weapons;
 		std::list<std::shared_ptr<Bullet>> bullets;
-		float dt;
 
 		World();
 		~World();

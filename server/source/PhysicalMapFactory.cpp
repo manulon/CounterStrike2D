@@ -18,6 +18,7 @@ PhysicalMapFactory::PhysicalMapFactory(World &w, std::string mapName, Game &g) :
     }
     setTerroristsPositions();
     setCounterTerroristsPositions();
+    setWeaponsPositions();
 }
 
 Border* PhysicalMapFactory::createBorders(){
@@ -36,7 +37,6 @@ Border* PhysicalMapFactory::createBorders(){
     return (new Border(world, 0,0, width + 1, height + 1));    
 }
 
-// NUEVO OJO
 void PhysicalMapFactory::setTerroristsPositions() {
     YAML::Node terrorists = map["terrorist"];
     float x = 0;
@@ -60,7 +60,20 @@ void PhysicalMapFactory::setCounterTerroristsPositions() {
         game.addCounterTerroristPosition(x,y);
     }
 }
-//
+
+void PhysicalMapFactory::setWeaponsPositions() {
+    YAML::Node weapons = map["weapon"];
+    float x = 0;
+    float y = 0;
+    int id = 0;
+
+    for (unsigned int i = 0; i < weapons.size(); i++) {
+        x = weapons[i][0].as<float>() - width/2;
+        y = weapons[i][1].as<float>() - height/2;
+        id = weapons[i][2].as<int>();
+        game.addWeaponPosition(x, y, id);
+    }    
+}
 
 int PhysicalMapFactory::getHeight(){
     return height + 1;
