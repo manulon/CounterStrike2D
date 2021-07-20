@@ -3,8 +3,6 @@ Lista:
 	(todos) 16. instalador
 	(todos) 17. manual de usuario completo
 	(todos) 18. documento del proyecto
-	()		20. ver valgrind client servidor 
-			21. bajar la velocidad
 
 LISTO:
 	1. Integrar menu al juego.
@@ -23,4 +21,6 @@ LISTO:
 	14. armas en el piso (editor).
 	15. armas en el piso (yaml).
 	19. damage del cuchillo.
+	20. ver valgrind client servidor 
 	21. crear los nuevos mapas con armas desperdigadas
+	22. bajar la velocidad

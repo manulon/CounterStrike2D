@@ -8,7 +8,7 @@
 
 #define DAMPING 70.0f //10.0f 
 #define DENSITY 1.0f
-#define MOVING_FORCE 500.0f //250.0f
+#define MOVING_FORCE 200.0f
 #define STOP_FORCE 0.0f
 #define FIXED_ROTATION true
 #define BODY_TYPE b2_dynamicBody
@@ -186,7 +186,7 @@ void Player::decreaseLife(int valueToDecrease){
 
 void Player::dropPrimaryWeapon(){
     if (primaryWeapon.get() != nullptr){
-        primaryWeapon->lateAttachToWorld(getPositionX()+3, getPositionY());
+        primaryWeapon->lateAttachToWorld(getPositionX()+1, getPositionY());
         primaryWeapon->setId(15);
         Entity::getWorld().spawnWeapon(std::move(primaryWeapon));
     }
@@ -200,7 +200,7 @@ void Player::setPrimaryWeapon(PrimaryWeapon &other) {
 
 void Player::dropSecondaryWeapon() {
     if (secondaryWeapon.get() != nullptr){
-        secondaryWeapon->lateAttachToWorld(getPositionX()+3, getPositionY());
+        secondaryWeapon->lateAttachToWorld(getPositionX()+1, getPositionY());
         Entity::getWorld().spawnWeapon(std::move(secondaryWeapon));
     }
 }
