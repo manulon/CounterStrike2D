@@ -11,9 +11,6 @@ ThreadAcceptor::ThreadAcceptor(const char *host,
 	acceptor.bindAndListen(host, service);
 }
 
-// ThreadAcceptor::ThreadAcceptor(ThreadAcceptor &&other) : 
-// 	acceptor(std::move(other.acceptor)), 
-// 	isRunning(other.isRunning), clients(other.clients) { }
 
 ThreadAcceptor::~ThreadAcceptor() { 
 	for (auto& client : clients){

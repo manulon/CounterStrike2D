@@ -34,17 +34,14 @@ FILE(GLOB_RECURSE serverMessages "server/source/messages/*.cpp")
 FILE(GLOB_RECURSE serverEvents "server/source/events/*.cpp")
 FILE(GLOB_RECURSE clientExceptions "client/source/Exception/*.cpp")
 
-add_executable(editor test/editor.cpp ${mapEditor} ${source} ${common})
+add_executable(editor mapEditor/main/editor.cpp ${mapEditor} ${source} ${common})
 target_link_libraries(editor SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
-# add_executable(counterStrike2D test/counterStrike2D.cpp ${server} ${source} ${common} ${serverThreads})
-# target_link_libraries(counterStrike2D SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
+add_executable(server server/source/server.cpp ${common} ${server} ${serverMessages} ${serverThreads} ${nbq})
+target_link_libraries(server Box2D yaml-cpp)
 
-add_executable(serverTest test/serverTest.cpp ${common} ${server} ${serverMessages} ${serverThreads} ${nbq})
-target_link_libraries(serverTest Box2D yaml-cpp)
-
-add_executable(clientTest test/clientTest.cpp ${common} ${source}) #ELIMINAR EL SERVER
-target_link_libraries(clientTest SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
+add_executable(client client/main/client.cpp ${common} ${source})
+target_link_libraries(client SDL2 SDL2_image SDL2_mixer SDL2_ttf Box2D yaml-cpp)
 
 
 

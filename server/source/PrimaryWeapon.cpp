@@ -20,13 +20,8 @@ PrimaryWeapon::~PrimaryWeapon() { }
 
 void PrimaryWeapon::collideWithPlayer(Player &player) {
 	if (player.isPickingUpWeapon()){
-        std::cout<<"Voy a setear el sensor en false"<<std::endl;
 		context->getBody()->GetFixtureList()->SetSensor(false);
-		std::cout<<"setee el sensor en false"<<std::endl;
         player.swapAndDropPrimaryWeapon(*this);
-		std::cout<<"Voy a hacer el cambio"<<std::endl;
     }
-	std::cout<<"Voy a setear el sensor en true"<<std::endl;
     context->getBody()->GetFixtureList()->SetSensor(true);		
-	std::cout<<"setee"<<std::endl;
 }

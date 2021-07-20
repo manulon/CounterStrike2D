@@ -14,7 +14,6 @@ void Server::run(const char* host, const char* service) {
 
     game.spawn();
 
-     std::cout<<"SNTES DEL CIN\n";
     std::string input("");
     while (input != "q" && input != "w"){
         std::cin >> input;
@@ -24,7 +23,5 @@ void Server::run(const char* host, const char* service) {
     } 
     acceptor.stop();
     acceptor.join();
-    std::cout<<"SE joinesa el aceptador\n";
     game.join();
-    std::cout<<"SE joinesa el juego\n";
 }

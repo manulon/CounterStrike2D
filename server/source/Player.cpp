@@ -127,7 +127,6 @@ void Player::attack(float angle) {
     float yShoot = getPositionY() + shootRadius*sin(angle*b2_pi/180.0f);
     
     currentWeapon->attack(angle, xShoot, yShoot);
-    std::cout<<"sale de aca"<<std::endl;
 }
 
 void Player::reload(size_t &ammunition) {
@@ -135,7 +134,6 @@ void Player::reload(size_t &ammunition) {
 }
 
 void Player::collideWith(Entity &entity) {
-    std::cout << "Colision de jugador con entidad\n";
     entity.collideWithPlayer(*this);
 }
 

@@ -138,8 +138,6 @@ void TileMap::renderTiles(int x, int y, const Area &dst){
 
 void TileMap::renderObjects(int x,int y){
     principalSoldier.render();
-
-   
     for (auto& soldier: soldiers){
         soldier.second->render(x,y);
     }
@@ -216,7 +214,9 @@ void TileMap::updateWeaponInfo(short weaponId, float x, float y){
 void TileMap::removePlayer(short id){
     if (id == principalSoldierId){ 
         // throw PrincipalSoldierDiedException();
-        std::cout<<"tu personaje murio\n";
+        std::cout << "--------------------------------\n";
+        std::cout<<"Tu personaje murio\n";
+        std::cout << "--------------------------------\n";
     } else {
         soldiers.erase(id);
     }

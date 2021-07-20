@@ -63,7 +63,6 @@ void Client::gameLoop(TileMap &map){
     std::chrono::duration<double, std::milli> diff;
 
     while (isRunning) {
-        //executeFrame();
         do {
             info = nonBlockingQueue.pop();
             if (info != nullptr) {

@@ -33,8 +33,6 @@ Game::Game(MaxPlayers maxPlayers,
 Game::~Game() { }
 
 void Game::createWeapons() {
-    std::cout << "FEO\n";
-    std::cout << weaponsPositions.size() << std::endl;
     for (size_t i = 0; i < weaponsPositions.size(); i++) {
         createWeapon(i);
     }
@@ -103,9 +101,7 @@ void Game::notifyResults() {
     for (auto& pair : senderQueues){
         if (pair.first % 2 == 0){
             pair.second->push(ctMsg);
-            std::cout<<"se pushea\n";
         } else {
-            std::cout<<"se pushea\n";
             pair.second->push(tMsg);
         }
     }
@@ -156,7 +152,6 @@ void Game::cleanAllPlayers() {
         }
     }   
     if (isGameOver() && playersInGame > 1){
-        std::cout<<"entro al fin del juego\n";
         isRunning = false;
         it = allPlayers.begin();
         if (it->first %2 == 0) {
@@ -324,7 +319,6 @@ void Game::createWeapon(int position) {
     std::shared_ptr<SWeapon> w(new SWeapon(world, std::move(ak)));
     w->earlyAttachToWorld(x, y);
     world.spawnWeapon(std::move(w)); 
-    std::cout << "CREO EL ARMA\n";
 }
 
 void Game::removePlayer(short id){
@@ -401,12 +395,7 @@ void Game::addCounterTerroristPosition(float x, float y) {
 void Game::addWeaponPosition(float x, float y, int id) {
     std::vector<std::tuple<float, float, int>>::iterator it = weaponsPositions.end();
     std::tuple<float, float, int> weap(x, y, id);
-        std::cout << weaponsPositions.size() << std::endl;
-
     weaponsPositions.insert(it, std::move(weap));
-    std::cout << "AGregue arma\n";
-        std::cout << weaponsPositions.size() << std::endl;
-
 }
 
 void Game::pickUpWeapon(short id){

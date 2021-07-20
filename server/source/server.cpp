@@ -15,8 +15,8 @@
 
 int main(int argc, const char *argv[]) {
     try {
-    Server server;
-    server.run("localhost","8080");
+        Server server;
+        server.run("localhost",argv[1]);
     
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;

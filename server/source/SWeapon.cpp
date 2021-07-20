@@ -81,7 +81,6 @@ void SWeapon::collideWithBorder(Border &border) {
 }
 
 void SWeapon::collideWithWeapon(SWeapon &Weapon) {
-    std::cout << "Colision de Sweapon con player\n";
 }
 
 void SWeapon::setBody(b2Body &body) {
