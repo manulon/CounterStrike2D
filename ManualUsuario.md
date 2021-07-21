@@ -7,7 +7,8 @@ Se debe utilizar un sistema operativo derivados de UNIX. Por ejemplo: Ubuntu.
 
 2. **Dependencias**  
 Se deberan instalar las siguientes aplicaciones para moder compilar el proyecto, el interprete de comandos
-del sistema operativo e ingrese los siguientes comandos de cada dependencia.
+del sistema operativo e ingrese los siguientes comandos de cada dependencia. Para evitar instalación manual de dependencias
+usar los pasos mostrados en instalación (opcion 2), instalar dependencias.
    - **SDL**  
       - sudo apt-get install libsdl2-dev
       - sudo apt-get install libsdl2-image-dev
@@ -31,12 +32,23 @@ del sistema operativo e ingrese los siguientes comandos de cada dependencia.
 2. Dirigirse hacia un directorio en donde se quieran descargar los archivos del repositorio.
 3. Ingrese el comando git clone https://github.com/manulon/CounterStrike2D.git para descargar el proyecto.
 
-## Compilación ##
+## Instalación ##
+**Opción 1 (manual)**  
 En el directorio en que se encuentra la descarga del proyecto ejecutar los siguientes comandos:
 1. mkdir build
 2. cd build
 3. cmake ..
 4. cmake --build .
+
+**Opción 2 (automática)**  
+En el directorio en que se encuentra la descarga del proyecto ejecutar los siguientes comandos:
+1. chmod +x menu.sh
+2. ./menu.sh
+
+Esto desplegará un menú con tres opciones, elegir a conveniencia:
+1. Instalar dependencias, en caso de ser necesarias.
+2. Instalar el juego.
+3. Desinstalar el juego.
 
 ## Configuraciones adicionales ##
 No hay.
