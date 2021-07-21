@@ -90,7 +90,7 @@ void Game::notifyResults() {
     std::shared_ptr<ServerMessage> winMsg(new PlaintextMessage("Tu equipo gano"));
     std::shared_ptr<ServerMessage> ctMsg = looseMsg; //comportamiento por default
     std::shared_ptr<ServerMessage> tMsg = winMsg;
-    if (allPlayers.size() > 1) {
+    if (counterTerrorist.size() > 0 && terrorist.size() > 0) {
         std::shared_ptr<ServerMessage> drawMsg(new PlaintextMessage("Hubo un empate"));
         ctMsg = drawMsg;
         tMsg = drawMsg;
